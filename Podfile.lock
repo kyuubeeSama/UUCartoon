@@ -1,0 +1,54 @@
+PODS:
+  - Alamofire (5.2.1)
+  - EmptyDataSet-Swift (5.0.0)
+  - FluentDarkModeKit (0.5.2)
+  - HandyJSON (5.0.2)
+  - IQKeyboardManagerSwift (6.5.5)
+  - Kingfisher (5.14.1):
+    - Kingfisher/Core (= 5.14.1)
+  - Kingfisher/Core (5.14.1)
+  - SideMenu (6.4.8)
+  - SnapKit (5.0.1)
+  - SwiftyJSON (5.0.0)
+  - Toast-Swift (5.0.1)
+
+DEPENDENCIES:
+  - Alamofire
+  - EmptyDataSet-Swift
+  - FluentDarkModeKit
+  - HandyJSON
+  - IQKeyboardManagerSwift
+  - Kingfisher
+  - SideMenu
+  - SnapKit
+  - SwiftyJSON
+  - Toast-Swift
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Alamofire
+    - EmptyDataSet-Swift
+    - FluentDarkModeKit
+    - HandyJSON
+    - IQKeyboardManagerSwift
+    - Kingfisher
+    - SideMenu
+    - SnapKit
+    - SwiftyJSON
+    - Toast-Swift
+
+SPEC CHECKSUMS:
+  Alamofire: e911732990610fe89af59ac0077f923d72dc3dfd
+  EmptyDataSet-Swift: eb382c0c87a2d9c678077385a595cec52da38171
+  FluentDarkModeKit: 78109bdbfb87c515543c0a52319da017c3843aae
+  HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
+  IQKeyboardManagerSwift: 0fb93310284665245591f50f7a5e38de615960b7
+  Kingfisher: 8050bc6f7f68cbf3908bd04df7ccbac188f6d6d6
+  SideMenu: 4a891be552d30bb6fa87ad404d62e485f8450c34
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
+  Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
+
+PODFILE CHECKSUM: d5822fbee6e3c93c9647fb98f275d19e17a6e14e
+
+COCOAPODS: 1.9.3
