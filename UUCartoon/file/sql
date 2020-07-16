@@ -1,0 +1,51 @@
+#站点表
+#name:站点名称   url:站点根目录地址  status:站点状态（预留字段）
+CREATE TABLE IF NOT EXISTS `website`
+(
+    `website_id`     integer NOT NULL primary key autoincrement,
+    `name`   VARCHAR(255) NOT NULL,
+    `url`    VARCHAR(255) NOT NULL,
+    'status' INT default (1)
+)
+#站点分类表
+#cartoon_id:分类id name:分类名 url:分类地址 status:分类状态（预留字段）
+CREATE TABLE IF NOT EXISTS 'category'
+(
+    `category_id` integer NOT NULL primary key autoincrement,
+    `cartoon_id` integer NOT NULL,
+    `name` VARCHAR(255) NOT NULL,
+    `url` VARCHAR(255) NOT NULL,
+    'status' INT default(1)
+)
+#收藏表
+#cartoon_id:漫画id
+CREATE TABLE IF NOT EXISTS 'collect'
+(
+    `collect_id` integer NOT NULL primary key autoincrement,
+    'cartoon_id' integer NOT NULL
+)
+#漫画表
+#website_id:所属站点 category_id:所属分类 name:漫画名 url:漫画地址 status:漫画状态
+CREATE TABLE IF NOT EXISTS 'cartoon'
+(
+    `cartoon_id` integer NOT NULL primary key autoincrement,
+    'website_id' integer NOT NULL,
+    `category_id` integer NOT NULL,
+    `name` VARCHAR(255) NOT NULL,
+    `url`  VARCHAR(255) NOT NULL,
+    'status' INT default(1)
+)
+#漫画图片表
+#cartoon_id:漫画id url:图片地址 status:漫画状态 width:图片宽 height:图片高
+CREATE TABLE IF NOT EXISTS 'picture'
+(
+    `pic_id` integer NOT NULL primary key autoincrement,
+    'cartoon_id' integer NOT NULL,
+    `url` VARCHAR(255) NOT NULL,
+    `status` INT default(1),
+    `width` FLOAT,
+    'height' FLOAT
+)
+
+#站点起始数据
+INSERT INTO 'website' ('name','url') value ('风之动漫','https://www.fzdm.com/')
