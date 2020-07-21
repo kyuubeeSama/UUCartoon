@@ -9,5 +9,7 @@
 import UIKit
 
 class DataManagerTool: NSObject {
+    func getWebData(websiteID:Int,result:@escaping(_ result:Bool) -> ()){
 
+    }
 }

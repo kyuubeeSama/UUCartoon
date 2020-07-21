@@ -21,7 +21,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = UIWindow.init(windowScene: windowScene)
         self.window?.backgroundColor = .white
         let index = IndexViewController.init()
-        self.window?.rootViewController = index
+        let nav = UINavigationController.init(rootViewController: index)
+        self.window?.rootViewController = nav
         self.window?.makeKeyAndVisible()
     }
 

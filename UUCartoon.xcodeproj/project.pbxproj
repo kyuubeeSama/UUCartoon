@@ -32,6 +32,20 @@
 		A9653EEC24BEA2F70098AB1E /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9653EEB24BEA2F70098AB1E /* MineViewController.swift */; };
 		A9653EF024BEDDAA0098AB1E /* DataManagerTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9653EEF24BEDDAA0098AB1E /* DataManagerTool.swift */; };
 		A9653EF224BEDF5B0098AB1E /* sqlTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9653EF124BEDF5B0098AB1E /* sqlTool.swift */; };
+		A9653EF524C04B8D0098AB1E /* WebsiteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9653EF424C04B8D0098AB1E /* WebsiteModel.swift */; };
+		A9653EF724C04C4F0098AB1E /* CartoonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9653EF624C04C4F0098AB1E /* CartoonModel.swift */; };
+		A9653EF924C04C610098AB1E /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9653EF824C04C610098AB1E /* CategoryModel.swift */; };
+		A9653EFB24C04C6D0098AB1E /* PictureModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9653EFA24C04C6D0098AB1E /* PictureModel.swift */; };
+		A9653EFD24C04C7E0098AB1E /* CollectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9653EFC24C04C7E0098AB1E /* CollectModel.swift */; };
+		A99B7C8D24C1880900DB3EBB /* config.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99B7C8C24C1880900DB3EBB /* config.swift */; };
+		A99B7C9024C18B3C00DB3EBB /* FzdmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99B7C8F24C18B3C00DB3EBB /* FzdmViewController.swift */; };
+		A99B7C9224C195B900DB3EBB /* ChapterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99B7C9124C195B900DB3EBB /* ChapterModel.swift */; };
+		A99B7C9524C1997500DB3EBB /* ChapterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99B7C9324C1997500DB3EBB /* ChapterCollectionViewCell.swift */; };
+		A99B7C9624C1997500DB3EBB /* ChapterCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A99B7C9424C1997500DB3EBB /* ChapterCollectionViewCell.xib */; };
+		A99B7C9924C1998000DB3EBB /* CartoonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99B7C9724C1998000DB3EBB /* CartoonCollectionViewCell.swift */; };
+		A99B7C9A24C1998000DB3EBB /* CartoonCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A99B7C9824C1998000DB3EBB /* CartoonCollectionViewCell.xib */; };
+		A99B7C9D24C1999100DB3EBB /* HeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99B7C9B24C1999100DB3EBB /* HeaderCollectionReusableView.swift */; };
+		A99B7C9E24C1999100DB3EBB /* HeaderCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A99B7C9C24C1999100DB3EBB /* HeaderCollectionReusableView.xib */; };
 		D809989F9805E6889C1A027D /* Pods_UUCartoon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 839A0DF0414B27A3CC996FFB /* Pods_UUCartoon.framework */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +78,20 @@
 		A9653EEB24BEA2F70098AB1E /* MineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineViewController.swift; sourceTree = "<group>"; };
 		A9653EEF24BEDDAA0098AB1E /* DataManagerTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerTool.swift; sourceTree = "<group>"; };
 		A9653EF124BEDF5B0098AB1E /* sqlTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sqlTool.swift; sourceTree = "<group>"; };
+		A9653EF424C04B8D0098AB1E /* WebsiteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebsiteModel.swift; sourceTree = "<group>"; };
+		A9653EF624C04C4F0098AB1E /* CartoonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoonModel.swift; sourceTree = "<group>"; };
+		A9653EF824C04C610098AB1E /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
+		A9653EFA24C04C6D0098AB1E /* PictureModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureModel.swift; sourceTree = "<group>"; };
+		A9653EFC24C04C7E0098AB1E /* CollectModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectModel.swift; sourceTree = "<group>"; };
+		A99B7C8C24C1880900DB3EBB /* config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = config.swift; sourceTree = "<group>"; };
+		A99B7C8F24C18B3C00DB3EBB /* FzdmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FzdmViewController.swift; sourceTree = "<group>"; };
+		A99B7C9124C195B900DB3EBB /* ChapterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterModel.swift; sourceTree = "<group>"; };
+		A99B7C9324C1997500DB3EBB /* ChapterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterCollectionViewCell.swift; sourceTree = "<group>"; };
+		A99B7C9424C1997500DB3EBB /* ChapterCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChapterCollectionViewCell.xib; sourceTree = "<group>"; };
+		A99B7C9724C1998000DB3EBB /* CartoonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoonCollectionViewCell.swift; sourceTree = "<group>"; };
+		A99B7C9824C1998000DB3EBB /* CartoonCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartoonCollectionViewCell.xib; sourceTree = "<group>"; };
+		A99B7C9B24C1999100DB3EBB /* HeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCollectionReusableView.swift; sourceTree = "<group>"; };
+		A99B7C9C24C1999100DB3EBB /* HeaderCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderCollectionReusableView.xib; sourceTree = "<group>"; };
 		B67310F4365BD6F8F98FBEEA /* Pods-UUCartoon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UUCartoon.release.xcconfig"; path = "Target Support Files/Pods-UUCartoon/Pods-UUCartoon.release.xcconfig"; sourceTree = "<group>"; };
 		CE5D49EAD0E59961112CC347 /* Pods-UUCartoon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UUCartoon.debug.xcconfig"; path = "Target Support Files/Pods-UUCartoon/Pods-UUCartoon.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -130,6 +158,7 @@
 		A9653EC524BD9F190098AB1E /* base */ = {
 			isa = PBXGroup;
 			children = (
+				A99B7C8C24C1880900DB3EBB /* config.swift */,
 				A9653EE324BDA0720098AB1E /* BaseViewController.swift */,
 			);
 			path = base;
@@ -170,6 +199,11 @@
 		A9653EC924BD9F3E0098AB1E /* model */ = {
 			isa = PBXGroup;
 			children = (
+				A9653EF424C04B8D0098AB1E /* WebsiteModel.swift */,
+				A9653EF624C04C4F0098AB1E /* CartoonModel.swift */,
+				A9653EF824C04C610098AB1E /* CategoryModel.swift */,
+				A9653EFA24C04C6D0098AB1E /* PictureModel.swift */,
+				A99B7C9124C195B900DB3EBB /* ChapterModel.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -178,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				A9653EE924BEA2230098AB1E /* IndexViewController.swift */,
+				A99B7C8F24C18B3C00DB3EBB /* FzdmViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -185,6 +220,12 @@
 		A9653ECB24BD9F4E0098AB1E /* view */ = {
 			isa = PBXGroup;
 			children = (
+				A99B7C9324C1997500DB3EBB /* ChapterCollectionViewCell.swift */,
+				A99B7C9424C1997500DB3EBB /* ChapterCollectionViewCell.xib */,
+				A99B7C9724C1998000DB3EBB /* CartoonCollectionViewCell.swift */,
+				A99B7C9824C1998000DB3EBB /* CartoonCollectionViewCell.xib */,
+				A99B7C9B24C1999100DB3EBB /* HeaderCollectionReusableView.swift */,
+				A99B7C9C24C1999100DB3EBB /* HeaderCollectionReusableView.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -207,6 +248,7 @@
 		A9653ECE24BD9F650098AB1E /* model */ = {
 			isa = PBXGroup;
 			children = (
+				A9653EFC24C04C7E0098AB1E /* CollectModel.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -273,7 +315,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1150;
-				LastUpgradeCheck = 1150;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = qykj;
 				TargetAttributes = {
 					A9653EAB24BD9BA00098AB1E = {
@@ -304,6 +346,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A99B7C9E24C1999100DB3EBB /* HeaderCollectionReusableView.xib in Resources */,
+				A99B7C9A24C1998000DB3EBB /* CartoonCollectionViewCell.xib in Resources */,
+				A99B7C9624C1997500DB3EBB /* ChapterCollectionViewCell.xib in Resources */,
 				A9653EBC24BD9BAA0098AB1E /* LaunchScreen.storyboard in Resources */,
 				A9653EB924BD9BAA0098AB1E /* Assets.xcassets in Resources */,
 				A9653EC424BD9C680098AB1E /* Podfile in Resources */,
@@ -361,22 +406,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9653EF724C04C4F0098AB1E /* CartoonModel.swift in Sources */,
 				A9653EE424BDA0720098AB1E /* BaseViewController.swift in Sources */,
 				A9653EE024BDA0340098AB1E /* UIView+extension.swift in Sources */,
 				A9653EE224BDA0340098AB1E /* Date+extension.swift in Sources */,
 				A9653EE824BDB2160098AB1E /* Tool.swift in Sources */,
+				A9653EF524C04B8D0098AB1E /* WebsiteModel.swift in Sources */,
+				A99B7C9024C18B3C00DB3EBB /* FzdmViewController.swift in Sources */,
+				A9653EF924C04C610098AB1E /* CategoryModel.swift in Sources */,
 				A9653EF024BEDDAA0098AB1E /* DataManagerTool.swift in Sources */,
 				A9653EDE24BDA0340098AB1E /* String+extension.swift in Sources */,
 				A9653EE124BDA0340098AB1E /* UIButton+extension.swift in Sources */,
 				A9653EDB24BDA0340098AB1E /* UITextField+extension.swift in Sources */,
 				A9653EB424BD9BA00098AB1E /* ViewController.swift in Sources */,
+				A99B7C9D24C1999100DB3EBB /* HeaderCollectionReusableView.swift in Sources */,
 				A9653EDF24BDA0340098AB1E /* UIColor+extension.swift in Sources */,
 				A9653EF224BEDF5B0098AB1E /* sqlTool.swift in Sources */,
 				A9653EB024BD9BA00098AB1E /* AppDelegate.swift in Sources */,
 				A9653EB224BD9BA00098AB1E /* SceneDelegate.swift in Sources */,
 				A9653EEA24BEA2230098AB1E /* IndexViewController.swift in Sources */,
 				A9653EEC24BEA2F70098AB1E /* MineViewController.swift in Sources */,
+				A9653EFB24C04C6D0098AB1E /* PictureModel.swift in Sources */,
+				A99B7C8D24C1880900DB3EBB /* config.swift in Sources */,
+				A99B7C9924C1998000DB3EBB /* CartoonCollectionViewCell.swift in Sources */,
+				A99B7C9224C195B900DB3EBB /* ChapterModel.swift in Sources */,
 				A9653EDD24BDA0340098AB1E /* UIImage+extension.swift in Sources */,
+				A99B7C9524C1997500DB3EBB /* ChapterCollectionViewCell.swift in Sources */,
+				A9653EFD24C04C7E0098AB1E /* CollectModel.swift in Sources */,
 				A9653EDA24BDA0340098AB1E /* NSObject+extension.swift in Sources */,
 				A9653EDC24BDA0340098AB1E /* Dictionary+extension.swift in Sources */,
 				A9653EE624BDA90E0098AB1E /* QYRequestData.swift in Sources */,
@@ -432,6 +488,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -492,6 +549,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;

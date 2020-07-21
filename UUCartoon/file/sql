@@ -17,6 +17,11 @@ CREATE TABLE IF NOT EXISTS 'category'
     `url` VARCHAR(255) NOT NULL,
     'status' INT default(1)
 )
+
+#漫画章节表
+chapter_id:章节id cartoon_id:漫画id name:章节名 url:章节地址 status:章节状态(预留字段)
+CREATE TABLE IF NOT EXISTS 'chapter' ('chapter_id' integer NOT NULL primary key autoincrement,'cartoon_id' integer NOT NULL,'name' VARCHAR(255) NOT NULL,'url' VARCHAR(255) NOT NULL,'status' INT default(1))
+
 #收藏表
 #cartoon_id:漫画id
 CREATE TABLE IF NOT EXISTS 'collect'
@@ -33,6 +38,7 @@ CREATE TABLE IF NOT EXISTS 'cartoon'
     `category_id` integer NOT NULL,
     `name` VARCHAR(255) NOT NULL,
     `url`  VARCHAR(255) NOT NULL,
+    `pic`  VARCHAR(255) NOT NULL,
     'status' INT default(1)
 )
 #漫画图片表

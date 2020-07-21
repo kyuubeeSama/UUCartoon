@@ -15,6 +15,7 @@ class BaseViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        self.view.backgroundColor = .white
     }
     
     func setNavColor(navColor:UIColor,titleColor:UIColor,barStyle:UIBarStyle) {
@@ -40,6 +41,15 @@ class BaseViewController: UIViewController {
     func endProgress(){
         self.view.hideAllToasts()
         self.view.hideToastActivity()
+    }
+//    TODO:自定义返回按钮
+    func addBackBtn(){
+        let navigationBtnItem = UIBarButtonItem.init(title: "返回", style: .plain, target: self, action: #selector(backBtnClick(button:)))
+            self.navigationItem.leftBarButtonItem = navigationBtnItem
+    }
+    
+    @objc func backBtnClick(button:UIButton?){
+        self.navigationController?.popViewController(animated: true)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
