@@ -14,6 +14,7 @@ class CartoonModel: NSObject {
     var category_id:Int?
     var name:String?
     var url:String?
-    var status:Int?
     var pic:String?
+    var content: String?
+    var status:Int?
 }

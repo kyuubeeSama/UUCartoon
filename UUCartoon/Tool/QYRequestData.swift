@@ -24,7 +24,7 @@ class UploadFileModel {
 private let NetWorkRequestShareInstance = QYRequestData()
 
 class QYRequestData{
-    class var sharedInstance:QYRequestData {
+    class var shared:QYRequestData {
         NetWorkRequestShareInstance
     }
 }

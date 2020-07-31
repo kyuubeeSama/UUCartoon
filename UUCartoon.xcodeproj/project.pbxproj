@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		144DF7229F99AE64219B0671 /* FileTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144DFB00E6E5D7B0E0DDFD7C /* FileTool.swift */; };
 		144DFD2D91D37148174C78FA /* sql in Resources */ = {isa = PBXBuildFile; fileRef = 144DF2F5CF03809F86997FAF /* sql */; };
+		A922C89B24D2BA7C00605E3F /* CartoonDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A922C89A24D2BA7C00605E3F /* CartoonDetailViewController.swift */; };
+		A94DF7E924D3E3C30022D3B5 /* ChapterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94DF7E824D3E3C30022D3B5 /* ChapterViewController.swift */; };
 		A9653EB024BD9BA00098AB1E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9653EAF24BD9BA00098AB1E /* AppDelegate.swift */; };
 		A9653EB224BD9BA00098AB1E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9653EB124BD9BA00098AB1E /* SceneDelegate.swift */; };
 		A9653EB424BD9BA00098AB1E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9653EB324BD9BA00098AB1E /* ViewController.swift */; };
@@ -53,6 +55,8 @@
 		144DF2F5CF03809F86997FAF /* sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sql; sourceTree = "<group>"; };
 		144DFB00E6E5D7B0E0DDFD7C /* FileTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTool.swift; sourceTree = "<group>"; };
 		839A0DF0414B27A3CC996FFB /* Pods_UUCartoon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UUCartoon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A922C89A24D2BA7C00605E3F /* CartoonDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoonDetailViewController.swift; sourceTree = "<group>"; };
+		A94DF7E824D3E3C30022D3B5 /* ChapterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterViewController.swift; sourceTree = "<group>"; };
 		A9653EAC24BD9BA00098AB1E /* UUCartoon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UUCartoon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9653EAF24BD9BA00098AB1E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A9653EB124BD9BA00098AB1E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -114,6 +118,13 @@
 				839A0DF0414B27A3CC996FFB /* Pods_UUCartoon.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A922C89524D2ACA900605E3F /* view */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = view;
 			sourceTree = "<group>";
 		};
 		A9653EA324BD9BA00098AB1E = {
@@ -179,9 +190,9 @@
 		A9653EC724BD9F310098AB1E /* mine */ = {
 			isa = PBXGroup;
 			children = (
+				A922C89524D2ACA900605E3F /* view */,
 				A9653ECE24BD9F650098AB1E /* model */,
 				A9653ECD24BD9F5C0098AB1E /* controller */,
-				A9653ECC24BD9F550098AB1E /* view */,
 			);
 			path = mine;
 			sourceTree = "<group>";
@@ -213,6 +224,8 @@
 			children = (
 				A9653EE924BEA2230098AB1E /* IndexViewController.swift */,
 				A99B7C8F24C18B3C00DB3EBB /* FzdmViewController.swift */,
+				A922C89A24D2BA7C00605E3F /* CartoonDetailViewController.swift */,
+				A94DF7E824D3E3C30022D3B5 /* ChapterViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -226,13 +239,6 @@
 				A99B7C9824C1998000DB3EBB /* CartoonCollectionViewCell.xib */,
 				A99B7C9B24C1999100DB3EBB /* HeaderCollectionReusableView.swift */,
 				A99B7C9C24C1999100DB3EBB /* HeaderCollectionReusableView.xib */,
-			);
-			path = view;
-			sourceTree = "<group>";
-		};
-		A9653ECC24BD9F550098AB1E /* view */ = {
-			isa = PBXGroup;
-			children = (
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -418,6 +424,7 @@
 				A9653EDE24BDA0340098AB1E /* String+extension.swift in Sources */,
 				A9653EE124BDA0340098AB1E /* UIButton+extension.swift in Sources */,
 				A9653EDB24BDA0340098AB1E /* UITextField+extension.swift in Sources */,
+				A922C89B24D2BA7C00605E3F /* CartoonDetailViewController.swift in Sources */,
 				A9653EB424BD9BA00098AB1E /* ViewController.swift in Sources */,
 				A99B7C9D24C1999100DB3EBB /* HeaderCollectionReusableView.swift in Sources */,
 				A9653EDF24BDA0340098AB1E /* UIColor+extension.swift in Sources */,
@@ -434,6 +441,7 @@
 				A99B7C9524C1997500DB3EBB /* ChapterCollectionViewCell.swift in Sources */,
 				A9653EFD24C04C7E0098AB1E /* CollectModel.swift in Sources */,
 				A9653EDA24BDA0340098AB1E /* NSObject+extension.swift in Sources */,
+				A94DF7E924D3E3C30022D3B5 /* ChapterViewController.swift in Sources */,
 				A9653EDC24BDA0340098AB1E /* Dictionary+extension.swift in Sources */,
 				A9653EE624BDA90E0098AB1E /* QYRequestData.swift in Sources */,
 				144DF7229F99AE64219B0671 /* FileTool.swift in Sources */,
@@ -513,7 +521,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -568,7 +576,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

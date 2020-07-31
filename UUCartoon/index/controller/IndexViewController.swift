@@ -39,15 +39,24 @@ class IndexViewController: BaseViewController,UITableViewDelegate,UITableViewDat
     func createDB(){
         if sqlTool.shared.createDb(dbname: "/cartoon.db") {
             //            创建所有数据表
-            if sqlTool.shared.createTable(sqlStr: "CREATE TABLE IF NOT EXISTS `website` (`website_id` integer NOT NULL primary key autoincrement,`name` VARCHAR(255) NOT NULL,`url` VARCHAR(255) NOT NULL,'status' INT default (1))"){
+            // 创建站点表
+            if sqlTool.shared.createTable(sqlStr: "CREATE TABLE IF NOT EXISTS `website` (`website_id` integer NOT NULL primary key autoincrement,`name` NVARCHAR(100) NOT NULL,`url` VARCHAR(100) NOT NULL,'status' INT default (1))"){
                 // 插入起始数据.插入数据时需要判断当前数据是否存在
-//                               sqlTool.shared.insertInto(table: "website", column: "'name','url'", values: "'风之动漫','https://www.fzdm.com/'")
+                _ = sqlTool.shared.insertInto(table: "website",
+                                          columns: "'name','url'",
+                                          values: "'风之动漫','https://www.fzdm.com/'",
+                                          whereStr: "SELECT * FROM website WHERE name='风之动漫' and url = 'https://www.fzdm.com/'")
             }
-            _ = sqlTool.shared.createTable(sqlStr: "CREATE TABLE IF NOT EXISTS 'category' (`category_id` integer NOT NULL primary key autoincrement,`cartoon_id` integer NOT NULL,`name` VARCHAR(255) NOT NULL,`url` VARCHAR(255) NOT NULL,'status' INT default(1))")
+//            创建漫画分类表
+            _ = sqlTool.shared.createTable(sqlStr: "CREATE TABLE IF NOT EXISTS 'category' (`category_id` integer NOT NULL primary key autoincrement,`website_id` integer NOT NULL,`name` NVARCHAR(100) NOT NULL,`url` VARCHAR(255) NOT NULL,'status' INT default(1))")
+//            创建收藏表
             _ = sqlTool.shared.createTable(sqlStr: "CREATE TABLE IF NOT EXISTS 'collect' (`collect_id` integer NOT NULL primary key autoincrement,'cartoon_id' integer NOT NULL)")
-            _ = sqlTool.shared.createTable(sqlStr: "CREATE TABLE IF NOT EXISTS 'cartoon' (`cartoon_id` integer NOT NULL primary key autoincrement,'website_id' integer NOT NULL,`category_id` integer NOT NULL,`name` VARCHAR(255) NOT NULL,`url`  VARCHAR(255) NOT NULL,`pic` VARCHAR(255) NOT NULL,`status` INT default(1))")
+//            创建漫画表
+            _ = sqlTool.shared.createTable(sqlStr: "CREATE TABLE IF NOT EXISTS 'cartoon' (`cartoon_id` integer NOT NULL primary key autoincrement,'website_id' integer NOT NULL,`category_id` integer NOT NULL,`name` NVARCHAR(255) NOT NULL,`url` VARCHAR(255) NOT NULL,`pic` VARCHAR(255) NOT NULL,`content` TEXT,`status` INT default(1))")
+            // 创建图片表
             _ = sqlTool.shared.createTable(sqlStr: "CREATE TABLE IF NOT EXISTS 'picture' (`pic_id` integer NOT NULL primary key autoincrement,'cartoon_id' integer NOT NULL,`url` VARCHAR(255) NOT NULL,`status` INT default(1),`width` FLOAT,'height' FLOAT)")
-            _ = sqlTool.shared.createTable(sqlStr: "CREATE TABLE IF NOT EXISTS 'chapter' ('chapter_id' integer NOT NULL primary key autoincrement,'cartoon_id' integer NOT NULL,'name' VARCHAR(255) NOT NULL,'url' VARCHAR(255) NOT NULL,'status' INT default(1))")
+//            创建章节表
+            _ = sqlTool.shared.createTable(sqlStr: "CREATE TABLE IF NOT EXISTS 'chapter' ('chapter_id' integer NOT NULL primary key autoincrement,'cartoon_id' integer NOT NULL,'name' NVARCHAR(255) NOT NULL,'url' VARCHAR(255) NOT NULL,'status' INT default(1))")
         }
     }
     

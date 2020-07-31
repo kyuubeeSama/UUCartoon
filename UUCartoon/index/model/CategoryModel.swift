@@ -10,6 +10,7 @@ import UIKit
 
 class CategoryModel: NSObject {
     var category_id:Int?
+    var website_id:Int?
     var name:String?
     var status:Int?
     var url:String?

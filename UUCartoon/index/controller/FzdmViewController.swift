@@ -9,7 +9,6 @@
 import UIKit
 import Kingfisher
 class FzdmViewController: BaseViewController,UICollectionViewDelegateFlowLayout,UICollectionViewDataSource,UICollectionViewDelegate {
-    
     var CartoonArr:[CartoonModel] = []
     var ChapterArr:[ChapterModel] = []
     
@@ -27,7 +26,7 @@ class FzdmViewController: BaseViewController,UICollectionViewDelegateFlowLayout,
     }
     //获取数据
     func getData(){
-        QYRequestData.sharedInstance.getHtmlContent(urlStr: "https://manhua.fzdm.com", params: nil, success: { (result) in
+        QYRequestData.shared.getHtmlContent(urlStr: "https://manhua.fzdm.com", params: nil, success: { (result) in
 //            print(result)
             // 从截取的数据中获取两个数组
             // 最新更新  chapterArr
@@ -145,6 +144,10 @@ class FzdmViewController: BaseViewController,UICollectionViewDelegateFlowLayout,
             // 点击直接进入漫画阅读
         }else{
             // 点击进入漫画介绍页面
+            let model = self.CartoonArr[indexPath.row]
+            let VC = CartoonDetailViewController.init()
+            VC.model = model
+            self.navigationController?.pushViewController(VC, animated: true)
         }
     }
     

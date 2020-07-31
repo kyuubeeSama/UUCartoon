@@ -58,6 +58,18 @@ class sqlTool {
             return false
         }
     }
+    func insertInto(table:String, columns:String, values:String, whereStr:String) -> Bool {
+        let path = FileTool.init().getDocumentPath().appending("/cartoon.db")
+        do {
+            let db = try Connection(path)
+            let sqlStr = "INSERT INTO "+table+" ("+columns+") SELECT "+values+" WHERE NOT EXISTS ("+whereStr+")"
+            try db.execute(sqlStr)
+            return true
+        }catch let error{
+            print(error)
+            return false
+        }
+    }
     // 查询站点列表
     func selectWebSite()->[WebsiteModel]{
         var array:[WebsiteModel] = []
