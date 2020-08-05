@@ -24,4 +24,14 @@ class Tool: NSObject {
         }
         return array;
     }
+    
+    func isIpad()->Bool{
+        if UIDevice.current.userInterfaceIdiom == .pad{
+            return true
+        }else{
+            return false
+        }
+    }
+    
+    
 }

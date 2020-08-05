@@ -1,29 +1,26 @@
 //
-//  FzdmViewController.swift
+//  FzdmPadViewController.swift
 //  UUCartoon
 //
-//  Created by kyuubee on 2020/7/17.
+//  Created by liuqingyuan on 2020/8/3.
 //  Copyright © 2020 qykj. All rights reserved.
 //
 
 import UIKit
-import Kingfisher
-class FzdmViewController: BaseViewController,UICollectionViewDelegateFlowLayout,UICollectionViewDataSource,UICollectionViewDelegate {
+
+class FzdmPadViewController: BaseViewController,UICollectionViewDelegateFlowLayout,UICollectionViewDataSource,UICollectionViewDelegate,UITableViewDelegate,UITableViewDataSource {
+    
     var CartoonArr:[CartoonModel] = []
     var ChapterArr:[ChapterModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Do any additional setup after loading the view.
-        self.setNav()
-        self .getData()
+        self.getData()
+        print("屏幕宽 \(screenW) 屏幕高是\(screenH)")
     }
     
-    func setNav(){
-        self.title = "风之动漫"
-        self.addBackBtn()
-    }
     //获取数据
     func getData(){
         QYRequestData.shared.getHtmlContent(urlStr: "https://manhua.fzdm.com", params: nil, success: { (result) in
@@ -53,6 +50,7 @@ class FzdmViewController: BaseViewController,UICollectionViewDelegateFlowLayout,
                 model.url = url
                 self.ChapterArr.append(model)
             }
+            self.mainTable.reloadData()
             // 所有漫画列表  cartoonArr
             //            mhmain"([\s\S]+?)<\/ul>
             let mhmain:[String] = Tool.init().getRegularData(regularExpress: "mhmain\"([\\s\\S]+?)<\\/ul>", content: result)
@@ -86,6 +84,18 @@ class FzdmViewController: BaseViewController,UICollectionViewDelegateFlowLayout,
         }
     }
     
+    lazy var mainTable:UITableView = {
+        let mainTable = UITableView.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: .plain)
+        mainTable.delegate = self
+        mainTable.dataSource = self
+        self.view.addSubview(mainTable)
+        mainTable.snp.makeConstraints { (make) in
+            make.left.top.bottom.equalToSuperview()
+            make.width.equalTo(200)
+        }
+        return mainTable
+    }()
+
     lazy var mainCollection:UICollectionView = {
         let layout = UICollectionViewFlowLayout.init()
         let collectionView = UICollectionView.init(frame: CGRect(x: 0, y: 0, width: screenW, height: screenH), collectionViewLayout: layout)
@@ -97,98 +107,67 @@ class FzdmViewController: BaseViewController,UICollectionViewDelegateFlowLayout,
         collectionView.register(UINib.init(nibName: "HeaderCollectionReusableView", bundle: Bundle.main), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
         collectionView.backgroundColor = .white
         collectionView.snp.makeConstraints { (make) in
-            make.left.right.top.bottom.equalToSuperview()
+            make.right.top.bottom.equalToSuperview()
+            make.left.equalTo(self.mainTable.snp.right)
         }
         return collectionView
     }()
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        2
-    }
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == 0 {
-            print(ChapterArr.count)
-            return ChapterArr.count
-        }else{
-            print(CartoonArr.count)
-            return CartoonArr.count
-        }
+        return CartoonArr.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.section == 0{
-            let model = ChapterArr[indexPath.row]
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "chapterCell", for: indexPath) as! ChapterCollectionViewCell
-            cell.titleLab.text = model.name
-            return cell
-        }else{
             let model = CartoonArr[indexPath.row]
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cartoonCell", for: indexPath) as! CartoonCollectionViewCell
             cell.titleLab.text = model.name
             cell.topImg.kf.setImage(with: URL.init(string: model.pic!), placeholder: UIImage.init(named: ""))
             return cell
-        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if indexPath.section == 0{
-            return CGSize(width: screenW, height: 40)
-        }else{
             return CGSize(width: 100, height: 150)
-        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
-            // 点击直接进入漫画阅读
-            let model:ChapterModel = self.ChapterArr[indexPath.row]
-            let VC = ChapterViewController.init()
-            model.url = "https://manhua.fzdm.com/"+model.url!
-            VC.model = model
-            self.navigationController?.pushViewController(VC, animated: true)
-        }else{
             // 点击进入漫画介绍页面
             let model = self.CartoonArr[indexPath.row]
             let VC = CartoonDetailViewController.init()
             VC.model = model
             self.navigationController?.pushViewController(VC, animated: true)
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        var headerView:HeaderCollectionReusableView!
-        if kind == UICollectionView.elementKindSectionHeader {
-            headerView = (collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header", for: indexPath) as! HeaderCollectionReusableView)
-            if indexPath.section == 0 {
-                headerView.titleLab.text = "最新更新"
-            }else{
-                headerView.titleLab.text = "在线漫画"
-            }
-        }
-        return headerView
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: screenW, height: 40)
     }
     
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//        UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        0.0
-//    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return ChapterArr.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let model = ChapterArr[indexPath.row]
+        let cell = UITableViewCell.init(style: .default, reuseIdentifier: "cell")
+        cell.textLabel?.text = model.name
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let model:ChapterModel = self.ChapterArr[indexPath.row]
+        let VC = ChapterViewController.init()
+        model.url = "https://manhua.fzdm.com/"+model.url!
+        VC.model = model
+        self.navigationController?.pushViewController(VC, animated: true)
+    }
     
     /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
 }

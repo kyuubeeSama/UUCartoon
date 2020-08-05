@@ -70,7 +70,11 @@ class CartoonDetailViewController: BaseViewController,UITableViewDelegate,UITabl
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        let model:ChapterModel = self.listArr[indexPath.row]
+        let VC = ChapterViewController.init()
+        model.url = "https://manhua.fzdm.com/"+(self.model?.url)!+model.url!
+        VC.model = model
+        self.navigationController?.pushViewController(VC, animated: true)
     }
     
     /*

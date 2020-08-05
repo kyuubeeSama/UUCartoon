@@ -19,7 +19,7 @@ class IndexViewController: BaseViewController,UITableViewDelegate,UITableViewDat
         self.view.backgroundColor = .yellow
         print(FileTool.init().getDocumentPath())
         
-
+        
         self.createDB()
         listArr = sqlTool.shared.selectWebSite()
         mainTable.reloadData()
@@ -43,19 +43,19 @@ class IndexViewController: BaseViewController,UITableViewDelegate,UITableViewDat
             if sqlTool.shared.createTable(sqlStr: "CREATE TABLE IF NOT EXISTS `website` (`website_id` integer NOT NULL primary key autoincrement,`name` NVARCHAR(100) NOT NULL,`url` VARCHAR(100) NOT NULL,'status' INT default (1))"){
                 // 插入起始数据.插入数据时需要判断当前数据是否存在
                 _ = sqlTool.shared.insertInto(table: "website",
-                                          columns: "'name','url'",
-                                          values: "'风之动漫','https://www.fzdm.com/'",
-                                          whereStr: "SELECT * FROM website WHERE name='风之动漫' and url = 'https://www.fzdm.com/'")
+                                              columns: "'name','url'",
+                                              values: "'风之动漫','https://www.fzdm.com/'",
+                                              whereStr: "SELECT * FROM website WHERE name='风之动漫' and url = 'https://www.fzdm.com/'")
             }
-//            创建漫画分类表
+            //            创建漫画分类表
             _ = sqlTool.shared.createTable(sqlStr: "CREATE TABLE IF NOT EXISTS 'category' (`category_id` integer NOT NULL primary key autoincrement,`website_id` integer NOT NULL,`name` NVARCHAR(100) NOT NULL,`url` VARCHAR(255) NOT NULL,'status' INT default(1))")
-//            创建收藏表
+            //            创建收藏表
             _ = sqlTool.shared.createTable(sqlStr: "CREATE TABLE IF NOT EXISTS 'collect' (`collect_id` integer NOT NULL primary key autoincrement,'cartoon_id' integer NOT NULL)")
-//            创建漫画表
+            //            创建漫画表
             _ = sqlTool.shared.createTable(sqlStr: "CREATE TABLE IF NOT EXISTS 'cartoon' (`cartoon_id` integer NOT NULL primary key autoincrement,'website_id' integer NOT NULL,`category_id` integer NOT NULL,`name` NVARCHAR(255) NOT NULL,`url` VARCHAR(255) NOT NULL,`pic` VARCHAR(255) NOT NULL,`content` TEXT,`status` INT default(1))")
             // 创建图片表
             _ = sqlTool.shared.createTable(sqlStr: "CREATE TABLE IF NOT EXISTS 'picture' (`pic_id` integer NOT NULL primary key autoincrement,'cartoon_id' integer NOT NULL,`url` VARCHAR(255) NOT NULL,`status` INT default(1),`width` FLOAT,'height' FLOAT)")
-//            创建章节表
+            //            创建章节表
             _ = sqlTool.shared.createTable(sqlStr: "CREATE TABLE IF NOT EXISTS 'chapter' ('chapter_id' integer NOT NULL primary key autoincrement,'cartoon_id' integer NOT NULL,'name' NVARCHAR(255) NOT NULL,'url' VARCHAR(255) NOT NULL,'status' INT default(1))")
         }
     }
@@ -76,8 +76,14 @@ class IndexViewController: BaseViewController,UITableViewDelegate,UITableViewDat
         if model.name == "风之动漫" {
             // 进入风之动漫界面
             print("风之动漫")
-            let VC = FzdmViewController.init()
-            self.navigationController?.pushViewController(VC, animated: true)
+            
+            if Tool.init().isIpad() {
+                let VC = FzdmPadViewController.init()
+                self.navigationController?.pushViewController(VC, animated: true)
+            }else{
+                let VC = FzdmViewController.init()
+                self.navigationController?.pushViewController(VC, animated: true)
+            }
         }
     }
     

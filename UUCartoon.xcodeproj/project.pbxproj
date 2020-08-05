@@ -11,6 +11,8 @@
 		144DFD2D91D37148174C78FA /* sql in Resources */ = {isa = PBXBuildFile; fileRef = 144DF2F5CF03809F86997FAF /* sql */; };
 		A922C89B24D2BA7C00605E3F /* CartoonDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A922C89A24D2BA7C00605E3F /* CartoonDetailViewController.swift */; };
 		A94DF7E924D3E3C30022D3B5 /* ChapterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94DF7E824D3E3C30022D3B5 /* ChapterViewController.swift */; };
+		A94DF7EC24D41B4E0022D3B5 /* ChapterDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94DF7EA24D41B4E0022D3B5 /* ChapterDetailCollectionViewCell.swift */; };
+		A94DF7ED24D41B4E0022D3B5 /* ChapterDetailCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A94DF7EB24D41B4E0022D3B5 /* ChapterDetailCollectionViewCell.xib */; };
 		A9653EB024BD9BA00098AB1E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9653EAF24BD9BA00098AB1E /* AppDelegate.swift */; };
 		A9653EB224BD9BA00098AB1E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9653EB124BD9BA00098AB1E /* SceneDelegate.swift */; };
 		A9653EB424BD9BA00098AB1E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9653EB324BD9BA00098AB1E /* ViewController.swift */; };
@@ -39,6 +41,7 @@
 		A9653EF924C04C610098AB1E /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9653EF824C04C610098AB1E /* CategoryModel.swift */; };
 		A9653EFB24C04C6D0098AB1E /* PictureModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9653EFA24C04C6D0098AB1E /* PictureModel.swift */; };
 		A9653EFD24C04C7E0098AB1E /* CollectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9653EFC24C04C7E0098AB1E /* CollectModel.swift */; };
+		A9881C6F24D7B6DA008A0029 /* FzdmPadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9881C6E24D7B6D9008A0029 /* FzdmPadViewController.swift */; };
 		A99B7C8D24C1880900DB3EBB /* config.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99B7C8C24C1880900DB3EBB /* config.swift */; };
 		A99B7C9024C18B3C00DB3EBB /* FzdmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99B7C8F24C18B3C00DB3EBB /* FzdmViewController.swift */; };
 		A99B7C9224C195B900DB3EBB /* ChapterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99B7C9124C195B900DB3EBB /* ChapterModel.swift */; };
@@ -57,6 +60,8 @@
 		839A0DF0414B27A3CC996FFB /* Pods_UUCartoon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UUCartoon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A922C89A24D2BA7C00605E3F /* CartoonDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoonDetailViewController.swift; sourceTree = "<group>"; };
 		A94DF7E824D3E3C30022D3B5 /* ChapterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterViewController.swift; sourceTree = "<group>"; };
+		A94DF7EA24D41B4E0022D3B5 /* ChapterDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterDetailCollectionViewCell.swift; sourceTree = "<group>"; };
+		A94DF7EB24D41B4E0022D3B5 /* ChapterDetailCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChapterDetailCollectionViewCell.xib; sourceTree = "<group>"; };
 		A9653EAC24BD9BA00098AB1E /* UUCartoon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UUCartoon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9653EAF24BD9BA00098AB1E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A9653EB124BD9BA00098AB1E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -87,6 +92,7 @@
 		A9653EF824C04C610098AB1E /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		A9653EFA24C04C6D0098AB1E /* PictureModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureModel.swift; sourceTree = "<group>"; };
 		A9653EFC24C04C7E0098AB1E /* CollectModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectModel.swift; sourceTree = "<group>"; };
+		A9881C6E24D7B6D9008A0029 /* FzdmPadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FzdmPadViewController.swift; sourceTree = "<group>"; };
 		A99B7C8C24C1880900DB3EBB /* config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = config.swift; sourceTree = "<group>"; };
 		A99B7C8F24C18B3C00DB3EBB /* FzdmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FzdmViewController.swift; sourceTree = "<group>"; };
 		A99B7C9124C195B900DB3EBB /* ChapterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterModel.swift; sourceTree = "<group>"; };
@@ -226,6 +232,7 @@
 				A99B7C8F24C18B3C00DB3EBB /* FzdmViewController.swift */,
 				A922C89A24D2BA7C00605E3F /* CartoonDetailViewController.swift */,
 				A94DF7E824D3E3C30022D3B5 /* ChapterViewController.swift */,
+				A9881C6E24D7B6D9008A0029 /* FzdmPadViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -239,6 +246,8 @@
 				A99B7C9824C1998000DB3EBB /* CartoonCollectionViewCell.xib */,
 				A99B7C9B24C1999100DB3EBB /* HeaderCollectionReusableView.swift */,
 				A99B7C9C24C1999100DB3EBB /* HeaderCollectionReusableView.xib */,
+				A94DF7EA24D41B4E0022D3B5 /* ChapterDetailCollectionViewCell.swift */,
+				A94DF7EB24D41B4E0022D3B5 /* ChapterDetailCollectionViewCell.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -360,6 +369,7 @@
 				A9653EC424BD9C680098AB1E /* Podfile in Resources */,
 				A9653EB724BD9BA00098AB1E /* Main.storyboard in Resources */,
 				144DFD2D91D37148174C78FA /* sql in Resources */,
+				A94DF7ED24D41B4E0022D3B5 /* ChapterDetailCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,6 +422,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9881C6F24D7B6DA008A0029 /* FzdmPadViewController.swift in Sources */,
 				A9653EF724C04C4F0098AB1E /* CartoonModel.swift in Sources */,
 				A9653EE424BDA0720098AB1E /* BaseViewController.swift in Sources */,
 				A9653EE024BDA0340098AB1E /* UIView+extension.swift in Sources */,
@@ -437,6 +448,7 @@
 				A99B7C8D24C1880900DB3EBB /* config.swift in Sources */,
 				A99B7C9924C1998000DB3EBB /* CartoonCollectionViewCell.swift in Sources */,
 				A99B7C9224C195B900DB3EBB /* ChapterModel.swift in Sources */,
+				A94DF7EC24D41B4E0022D3B5 /* ChapterDetailCollectionViewCell.swift in Sources */,
 				A9653EDD24BDA0340098AB1E /* UIImage+extension.swift in Sources */,
 				A99B7C9524C1997500DB3EBB /* ChapterCollectionViewCell.swift in Sources */,
 				A9653EFD24C04C7E0098AB1E /* CollectModel.swift in Sources */,
