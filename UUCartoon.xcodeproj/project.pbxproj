@@ -41,6 +41,7 @@
 		A9653EF924C04C610098AB1E /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9653EF824C04C610098AB1E /* CategoryModel.swift */; };
 		A9653EFB24C04C6D0098AB1E /* PictureModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9653EFA24C04C6D0098AB1E /* PictureModel.swift */; };
 		A9653EFD24C04C7E0098AB1E /* CollectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9653EFC24C04C7E0098AB1E /* CollectModel.swift */; };
+		A9664DE324DD295400EB1FD5 /* NavView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9664DE224DD295400EB1FD5 /* NavView.swift */; };
 		A9881C6F24D7B6DA008A0029 /* FzdmPadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9881C6E24D7B6D9008A0029 /* FzdmPadViewController.swift */; };
 		A99B7C8D24C1880900DB3EBB /* config.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99B7C8C24C1880900DB3EBB /* config.swift */; };
 		A99B7C9024C18B3C00DB3EBB /* FzdmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99B7C8F24C18B3C00DB3EBB /* FzdmViewController.swift */; };
@@ -66,9 +67,7 @@
 		A9653EAF24BD9BA00098AB1E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A9653EB124BD9BA00098AB1E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A9653EB324BD9BA00098AB1E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		A9653EB624BD9BA00098AB1E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A9653EB824BD9BAA0098AB1E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A9653EBB24BD9BAA0098AB1E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A9653EBD24BD9BAA0098AB1E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A9653EC324BD9C670098AB1E /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A9653ED124BDA0330098AB1E /* NSObject+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSObject+extension.swift"; sourceTree = "<group>"; };
@@ -92,6 +91,12 @@
 		A9653EF824C04C610098AB1E /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		A9653EFA24C04C6D0098AB1E /* PictureModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureModel.swift; sourceTree = "<group>"; };
 		A9653EFC24C04C7E0098AB1E /* CollectModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectModel.swift; sourceTree = "<group>"; };
+		A9664BF824DCEFE000EB1FD5 /* UUCartoon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = UUCartoon.entitlements; sourceTree = "<group>"; };
+		A9664DDE24DD28ED00EB1FD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A9664DDF24DD28ED00EB1FD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A9664DE024DD293700EB1FD5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		A9664DE124DD293700EB1FD5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		A9664DE224DD295400EB1FD5 /* NavView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavView.swift; sourceTree = "<group>"; };
 		A9881C6E24D7B6D9008A0029 /* FzdmPadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FzdmPadViewController.swift; sourceTree = "<group>"; };
 		A99B7C8C24C1880900DB3EBB /* config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = config.swift; sourceTree = "<group>"; };
 		A99B7C8F24C18B3C00DB3EBB /* FzdmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FzdmViewController.swift; sourceTree = "<group>"; };
@@ -155,6 +160,7 @@
 		A9653EAE24BD9BA00098AB1E /* UUCartoon */ = {
 			isa = PBXGroup;
 			children = (
+				A9664BF824DCEFE000EB1FD5 /* UUCartoon.entitlements */,
 				A9653EF324BFE8460098AB1E /* file */,
 				A9653ECF24BD9F6D0098AB1E /* category */,
 				A9653EC824BD9F350098AB1E /* index */,
@@ -248,6 +254,7 @@
 				A99B7C9C24C1999100DB3EBB /* HeaderCollectionReusableView.xib */,
 				A94DF7EA24D41B4E0022D3B5 /* ChapterDetailCollectionViewCell.swift */,
 				A94DF7EB24D41B4E0022D3B5 /* ChapterDetailCollectionViewCell.xib */,
+				A9664DE224DD295400EB1FD5 /* NavView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -345,6 +352,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = A9653EA324BD9BA00098AB1E;
 			productRefGroup = A9653EAD24BD9BA00098AB1E /* Products */;
@@ -446,6 +454,7 @@
 				A9653EEC24BEA2F70098AB1E /* MineViewController.swift in Sources */,
 				A9653EFB24C04C6D0098AB1E /* PictureModel.swift in Sources */,
 				A99B7C8D24C1880900DB3EBB /* config.swift in Sources */,
+				A9664DE324DD295400EB1FD5 /* NavView.swift in Sources */,
 				A99B7C9924C1998000DB3EBB /* CartoonCollectionViewCell.swift in Sources */,
 				A99B7C9224C195B900DB3EBB /* ChapterModel.swift in Sources */,
 				A94DF7EC24D41B4E0022D3B5 /* ChapterDetailCollectionViewCell.swift in Sources */,
@@ -466,7 +475,8 @@
 		A9653EB524BD9BA00098AB1E /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				A9653EB624BD9BA00098AB1E /* Base */,
+				A9664DDE24DD28ED00EB1FD5 /* Base */,
+				A9664DE024DD293700EB1FD5 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -474,7 +484,8 @@
 		A9653EBA24BD9BAA0098AB1E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				A9653EBB24BD9BAA0098AB1E /* Base */,
+				A9664DDF24DD28ED00EB1FD5 /* Base */,
+				A9664DE124DD293700EB1FD5 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -486,6 +497,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -547,6 +559,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -603,6 +616,7 @@
 			baseConfigurationReference = CE5D49EAD0E59961112CC347 /* Pods-UUCartoon.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = UUCartoon/UUCartoon.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3KW2TU676U;
 				INFOPLIST_FILE = UUCartoon/Info.plist;
@@ -612,6 +626,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.qystudio.UUCartoon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -622,6 +637,7 @@
 			baseConfigurationReference = B67310F4365BD6F8F98FBEEA /* Pods-UUCartoon.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = UUCartoon/UUCartoon.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3KW2TU676U;
 				INFOPLIST_FILE = UUCartoon/Info.plist;
@@ -631,6 +647,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.qystudio.UUCartoon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

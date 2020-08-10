@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FluentDarkModeKit
 
 class FzdmPadViewController: BaseViewController,UICollectionViewDelegateFlowLayout,UICollectionViewDataSource,UICollectionViewDelegate,UITableViewDelegate,UITableViewDataSource {
     
@@ -23,7 +24,9 @@ class FzdmPadViewController: BaseViewController,UICollectionViewDelegateFlowLayo
     
     //获取数据
     func getData(){
+        self.beginProgress()
         QYRequestData.shared.getHtmlContent(urlStr: "https://manhua.fzdm.com", params: nil, success: { (result) in
+            self.endProgress()
 //            print(result)
             // 从截取的数据中获取两个数组
             // 最新更新  chapterArr
@@ -81,6 +84,7 @@ class FzdmPadViewController: BaseViewController,UICollectionViewDelegateFlowLayo
             self.mainCollection.reloadData()
         }) { (error) in
             print(error)
+            self.navigationController?.popViewController(animated: true)
         }
     }
     
@@ -102,10 +106,11 @@ class FzdmPadViewController: BaseViewController,UICollectionViewDelegateFlowLayo
         self.view.addSubview(collectionView)
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.backgroundColor = .systemBackground
         collectionView.register(UINib.init(nibName: "ChapterCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: "chapterCell")
         collectionView.register(UINib.init(nibName: "CartoonCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: "cartoonCell")
         collectionView.register(UINib.init(nibName: "HeaderCollectionReusableView", bundle: Bundle.main), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
-        collectionView.backgroundColor = .white
+//        collectionView.backgroundColor = UIColor.init(.dm, light: .white, dark: .black)
         collectionView.snp.makeConstraints { (make) in
             make.right.top.bottom.equalToSuperview()
             make.left.equalTo(self.mainTable.snp.right)
@@ -149,6 +154,7 @@ class FzdmPadViewController: BaseViewController,UICollectionViewDelegateFlowLayo
         let model = ChapterArr[indexPath.row]
         let cell = UITableViewCell.init(style: .default, reuseIdentifier: "cell")
         cell.textLabel?.text = model.name
+        cell.textLabel?.numberOfLines = 0
         return cell
     }
     
@@ -157,7 +163,8 @@ class FzdmPadViewController: BaseViewController,UICollectionViewDelegateFlowLayo
         let VC = ChapterViewController.init()
         model.url = "https://manhua.fzdm.com/"+model.url!
         VC.model = model
-        self.navigationController?.pushViewController(VC, animated: true)
+        VC.modalPresentationStyle = .fullScreen
+        self.present(VC, animated: true, completion: nil)
     }
     
     /*

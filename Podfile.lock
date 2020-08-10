@@ -1,6 +1,7 @@
 PODS:
   - Alamofire (5.2.2)
   - EmptyDataSet-Swift (5.0.0)
+  - FluentDarkModeKit (0.5.2)
   - HandyJSON (5.0.2)
   - IQKeyboardManagerSwift (6.5.5)
   - Kingfisher (5.14.1):
@@ -17,6 +18,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - EmptyDataSet-Swift
+  - FluentDarkModeKit
   - HandyJSON
   - IQKeyboardManagerSwift
   - Kingfisher
@@ -30,6 +32,7 @@ SPEC REPOS:
   https://gitee.com/mirrors/CocoaPods-Specs.git:
     - Alamofire
     - EmptyDataSet-Swift
+    - FluentDarkModeKit
     - HandyJSON
     - IQKeyboardManagerSwift
     - Kingfisher
@@ -42,6 +45,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
   EmptyDataSet-Swift: eb382c0c87a2d9c678077385a595cec52da38171
+  FluentDarkModeKit: 78109bdbfb87c515543c0a52319da017c3843aae
   HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
   IQKeyboardManagerSwift: 0fb93310284665245591f50f7a5e38de615960b7
   Kingfisher: 8050bc6f7f68cbf3908bd04df7ccbac188f6d6d6
@@ -51,6 +55,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 69591066e29a0b8f1371eb089f537ffa0cb63dd3
+PODFILE CHECKSUM: f75b50b094eb95b31e70f3a0f5c5954d25554017
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.9.3

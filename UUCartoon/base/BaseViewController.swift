@@ -15,7 +15,7 @@ class BaseViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .systemBackground
     }
     
     func setNavColor(navColor:UIColor,titleColor:UIColor,barStyle:UIBarStyle) {

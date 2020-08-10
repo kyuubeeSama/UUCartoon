@@ -22,7 +22,9 @@ class CartoonDetailViewController: BaseViewController,UITableViewDelegate,UITabl
     }
     
     func getChapterData() {
+        self.beginProgress()
         QYRequestData.shared.getHtmlContent(urlStr: "https://manhua.fzdm.com/"+(model?.url)!, params: nil) { (html) in
+            self.endProgress()
             print(html)
             // 获取列表
 //            <li class="pure-u-1-2([\s\S]+?)\/li>
@@ -45,9 +47,8 @@ class CartoonDetailViewController: BaseViewController,UITableViewDelegate,UITabl
             }
             self.mainTable.reloadData()
         } failure: { (error) in
-            
+            self.navigationController?.popViewController(animated: true)
         }
-
     }
     
     lazy var mainTable:UITableView = {
@@ -74,7 +75,8 @@ class CartoonDetailViewController: BaseViewController,UITableViewDelegate,UITabl
         let VC = ChapterViewController.init()
         model.url = "https://manhua.fzdm.com/"+(self.model?.url)!+model.url!
         VC.model = model
-        self.navigationController?.pushViewController(VC, animated: true)
+        VC.modalPresentationStyle = .fullScreen
+        self.present(VC, animated: true, completion: nil)
     }
     
     /*

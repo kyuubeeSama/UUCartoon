@@ -16,9 +16,7 @@ class IndexViewController: BaseViewController,UITableViewDelegate,UITableViewDat
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        self.view.backgroundColor = .yellow
         print(FileTool.init().getDocumentPath())
-        
         
         self.createDB()
         listArr = sqlTool.shared.selectWebSite()
@@ -68,6 +66,7 @@ class IndexViewController: BaseViewController,UITableViewDelegate,UITableViewDat
         let model = listArr[indexPath.row]
         let cell = UITableViewCell.init(style: .default, reuseIdentifier: "cell")
         cell.textLabel?.text = model.name
+        cell.textLabel?.textColor = UIColor.init(.dm, light: .white, dark: .red)
         return cell
     }
     

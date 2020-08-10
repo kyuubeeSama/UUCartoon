@@ -22,7 +22,7 @@ pod 'HandyJSON'
 # 侧滑菜单
 pod 'SideMenu'
 # 暗黑模式
-#pod 'FluentDarkModeKit'
+pod 'FluentDarkModeKit'
 # 数据库
 pod 'SQLite.swift'
 end

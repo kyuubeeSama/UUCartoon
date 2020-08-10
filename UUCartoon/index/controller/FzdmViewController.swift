@@ -26,7 +26,9 @@ class FzdmViewController: BaseViewController,UICollectionViewDelegateFlowLayout,
     }
     //获取数据
     func getData(){
+        self.beginProgress()
         QYRequestData.shared.getHtmlContent(urlStr: "https://manhua.fzdm.com", params: nil, success: { (result) in
+            self.endProgress()
 //            print(result)
             // 从截取的数据中获取两个数组
             // 最新更新  chapterArr
@@ -95,7 +97,7 @@ class FzdmViewController: BaseViewController,UICollectionViewDelegateFlowLayout,
         collectionView.register(UINib.init(nibName: "ChapterCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: "chapterCell")
         collectionView.register(UINib.init(nibName: "CartoonCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: "cartoonCell")
         collectionView.register(UINib.init(nibName: "HeaderCollectionReusableView", bundle: Bundle.main), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .systemBackground
         collectionView.snp.makeConstraints { (make) in
             make.left.right.top.bottom.equalToSuperview()
         }
@@ -146,7 +148,8 @@ class FzdmViewController: BaseViewController,UICollectionViewDelegateFlowLayout,
             let VC = ChapterViewController.init()
             model.url = "https://manhua.fzdm.com/"+model.url!
             VC.model = model
-            self.navigationController?.pushViewController(VC, animated: true)
+            VC.modalPresentationStyle = .fullScreen
+            self.present(VC, animated: true, completion: nil)
         }else{
             // 点击进入漫画介绍页面
             let model = self.CartoonArr[indexPath.row]
