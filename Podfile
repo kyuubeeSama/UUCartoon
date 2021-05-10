@@ -27,6 +27,10 @@ pod 'FluentDarkModeKit'
 pod 'GRDB.swift'
 #XPATH
 pod 'Ji'
+# 导航栏
+pod 'JXSegmentedView'
+
+pod 'ReactiveCocoa'
 
 end
 

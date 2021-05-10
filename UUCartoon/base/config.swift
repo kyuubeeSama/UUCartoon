@@ -17,6 +17,4 @@ let statusbar_height = CGFloat((UIApplication.shared.connectedScenes.map({$0 as?
 let top_height = CGFloat(statusbar_height+44)
 let NavColor = "196EE5"
 let ButtonBackColor = "CD3C3E"
-let BaseUrl = "http://wxyf.hzbx365.com/"
-let FileUrl = "http://wxyf.hzbx365.com/files/"
 let isIphoneX = UIScreen.main.bounds.size.height >= 812 ? true : false

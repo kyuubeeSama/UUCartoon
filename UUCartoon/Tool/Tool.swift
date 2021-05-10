@@ -33,5 +33,24 @@ class Tool: NSObject {
         }
     }
     
+    func isMac()->Bool{
+        if #available(iOS 14.0, *) {
+            if UIDevice.current.userInterfaceIdiom == .mac {
+                return true
+            }else{
+                return false
+            }
+        } else {
+            // Fallback on earlier versions
+            return false
+        }
+    }
     
+    func isPhone()->Bool{
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            return true
+        }else{
+            return false
+        }
+    }
 }
