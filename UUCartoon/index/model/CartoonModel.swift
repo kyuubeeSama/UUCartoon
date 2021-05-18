@@ -25,4 +25,6 @@ struct CartoonModel {
     var num: String = ""
     // 类型
     var type:CartoonType = .ykmh
+    // 是否是排序
+    var is_rank:Bool = false
 }

@@ -18,6 +18,10 @@ class CartoonListCollectionViewCell: UICollectionViewCell {
     // 最新更新
     @IBOutlet weak var numLab: UILabel!
     @IBOutlet weak var titleConstraintHeight: NSLayoutConstraint!
+    // 在排序中，右侧按钮要隐藏
+    @IBOutlet weak var rightImg: UIImageView!
+    // 排序中，要显示，其他情况隐藏
+    @IBOutlet weak var rankLab: UILabel!
     
     func setData(cartoonModel:CartoonModel) {
         let titleSize = cartoonModel.name.getStringSize(font: UIFont.systemFont(ofSize: 15), size: CGSize(width: screenW-116, height: CGFloat(MAXFLOAT)))
@@ -32,6 +36,15 @@ class CartoonListCollectionViewCell: UICollectionViewCell {
             numLab.text = String(numArr[0])
         }else{
             numLab.text = cartoonModel.num
+        }
+        if cartoonModel.is_rank == true {
+            rankLab.isHidden = false
+            numLab.isHidden = true
+            rightImg.isHidden = true
+        }else{
+            rankLab.isHidden = true
+            numLab.isHidden = false
+            rightImg.isHidden = false
         }
     }
     

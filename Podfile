@@ -32,5 +32,8 @@ pod 'JXSegmentedView'
 
 pod 'ReactiveCocoa'
 
+#上拉下拉
+pod 'ESPullToRefresh'
+
 end
 

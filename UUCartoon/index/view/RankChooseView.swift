@@ -20,7 +20,15 @@ class CategoryBtnView:UIView {
         layer.masksToBounds = true
         layer.cornerRadius = 3
         layer.borderWidth = 1
-        layer.borderColor = UIColor.init(.dm, light: UIColor.init(named: "lineColor")!, dark: .white).cgColor
+        layer.borderColor = UIColor.init(named: "lineColor")?.cgColor
+        
+        // 添加分割线
+        for item in 1...2 {
+            let lineLayer = CALayer.init()
+            layer.addSublayer(lineLayer)
+            lineLayer.frame = CGRect(x: 70*item-1, y: 0, width: 1, height: 30)
+            lineLayer.backgroundColor = UIColor.init(named: "lineColor")?.cgColor
+        }
         
         let titleArr = [["人气排行","点击排行","订阅排行"],["今日最热","最多人看","最受好评"]]
         for item in 0...2 {
@@ -38,7 +46,7 @@ class CategoryBtnView:UIView {
             
             categoryBtn.tag = 700+item
             categoryBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-            categoryBtn.frame = CGRect(x: 70*item, y: 0, width: 70, height: 30)
+            categoryBtn.frame = CGRect(x: 70*item, y: 0, width: 69, height: 30)
             categoryBtn.reactive.controlEvents(.touchUpInside).observeValues { button in
 //                修改按钮，同时修改其他按钮为白色
                 for index in 0...2 {
@@ -75,7 +83,9 @@ class SiftBtn:UIButton {
         titleLabel?.font = UIFont.systemFont(ofSize: 15)
         reactive.controlEvents(.touchUpInside).observeValues { button in
             //TODO:添加筛选点击事件
-
+            if self.rentBtnBlock != nil{
+                self.rentBtnBlock!()
+            }
         }
     }
 

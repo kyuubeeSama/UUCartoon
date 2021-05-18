@@ -14,6 +14,8 @@
 		A907CC6726441C7B00B9393C /* CartoonListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A907CC6626441C7B00B9393C /* CartoonListViewController.swift */; };
 		A907CC6926441CCA00B9393C /* CartoonDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A907CC6826441CCA00B9393C /* CartoonDetailViewController.swift */; };
 		A907CC6B26441CF300B9393C /* ChapterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A907CC6A26441CF300B9393C /* ChapterViewController.swift */; };
+		A95527D426536633009ED762 /* Array+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95527D326536633009ED762 /* Array+extension.swift */; };
+		A95527E22653E7D0009ED762 /* SiftCategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95527E12653E7D0009ED762 /* SiftCategoryModel.swift */; };
 		A9653EB024BD9BA00098AB1E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9653EAF24BD9BA00098AB1E /* AppDelegate.swift */; };
 		A9653EB224BD9BA00098AB1E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9653EB124BD9BA00098AB1E /* SceneDelegate.swift */; };
 		A9653EB424BD9BA00098AB1E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9653EB324BD9BA00098AB1E /* ViewController.swift */; };
@@ -36,6 +38,8 @@
 		A9653EEA24BEA2230098AB1E /* IndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9653EE924BEA2230098AB1E /* IndexViewController.swift */; };
 		A974234E264665E70012B82E /* placeholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A974234D264665E60012B82E /* placeholder.jpg */; };
 		A9742350264682830012B82E /* RankChooseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A974234F264682830012B82E /* RankChooseView.swift */; };
+		A98B8BFB2648DA2400792C54 /* SiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98B8BFA2648DA2400792C54 /* SiftView.swift */; };
+		A98B8BFD2649035400792C54 /* SiftTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98B8BFC2649035400792C54 /* SiftTableView.swift */; };
 		A993C930263ADCBA004EE50E /* DataTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = A993C92F263ADCBA004EE50E /* DataTool.swift */; };
 		A993C932263ADCC4004EE50E /* SqlTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = A993C931263ADCC4004EE50E /* SqlTool.swift */; };
 		A99B7C8D24C1880900DB3EBB /* config.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99B7C8C24C1880900DB3EBB /* config.swift */; };
@@ -55,6 +59,8 @@
 		A907CC6626441C7B00B9393C /* CartoonListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoonListViewController.swift; sourceTree = "<group>"; };
 		A907CC6826441CCA00B9393C /* CartoonDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoonDetailViewController.swift; sourceTree = "<group>"; };
 		A907CC6A26441CF300B9393C /* ChapterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterViewController.swift; sourceTree = "<group>"; };
+		A95527D326536633009ED762 /* Array+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+extension.swift"; sourceTree = "<group>"; };
+		A95527E12653E7D0009ED762 /* SiftCategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiftCategoryModel.swift; sourceTree = "<group>"; };
 		A9653EAC24BD9BA00098AB1E /* UUCartoon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UUCartoon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9653EAF24BD9BA00098AB1E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A9653EB124BD9BA00098AB1E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -82,6 +88,8 @@
 		A9664DE124DD293700EB1FD5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		A974234D264665E60012B82E /* placeholder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = placeholder.jpg; sourceTree = "<group>"; };
 		A974234F264682830012B82E /* RankChooseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankChooseView.swift; sourceTree = "<group>"; };
+		A98B8BFA2648DA2400792C54 /* SiftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiftView.swift; sourceTree = "<group>"; };
+		A98B8BFC2649035400792C54 /* SiftTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiftTableView.swift; sourceTree = "<group>"; };
 		A993C92F263ADCBA004EE50E /* DataTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTool.swift; sourceTree = "<group>"; };
 		A993C931263ADCC4004EE50E /* SqlTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SqlTool.swift; sourceTree = "<group>"; };
 		A99B7C8C24C1880900DB3EBB /* config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = config.swift; sourceTree = "<group>"; };
@@ -205,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				A9CEF70526452C8D00FD43C2 /* CartoonModel.swift */,
+				A95527E12653E7D0009ED762 /* SiftCategoryModel.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -229,6 +238,8 @@
 				A9CEF7012645268900FD43C2 /* CartoonListCollectionViewCell.swift */,
 				A9CEF7022645268900FD43C2 /* CartoonListCollectionViewCell.xib */,
 				A974234F264682830012B82E /* RankChooseView.swift */,
+				A98B8BFA2648DA2400792C54 /* SiftView.swift */,
+				A98B8BFC2649035400792C54 /* SiftTableView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -259,6 +270,7 @@
 				A9653ED424BDA0330098AB1E /* UIImage+extension.swift */,
 				A9653ED224BDA0330098AB1E /* UITextField+extension.swift */,
 				A9653ED724BDA0340098AB1E /* UIView+extension.swift */,
+				A95527D326536633009ED762 /* Array+extension.swift */,
 			);
 			path = category;
 			sourceTree = "<group>";
@@ -405,16 +417,19 @@
 				A9653EE024BDA0340098AB1E /* UIView+extension.swift in Sources */,
 				A9653EE224BDA0340098AB1E /* Date+extension.swift in Sources */,
 				A9653EE824BDB2160098AB1E /* Tool.swift in Sources */,
+				A95527E22653E7D0009ED762 /* SiftCategoryModel.swift in Sources */,
 				A907CC6926441CCA00B9393C /* CartoonDetailViewController.swift in Sources */,
 				A907CC6B26441CF300B9393C /* ChapterViewController.swift in Sources */,
 				A9653EDE24BDA0340098AB1E /* String+extension.swift in Sources */,
 				A9653EE124BDA0340098AB1E /* UIButton+extension.swift in Sources */,
+				A98B8BFD2649035400792C54 /* SiftTableView.swift in Sources */,
 				A9653EDB24BDA0340098AB1E /* UITextField+extension.swift in Sources */,
 				A9653EB424BD9BA00098AB1E /* ViewController.swift in Sources */,
 				A9653EDF24BDA0340098AB1E /* UIColor+extension.swift in Sources */,
 				A907CC6326440FDE00B9393C /* LabelTableView.swift in Sources */,
 				A9653EB024BD9BA00098AB1E /* AppDelegate.swift in Sources */,
 				A9742350264682830012B82E /* RankChooseView.swift in Sources */,
+				A98B8BFB2648DA2400792C54 /* SiftView.swift in Sources */,
 				A9653EB224BD9BA00098AB1E /* SceneDelegate.swift in Sources */,
 				A9653EEA24BEA2230098AB1E /* IndexViewController.swift in Sources */,
 				A9CEF7002645267800FD43C2 /* CartoonListCollectionView.swift in Sources */,
@@ -422,6 +437,7 @@
 				A99B7C8D24C1880900DB3EBB /* config.swift in Sources */,
 				A9653EDD24BDA0340098AB1E /* UIImage+extension.swift in Sources */,
 				A907CC6726441C7B00B9393C /* CartoonListViewController.swift in Sources */,
+				A95527D426536633009ED762 /* Array+extension.swift in Sources */,
 				A993C932263ADCC4004EE50E /* SqlTool.swift in Sources */,
 				A9CEF7032645268900FD43C2 /* CartoonListCollectionViewCell.swift in Sources */,
 				A9653EDA24BDA0340098AB1E /* NSObject+extension.swift in Sources */,
