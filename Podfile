@@ -30,6 +30,7 @@ pod 'Ji'
 # 导航栏
 pod 'JXSegmentedView'
 
+
 pod 'ReactiveCocoa'
 
 #上拉下拉

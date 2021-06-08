@@ -2,7 +2,7 @@ PODS:
   - Alamofire (5.4.3)
   - EmptyDataSet-Swift (5.0.0)
   - ESPullToRefresh (2.9.3)
-  - FluentDarkModeKit (1.0.3)
+  - FluentDarkModeKit (1.0.4)
   - GRDB.swift (5.8.0):
     - GRDB.swift/standard (= 5.8.0)
   - GRDB.swift/standard (5.8.0)
@@ -59,7 +59,7 @@ SPEC CHECKSUMS:
   Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
   EmptyDataSet-Swift: eb382c0c87a2d9c678077385a595cec52da38171
   ESPullToRefresh: 0d68daa602b343c81753a1b95e09fd0bfcddfd40
-  FluentDarkModeKit: e3fe5d8aa471422480b04b0aa03d83425e3e1826
+  FluentDarkModeKit: b6317653a00329564582884772ec57c4eaad1a1f
   GRDB.swift: 9b9beec114435e1d852ad68c136cff4c71134627
   HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe

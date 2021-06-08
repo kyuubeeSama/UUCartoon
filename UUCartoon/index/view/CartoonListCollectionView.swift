@@ -8,7 +8,14 @@
 
 import UIKit
 
+enum CollectionViewCellType:Int {
+    case Table = 0
+    case Collection = 1
+}
+
 class CartoonListCollectionView: UICollectionView,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
+    
+    public var cellType:CollectionViewCellType = .Table
     
     var listArr:[CartoonModel]?{
         didSet{
@@ -21,7 +28,8 @@ class CartoonListCollectionView: UICollectionView,UICollectionViewDelegate,UICol
         super.init(frame: frame, collectionViewLayout: layout)
         delegate = self
         dataSource = self
-        self.register(UINib.init(nibName: "CartoonListCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: "cell")
+        self.register(UINib.init(nibName: "CartoonTableListCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: "tableCell")
+        self.register(UINib.init(nibName: "CartoonListCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: "collectionCell")
         backgroundColor = .systemBackground
     }
     
@@ -34,9 +42,15 @@ class CartoonListCollectionView: UICollectionView,UICollectionViewDelegate,UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell:CartoonListCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CartoonListCollectionViewCell
-        cell.setData(cartoonModel: listArr![indexPath.row])
-        return cell
+        if cellType == .Table {
+            let cell:CartoonTableListCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "tableCell", for: indexPath) as! CartoonTableListCollectionViewCell
+            cell.setData(cartoonModel: listArr![indexPath.row])
+            return cell
+        }else{
+            let cell:CartoonListCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! CartoonListCollectionViewCell
+            cell.setData(cartoonModel: listArr![indexPath.row])
+            return cell
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -46,14 +60,33 @@ class CartoonListCollectionView: UICollectionView,UICollectionViewDelegate,UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if Tool.init().isPhone() {
-            // 手机上，单行显示
-            return CGSize(width: screenW, height: 135)
+        if cellType == .Table {
+            if Tool.init().isPhone() {
+                // 手机上，单行显示
+                return CGSize(width: screenW, height: 135)
+            }else{
+                return CGSize(width: 375, height: 135)
+            }
         }else{
-            return CGSize(width: 375, height: 135)
+            if Tool.init().isPhone() {
+                return CGSize(width: screenW/3, height: screenW/3*91/56)
+            }else{
+                return CGSize(width: 125, height: 203)
+            }
         }
     }
-
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        0
+    }
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.

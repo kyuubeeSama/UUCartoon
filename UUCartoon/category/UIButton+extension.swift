@@ -16,7 +16,20 @@ enum QYButtonEdgeInsetsStyle {
     case Bottom
 }
 
+var clickLevelKey = 100
+
 extension UIButton {
+    var clickLevel:Int {
+        set {
+            objc_setAssociatedObject(self, &clickLevelKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
+        }
+        get {
+            if let rs = objc_getAssociatedObject(self, &clickLevelKey) as? Int{
+                return rs
+            }
+            return -1
+        }
+    }
     func layoutButton(style: QYButtonEdgeInsetsStyle, imageTitleSpace: CGFloat) {
         //得到imageView和titleLabel的宽高
         let imageWidth = self.imageView?.frame.size.width

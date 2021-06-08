@@ -43,5 +43,14 @@ extension String {
         let ret1:Bool = self.isValidateByRegex(regex: phsRegex)
         return (ret||ret1)
     }
+
+//    汉字转拼音
+    func chineseToPinyin()->String{
+        let stringRef = NSMutableString(string: self) as CFMutableString
+        CFStringTransform(stringRef,nil, kCFStringTransformToLatin, false) // 转换为带音标的拼音
+        CFStringTransform(stringRef, nil, kCFStringTransformStripCombiningMarks, false) // 去掉音标
+        let pinyin = stringRef as String
+        return pinyin
+    }
 }
 
