@@ -20,6 +20,16 @@
 		A915A014266F0E6600182FB1 /* UICollectionViewLeftAlignedLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A915A013266F0E6600182FB1 /* UICollectionViewLeftAlignedLayout.swift */; };
 		A915A017266F619900182FB1 /* CartoonListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A915A015266F619900182FB1 /* CartoonListCollectionViewCell.swift */; };
 		A915A018266F619900182FB1 /* CartoonListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A915A016266F619900182FB1 /* CartoonListCollectionViewCell.xib */; };
+		A915A01A266F7A9E00182FB1 /* CartoonDetailCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A915A019266F7A9E00182FB1 /* CartoonDetailCollectionView.swift */; };
+		A915A01C266F87FC00182FB1 /* cartoon_detail_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = A915A01B266F87FC00182FB1 /* cartoon_detail_bg.png */; };
+		A915A01F266F89CD00182FB1 /* CartoonInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A915A01D266F89CD00182FB1 /* CartoonInfoCollectionViewCell.swift */; };
+		A915A020266F89CD00182FB1 /* CartoonInfoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A915A01E266F89CD00182FB1 /* CartoonInfoCollectionViewCell.xib */; };
+		A915A023266F89EA00182FB1 /* CartoonIntroCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A915A021266F89EA00182FB1 /* CartoonIntroCollectionViewCell.swift */; };
+		A915A024266F89EA00182FB1 /* CartoonIntroCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A915A022266F89EA00182FB1 /* CartoonIntroCollectionViewCell.xib */; };
+		A915A027266F8A1F00182FB1 /* ChapterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A915A025266F8A1F00182FB1 /* ChapterCollectionViewCell.swift */; };
+		A915A028266F8A1F00182FB1 /* ChapterCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A915A026266F8A1F00182FB1 /* ChapterCollectionViewCell.xib */; };
+		A915A02B266F8A6C00182FB1 /* CartoonInfoHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A915A029266F8A6C00182FB1 /* CartoonInfoHeaderCollectionReusableView.swift */; };
+		A915A02C266F8A6C00182FB1 /* CartoonInfoHeaderCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A915A02A266F8A6C00182FB1 /* CartoonInfoHeaderCollectionReusableView.xib */; };
 		A95527D426536633009ED762 /* Array+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95527D326536633009ED762 /* Array+extension.swift */; };
 		A95527E22653E7D0009ED762 /* SiftCategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95527E12653E7D0009ED762 /* SiftCategoryModel.swift */; };
 		A9653EB024BD9BA00098AB1E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9653EAF24BD9BA00098AB1E /* AppDelegate.swift */; };
@@ -73,6 +83,16 @@
 		A915A013266F0E6600182FB1 /* UICollectionViewLeftAlignedLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionViewLeftAlignedLayout.swift; sourceTree = "<group>"; };
 		A915A015266F619900182FB1 /* CartoonListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoonListCollectionViewCell.swift; sourceTree = "<group>"; };
 		A915A016266F619900182FB1 /* CartoonListCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartoonListCollectionViewCell.xib; sourceTree = "<group>"; };
+		A915A019266F7A9E00182FB1 /* CartoonDetailCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoonDetailCollectionView.swift; sourceTree = "<group>"; };
+		A915A01B266F87FC00182FB1 /* cartoon_detail_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cartoon_detail_bg.png; sourceTree = "<group>"; };
+		A915A01D266F89CD00182FB1 /* CartoonInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoonInfoCollectionViewCell.swift; sourceTree = "<group>"; };
+		A915A01E266F89CD00182FB1 /* CartoonInfoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartoonInfoCollectionViewCell.xib; sourceTree = "<group>"; };
+		A915A021266F89EA00182FB1 /* CartoonIntroCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoonIntroCollectionViewCell.swift; sourceTree = "<group>"; };
+		A915A022266F89EA00182FB1 /* CartoonIntroCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartoonIntroCollectionViewCell.xib; sourceTree = "<group>"; };
+		A915A025266F8A1F00182FB1 /* ChapterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterCollectionViewCell.swift; sourceTree = "<group>"; };
+		A915A026266F8A1F00182FB1 /* ChapterCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChapterCollectionViewCell.xib; sourceTree = "<group>"; };
+		A915A029266F8A6C00182FB1 /* CartoonInfoHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoonInfoHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
+		A915A02A266F8A6C00182FB1 /* CartoonInfoHeaderCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartoonInfoHeaderCollectionReusableView.xib; sourceTree = "<group>"; };
 		A95527D326536633009ED762 /* Array+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+extension.swift"; sourceTree = "<group>"; };
 		A95527E12653E7D0009ED762 /* SiftCategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiftCategoryModel.swift; sourceTree = "<group>"; };
 		A9653EAC24BD9BA00098AB1E /* UUCartoon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UUCartoon.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -264,6 +284,15 @@
 				A974234F264682830012B82E /* RankChooseView.swift */,
 				A98B8BFC2649035400792C54 /* SiftTableView.swift */,
 				A98B8BFA2648DA2400792C54 /* SiftView.swift */,
+				A915A019266F7A9E00182FB1 /* CartoonDetailCollectionView.swift */,
+				A915A029266F8A6C00182FB1 /* CartoonInfoHeaderCollectionReusableView.swift */,
+				A915A02A266F8A6C00182FB1 /* CartoonInfoHeaderCollectionReusableView.xib */,
+				A915A025266F8A1F00182FB1 /* ChapterCollectionViewCell.swift */,
+				A915A026266F8A1F00182FB1 /* ChapterCollectionViewCell.xib */,
+				A915A021266F89EA00182FB1 /* CartoonIntroCollectionViewCell.swift */,
+				A915A022266F89EA00182FB1 /* CartoonIntroCollectionViewCell.xib */,
+				A915A01D266F89CD00182FB1 /* CartoonInfoCollectionViewCell.swift */,
+				A915A01E266F89CD00182FB1 /* CartoonInfoCollectionViewCell.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -302,6 +331,7 @@
 		A9653EF324BFE8460098AB1E /* file */ = {
 			isa = PBXGroup;
 			children = (
+				A915A01B266F87FC00182FB1 /* cartoon_detail_bg.png */,
 				A974234D264665E60012B82E /* placeholder.jpg */,
 				144DF2F5CF03809F86997FAF /* sql */,
 			);
@@ -380,11 +410,16 @@
 			files = (
 				A9653EBC24BD9BAA0098AB1E /* LaunchScreen.storyboard in Resources */,
 				A9653EB924BD9BAA0098AB1E /* Assets.xcassets in Resources */,
+				A915A01C266F87FC00182FB1 /* cartoon_detail_bg.png in Resources */,
 				A9653EC424BD9C680098AB1E /* Podfile in Resources */,
+				A915A024266F89EA00182FB1 /* CartoonIntroCollectionViewCell.xib in Resources */,
 				A9CEF7042645268900FD43C2 /* CartoonTableListCollectionViewCell.xib in Resources */,
 				A974234E264665E70012B82E /* placeholder.jpg in Resources */,
 				A9653EB724BD9BA00098AB1E /* Main.storyboard in Resources */,
 				A915A018266F619900182FB1 /* CartoonListCollectionViewCell.xib in Resources */,
+				A915A02C266F8A6C00182FB1 /* CartoonInfoHeaderCollectionReusableView.xib in Resources */,
+				A915A028266F8A1F00182FB1 /* ChapterCollectionViewCell.xib in Resources */,
+				A915A020266F89CD00182FB1 /* CartoonInfoCollectionViewCell.xib in Resources */,
 				144DFD2D91D37148174C78FA /* sql in Resources */,
 				144DF9E42F61D7F5853F5C8F /* CartoonCategoryCollectionViewCell.xib in Resources */,
 			);
@@ -440,6 +475,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9653EE424BDA0720098AB1E /* BaseViewController.swift in Sources */,
+				A915A027266F8A1F00182FB1 /* ChapterCollectionViewCell.swift in Sources */,
 				A9653EE024BDA0340098AB1E /* UIView+extension.swift in Sources */,
 				A9653EE224BDA0340098AB1E /* Date+extension.swift in Sources */,
 				A9653EE824BDB2160098AB1E /* Tool.swift in Sources */,
@@ -459,6 +495,7 @@
 				A9653EB224BD9BA00098AB1E /* SceneDelegate.swift in Sources */,
 				A9653EEA24BEA2230098AB1E /* IndexViewController.swift in Sources */,
 				A9CEF7002645267800FD43C2 /* CartoonListCollectionView.swift in Sources */,
+				A915A01A266F7A9E00182FB1 /* CartoonDetailCollectionView.swift in Sources */,
 				A9CEF70626452C8D00FD43C2 /* CartoonModel.swift in Sources */,
 				A99B7C8D24C1880900DB3EBB /* config.swift in Sources */,
 				A9653EDD24BDA0340098AB1E /* UIImage+extension.swift in Sources */,
@@ -470,12 +507,15 @@
 				A9653EDA24BDA0340098AB1E /* NSObject+extension.swift in Sources */,
 				A915A017266F619900182FB1 /* CartoonListCollectionViewCell.swift in Sources */,
 				A9653EDC24BDA0340098AB1E /* Dictionary+extension.swift in Sources */,
+				A915A02B266F8A6C00182FB1 /* CartoonInfoHeaderCollectionReusableView.swift in Sources */,
 				A915A014266F0E6600182FB1 /* UICollectionViewLeftAlignedLayout.swift in Sources */,
 				A9653EE624BDA90E0098AB1E /* QYRequestData.swift in Sources */,
+				A915A023266F89EA00182FB1 /* CartoonIntroCollectionViewCell.swift in Sources */,
 				A907CC6526441C6A00B9393C /* CartoonViewController.swift in Sources */,
 				A99B21FD266E477E00BB5D58 /* CategoryModel.swift in Sources */,
 				A993C930263ADCBA004EE50E /* DataTool.swift in Sources */,
 				144DF7229F99AE64219B0671 /* FileTool.swift in Sources */,
+				A915A01F266F89CD00182FB1 /* CartoonInfoCollectionViewCell.swift in Sources */,
 				144DF6346D7E51A395081A06 /* CartoonCategoryCollectionViewCell.swift in Sources */,
 				144DF8AA157AC759C759F27A /* CartoonCategoryCollectionView.swift in Sources */,
 			);

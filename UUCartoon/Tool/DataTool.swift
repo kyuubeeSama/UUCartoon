@@ -216,7 +216,15 @@ class DataTool: NSObject {
             success(resultArr)
         }
     }
-
+    
+    /// 获取类型筛选结果
+    /// - Parameters:
+    ///   - type: 网站类型
+    ///   - detailUrl: 类型筛选拼接地址
+    ///   - page: 页码
+    ///   - success: 漫画列表
+    ///   - failure: error
+    /// - Returns: nil
     func getCategorySiftResultListData(type:CartoonType,detailUrl:String,page:Int,success:@escaping (_ listArr:[CartoonModel])->(),failure:@escaping (_ error:Error)->()){
         var detailUrlStr = ""
         if type == .ykmh {
@@ -266,6 +274,63 @@ class DataTool: NSObject {
                 }
             }
             success(resultArr)
+        }
+    }
+    
+    
+    /// 获取已完成漫画列表
+    /// - Parameters:
+    ///   - type: 网站类型
+    ///   - page: 页码
+    ///   - success: 漫画类表
+    ///   - failure: error
+    /// - Returns: nil
+    func getDoneCartoonData(type:CartoonType,page:Int,success:@escaping (_ listArr:[CartoonModel])->(),failure:@escaping (_ error:Error)->()){
+        var detailUrlStr = ""
+        if type == .ykmh{
+            detailUrlStr = "/list/wanjie/post/?page=\(page)"
+        }
+        var urlStr = urlArr[type.rawValue]+detailUrlStr
+        let jiDoc = Ji.init(htmlURL: URL.init(string: urlStr)!)
+        if jiDoc == nil {
+            failure(XPathError.getContentFail)
+        }else{
+            var resultArr:[CartoonModel] = []
+                        //            标题
+                        var titleXPath = ""
+                        //            详情
+                        var urlXPath = ""
+                        // 作者
+                        var authorXPath = ""
+                        // 图片
+                        var imgXPath = ""
+                        if type == .ykmh {
+                            titleXPath = "//*[@id=\"comic-items\"]/li/a[2]"
+                            urlXPath = "//*[@id=\"comic-items\"]/li/a[2]/@href"
+                            authorXPath = "//*[@id=\"comic-items\"]/li/span/a"
+                            imgXPath = "//*[@id=\"comic-items\"]/li/a[1]/img/@src"
+                        }else if type == .ssoonn{
+
+                        }
+                        let titleNodeArr = jiDoc?.xPath(titleXPath)
+                        let urlNodeArr = jiDoc?.xPath(urlXPath)
+                        let authorNodeArr = jiDoc?.xPath(authorXPath)
+                        let imgNodeArr = jiDoc?.xPath(imgXPath)
+                        // 数据不为空
+                        if !(urlNodeArr?.isEmpty)!{
+                            for (index,urlNode) in urlNodeArr!.enumerated() {
+                                var cartoonModel = CartoonModel.init()
+                                cartoonModel.is_rank = true
+                                cartoonModel.name = titleNodeArr![index].content!
+                                cartoonModel.detailUrl = urlNode.content!
+                                cartoonModel.author = authorNodeArr![index].content!
+                                cartoonModel.num = "0"
+                                cartoonModel.imgUrl = imgNodeArr![index].content!
+                                cartoonModel.type = type
+                                resultArr.append(cartoonModel)
+                            }
+                        }
+                        success(resultArr)
         }
     }
 }

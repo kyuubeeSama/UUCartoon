@@ -222,6 +222,25 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
                         self.view.makeToast("获取数据失败")
                     }
                 })
+            }else if self.index == 3{
+                DataTool.init().getDoneCartoonData(type: self.type!, page: self.pageNum) { resultArr in
+                    DispatchQueue.main.async {
+                        self.endProgress()
+                        if !resultArr.isEmpty {
+                            self.pageNum += 1
+                            self.mainCollect.es.stopLoadingMore()
+                        } else {
+                            self.mainCollect.es.noticeNoMoreData()
+                        }
+                        self.listArr.append(array: resultArr)
+                        self.mainCollect.listArr = self.listArr
+                    }
+                } failure: { Error in
+                    DispatchQueue.main.async {
+                        self.endProgress()
+                        self.view.makeToast("获取数据失败")
+                    }
+                }
             }
         }
     }
