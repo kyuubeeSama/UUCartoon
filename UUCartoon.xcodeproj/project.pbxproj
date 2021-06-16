@@ -30,6 +30,8 @@
 		A915A028266F8A1F00182FB1 /* ChapterCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A915A026266F8A1F00182FB1 /* ChapterCollectionViewCell.xib */; };
 		A915A02B266F8A6C00182FB1 /* CartoonInfoHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A915A029266F8A6C00182FB1 /* CartoonInfoHeaderCollectionReusableView.swift */; };
 		A915A02C266F8A6C00182FB1 /* CartoonInfoHeaderCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A915A02A266F8A6C00182FB1 /* CartoonInfoHeaderCollectionReusableView.xib */; };
+		A925C66D267878060070E14D /* CartoonDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A925C66C267878060070E14D /* CartoonDetailModel.swift */; };
+		A925C66F267888E20070E14D /* ChapterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A925C66E267888E20070E14D /* ChapterModel.swift */; };
 		A95527D426536633009ED762 /* Array+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95527D326536633009ED762 /* Array+extension.swift */; };
 		A95527E22653E7D0009ED762 /* SiftCategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95527E12653E7D0009ED762 /* SiftCategoryModel.swift */; };
 		A9653EB024BD9BA00098AB1E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9653EAF24BD9BA00098AB1E /* AppDelegate.swift */; };
@@ -93,6 +95,8 @@
 		A915A026266F8A1F00182FB1 /* ChapterCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChapterCollectionViewCell.xib; sourceTree = "<group>"; };
 		A915A029266F8A6C00182FB1 /* CartoonInfoHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoonInfoHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		A915A02A266F8A6C00182FB1 /* CartoonInfoHeaderCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartoonInfoHeaderCollectionReusableView.xib; sourceTree = "<group>"; };
+		A925C66C267878060070E14D /* CartoonDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoonDetailModel.swift; sourceTree = "<group>"; };
+		A925C66E267888E20070E14D /* ChapterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterModel.swift; sourceTree = "<group>"; };
 		A95527D326536633009ED762 /* Array+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+extension.swift"; sourceTree = "<group>"; };
 		A95527E12653E7D0009ED762 /* SiftCategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiftCategoryModel.swift; sourceTree = "<group>"; };
 		A9653EAC24BD9BA00098AB1E /* UUCartoon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UUCartoon.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -252,6 +256,8 @@
 				A9CEF70526452C8D00FD43C2 /* CartoonModel.swift */,
 				A95527E12653E7D0009ED762 /* SiftCategoryModel.swift */,
 				A99B21FC266E477E00BB5D58 /* CategoryModel.swift */,
+				A925C66C267878060070E14D /* CartoonDetailModel.swift */,
+				A925C66E267888E20070E14D /* ChapterModel.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -479,6 +485,7 @@
 				A9653EE024BDA0340098AB1E /* UIView+extension.swift in Sources */,
 				A9653EE224BDA0340098AB1E /* Date+extension.swift in Sources */,
 				A9653EE824BDB2160098AB1E /* Tool.swift in Sources */,
+				A925C66F267888E20070E14D /* ChapterModel.swift in Sources */,
 				A95527E22653E7D0009ED762 /* SiftCategoryModel.swift in Sources */,
 				A907CC6926441CCA00B9393C /* CartoonDetailViewController.swift in Sources */,
 				A907CC6B26441CF300B9393C /* ChapterViewController.swift in Sources */,
@@ -498,6 +505,7 @@
 				A915A01A266F7A9E00182FB1 /* CartoonDetailCollectionView.swift in Sources */,
 				A9CEF70626452C8D00FD43C2 /* CartoonModel.swift in Sources */,
 				A99B7C8D24C1880900DB3EBB /* config.swift in Sources */,
+				A925C66D267878060070E14D /* CartoonDetailModel.swift in Sources */,
 				A9653EDD24BDA0340098AB1E /* UIImage+extension.swift in Sources */,
 				A907CC6726441C7B00B9393C /* CartoonListViewController.swift in Sources */,
 				A95527D426536633009ED762 /* Array+extension.swift in Sources */,

@@ -20,7 +20,7 @@ enum XPathError: Error {
 
 class DataTool: NSObject {
     let urlArr = ["http://wap.ykmh.com", "http://ssoonn.com/"]
-    
+
     /// 获取最新更新漫画列表
     /// - Parameters:
     ///   - type: 站点类型
@@ -33,15 +33,15 @@ class DataTool: NSObject {
         var detailUrlStr = ""
         if type == .ykmh {
             detailUrlStr = "/update/?page=\(pageNum)"
-        }else{
-            
+        } else {
+
         }
         let urlStr = urlArr[type.rawValue] + detailUrlStr
         let jiDoc = Ji.init(htmlURL: URL.init(string: urlStr)!)
-        if jiDoc == nil{
+        if jiDoc == nil {
             failure(XPathError.getContentFail)
-        }else{
-            var resultArr:[CartoonModel] = []
+        } else {
+            var resultArr: [CartoonModel] = []
 //            标题
             var titleXPath = ""
 //            详情
@@ -64,7 +64,7 @@ class DataTool: NSObject {
                 timeXPath = "//*[@id=\"update_list\"]/div/div/div[2]/p[3]/span[2]"
                 imgXPath = "//*[@id=\"update_list\"]/div/div/div[1]/a/img/@src"
                 numXPath = "//*[@id=\"update_list\"]/div/div/a"
-            }else if type == .ssoonn {
+            } else if type == .ssoonn {
 
             }
             let titleNodeArr = jiDoc?.xPath(titleXPath)
@@ -75,8 +75,8 @@ class DataTool: NSObject {
             let numNodeArr = jiDoc?.xPath(numXPath)
             let imgNodeArr = jiDoc?.xPath(imgXPath)
             // 数据不为空
-            if !(urlNodeArr?.isEmpty)!{
-                for (index,urlNode) in urlNodeArr!.enumerated() {
+            if !(urlNodeArr?.isEmpty)! {
+                for (index, urlNode) in urlNodeArr!.enumerated() {
                     var cartoonModel = CartoonModel.init()
                     cartoonModel.name = titleNodeArr![index].content!
                     cartoonModel.detailUrl = urlNode.content!
@@ -92,8 +92,8 @@ class DataTool: NSObject {
             success(resultArr)
         }
     }
-    
-    
+
+
     /// 获取排行数据
     /// - Parameters:
     ///   - type: 站点类型
@@ -103,23 +103,23 @@ class DataTool: NSObject {
     ///   - success: 漫画数组
     ///   - failure: 失败
     /// - Returns: 空
-    func getRankCartoonData(type:CartoonType,pageNum:Int,rankType:Int,timeType:Int = 0,category:Int = 0,success:@escaping(_ listArr:[CartoonModel])->(),failure:@escaping(_ error:Error)->()){
+    func getRankCartoonData(type: CartoonType, pageNum: Int, rankType: Int, timeType: Int = 0, category: Int = 0, success: @escaping (_ listArr: [CartoonModel]) -> (), failure: @escaping (_ error: Error) -> ()) {
         // 域名后面的地址
 //        http://wap.ykmh.com/rank/shaonian_popularity-daily/
         var detailUrlStr = ""
         if type == .ykmh {
-            let rankTypeArr = ["popularity","click","subscribe"]
-            let timeTypeArr = ["","-daily","-weekly","-monthly"]
-            let categoryTypeArr = ["","mofa_","shaonian_","shaonv_","qingnian_","gaoxiao_","kehuan_","rexue_","maoxian_","wanjie_"]
-            detailUrlStr = "/rank/"+categoryTypeArr[category]+rankTypeArr[rankType]+timeTypeArr[timeType]+"/"
+            let rankTypeArr = ["popularity", "click", "subscribe"]
+            let timeTypeArr = ["", "-daily", "-weekly", "-monthly"]
+            let categoryTypeArr = ["", "mofa_", "shaonian_", "shaonv_", "qingnian_", "gaoxiao_", "kehuan_", "rexue_", "maoxian_", "wanjie_"]
+            detailUrlStr = "/rank/" + categoryTypeArr[category] + rankTypeArr[rankType] + timeTypeArr[timeType] + "/"
         }
-        let urlStr = urlArr[type.rawValue]+detailUrlStr
+        let urlStr = urlArr[type.rawValue] + detailUrlStr
         print(urlStr)
         let jiDoc = Ji.init(htmlURL: URL.init(string: urlStr)!)
         if jiDoc == nil {
             failure(XPathError.getContentFail)
-        }else{
-            var resultArr:[CartoonModel] = []
+        } else {
+            var resultArr: [CartoonModel] = []
             //            标题
             var titleXPath = ""
             //            详情
@@ -139,8 +139,8 @@ class DataTool: NSObject {
                 categoryXPath = "//*[@id=\"topImgCon\"]/div/div/div[2]/p[2]/span[2]"
                 timeXPath = "//*[@id=\"topImgCon\"]/div/div/div[2]/p[3]/span[2]"
                 imgXPath = "//*[@id=\"topImgCon\"]/div/div/div[1]/a/img/@src"
-            }else if type == .ssoonn{
-                
+            } else if type == .ssoonn {
+
             }
             let titleNodeArr = jiDoc?.xPath(titleXPath)
             let urlNodeArr = jiDoc?.xPath(urlXPath)
@@ -149,8 +149,8 @@ class DataTool: NSObject {
             let timeNodeArr = jiDoc?.xPath(timeXPath)
             let imgNodeArr = jiDoc?.xPath(imgXPath)
             // 数据不为空
-            if !(urlNodeArr?.isEmpty)!{
-                for (index,urlNode) in urlNodeArr!.enumerated() {
+            if !(urlNodeArr?.isEmpty)! {
+                for (index, urlNode) in urlNodeArr!.enumerated() {
                     var cartoonModel = CartoonModel.init()
                     cartoonModel.is_rank = true
                     cartoonModel.name = titleNodeArr![index].content!
@@ -167,7 +167,7 @@ class DataTool: NSObject {
             success(resultArr)
         }
     }
-    
+
     /// 获取分类筛选信息
     /// - Parameters:
     ///   - type: 站点类型
@@ -179,32 +179,32 @@ class DataTool: NSObject {
         if type == .ykmh {
             detailUrlStr = "/list/"
         }
-        let urlStr = urlArr[type.rawValue]+detailUrlStr
+        let urlStr = urlArr[type.rawValue] + detailUrlStr
         let jiDoc = Ji.init(htmlURL: URL.init(string: urlStr)!)
         if jiDoc == nil {
             failure(XPathError.getContentFail)
-        }else{
-            var resultArr:[[CategoryModel]] = []
-            var titleXpathArr:[String] = []
+        } else {
+            var resultArr: [[CategoryModel]] = []
+            var titleXpathArr: [String] = []
             if type == .ykmh {
                 for item in 1...4 {
                     let titleXpath = "//*[@id=\"w0\"]/div[2]/div[\(item)]/ul/li/a"
                     titleXpathArr.append(titleXpath)
                 }
             }
-            for (index,item) in titleXpathArr.enumerated() {
+            for (index, item) in titleXpathArr.enumerated() {
                 let titleNodeArr = jiDoc?.xPath(item)
-                var array:[CategoryModel] = []
+                var array: [CategoryModel] = []
                 if !(titleNodeArr?.isEmpty)! {
                     for node in titleNodeArr! {
                         var categoryModel = CategoryModel.init()
                         categoryModel.name = node.content!
-                        if categoryModel.name == "全部"{
+                        if categoryModel.name == "全部" {
                             categoryModel.ischoose = true
-                        }else{
+                        } else {
                             if type == .ykmh && index != 0 {
-                                categoryModel.value = "-"+categoryModel.name.chineseToPinyin()
-                            }else{
+                                categoryModel.value = "-" + categoryModel.name.chineseToPinyin()
+                            } else {
                                 categoryModel.value = categoryModel.name.chineseToPinyin()
                             }
                         }
@@ -216,7 +216,7 @@ class DataTool: NSObject {
             success(resultArr)
         }
     }
-    
+
     /// 获取类型筛选结果
     /// - Parameters:
     ///   - type: 网站类型
@@ -225,20 +225,20 @@ class DataTool: NSObject {
     ///   - success: 漫画列表
     ///   - failure: error
     /// - Returns: nil
-    func getCategorySiftResultListData(type:CartoonType,detailUrl:String,page:Int,success:@escaping (_ listArr:[CartoonModel])->(),failure:@escaping (_ error:Error)->()){
+    func getCategorySiftResultListData(type: CartoonType, detailUrl: String, page: Int, success: @escaping (_ listArr: [CartoonModel]) -> (), failure: @escaping (_ error: Error) -> ()) {
         var detailUrlStr = ""
         if type == .ykmh {
 //            http://wap.ykmh.com/list/aiqing-riben/?page=2
-            detailUrlStr = "/list/"+detailUrl+"/?page=\(page)"
+            detailUrlStr = "/list/" + detailUrl + "/?page=\(page)"
         }
-        var urlStr = urlArr[type.rawValue]+detailUrlStr
+        var urlStr = urlArr[type.rawValue] + detailUrlStr
         urlStr = urlStr.replacingOccurrences(of: "//", with: "/")
         urlStr = urlStr.replacingOccurrences(of: " ", with: "")
         let jiDoc = Ji.init(htmlURL: URL.init(string: urlStr)!)
         if jiDoc == nil {
             failure(XPathError.getContentFail)
-        }else{
-            var resultArr:[CartoonModel] = []
+        } else {
+            var resultArr: [CartoonModel] = []
             //            标题
             var titleXPath = ""
             //            详情
@@ -252,7 +252,7 @@ class DataTool: NSObject {
                 urlXPath = "//*[@id=\"comic-items\"]/li/a[2]/@href"
                 authorXPath = "//*[@id=\"comic-items\"]/li/span/a"
                 imgXPath = "//*[@id=\"comic-items\"]/li/a[1]/img/@src"
-            }else if type == .ssoonn{
+            } else if type == .ssoonn {
 
             }
             let titleNodeArr = jiDoc?.xPath(titleXPath)
@@ -260,8 +260,65 @@ class DataTool: NSObject {
             let authorNodeArr = jiDoc?.xPath(authorXPath)
             let imgNodeArr = jiDoc?.xPath(imgXPath)
             // 数据不为空
-            if !(urlNodeArr?.isEmpty)!{
-                for (index,urlNode) in urlNodeArr!.enumerated() {
+            if !(urlNodeArr?.isEmpty)! {
+                for (index, urlNode) in urlNodeArr!.enumerated() {
+                    var cartoonModel = CartoonModel.init()
+                    cartoonModel.is_rank = true
+                    cartoonModel.name = titleNodeArr![index].content!
+                    cartoonModel.detailUrl = urlNode.content!
+                    cartoonModel.author = authorNodeArr![index].content!
+                    cartoonModel.num = "0"
+                    cartoonModel.imgUrl = imgNodeArr![index].content!
+                    cartoonModel.type = type
+                    resultArr.append(cartoonModel)
+                }
+            }
+            success(resultArr)
+        }
+    }
+
+
+    /// 获取已完成漫画列表
+    /// - Parameters:
+    ///   - type: 网站类型
+    ///   - page: 页码
+    ///   - success: 漫画类表
+    ///   - failure: error
+    /// - Returns: nil
+    func getDoneCartoonData(type: CartoonType, page: Int, success: @escaping (_ listArr: [CartoonModel]) -> (), failure: @escaping (_ error: Error) -> ()) {
+        var detailUrlStr = ""
+        if type == .ykmh {
+            detailUrlStr = "/list/wanjie/post/?page=\(page)"
+        }
+        let urlStr = urlArr[type.rawValue] + detailUrlStr
+        let jiDoc = Ji.init(htmlURL: URL.init(string: urlStr)!)
+        if jiDoc == nil {
+            failure(XPathError.getContentFail)
+        } else {
+            var resultArr: [CartoonModel] = []
+            //            标题
+            var titleXPath = ""
+            //            详情
+            var urlXPath = ""
+            // 作者
+            var authorXPath = ""
+            // 图片
+            var imgXPath = ""
+            if type == .ykmh {
+                titleXPath = "//*[@id=\"comic-items\"]/li/a[2]"
+                urlXPath = "//*[@id=\"comic-items\"]/li/a[2]/@href"
+                authorXPath = "//*[@id=\"comic-items\"]/li/span/a"
+                imgXPath = "//*[@id=\"comic-items\"]/li/a[1]/img/@src"
+            } else if type == .ssoonn {
+
+            }
+            let titleNodeArr = jiDoc?.xPath(titleXPath)
+            let urlNodeArr = jiDoc?.xPath(urlXPath)
+            let authorNodeArr = jiDoc?.xPath(authorXPath)
+            let imgNodeArr = jiDoc?.xPath(imgXPath)
+            // 数据不为空
+            if !(urlNodeArr?.isEmpty)! {
+                for (index, urlNode) in urlNodeArr!.enumerated() {
                     var cartoonModel = CartoonModel.init()
                     cartoonModel.is_rank = true
                     cartoonModel.name = titleNodeArr![index].content!
@@ -277,60 +334,93 @@ class DataTool: NSObject {
         }
     }
     
-    
-    /// 获取已完成漫画列表
+    /// 获取漫画章节详情
     /// - Parameters:
     ///   - type: 网站类型
-    ///   - page: 页码
-    ///   - success: 漫画类表
-    ///   - failure: error
+    ///   - detailUrl: 详情地址
+    ///   - success: 详情model
+    ///   - failure: 失败
     /// - Returns: nil
-    func getDoneCartoonData(type:CartoonType,page:Int,success:@escaping (_ listArr:[CartoonModel])->(),failure:@escaping (_ error:Error)->()){
-        var detailUrlStr = ""
-        if type == .ykmh{
-            detailUrlStr = "/list/wanjie/post/?page=\(page)"
-        }
-        var urlStr = urlArr[type.rawValue]+detailUrlStr
+    func getCartoonDetailData(type: CartoonType, detailUrl: String, success: @escaping (_ model: CartoonDetailModel) -> (), failure: @escaping (_ error: Error) -> ()) {
+        let urlStr = detailUrl
         let jiDoc = Ji.init(htmlURL: URL.init(string: urlStr)!)
         if jiDoc == nil {
             failure(XPathError.getContentFail)
-        }else{
-            var resultArr:[CartoonModel] = []
-                        //            标题
-                        var titleXPath = ""
-                        //            详情
-                        var urlXPath = ""
-                        // 作者
-                        var authorXPath = ""
-                        // 图片
-                        var imgXPath = ""
-                        if type == .ykmh {
-                            titleXPath = "//*[@id=\"comic-items\"]/li/a[2]"
-                            urlXPath = "//*[@id=\"comic-items\"]/li/a[2]/@href"
-                            authorXPath = "//*[@id=\"comic-items\"]/li/span/a"
-                            imgXPath = "//*[@id=\"comic-items\"]/li/a[1]/img/@src"
-                        }else if type == .ssoonn{
-
-                        }
-                        let titleNodeArr = jiDoc?.xPath(titleXPath)
-                        let urlNodeArr = jiDoc?.xPath(urlXPath)
-                        let authorNodeArr = jiDoc?.xPath(authorXPath)
-                        let imgNodeArr = jiDoc?.xPath(imgXPath)
-                        // 数据不为空
-                        if !(urlNodeArr?.isEmpty)!{
-                            for (index,urlNode) in urlNodeArr!.enumerated() {
-                                var cartoonModel = CartoonModel.init()
-                                cartoonModel.is_rank = true
-                                cartoonModel.name = titleNodeArr![index].content!
-                                cartoonModel.detailUrl = urlNode.content!
-                                cartoonModel.author = authorNodeArr![index].content!
-                                cartoonModel.num = "0"
-                                cartoonModel.imgUrl = imgNodeArr![index].content!
-                                cartoonModel.type = type
-                                resultArr.append(cartoonModel)
-                            }
-                        }
-                        success(resultArr)
+        } else {
+            var titleXpath = ""
+            var imgXpath = ""
+            var authorXpath = ""
+            var timeXpath = ""
+            var categoryXpath = ""
+            var chapterNameXpath = ""
+            var descXpath = ""
+            var chapterTitleListXpath = ""
+            var chapterUrlListXpath = ""
+            var recommendTitleXpath = ""
+            var recommendUrlXpath = ""
+            var recommendImgXpath = ""
+            var recommendAuthorXpath = ""
+            if type == .ykmh {
+                titleXpath = "//*[@id=\"comicName\"]"
+                imgXpath = "//*[@id=\"Cover\"]/mip-img/@src"
+                authorXpath = "//*[@id=\"header\"]/div/div[3]/div[2]/p[1]/a"
+                timeXpath = "//*[@id=\"header\"]/div/div[3]/div[2]/p[4]/span[2]"
+                categoryXpath = "//*[@id=\"header\"]/div/div[3]/div[2]/p[2]/a"
+                chapterNameXpath = "//*[@id=\"list_block\"]/div/div[1]/div[1]/span[2]"
+                descXpath = "//*[@id=\"showmore-des\"]"
+                recommendTitleXpath = "//*[@id=\"w1\"]/li/a[2]"
+                recommendUrlXpath = "//*[@id=\"w1\"]/li/a[2]/@href"
+                recommendImgXpath = "//*[@id=\"w1\"]/li/a[1]/mip-img/@src"
+                recommendAuthorXpath = "//*[@id=\"w1\"]/li/span/a"
+            }
+            let titleNodeArr = jiDoc?.xPath(titleXpath)
+            let imgNodeArr = jiDoc?.xPath(imgXpath)
+            let authorNodeArr = jiDoc?.xPath(authorXpath)
+            let timeNodeArr = jiDoc?.xPath(timeXpath)
+            let categoryNodeArr = jiDoc?.xPath(categoryXpath)
+            let chapterNameNodeArr = jiDoc?.xPath(chapterNameXpath)
+            let descNodeArr = jiDoc?.xPath(descXpath)
+            let recommendTitleNodeArr = jiDoc?.xPath(recommendTitleXpath)
+            let recommendUrlNodeArr = jiDoc?.xPath(recommendUrlXpath)
+            let recommendImgNodeArr = jiDoc?.xPath(recommendImgXpath)
+            let recommendAuthorNodeArr = jiDoc?.xPath(recommendAuthorXpath)
+            var detailModel = CartoonDetailModel.init()
+            // 剧集数据
+            if !(chapterNameNodeArr!.isEmpty) {
+                for (index,item) in chapterNameNodeArr!.enumerated() {
+                    chapterTitleListXpath = "//*[@id=\"chapter-list-\(index+1)\"]/li/a/span"
+                    chapterUrlListXpath = "//*[@id=\"chapter-list-\(index+1)\"]/li/a/@href"
+                    let chapterTitleListNodeArr = jiDoc?.xPath(chapterTitleListXpath)
+                    let chapterUrlListNodeArr = jiDoc?.xPath(chapterUrlListXpath)
+                    var chapterArr:[ChapterModel] = []
+                    for (k,chapterItem) in chapterTitleListNodeArr!.enumerated() {
+                        var chapterModel = ChapterModel.init()
+                        chapterModel.name = chapterItem.content!
+                        chapterModel.detailUrl = chapterUrlListNodeArr![k].content!
+                        chapterArr.append(chapterModel)
+                    }
+                    let chapterData = (name:item.content!,data:chapterArr)
+                    detailModel.chapterArr.append(chapterData)
+                }
+            }
+            // 推荐漫画
+            for (index,_) in recommendTitleNodeArr!.enumerated() {
+                var cartoonModel = CartoonModel.init()
+                cartoonModel.name = recommendTitleNodeArr![index].content!
+                cartoonModel.author = recommendAuthorNodeArr![index].content!
+                cartoonModel.imgUrl = recommendImgNodeArr![index].content!
+                cartoonModel.detailUrl = recommendUrlNodeArr![index].content!
+                detailModel.recommendArr.append(cartoonModel)
+            }
+            detailModel.title = titleNodeArr![0].content!
+            detailModel.imgUrl = imgNodeArr![0].content!
+            detailModel.author = authorNodeArr![0].content!
+            detailModel.time = timeNodeArr![0].content!
+            if !(categoryNodeArr!.isEmpty) {
+                detailModel.category = categoryNodeArr![0].content!
+            }
+            detailModel.desc = descNodeArr![0].content!
+            success(detailModel)
         }
     }
 }

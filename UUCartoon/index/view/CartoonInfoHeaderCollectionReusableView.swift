@@ -10,6 +10,9 @@ import UIKit
 
 class CartoonInfoHeaderCollectionReusableView: UICollectionReusableView {
 
+    @IBOutlet weak var leftImg: UIImageView!
+    @IBOutlet weak var titleLab: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

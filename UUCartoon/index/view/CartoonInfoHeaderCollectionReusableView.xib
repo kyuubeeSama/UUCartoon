@@ -53,6 +53,10 @@
                 <constraint firstItem="D9g-Lb-xI2" firstAttribute="leading" secondItem="VXr-Tz-HHm" secondAttribute="leading" id="SYP-Jm-ofp"/>
                 <constraint firstAttribute="bottom" secondItem="D9g-Lb-xI2" secondAttribute="bottom" id="aj0-os-WgG"/>
             </constraints>
+            <connections>
+                <outlet property="leftImg" destination="RqK-aS-21K" id="I4U-eR-h95"/>
+                <outlet property="titleLab" destination="f8u-kv-lAM" id="VF7-PI-8Nw"/>
+            </connections>
             <point key="canvasLocation" x="132" y="56"/>
         </collectionReusableView>
     </objects>
