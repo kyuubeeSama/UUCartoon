@@ -22,9 +22,11 @@ class ChapterViewController: BaseViewController {
     }
 
     func getData(){
+        self.beginProgress()
         DispatchQueue.global().async {
             DataTool.init().getCartoonDetailData(type: self.type!, detailUrl: self.detailUrl!, success: { detailModel in
                 DispatchQueue.main.async {
+                    self.endProgress()
                     self.model = detailModel
                     self.mainCollect.model = detailModel
                 }

@@ -388,8 +388,8 @@ class DataTool: NSObject {
             // 剧集数据
             if !(chapterNameNodeArr!.isEmpty) {
                 for (index,item) in chapterNameNodeArr!.enumerated() {
-                    chapterTitleListXpath = "//*[@id=\"chapter-list-\(index+1)\"]/li/a/span"
-                    chapterUrlListXpath = "//*[@id=\"chapter-list-\(index+1)\"]/li/a/@href"
+                    chapterTitleListXpath = "/html/body/div[1]/div/div[4]/div[\(index+1)]/div[2]/div/mip-showmore/ul/li/a/span"
+                    chapterUrlListXpath = "/html/body/div[1]/div/div[4]/div[\(index+1)]/div[2]/div/mip-showmore/ul/li/a/@href"
                     let chapterTitleListNodeArr = jiDoc?.xPath(chapterTitleListXpath)
                     let chapterUrlListNodeArr = jiDoc?.xPath(chapterUrlListXpath)
                     var chapterArr:[ChapterModel] = []
@@ -409,7 +409,7 @@ class DataTool: NSObject {
                 cartoonModel.name = recommendTitleNodeArr![index].content!
                 cartoonModel.author = recommendAuthorNodeArr![index].content!
                 cartoonModel.imgUrl = recommendImgNodeArr![index].content!
-                cartoonModel.detailUrl = recommendUrlNodeArr![index].content!
+                cartoonModel.detailUrl = self.checkUrl(urlStr: recommendUrlNodeArr![index].content!, domainUrlStr: urlArr[type.rawValue])
                 detailModel.recommendArr.append(cartoonModel)
             }
             detailModel.title = titleNodeArr![0].content!
@@ -421,6 +421,54 @@ class DataTool: NSObject {
             }
             detailModel.desc = descNodeArr![0].content!
             success(detailModel)
+        }
+    }
+    
+    /// 获取搜索推荐数据
+    /// - Parameters:
+    ///   - type: 网站类型
+    ///   - success: 推荐列表
+    ///   - failure: 失败
+    /// - Returns: nil
+    func getSearchRecommendData(type:CartoonType,success:@escaping (_ resultArr:[CartoonModel])->(),failure:@escaping (_ error:Error)->()){
+        var detailUrlStr = ""
+        if type == .ssoonn {
+            detailUrlStr = ""
+        }
+        let urlStr = urlArr[type.rawValue] + detailUrlStr
+        let jiDoc = Ji.init(htmlURL: URL.init(string: urlStr)!)
+        if jiDoc == nil {
+            failure(XPathError.getContentFail)
+        }else{
+            var resultArr:[CartoonModel] = []
+            var titleXpath = ""
+            var urlXpath = ""
+            if type == .ykmh {
+                titleXpath = "//*[@id=\"w7\"]/li/a"
+                urlXpath = "//*[@id=\"w7\"]/li/a/@href"
+            }else if type == .ssoonn{
+                
+            }
+            let titleNodeArr = jiDoc?.xPath(titleXpath)
+            let urlNodeArr = jiDoc?.xPath(urlXpath)
+            if !(titleNodeArr?.isEmpty)! {
+                for (index,item) in titleNodeArr!.enumerated() {
+                    var model = CartoonModel.init()
+                    model.name = item.content!
+                    model.detailUrl = urlNodeArr![index].content!
+                    resultArr.append(model)
+                }
+            }
+            success(resultArr)
+        }
+    }
+    
+    // 判断是否有http，并拼接地址
+    func checkUrl(urlStr: String, domainUrlStr: String) -> String {
+        if urlStr.contains("http") || urlStr.contains("https") {
+            return urlStr
+        } else {
+            return domainUrlStr + urlStr
         }
     }
 }

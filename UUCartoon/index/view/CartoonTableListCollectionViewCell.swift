@@ -22,6 +22,7 @@ class CartoonTableListCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var rightImg: UIImageView!
     // 排序中，要显示，其他情况隐藏
     @IBOutlet weak var rankLab: UILabel!
+    @IBOutlet weak var rankView: UIView!
     
     func setData(cartoonModel:CartoonModel) {
         let titleSize = cartoonModel.name.getStringSize(font: UIFont.systemFont(ofSize: 15), size: CGSize(width: screenW-116, height: CGFloat(MAXFLOAT)))

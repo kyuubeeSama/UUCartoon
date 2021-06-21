@@ -44,7 +44,18 @@ class CartoonListCollectionView: UICollectionView,UICollectionViewDelegate,UICol
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if cellType == .Table {
             let cell:CartoonTableListCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "tableCell", for: indexPath) as! CartoonTableListCollectionViewCell
-            cell.setData(cartoonModel: listArr![indexPath.row])
+            let model = listArr![indexPath.row]
+            cell.setData(cartoonModel: model)
+            if model.is_rank {
+                cell.rankLab.text = "\(indexPath.row+1)"
+                cell.rankView.addRound(radio: 40, corners: UIRectCorner.bottomLeft)
+                let colorArr = ["ff4b4b","ff8004","ffc000","dfdfdf"]
+                if indexPath.row < 3{
+                    cell.rankView.backgroundColor = UIColor.colorWithHexString(hexString: colorArr[indexPath.row])
+                }else{
+                    cell.rankView.backgroundColor = UIColor.colorWithHexString(hexString: colorArr[3])
+                }
+            }
             return cell
         }else{
             let cell:CartoonListCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! CartoonListCollectionViewCell

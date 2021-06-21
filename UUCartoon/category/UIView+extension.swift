@@ -58,6 +58,16 @@ extension UIView{
         return shapeLayer
     }
     
+    // 切圆角
+    func addRound(radio:Float,corners:UIRectCorner){
+        let size = CGSize(width: CGFloat(radio), height: CGFloat(radio))
+        let maskPath = UIBezierPath.init(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: size)
+        let maskLayer = CAShapeLayer.init()
+        maskLayer.frame = bounds
+        maskLayer.path = maskPath.cgPath
+        self.layer.mask = maskLayer
+        
+    }
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
