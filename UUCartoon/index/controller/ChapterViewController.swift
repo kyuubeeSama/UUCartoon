@@ -32,6 +32,10 @@ class ChapterViewController: BaseViewController {
                 }
             }, failure: { error in
                 print(error)
+                DispatchQueue.main.async {
+                    self.endProgress()
+                    self.view.makeToast("加载失败")
+                }
             })
         }
     }
@@ -55,6 +59,8 @@ class ChapterViewController: BaseViewController {
                 // 章节
                 let model = self.model.chapterArr[indexPath.section-2].data[indexPath.row]
                 let VC = CartoonDetailViewController.init()
+                VC.model = model
+                VC.type = self.type
                 self.navigationController?.pushViewController(VC, animated: true)
             }
         }
@@ -62,6 +68,8 @@ class ChapterViewController: BaseViewController {
             // 阅读
             let model = self.model.chapterArr[0].data.last
             let VC = CartoonDetailViewController.init()
+            VC.model = model!
+            VC.type = self.type!
             self.navigationController?.pushViewController(VC, animated: true)
         }
         mainCollect.subscribeBlock = {

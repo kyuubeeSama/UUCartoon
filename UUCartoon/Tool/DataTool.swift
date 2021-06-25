@@ -463,6 +463,35 @@ class DataTool: NSObject {
         }
     }
     
+    /// 获取漫画详情
+    /// - Parameters:
+    ///   - type: 网站类型
+    ///   - detailUrl: 漫画详情地址
+    ///   - success: 图片列表
+    ///   - failure: 失败
+    func getCartoonDetailImgData(type:CartoonType,detailUrl:String,success: @escaping (_ imgArr:[CartoonImgModel]) -> (), failure: @escaping (_ error: Error) -> ()){
+        let jiDoc = Ji.init(htmlURL: URL.init(string: detailUrl.replacingOccurrences(of: "//", with: "/"))!)
+        if jiDoc == nil {
+            failure(XPathError.getContentFail)
+        }else{
+            if type == .ykmh {
+                let jsXpath = "/html/body/script[1]/text()"
+                let jsNodeArr = jiDoc?.xPath(jsXpath)
+                let htmlContent = jsNodeArr![0].content
+                var oneStr:String = String(htmlContent!.split(separator: ";")[0])
+                oneStr = oneStr.replacingOccurrences(of: "]", with: "")
+                oneStr = oneStr.replacingOccurrences(of: "var chapterImages = [", with: "")
+                var array:[CartoonImgModel] = []
+                for item in oneStr.split(separator: ",") {
+                    var imgModel = CartoonImgModel.init()
+                    imgModel.imgUrl = String(item.replacingOccurrences(of: "\"", with: ""))
+                    array.append(imgModel)
+                }
+                success(array)
+            }
+        }
+    }
+    
     // 判断是否有http，并拼接地址
     func checkUrl(urlStr: String, domainUrlStr: String) -> String {
         if urlStr.contains("http") || urlStr.contains("https") {
