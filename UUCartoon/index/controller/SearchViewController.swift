@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchViewController: BaseViewController {
+class SearchViewController: BaseViewController,UISearchBarDelegate {
 
     var type:CartoonType?
     
@@ -23,12 +23,20 @@ class SearchViewController: BaseViewController {
     func makeUI(){
         let searchView = UISearchBar.init()
         self.view.addSubview(searchView)
+        searchView.delegate = self
         searchView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             make.height.equalTo(50)
         }
         searchView.placeholder = "请输入搜索内容"
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let VC = SearchResultViewController.init()
+        VC.type = self.type
+        VC.keyword = searchBar.text!
+        self.navigationController?.pushViewController(VC, animated: true)
     }
     
     func getData(){

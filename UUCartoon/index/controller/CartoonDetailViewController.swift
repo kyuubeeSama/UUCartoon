@@ -22,11 +22,11 @@ class CartoonDetailViewController: BaseViewController {
     }
     
     func getData() {
-        var detailUrl = ""
+        var detailUrl = model?.detailUrl
         if type == .ykmh {
             detailUrl = "http://wap.ykmh.com/"+model!.detailUrl
         }
-        DataTool.init().getCartoonDetailImgData(type: .ykmh, detailUrl: detailUrl, success: { imgArr in
+        DataTool.init().getCartoonDetailImgData(type: self.type!, detailUrl: detailUrl!, success: { imgArr in
             self.mainCollect.listArr = imgArr
         }, failure: { error in
             print(error)

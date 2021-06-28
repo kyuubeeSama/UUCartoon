@@ -61,7 +61,7 @@ class CategoryChooseView: UIView {
 
         let titleLab = UILabel.init()
         titleView.addSubview(titleLab)
-        titleLab.text = "搜索结果"
+        titleLab.text = "筛选结果"
         titleLab.font = UIFont.systemFont(ofSize: 15)
         titleLab.textColor = UIColor.init(named: "333333")
         titleLab.frame = CGRect(x: 10, y: 10, width: 150, height: 20)

@@ -28,7 +28,12 @@ class CartoonTableListCollectionViewCell: UICollectionViewCell {
         let titleSize = cartoonModel.name.getStringSize(font: UIFont.systemFont(ofSize: 15), size: CGSize(width: screenW-116, height: CGFloat(MAXFLOAT)))
         titleLab.text = cartoonModel.name
         titleConstraintHeight.constant = CGFloat(ceilf(Float(titleSize.height)))
-        leftImg.kf.setImage(with: URL.init(string: cartoonModel.imgUrl), placeholder: UIImage.init(named: "placeholder.jpg"), options: nil, completionHandler: nil)
+        let modifier = AnyModifier { request in
+            var r = request
+            r.setValue(urlArr[cartoonModel.type.rawValue], forHTTPHeaderField: "Referer")
+            return r
+        }
+        leftImg.kf.setImage(with: URL.init(string: cartoonModel.imgUrl), placeholder: UIImage.init(named: "placeholder.jpg"), options: [.requestModifier(modifier)], completionHandler: nil)
         authorLab.text = cartoonModel.author
         categoryLab.text = cartoonModel.category
         timeLab.text = cartoonModel.time

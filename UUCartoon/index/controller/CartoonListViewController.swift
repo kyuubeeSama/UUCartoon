@@ -69,9 +69,12 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
                 self.mainCollect.listArr = array
             }
         }
-        if type == .ykmh {
-            header.siftBtn.isHidden = false
-        }
+//        if type == .ykmh {
+//            header.siftBtn.isHidden = false
+//        }else{
+//            header.siftBtn.isHidden = true
+//        }
+        header.siftBtn.isHidden = type == .ssoonn
         header.siftBtn.rentBtnBlock = {
             if self.rankType != 2 {
                 if self.is_show {
@@ -79,7 +82,6 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
                     siftView?.removeFromSuperview()
                 } else {
                     // 点击展示类型筛选界面
-                    //TODO:添加筛选界面
                     let siftView = SiftView.init(frame: CGRect(x: 0, y: 50, width: screenW, height: screenH))
                     siftView.tag = 500
                     self.view.addSubview(siftView)
@@ -114,60 +116,81 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
         view.addSubview(chooseView)
         chooseView.btnClickBlock = { index in
             if index<10 {
-                let array = self.categoryArr[index]
-                if !array.isEmpty {
-                    let button:UIButton = chooseView.viewWithTag(150+index) as! UIButton
-                    if button.isSelected {
-                        let backView = UIView.init()
-                        backView.tag = 200
-                        self.view.addSubview(backView)
-                        backView.backgroundColor = UIColor.colorWithHexString(hexString: "333333", alpha: 0.3)
-                        backView.snp.makeConstraints { make in
-                            make.left.right.bottom.equalToSuperview()
-                            make.top.equalTo(chooseView.snp.bottom).offset(-50)
-                        }
-                        let layout = UICollectionViewLeftAlignedLayout.init()
-                        let categoryCollectionView = CartoonCategoryCollectionView.init(frame: CGRect.init(), collectionViewLayout: layout)
-                        backView.addSubview(categoryCollectionView)
-                        categoryCollectionView.snp.makeConstraints { make in
-                            make.left.right.top.equalToSuperview()
-                            make.bottom.equalToSuperview().offset(-100)
-                        }
-                        categoryCollectionView.listArr = array
-                        categoryCollectionView.cellItemSelectedBlock = { indexPath in
-                            button.isSelected = false
-                            button.setImage(UIImage.init(named: "category_row_close"), for: .normal)
-                            button.setTitleColor(UIColor.init(named: "333333"), for: .normal)
-                            backView.removeFromSuperview()
-                            //                    赋值，并刷新列表
-                            var categoryModel = array[indexPath.row]
-                            for var model in array {
-                                model.ischoose = false
+                let button:UIButton = chooseView.viewWithTag(150+index) as! UIButton
+                if self.type == .ssoonn && index == 3 {
+                    self.view.makeToast("当前功能不可用")
+                    button.isSelected = false
+                    button.setImage(UIImage.init(named: "category_row_close"), for: .normal)
+                    button.setTitleColor(UIColor.init(named: "333333"), for: .normal)
+                }else{
+                    let array = self.categoryArr[index]
+                    if !array.isEmpty {
+                        if button.isSelected {
+                            let backView = UIView.init()
+                            backView.tag = 200
+                            self.view.addSubview(backView)
+                            backView.backgroundColor = UIColor.colorWithHexString(hexString: "333333", alpha: 0.3)
+                            backView.snp.makeConstraints { make in
+                                make.left.right.bottom.equalToSuperview()
+                                make.top.equalTo(chooseView.snp.bottom).offset(-50)
                             }
-                            categoryModel.ischoose = true
-                            self.categoryValue[index] = categoryModel.value
-                            self.pageNum = 1
-                            self.listArr = []
-                            self.getListData()
+                            let layout = UICollectionViewLeftAlignedLayout.init()
+                            let categoryCollectionView = CartoonCategoryCollectionView.init(frame: CGRect.init(), collectionViewLayout: layout)
+                            backView.addSubview(categoryCollectionView)
+                            categoryCollectionView.snp.makeConstraints { make in
+                                make.left.right.top.equalToSuperview()
+                                make.bottom.equalToSuperview().offset(-100)
+                            }
+                            categoryCollectionView.listArr = array
+                            categoryCollectionView.cellItemSelectedBlock = { indexPath in
+                                button.isSelected = false
+                                button.setImage(UIImage.init(named: "category_row_close"), for: .normal)
+                                button.setTitleColor(UIColor.init(named: "333333"), for: .normal)
+                                backView.removeFromSuperview()
+                                //                    赋值，并刷新列表
+                                let categoryModel = array[indexPath.row]
+                                if self.type == .ykmh {
+                                    for model in array {
+                                        model.ischoose = false
+                                    }
+                                }else {
+                                    for array1 in self.categoryArr {
+                                        for model in array1 {
+                                            model.ischoose = false
+                                        }
+                                    }
+                                    self.categoryValue = ["","","",""]
+                                }
+                                categoryModel.ischoose = true
+//                                self.categoryArr[index][indexPath.row] = categoryModel
+                                self.categoryValue[index] = categoryModel.value
+                                self.pageNum = 1
+                                self.listArr = []
+                                self.getListData()
+                            }
+                        }else{
+                            for view in self.view.subviews {
+                                if view.tag == 200 {
+                                    view.removeFromSuperview()
+                                }
+                            }
                         }
                     }else{
-                        for view in self.view.subviews {
-                            if view.tag == 200 {
-                                view.removeFromSuperview()
-                            }
-                        }
+                        self.view.makeToast("当前未获取分类信息")
                     }
-                }else{
-                    self.view.makeToast("当前未获取分类信息")
                 }
             }else{
-                let valueArr:[[String]] = [["/post","/update","/click"],["/-post","/-update","/-click"]]
-                // 排序按钮
-                let button = chooseView.viewWithTag(150+index) as! UIButton
-                self.orderType = valueArr[button.clickLevel-1][index-11]
-                self.listArr = []
-                self.pageNum = 1
-                self.getListData()
+                if self.type != .ssoonn {
+                    let valueArr:[[String]] = [["/post","/update","/click"],["/-post","/-update","/-click"]]
+                    // 排序按钮
+                    let button = chooseView.viewWithTag(150+index) as! UIButton
+                    self.orderType = valueArr[button.clickLevel-1][index-11]
+                    self.listArr = []
+                    self.pageNum = 1
+                    self.getListData()
+                }else{
+                    self.view.makeToast("当前功能不可用")
+                }
             }
         }
     }
@@ -175,7 +198,7 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
     // 获取漫画列表
     func getListData() {
         beginProgress()
-        DispatchQueue.global().async {
+        DispatchQueue.global().async { [self] in
             if self.index == 0 {
                 DataTool.init().getNewCartoonData(type: self.type!, pageNum: self.pageNum) { resultArr in
                     DispatchQueue.main.async {
@@ -203,25 +226,36 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
                     print(error.localizedDescription)
                 }
             }else if self.index == 2{
-                let detailUrl = self.categoryValue.joined(separator: "")+self.orderType
-                DataTool.init().getCategorySiftResultListData(type: self.type!, detailUrl: detailUrl, page: self.pageNum, success: { resultArr in
+                var detailUrl = self.categoryValue.joined(separator: "")+self.orderType
+                if self.type == .ssoonn {
+                    detailUrl = self.categoryValue.joined(separator: "")
+                }
+                if detailUrl.isEmpty {
                     DispatchQueue.main.async {
                         self.endProgress()
-                        if !resultArr.isEmpty {
-                            self.pageNum += 1
-                            self.mainCollect.es.stopLoadingMore()
-                        } else {
-                            self.mainCollect.es.noticeNoMoreData()
+                        self.view.makeToast("请选择筛选条件", duration: 3, position: .center)
+                    }
+                }else{
+                    DataTool.init().getCategorySiftResultListData(type: self.type!, detailUrl: detailUrl, page: self.pageNum, success: { resultArr in
+                        DispatchQueue.main.async {
+                            self.endProgress()
+                            if !resultArr.isEmpty {
+                                self.pageNum += 1
+                                self.mainCollect.es.stopLoadingMore()
+                            } else {
+                                self.mainCollect.es.noticeNoMoreData()
+                            }
+                            self.listArr.append(array: resultArr)
+                            self.mainCollect.listArr = self.listArr
                         }
-                        self.listArr.append(array: resultArr)
-                        self.mainCollect.listArr = self.listArr
-                    }
-                }, failure: { errer in
-                    DispatchQueue.main.async {
-                        self.endProgress()
-                        self.view.makeToast("获取数据失败")
-                    }
-                })
+                    }, failure: { errer in
+                        DispatchQueue.main.async {
+                            self.endProgress()
+                            self.view.makeToast("获取数据失败")
+                        }
+                    })
+                }
+                
             }else if self.index == 3{
                 DataTool.init().getDoneCartoonData(type: self.type!, page: self.pageNum) { resultArr in
                     DispatchQueue.main.async {
@@ -250,6 +284,11 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
         DispatchQueue.global().async {
             DataTool.init().getCategoryData(type: self.type!, success: { resultArr in
                 self.categoryArr = resultArr
+                if self.type == .ssoonn{
+                    let array = self.categoryArr[1]
+                    self.categoryArr[1] = self.categoryArr[2]
+                    self.categoryArr[2] = array
+                }
             }, failure: { error in
                 DispatchQueue.main.async {
                     self.view.makeToast("获取漫画分类失败")

@@ -13,7 +13,43 @@ import ReactiveCocoa
 class CategoryBtnView:UIView {
     var categoryBtnBlock:((_ index:Int)->())?
 
-    var type:CartoonType = .ykmh
+    var type:CartoonType = .ykmh {
+        didSet{
+            let titleArr = [["人气排行","点击排行","订阅排行"],["今日最热","最多人看","最受好评"]]
+            for item in 0...2 {
+                // 创建三个按钮，根据不同的type，显示不同的文字
+                let categoryBtn = UIButton.init(type: .custom)
+                addSubview(categoryBtn)
+                categoryBtn.setTitle(titleArr[type.rawValue][item], for: .normal)
+                if item == 0 {
+                    categoryBtn.setTitleColor(.white, for: .normal)
+                    categoryBtn.backgroundColor = UIColor.colorWithHexString(hexString: "0090ff")
+                }else{
+                    categoryBtn.setTitleColor(UIColor.init(.dm, light: .black, dark: .white), for: .normal)
+                    categoryBtn.backgroundColor = UIColor.init(.dm, light: .white, dark: .black)
+                }
+                
+                categoryBtn.tag = 700+item
+                categoryBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+                categoryBtn.frame = CGRect(x: 70*item, y: 0, width: 69, height: 30)
+                categoryBtn.reactive.controlEvents(.touchUpInside).observeValues { button in
+    //                修改按钮，同时修改其他按钮为白色
+                    for index in 0...2 {
+                        let btn:UIButton = self.viewWithTag(700+index)! as! UIButton
+                        btn.setTitleColor(UIColor.init(.dm, light: .black, dark: .white), for: .normal)
+                        btn.backgroundColor = UIColor.init(.dm, light: .white, dark: .black)
+                    }
+                    
+                    button.setTitleColor(.white, for: .normal)
+                    button.backgroundColor = UIColor.colorWithHexString(hexString: "0090ff")
+                    
+                    if (self.categoryBtnBlock != nil) {
+                        self.categoryBtnBlock!(item)
+                    }
+                }
+            }
+        }
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,40 +64,6 @@ class CategoryBtnView:UIView {
             layer.addSublayer(lineLayer)
             lineLayer.frame = CGRect(x: 70*item-1, y: 0, width: 1, height: 30)
             lineLayer.backgroundColor = UIColor.init(named: "lineColor")?.cgColor
-        }
-        
-        let titleArr = [["人气排行","点击排行","订阅排行"],["今日最热","最多人看","最受好评"]]
-        for item in 0...2 {
-            // 创建三个按钮，根据不同的type，显示不同的文字
-            let categoryBtn = UIButton.init(type: .custom)
-            addSubview(categoryBtn)
-            categoryBtn.setTitle(titleArr[type.rawValue][item], for: .normal)
-            if item == 0 {
-                categoryBtn.setTitleColor(.white, for: .normal)
-                categoryBtn.backgroundColor = UIColor.colorWithHexString(hexString: "0090ff")
-            }else{
-                categoryBtn.setTitleColor(UIColor.init(.dm, light: .black, dark: .white), for: .normal)
-                categoryBtn.backgroundColor = UIColor.init(.dm, light: .white, dark: .black)
-            }
-            
-            categoryBtn.tag = 700+item
-            categoryBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-            categoryBtn.frame = CGRect(x: 70*item, y: 0, width: 69, height: 30)
-            categoryBtn.reactive.controlEvents(.touchUpInside).observeValues { button in
-//                修改按钮，同时修改其他按钮为白色
-                for index in 0...2 {
-                    let btn:UIButton = self.viewWithTag(700+index)! as! UIButton
-                    btn.setTitleColor(UIColor.init(.dm, light: .black, dark: .white), for: .normal)
-                    btn.backgroundColor = UIColor.init(.dm, light: .white, dark: .black)
-                }
-                
-                button.setTitleColor(.white, for: .normal)
-                button.backgroundColor = UIColor.colorWithHexString(hexString: "0090ff")
-                
-                if (self.categoryBtnBlock != nil) {
-                    self.categoryBtnBlock!(item)
-                }
-            }
         }
     }
     

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct CategoryModel {
+class CategoryModel: NSObject {
     var ischoose:Bool = false
     var name:String = ""
     var value:String = ""

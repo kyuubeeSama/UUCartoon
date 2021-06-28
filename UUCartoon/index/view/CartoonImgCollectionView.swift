@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class CartoonImgCollectionView: UICollectionView,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
         
@@ -35,7 +36,12 @@ class CartoonImgCollectionView: UICollectionView,UICollectionViewDelegate,UIColl
             imgUrl = imgUrl.replacingOccurrences(of: "\\", with: "")
             imgUrl = "http://pic.w1fl.com/\(imgUrl)"
         }
-        cell.cartoonImage.kf.setImage(with: URL.init(string: imgUrl), placeholder: UIImage.init(named: "placeholder.jpg"), options: nil, progressBlock: { receivedSize, totalSize in
+        let modifier = AnyModifier { request in
+            var r = request
+            r.setValue(urlArr[model.type.rawValue], forHTTPHeaderField: "Referer")
+            return r
+        }
+        cell.cartoonImage.kf.setImage(with: URL.init(string: imgUrl), placeholder: UIImage.init(named: "placeholder.jpg"), options: [.requestModifier(modifier)], progressBlock: { receivedSize, totalSize in
             
         }, completionHandler: { result in
             switch result {
