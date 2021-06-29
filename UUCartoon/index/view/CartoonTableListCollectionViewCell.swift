@@ -37,12 +37,6 @@ class CartoonTableListCollectionViewCell: UICollectionViewCell {
         authorLab.text = cartoonModel.author
         categoryLab.text = cartoonModel.category
         timeLab.text = cartoonModel.time
-        if cartoonModel.type == .ykmh {
-            let numArr = cartoonModel.num.split(separator: " ")
-            numLab.text = String(numArr[0])
-        }else{
-            numLab.text = cartoonModel.num
-        }
         if cartoonModel.is_rank == true {
             rankLab.isHidden = false
             numLab.isHidden = true
@@ -51,6 +45,18 @@ class CartoonTableListCollectionViewCell: UICollectionViewCell {
             rankLab.isHidden = true
             numLab.isHidden = false
             rightImg.isHidden = false
+        }
+        if cartoonModel.is_collect {
+            numLab.isHidden = true
+            rightImg.isHidden = true
+            timeLab.text = ["优酷漫画","ssoonn"][cartoonModel.type.rawValue]
+        }else{
+            if cartoonModel.type == .ykmh {
+                let numArr = cartoonModel.num.split(separator: " ")
+                numLab.text = String(numArr[0])
+            }else{
+                numLab.text = cartoonModel.num
+            }
         }
     }
     

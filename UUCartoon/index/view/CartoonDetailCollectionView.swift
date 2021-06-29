@@ -15,7 +15,7 @@ class CartoonDetailCollectionView: UICollectionView,UICollectionViewDelegate,UIC
     var readBlock:(()->())?
     // 添加订阅
     var subscribeBlock:(()->())?
-    var model:CartoonDetailModel?{
+    var model:CartoonModel?{
         didSet{
             self.reloadData()
         }
@@ -52,7 +52,7 @@ class CartoonDetailCollectionView: UICollectionView,UICollectionViewDelegate,UIC
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.section == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "infoCell", for: indexPath) as! CartoonInfoCollectionViewCell
-            cell.titleLab.text = self.model?.title
+            cell.titleLab.text = self.model?.name
             cell.timeLab.text = self.model?.time
             cell.categoryLab.text = self.model?.category
             cell.authorLab.text = self.model?.author
@@ -107,6 +107,13 @@ class CartoonDetailCollectionView: UICollectionView,UICollectionViewDelegate,UIC
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        for chapter in self.model!.chapterArr {
+            for var model in chapter.data {
+                model.is_choose = false
+            }
+        }
+        self.model?.chapterArr[indexPath.section].data[indexPath.row].is_choose = true
+        self.reloadData()
         if self.cellItemSelectedBlock != nil {
             self.cellItemSelectedBlock!(indexPath)
         }

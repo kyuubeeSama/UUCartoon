@@ -19,7 +19,7 @@ class IndexViewController: BaseViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        mainTable.listArr = ["优酷漫画","ssoonn"]
+        mainTable.listArr = ["优酷漫画","ssoonn","收藏列表","历史记录"]
     }
     
     lazy var mainTable: LabelTableView = {
@@ -29,9 +29,16 @@ class IndexViewController: BaseViewController {
             make.left.right.top.bottom.equalToSuperview()
         }
         mainTable.cellItemBlock = { indexPath in
-            let VC = CartoonViewController.init()
-            VC.type = CartoonType(rawValue: indexPath.row)
-            self.navigationController?.pushViewController(VC, animated: true)
+            if indexPath.row == 2{
+                let VC = CollectViewController.init()
+                self.navigationController?.pushViewController(VC, animated: true)
+            }else if indexPath.row == 3{
+                
+            }else{
+                let VC = CartoonViewController.init()
+                VC.type = CartoonType(rawValue: indexPath.row)
+                self.navigationController?.pushViewController(VC, animated: true)
+            }
         }
         return mainTable
     }()

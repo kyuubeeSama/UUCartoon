@@ -27,4 +27,19 @@ struct CartoonModel {
     var type:CartoonType = .ykmh
     // 是否是排序
     var is_rank:Bool = false
+    // 简介
+    var desc:String = ""
+    // 章节
+    var chapterArr:[(name:String,data:[ChapterModel])] = []
+    // 推荐漫画
+    var recommendArr:[CartoonModel] = []
+    // 阅读记录相关的
+    // 阅读的章节所在分区
+    var chapter_area:Int = 0
+    // 第几章节
+    var chapter_index:Int = 0
+    // 第几页
+    var page_index:Int = 0
+    //是否是收藏列表
+    var is_collect:Bool = false
 }

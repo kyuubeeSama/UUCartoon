@@ -11,6 +11,7 @@ import ESPullToRefresh
 
 class CartoonDetailViewController: BaseViewController {
     
+    public var cartoonModel:CartoonModel?
     public var model:ChapterModel?
     public var type:CartoonType?
     
@@ -20,6 +21,9 @@ class CartoonDetailViewController: BaseViewController {
         // Do any additional setup after loading the view.
         getData()
     }
+    
+    // 保存历史记录
+    
     
     func getData() {
         var detailUrl = model?.detailUrl

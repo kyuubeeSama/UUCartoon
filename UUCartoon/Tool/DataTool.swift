@@ -409,7 +409,7 @@ class DataTool: NSObject {
     ///   - success: 详情model
     ///   - failure: 失败
     /// - Returns: nil
-    func getCartoonDetailData(type: CartoonType, detailUrl: String, success: @escaping (_ model: CartoonDetailModel) -> (), failure: @escaping (_ error: Error) -> ()) {
+    func getCartoonDetailData(type: CartoonType, detailUrl: String, success: @escaping (_ model: CartoonModel) -> (), failure: @escaping (_ error: Error) -> ()) {
         let urlStr = detailUrl
         let jiDoc = Ji.init(htmlURL: URL.init(string: urlStr)!)
         if jiDoc == nil {
@@ -459,7 +459,7 @@ class DataTool: NSObject {
             let recommendUrlNodeArr = jiDoc?.xPath(recommendUrlXpath)
             let recommendImgNodeArr = jiDoc?.xPath(recommendImgXpath)
             let recommendAuthorNodeArr = jiDoc?.xPath(recommendAuthorXpath)
-            var detailModel = CartoonDetailModel.init()
+            var detailModel = CartoonModel.init()
             // 剧集数据
             if !(chapterNameNodeArr!.isEmpty)  && type == .ykmh{
                 for (index,item) in chapterNameNodeArr!.enumerated() {
@@ -503,7 +503,7 @@ class DataTool: NSObject {
                 cartoonModel.type = type
                 detailModel.recommendArr.append(cartoonModel)
             }
-            detailModel.title = titleNodeArr![0].content!
+            detailModel.name = titleNodeArr![0].content!
             detailModel.imgUrl = imgNodeArr![0].content!
             detailModel.author = authorNodeArr![0].content!
             detailModel.time = timeNodeArr![0].content!
