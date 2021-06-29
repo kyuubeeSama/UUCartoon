@@ -559,7 +559,8 @@ class DataTool: NSObject {
     func getSearchResultData(type:CartoonType,keyword:String,page:Int,success:@escaping(_ resultArr:[CartoonModel])->(),failure:@escaping(_ error:Error)->()){
         var detailUrlStr = ""
         if type == .ykmh {
-            
+//            http://wap.ykmh.com/search/?keywords=%E6%88%91&page=2
+            detailUrlStr = "search/?keywords=\(keyword)&page=\(page)"
         }else{
 //            http://ssoonn.com/comicsearch/s.aspx?s=%E6%B5%B7%E8%B4%BC%E7%8E%8B
             detailUrlStr = "comicsearch/s.aspx?s=\(keyword)"
