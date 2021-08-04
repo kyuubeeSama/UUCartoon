@@ -30,7 +30,7 @@ class CartoonImgCollectionView: UICollectionView,UICollectionViewDelegate,UIColl
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CartoonImgCollectionViewCell
-        var model = self.listArr[indexPath.row]
+        var model = listArr[indexPath.row]
         var imgUrl = model.imgUrl
         if model.type == .ykmh {
             imgUrl = imgUrl.replacingOccurrences(of: "\\", with: "")
@@ -65,7 +65,7 @@ class CartoonImgCollectionView: UICollectionView,UICollectionViewDelegate,UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let model = self.listArr[indexPath.row]
+        let model = listArr[indexPath.row]
         if model.width == 0 {
             return CGSize(width: screenW, height: screenH)
         }else{

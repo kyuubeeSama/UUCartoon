@@ -112,7 +112,7 @@ class CartoonDetailCollectionView: UICollectionView,UICollectionViewDelegate,UIC
                 model.is_choose = false
             }
         }
-        self.model?.chapterArr[indexPath.section].data[indexPath.row].is_choose = true
+        self.model?.chapterArr[indexPath.section-2].data[indexPath.row].is_choose = true
         self.reloadData()
         if self.cellItemSelectedBlock != nil {
             self.cellItemSelectedBlock!(indexPath)

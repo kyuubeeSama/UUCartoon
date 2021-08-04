@@ -700,6 +700,7 @@ class DataTool: NSObject {
                 var array:[CartoonImgModel] = []
                 for item in imgArr {
                     var model = CartoonImgModel.init()
+                    //TODO:根据spath获取对应的图片地址
                     model.imgUrl = "http://19.125084.com/dm01/"+item
                     model.type = type
                     array.append(model)

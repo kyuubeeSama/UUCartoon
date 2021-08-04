@@ -30,5 +30,4 @@ class CartoonImgCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
 }

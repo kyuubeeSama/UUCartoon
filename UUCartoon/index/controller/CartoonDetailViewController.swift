@@ -23,31 +23,27 @@ class CartoonDetailViewController: BaseViewController {
     }
     
     // 保存历史记录
-    
-    
     func getData() {
         var detailUrl = model?.detailUrl
         if type == .ykmh {
             detailUrl = "http://wap.ykmh.com/"+model!.detailUrl
         }
         DataTool.init().getCartoonDetailImgData(type: self.type!, detailUrl: detailUrl!, success: { imgArr in
-            self.mainCollect.listArr = imgArr
+            self.mainTable.listArr = imgArr
         }, failure: { error in
             print(error)
         })
     }
     
-    lazy var mainCollect: CartoonImgCollectionView = {
-        let collectionView = CartoonImgCollectionView.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0), collectionViewLayout: UICollectionViewFlowLayout.init())
-        self.view.addSubview(collectionView)
-        collectionView.snp.makeConstraints { make in
-            make.left.right.top.bottom.equalTo(self.view)
+    lazy var mainTable: CartoonImgTableView = {
+        let mainTable = CartoonImgTableView.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: .plain)
+        self.view.addSubview(mainTable)
+        mainTable.snp.makeConstraints { make in
+            make.left.right.top.bottom.equalToSuperview()
         }
-        collectionView.es.addInfiniteScrolling {
-            // TODO:进入下一话
-        }
-        return collectionView
+        return mainTable
     }()
+         
     /*
     // MARK: - Navigation
 
