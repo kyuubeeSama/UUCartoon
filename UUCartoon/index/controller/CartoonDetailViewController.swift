@@ -22,7 +22,22 @@ class CartoonDetailViewController: BaseViewController {
         getData()
     }
     
-    // 保存历史记录
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // TODO:退出页面时，更新页码
+        self.saveHistory()
+    }
+    
+    func saveHistory(){
+        let visible = mainTable.indexPathsForVisibleRows
+        let indexPath = visible![0]
+        self.cartoonModel?.page_index = indexPath.row
+        self.cartoonModel?.chapter_name = self.model!.name
+        self.cartoonModel?.type = self.type!
+        SqlTool.init().saveHistory(model: self.cartoonModel!)
+    }
+    
+    // TODO:进入页面时，保存历史记录
     func getData() {
         var detailUrl = model?.detailUrl
         if type == .ykmh {
@@ -30,6 +45,8 @@ class CartoonDetailViewController: BaseViewController {
         }
         DataTool.init().getCartoonDetailImgData(type: self.type!, detailUrl: detailUrl!, success: { imgArr in
             self.mainTable.listArr = imgArr
+            self.mainTable.scrollToRow(at: IndexPath.init(row: self.cartoonModel!.page_index, section: 0), at: .middle, animated: false)
+            self.saveHistory()
         }, failure: { error in
             print(error)
         })

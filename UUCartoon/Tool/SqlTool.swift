@@ -27,7 +27,7 @@ class SqlTool: NSObject {
                                          img_url varchar(300) NOT NULL,
                                          type integer NOT NULL,
                                          chapter_area integer DEFAULT(0),
-                                         chapter_index integer DEFAULT(0),
+                                         chapter_name varchar(200) NOT NULL,
                                          page_index integer DEFAULT(0),
                                          add_time integer NOT NULL,
                                          author varchar(200),
@@ -159,8 +159,8 @@ class SqlTool: NSObject {
             let dbQueue = try DatabaseQueue(path: databasePath)
             try dbQueue.write { db in
                 try db.execute(sql: """
-                                            REPLACE INTO history ('name','detail_url','img_url',add_time,type,chapter_area,chapter_index,page_index,'author','category') VALUES(:name,:detail_url,:img_url,:add_time,:type,:chapter_area,:chapter_index,:page_index,:author,:category)
-                                        """, arguments: [model.name, model.detailUrl, model.imgUrl,  Date.getCurrentTimeInterval(), model.type.rawValue, model.chapter_area, model.chapter_index,model.page_index,model.author,model.category])
+                                            REPLACE INTO history ('name','detail_url','img_url',add_time,type,chapter_area,chapter_name,page_index,'author','category') VALUES(:name,:detail_url,:img_url,:add_time,:type,:chapter_area,:chapter_name,:page_index,:author,:category)
+                                        """, arguments: [model.name, model.detailUrl, model.imgUrl,  Date.getCurrentTimeInterval(), model.type.rawValue, model.chapter_area, model.chapter_name,model.page_index,model.author,model.category])
             }
         } catch {
             print(error.localizedDescription)
@@ -194,8 +194,11 @@ class SqlTool: NSObject {
                 model.imgUrl = items[Column("img_url")]
                 model.type = CartoonType.init(rawValue:items[Column("type")])!
                 model.chapter_area = items[Column("chapter_area")]
-                model.chapter_index = items[Column("chapter_index")]
+                model.chapter_name = items[Column("chapter_name")]
                 model.page_index = items[Column("page_index")]
+                model.author = items[Column("author")]
+                model.category = items[Column("category")]
+                model.is_history = true
                 listArr.append(model)
             }
         } catch {
@@ -209,12 +212,12 @@ class SqlTool: NSObject {
         do {
             let dbQueue = try DatabaseQueue(path: databasePath)
             let rows = try dbQueue.read({ db in
-                try Row.fetchAll(db, sql: "select * from history where detail_url = :detailUrl order by add_time desc",arguments: [model.detailUrl])
+                try Row.fetchAll(db, sql: "select * from history where detail_url = :detailUrl order by add_time desc",arguments: [detailUrl])
             })
             for items in rows {
                 model.name = items[Column("name")]
                 model.chapter_area = items[Column("chapter_area")]
-                model.chapter_index = items[Column("chapter_index")]
+                model.chapter_name = items[Column("chapter_name")]
                 model.page_index = items[Column("page_index")]
             }
         } catch {

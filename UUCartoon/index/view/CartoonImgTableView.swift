@@ -37,7 +37,7 @@ class CartoonImgTableView: UITableView,UITableViewDelegate,UITableViewDataSource
         var imgUrl = model.imgUrl
         if model.type == .ykmh {
             imgUrl = imgUrl.replacingOccurrences(of: "\\", with: "")
-            imgUrl = "http://pic.w1fl.com/\(imgUrl)"
+            imgUrl = "http://pic.w1fl.com\(imgUrl)"
         }
         let modifier = AnyModifier { request in
             var r = request
@@ -45,21 +45,19 @@ class CartoonImgTableView: UITableView,UITableViewDelegate,UITableViewDataSource
             return r
         }
         print(imgUrl)
-        cell.imgView.kf.setImage(with: URL.init(string: imgUrl), placeholder: UIImage.init(named: "placeholder.jpg"), options: [.requestModifier(modifier)], progressBlock: { receivedSize, totalSize in
-
+        cell.imgView.kf.setImage(with: URL.init(string: imgUrl), placeholder: ImgLoadingPlaceHolderView.init(frame: CGRect(x: 0, y: 0, width: screenW, height: screenH)), options: [.requestModifier(modifier)], progressBlock: { receivedSize, totalSize in
         }, completionHandler: { result in
             switch result {
             case .success(let value):
                 if !model.has_done{
                     model.height = value.image.size.height*screenW/value.image.size.width
                     model.has_done = true
-                    print("图片高度是\(model.height)")
                     self.listArr[indexPath.row] = model
                     self.reloadRows(at: [indexPath], with: .none)
                 }
             case .failure(let error):
                 //TODO:图片加载失败的问题
-                print("Job failed: \(error.localizedDescription)")
+                print("图片加载失败， \(error.localizedDescription)")
             }
         })
         return cell

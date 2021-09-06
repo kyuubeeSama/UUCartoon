@@ -37,9 +37,11 @@ struct CartoonModel {
     // 阅读的章节所在分区
     var chapter_area:Int = 0
     // 第几章节
-    var chapter_index:Int = 0
+    var chapter_name:String = ""
     // 第几页
     var page_index:Int = 0
     //是否是收藏列表
     var is_collect:Bool = false
+    // 是否是历史记录列表
+    var is_history:Bool = false
 }

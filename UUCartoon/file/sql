@@ -1,1 +1,12 @@
+history表
+name：用户名
+detail_url 漫画详情地址
+img_url 漫画封面
+type 站点type
+chapter_area 章节区， 某些站点章节会有分区
+chapter_name 第几章节，存储章节名，根据章节名区分是第几章节
+page_index 看到了第几页
+add_time 添加时间
+author 作者
+category 漫画分类
 

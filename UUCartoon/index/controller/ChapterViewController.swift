@@ -45,11 +45,18 @@ class ChapterViewController: BaseViewController {
     
     //TODO:查找历史记录
     func getHistoryData(){
-        let model = SqlTool.init().getHistory(detailUrl: self.model.detailUrl)
-        if !model.name.isEmpty {
-            self.model.chapter_area = model.chapter_area
-            self.model.chapter_index = model.chapter_index
-            self.model.page_index = model.page_index
+        let historyModel = SqlTool.init().getHistory(detailUrl: self.model.detailUrl)
+        if !historyModel.name.isEmpty {
+            for (index,item) in model.chapterArr.enumerated() {
+                for (j,var chapterModel) in item.data.enumerated() {
+                    if chapterModel.name == historyModel.chapter_name {
+                        chapterModel.is_choose = true
+                        self.model.chapterArr[index].data[j] = chapterModel
+                        self.model.page_index = historyModel.page_index
+                    }
+                }
+            }
+            mainCollect.model = model
         }
     }
     
@@ -107,6 +114,7 @@ class ChapterViewController: BaseViewController {
                 let VC = CartoonDetailViewController.init()
                 VC.model = model
                 VC.cartoonModel = self.model
+                VC.cartoonModel?.chapter_area = indexPath.section-2
                 VC.type = self.type
                 self.navigationController?.pushViewController(VC, animated: true)
             }
@@ -117,6 +125,7 @@ class ChapterViewController: BaseViewController {
             let VC = CartoonDetailViewController.init()
             VC.model = model!
             VC.cartoonModel = self.model
+            VC.cartoonModel?.chapter_area = 0
             VC.type = self.type!
             self.navigationController?.pushViewController(VC, animated: true)
         }

@@ -9,9 +9,12 @@
 /* Begin PBXBuildFile section */
 		144DF6346D7E51A395081A06 /* CartoonCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144DFABB693FBB68992DFDAD /* CartoonCategoryCollectionViewCell.swift */; };
 		144DF7229F99AE64219B0671 /* FileTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144DFB00E6E5D7B0E0DDFD7C /* FileTool.swift */; };
+		144DF7CF13B5D1F4139BCC9B /* ImgLoadingPlaceHolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144DF976FA02CBC53D84839C /* ImgLoadingPlaceHolderView.swift */; };
 		144DF8AA157AC759C759F27A /* CartoonCategoryCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144DF0629CA4C953FCB4C2F3 /* CartoonCategoryCollectionView.swift */; };
 		144DF9E42F61D7F5853F5C8F /* CartoonCategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 144DFF8BE7E815690FDE0A14 /* CartoonCategoryCollectionViewCell.xib */; };
 		144DFD2D91D37148174C78FA /* sql in Resources */ = {isa = PBXBuildFile; fileRef = 144DF2F5CF03809F86997FAF /* sql */; };
+		144DFD3746DC88E0C675542D /* placeholder.gif in Resources */ = {isa = PBXBuildFile; fileRef = 144DFE0A4C4BC132C0DBB958 /* placeholder.gif */; };
+		144DFE53D99CE5ADF635DCFB /* UIImageView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144DF5E9CD713E7B7484D1F9 /* UIImageView+extension.swift */; };
 		A907CC6326440FDE00B9393C /* LabelTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A907CC6226440FDE00B9393C /* LabelTableView.swift */; };
 		A907CC6526441C6A00B9393C /* CartoonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A907CC6426441C6A00B9393C /* CartoonViewController.swift */; };
 		A907CC6726441C7B00B9393C /* CartoonListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A907CC6626441C7B00B9393C /* CartoonListViewController.swift */; };
@@ -84,8 +87,11 @@
 /* Begin PBXFileReference section */
 		144DF0629CA4C953FCB4C2F3 /* CartoonCategoryCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartoonCategoryCollectionView.swift; sourceTree = "<group>"; };
 		144DF2F5CF03809F86997FAF /* sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sql; sourceTree = "<group>"; };
+		144DF5E9CD713E7B7484D1F9 /* UIImageView+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+extension.swift"; sourceTree = "<group>"; };
+		144DF976FA02CBC53D84839C /* ImgLoadingPlaceHolderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImgLoadingPlaceHolderView.swift; sourceTree = "<group>"; };
 		144DFABB693FBB68992DFDAD /* CartoonCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartoonCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		144DFB00E6E5D7B0E0DDFD7C /* FileTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTool.swift; sourceTree = "<group>"; };
+		144DFE0A4C4BC132C0DBB958 /* placeholder.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = placeholder.gif; sourceTree = "<group>"; };
 		144DFF8BE7E815690FDE0A14 /* CartoonCategoryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartoonCategoryCollectionViewCell.xib; sourceTree = "<group>"; };
 		839A0DF0414B27A3CC996FFB /* Pods_UUCartoon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UUCartoon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A907CC6226440FDE00B9393C /* LabelTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableView.swift; sourceTree = "<group>"; };
@@ -332,6 +338,7 @@
 				A9F0056A2689F77E00CCC791 /* SearchResultCollectionView.swift */,
 				A97FE41B26BA88DB00BCC954 /* CartoonImgTableView.swift */,
 				A97FE41D26BA88F400BCC954 /* CartoonImgTableViewCell.swift */,
+				144DF976FA02CBC53D84839C /* ImgLoadingPlaceHolderView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -363,6 +370,7 @@
 				A9653ED224BDA0330098AB1E /* UITextField+extension.swift */,
 				A9653ED724BDA0340098AB1E /* UIView+extension.swift */,
 				A95527D326536633009ED762 /* Array+extension.swift */,
+				144DF5E9CD713E7B7484D1F9 /* UIImageView+extension.swift */,
 			);
 			path = category;
 			sourceTree = "<group>";
@@ -373,6 +381,7 @@
 				A915A01B266F87FC00182FB1 /* cartoon_detail_bg.png */,
 				A974234D264665E60012B82E /* placeholder.jpg */,
 				144DF2F5CF03809F86997FAF /* sql */,
+				144DFE0A4C4BC132C0DBB958 /* placeholder.gif */,
 			);
 			path = file;
 			sourceTree = "<group>";
@@ -461,6 +470,7 @@
 				A915A020266F89CD00182FB1 /* CartoonInfoCollectionViewCell.xib in Resources */,
 				144DFD2D91D37148174C78FA /* sql in Resources */,
 				144DF9E42F61D7F5853F5C8F /* CartoonCategoryCollectionViewCell.xib in Resources */,
+				144DFD3746DC88E0C675542D /* placeholder.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -570,6 +580,8 @@
 				A915A01F266F89CD00182FB1 /* CartoonInfoCollectionViewCell.swift in Sources */,
 				144DF6346D7E51A395081A06 /* CartoonCategoryCollectionViewCell.swift in Sources */,
 				144DF8AA157AC759C759F27A /* CartoonCategoryCollectionView.swift in Sources */,
+				144DF7CF13B5D1F4139BCC9B /* ImgLoadingPlaceHolderView.swift in Sources */,
+				144DFE53D99CE5ADF635DCFB /* UIImageView+extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

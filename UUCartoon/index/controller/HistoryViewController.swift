@@ -15,6 +15,7 @@ class HistoryViewController: BaseViewController {
         
         // Do any additional setup after loading the view.
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "清空", style: .plain, target: self, action: #selector(cleanHistory))
+        getHistoryData()
     }
     
     @objc func cleanHistory(){

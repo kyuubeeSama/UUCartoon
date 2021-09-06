@@ -46,14 +46,16 @@ class CartoonTableListCollectionViewCell: UICollectionViewCell {
             numLab.isHidden = false
             rightImg.isHidden = false
         }
-        if cartoonModel.is_collect {
+        if cartoonModel.is_collect || cartoonModel.is_history {
             numLab.isHidden = true
             rightImg.isHidden = true
             timeLab.text = ["优酷漫画","ssoonn"][cartoonModel.type.rawValue]
         }else{
             if cartoonModel.type == .ykmh {
                 let numArr = cartoonModel.num.split(separator: " ")
-                numLab.text = String(numArr[0])
+                if (numArr.count != 0) {
+                    numLab.text = String(numArr[0])
+                }
             }else{
                 numLab.text = cartoonModel.num
             }

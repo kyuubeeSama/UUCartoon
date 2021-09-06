@@ -30,11 +30,12 @@ pod 'Ji'
 # 导航栏
 pod 'JXSegmentedView'
 
-
 pod 'ReactiveCocoa'
 
 #上拉下拉
 pod 'ESPullToRefresh'
+
+pod 'JXPhotoBrowser'
 
 end
 

@@ -15,4 +15,5 @@ struct CartoonImgModel {
     public var width:CGFloat = screenW
     public var height:CGFloat = 0.00
     public var has_done:Bool = false
+    public var is_visible:Bool = false
 }

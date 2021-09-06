@@ -43,7 +43,7 @@ class DataTool: NSObject {
             }catch{
                 failure(XPathError.getContentFail)
             }
-            let contentStr = "<html><body>\(String.init(data: data, encoding: .utf8))))</body></html>"
+            let contentStr = "<html><body>"+String.init(data: data, encoding: .utf8)!+"</body></html>"
             jiDoc = Ji.init(htmlString: contentStr.replacingOccurrences(of: "\\", with: ""))
         }
         if jiDoc == nil {
@@ -93,8 +93,8 @@ class DataTool: NSObject {
                 for (index, urlNode) in urlNodeArr!.enumerated() {
                     var cartoonModel = CartoonModel.init()
                     cartoonModel.name = titleNodeArr![index].content!
-                    let detailUrl = urlNode.content
-                    print(detailUrl)
+//                    let detailUrl = urlNode.content
+//                    print(detailUrl)
                     cartoonModel.detailUrl = urlNode.content!
                     cartoonModel.author = authorNodeArr![index].content!
                     cartoonModel.category = categoryNodeArr![index].content!
@@ -138,7 +138,7 @@ class DataTool: NSObject {
             detailUrlStr = "/top/"+rankTypeArr[rankType]
         }
         let urlStr = urlArr[type.rawValue] + detailUrlStr
-        print(urlStr)
+//        print(urlStr)
         var jiDoc = Ji.init(htmlURL: URL.init(string: urlStr)!)
         if type == .ssoonn {
             var data = Data.init()
@@ -147,7 +147,7 @@ class DataTool: NSObject {
             }catch{
                 failure(XPathError.getContentFail)
             }
-            let contentStr = "<html><body>\(String.init(data: data, encoding: .utf8))))</body></html>"
+            let contentStr = "<html><body>"+String.init(data: data, encoding: .utf8)!+"</body></html>"
             jiDoc = Ji.init(htmlString: contentStr.replacingOccurrences(of: "\\", with: ""))
         }
         if jiDoc == nil {
@@ -575,7 +575,7 @@ class DataTool: NSObject {
             }catch{
                 failure(XPathError.getContentFail)
             }
-            let contentStr = "<html><body>\(String.init(data: data, encoding: .utf8))))</body></html>"
+            let contentStr = "<html><body>"+String.init(data: data, encoding: .utf8)!+"</body></html>"
             jiDoc = Ji.init(htmlString: contentStr.replacingOccurrences(of: "\\", with: ""))
         }
         if jiDoc == nil {
@@ -625,8 +625,8 @@ class DataTool: NSObject {
                 for (index, urlNode) in urlNodeArr!.enumerated() {
                     var cartoonModel = CartoonModel.init()
                     cartoonModel.name = titleNodeArr![index].content!
-                    let detailUrl = urlNode.content
-                    print(detailUrl)
+//                    let detailUrl = urlNode.content
+//                    print(detailUrl)
                     cartoonModel.detailUrl = urlNode.content!
                     cartoonModel.author = authorNodeArr![index].content!
                     cartoonModel.category = categoryNodeArr![index].content!
