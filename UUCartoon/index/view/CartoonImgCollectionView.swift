@@ -46,16 +46,16 @@ class CartoonImgCollectionView: UICollectionView,UICollectionViewDelegate,UIColl
         }, completionHandler: { result in
             switch result {
             case .success(let value):
-                if !model.has_done{
+//                if !model.has_done{
                     model.height = value.image.size.height*screenW/value.image.size.width
                     cell.scrollView.frame = CGRect(x: 0, y: 0, width: model.width, height: model.height)
                     cell.scrollView.contentSize = CGSize(width: model.width, height: model.height)
                     cell.cartoonImage.frame = CGRect(x: 0, y: 0, width: model.width, height: model.height)
-                    model.has_done = true
+//                    model.has_done = true
                     print("图片高度是\(model.height)")
                     self.listArr[indexPath.row] = model
                     collectionView.reloadItems(at: [indexPath])
-                }
+//                }
             case .failure(let error):
                 //TODO:图片加载失败的问题
                 print("Job failed: \(error.localizedDescription)")

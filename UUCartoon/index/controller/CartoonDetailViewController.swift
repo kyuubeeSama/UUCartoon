@@ -8,6 +8,7 @@
 
 import UIKit
 import ESPullToRefresh
+import Kingfisher
 
 class CartoonDetailViewController: BaseViewController {
     
@@ -17,8 +18,8 @@ class CartoonDetailViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
+        setNavColor(navColor: .systemBackground, titleColor: UIColor.init(.dm, light: .black, dark: .white), barStyle: .default)
         getData()
     }
     
@@ -26,6 +27,7 @@ class CartoonDetailViewController: BaseViewController {
         super.viewWillDisappear(animated)
         // TODO:退出页面时，更新页码
         self.saveHistory()
+        ImageCache.default.clearMemoryCache()
     }
     
     func saveHistory(){
@@ -60,7 +62,11 @@ class CartoonDetailViewController: BaseViewController {
         }
         return mainTable
     }()
-         
+    
+    override func didReceiveMemoryWarning() {
+        ImageCache.default.clearMemoryCache()
+    }
+    
     /*
     // MARK: - Navigation
 

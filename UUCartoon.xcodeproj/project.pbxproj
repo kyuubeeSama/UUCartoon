@@ -300,8 +300,6 @@
 				A907CC6A26441CF300B9393C /* ChapterViewController.swift */,
 				A9FC199C2679E74800665986 /* SearchViewController.swift */,
 				A9F005682689F76C00CCC791 /* SearchResultViewController.swift */,
-				A99F7A6D268B0FCD0093B765 /* CollectViewController.swift */,
-				A99F7A71268B15730093B765 /* HistoryViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -346,6 +344,8 @@
 		A9653ECD24BD9F5C0098AB1E /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				A99F7A6D268B0FCD0093B765 /* CollectViewController.swift */,
+				A99F7A71268B15730093B765 /* HistoryViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";

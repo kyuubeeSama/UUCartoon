@@ -45,21 +45,29 @@ class CartoonImgTableView: UITableView,UITableViewDelegate,UITableViewDataSource
             return r
         }
         print(imgUrl)
-        cell.imgView.kf.setImage(with: URL.init(string: imgUrl), placeholder: ImgLoadingPlaceHolderView.init(frame: CGRect(x: 0, y: 0, width: screenW, height: screenH)), options: [.requestModifier(modifier)], progressBlock: { receivedSize, totalSize in
-        }, completionHandler: { result in
-            switch result {
-            case .success(let value):
-                if !model.has_done{
-                    model.height = value.image.size.height*screenW/value.image.size.width
-                    model.has_done = true
+        if model.has_done == .success || model.has_done == .prepare {
+            cell.imgView.kf.setImage(with: URL.init(string: imgUrl), placeholder: ImgLoadingPlaceHolderView.init(frame: CGRect(x: 0, y: 0, width: screenW, height: screenH)), options: [.requestModifier(modifier)], progressBlock: { receivedSize, totalSize in
+            }, completionHandler: { result in
+                switch result {
+                case .success(let value):
+                    if model.has_done == .prepare {
+                        model.height = value.image.size.height*screenW/value.image.size.width
+                        model.has_done = .success
+                        self.listArr[indexPath.row] = model
+                        self.reloadRows(at: [indexPath], with: .none)
+                    }
+                case .failure(let error):
+                    //TODO:图片加载失败的问题
+                    print("图片加载失败， \(error.localizedDescription)")
+                    model.height = 500
+                    model.has_done = .fail
                     self.listArr[indexPath.row] = model
                     self.reloadRows(at: [indexPath], with: .none)
                 }
-            case .failure(let error):
-                //TODO:图片加载失败的问题
-                print("图片加载失败， \(error.localizedDescription)")
-            }
-        })
+            })
+        }else{
+            cell.imgView.image = UIImage.init(named: "placeholder.jpg")
+        }
         return cell
     }
     
@@ -70,6 +78,18 @@ class CartoonImgTableView: UITableView,UITableViewDelegate,UITableViewDataSource
         }else{
             return model.height
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var model = listArr[indexPath.row]
+        if model.has_done == .fail{
+            let cell = tableView.cellForRow(at: indexPath) as! CartoonImgTableViewCell
+            cell.imgView.image = UIImage.init()
+            model.has_done = .prepare
+            model.height = 0
+            listArr[indexPath.row] = model
+        }
+        self.reloadRows(at: [indexPath], with: .none)
     }
     
     required init?(coder: NSCoder) {

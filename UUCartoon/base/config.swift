@@ -19,3 +19,9 @@ let NavColor = "196EE5"
 let ButtonBackColor = "CD3C3E"
 let isIphoneX = UIScreen.main.bounds.size.height >= 812 ? true : false
 let urlArr = ["http://wap.ykmh.com/", "http://ssoonn.com/"]
+
+enum downloadStatus : Int {
+    case prepare = 0
+    case fail = 1
+    case success = 2
+}
