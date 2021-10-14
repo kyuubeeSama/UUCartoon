@@ -60,7 +60,7 @@ class CartoonImgTableView: UITableView,UITableViewDelegate,UITableViewDataSource
                     //TODO:图片加载失败的问题
                     print("图片加载失败， \(error.localizedDescription)")
                     model.height = 500
-                    model.has_done = .fail
+                    model.has_done = .prepare
                     self.listArr[indexPath.row] = model
                     self.reloadRows(at: [indexPath], with: .none)
                 }
@@ -73,10 +73,12 @@ class CartoonImgTableView: UITableView,UITableViewDelegate,UITableViewDataSource
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let model = listArr[indexPath.row]
-        if model.height == 0 {
-            return screenH
-        }else{
+        if model.has_done == .success {
             return model.height
+        }else if model.has_done == .fail{
+            return 500
+        }else{
+            return screenH
         }
     }
     

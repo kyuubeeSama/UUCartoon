@@ -744,13 +744,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = UUCartoon/UUCartoon.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3KW2TU676U;
+				DEVELOPMENT_TEAM = WVJ3T6UNZ3;
 				INFOPLIST_FILE = UUCartoon/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.qystudio.UUCartoon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.quanyihulian.UUCartoon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
@@ -765,13 +765,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = UUCartoon/UUCartoon.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3KW2TU676U;
+				DEVELOPMENT_TEAM = WVJ3T6UNZ3;
 				INFOPLIST_FILE = UUCartoon/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.qystudio.UUCartoon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.quanyihulian.UUCartoon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;

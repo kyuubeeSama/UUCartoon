@@ -47,7 +47,7 @@ class CartoonDetailViewController: BaseViewController {
         }
         DataTool.init().getCartoonDetailImgData(type: self.type!, detailUrl: detailUrl!, success: { imgArr in
             self.mainTable.listArr = imgArr
-            self.mainTable.scrollToRow(at: IndexPath.init(row: self.cartoonModel!.page_index, section: 0), at: .middle, animated: false)
+            self.mainTable.scrollToRow(at: IndexPath.init(row: self.cartoonModel!.page_index, section: 0), at: .top, animated: false)
             self.saveHistory()
         }, failure: { error in
             print(error)

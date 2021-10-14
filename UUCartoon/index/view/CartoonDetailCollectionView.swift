@@ -36,7 +36,8 @@ class CartoonDetailCollectionView: UICollectionView,UICollectionViewDelegate,UIC
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 3+(model?.chapterArr.count)!
+        return ((model?.recommendArr.count)! > 0 ? 3 : 2)+(model?.chapterArr.count)!
+
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -109,15 +110,17 @@ class CartoonDetailCollectionView: UICollectionView,UICollectionViewDelegate,UIC
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        for chapter in self.model!.chapterArr {
-            for var model in chapter.data {
-                model.is_choose = false
+        if indexPath.section == 2 {
+            for chapter in self.model!.chapterArr {
+                for var model in chapter.data {
+                    model.is_choose = false
+                }
             }
-        }
-        self.model?.chapterArr[indexPath.section-2].data[indexPath.row].is_choose = true
-        self.reloadData()
-        if self.cellItemSelectedBlock != nil {
-            self.cellItemSelectedBlock!(indexPath)
+            self.model?.chapterArr[indexPath.section-2].data[indexPath.row].is_choose = true
+            self.reloadData()
+            if self.cellItemSelectedBlock != nil {
+                self.cellItemSelectedBlock!(indexPath)
+            }
         }
     }
     
