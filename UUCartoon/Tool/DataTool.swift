@@ -667,7 +667,10 @@ class DataTool: NSObject {
                 var array:[CartoonImgModel] = []
                 for item in oneStr.split(separator: ",") {
                     var imgModel = CartoonImgModel.init()
-                    imgModel.imgUrl = String(item.replacingOccurrences(of: "\"", with: ""))
+                    var imgUrl = String(item.replacingOccurrences(of: "\"", with: ""))
+                    imgUrl = imgUrl.replacingOccurrences(of: "\\", with: "")
+                    imgUrl = "http://js.tingliu.cc\(imgUrl)"
+                    imgModel.imgUrl = imgUrl
                     imgModel.type = type
                     array.append(imgModel)
                 }

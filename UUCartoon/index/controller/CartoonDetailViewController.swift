@@ -19,14 +19,15 @@ class CartoonDetailViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        setNavColor(navColor: .systemBackground, titleColor: UIColor.init(.dm, light: .black, dark: .white), barStyle: .default)
+//        setNavColor(navColor: .systemBackground, titleColor: UIColor.init(.dm, light: .black, dark: .white), barStyle: .default)
+        self.navigationController?.isNavigationBarHidden = true
         getData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // TODO:退出页面时，更新页码
-        self.saveHistory()
+//        saveHistory()
         ImageCache.default.clearMemoryCache()
     }
     
@@ -46,13 +47,31 @@ class CartoonDetailViewController: BaseViewController {
             detailUrl = "http://wap.ykmh.com/"+model!.detailUrl
         }
         DataTool.init().getCartoonDetailImgData(type: self.type!, detailUrl: detailUrl!, success: { imgArr in
-            self.mainTable.listArr = imgArr
-            self.mainTable.scrollToRow(at: IndexPath.init(row: self.cartoonModel!.page_index, section: 0), at: .top, animated: false)
-            self.saveHistory()
+//            self.mainTable.listArr = imgArr
+            self.mainScroll.listArr = imgArr
+//            self.mainTable.scrollToRow(at: IndexPath.init(row: self.cartoonModel!.page_index, section: 0), at: .top, animated: false)
+//            self.saveHistory()
         }, failure: { error in
             print(error)
         })
     }
+    
+    lazy var mainScroll: ImageViewScrollView = {
+        let scrollView = ImageViewScrollView.init(frame: CGRect(x: 0, y: 0, width: screenW, height: screenH))
+        self.view.addSubview(scrollView)
+//        scrollView.snp.makeConstraints { make in
+//            make.left.right.equalToSuperview()
+//            make.top.equalTo(self.view.safeAreaInsets.top)
+//            make.bottom.equalTo(self.view.safeAreaInsets.bottom)
+//        }
+        scrollView.scrollLastPage = {
+            
+        }
+        scrollView.scrollFirstPage = {
+            
+        }
+        return scrollView
+    }()
     
     lazy var mainTable: CartoonImgTableView = {
         let mainTable = CartoonImgTableView.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: .plain)
