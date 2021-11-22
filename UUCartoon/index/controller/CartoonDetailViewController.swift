@@ -59,16 +59,24 @@ class CartoonDetailViewController: BaseViewController {
     lazy var mainScroll: ImageViewScrollView = {
         let scrollView = ImageViewScrollView.init(frame: CGRect(x: 0, y: 0, width: screenW, height: screenH))
         self.view.addSubview(scrollView)
-//        scrollView.snp.makeConstraints { make in
-//            make.left.right.equalToSuperview()
-//            make.top.equalTo(self.view.safeAreaInsets.top)
-//            make.bottom.equalTo(self.view.safeAreaInsets.bottom)
-//        }
+        scrollView.backgroundColor = .red
         scrollView.scrollLastPage = {
-            
+            print("滑动到最后一页")
+            let alert = UIAlertController.init(title: "提醒", message: "前面没有了", preferredStyle: .alert)
+            let sureAction = UIAlertAction.init(title: "确定", style: .default) { action in
+                self.mainScroll.contentOffset = CGPoint(x: screenW, y: 0)
+            }
+            alert.addAction(sureAction)
+            self.present(alert, animated: true, completion: nil)
         }
         scrollView.scrollFirstPage = {
-            
+            print("滑到到第一页")
+            let alert = UIAlertController.init(title: "提醒", message: "后面没有了", preferredStyle: .alert)
+            let sureAction = UIAlertAction.init(title: "确定", style: .default) { action in
+                self.mainScroll.contentOffset = CGPoint(x: screenW, y: 0)
+            }
+            alert.addAction(sureAction)
+            self.present(alert, animated: true, completion: nil)
         }
         return scrollView
     }()

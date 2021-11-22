@@ -29,9 +29,11 @@ class ImageViewScrollView: UIScrollView,UIScrollViewDelegate {
         super.init(frame: frame)
         self.delegate = self
         setSonViewFrame()
+        self.contentInsetAdjustmentBehavior = .never
         itemWidth = frame.size.width
         leftView.contentMode = .scaleAspectFit
         middleView.contentMode = .scaleAspectFit
+        middleView.backgroundColor = .yellow
         rightView.contentMode = .scaleAspectFit
         self.addSubview(leftView)
         self.addSubview(middleView)
@@ -58,14 +60,14 @@ class ImageViewScrollView: UIScrollView,UIScrollViewDelegate {
             if currentPageIndex == 0{
                 // 第一位
                 //TODO:如果是第一页，左边不能读取最后一页，应该禁止左滑，或者提示到页尾
-                leftModel = listArr.last!
+//                leftModel = listArr.last!
                 middleModel = listArr.first!
                 rightModel = listArr[1]
             }else if currentPageIndex == listArr.count-1 {
                 // 最后一位
                 leftModel = listArr[currentPageIndex-1]
                 middleModel = listArr[currentPageIndex]
-                rightModel = listArr.first!
+//                rightModel = listArr.first!
             }else{
                 leftModel = listArr[currentPageIndex-1]
                 middleModel = listArr[currentPageIndex]
@@ -76,13 +78,17 @@ class ImageViewScrollView: UIScrollView,UIScrollViewDelegate {
                 r.setValue(urlArr[leftModel.type.rawValue], forHTTPHeaderField: "Referer")
                 return r
             }
-            leftView.kf.setImage(with: URL.init(string: leftModel.imgUrl), placeholder: UIImage.init(named: ""), options: [.requestModifier(modifier)], completionHandler: nil)
+            if !leftModel.imgUrl.isEmpty{
+                leftView.kf.setImage(with: URL.init(string: leftModel.imgUrl), placeholder: UIImage.init(named: ""), options: [.requestModifier(modifier)], completionHandler: nil)
+            }
+            if !rightModel.imgUrl.isEmpty{
+                rightView.kf.setImage(with: URL.init(string: rightModel.imgUrl), placeholder: UIImage.init(named: ""), options: [.requestModifier(modifier)], completionHandler: nil)
+            }
             middleView.kf.setImage(with: URL.init(string: middleModel.imgUrl), placeholder: UIImage.init(named: ""), options: [.requestModifier(modifier)], completionHandler: nil)
-            rightView.kf.setImage(with: URL.init(string: rightModel.imgUrl), placeholder: UIImage.init(named: ""), options: [.requestModifier(modifier)], completionHandler: nil)
             self.contentOffset = CGPoint(x: itemWidth, y: 0)
         }
     }
-    
+    //TODO:判断此处不对
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView){
 //        判断是左移还是右移，如果是左移-1，右移+1,当currentindex小于0或者大于数组长度时，重置数据
         let offsetX = scrollView.contentOffset.x
