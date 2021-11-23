@@ -22,26 +22,23 @@ class CartoonViewScrollView: UIScrollView,UIScrollViewDelegate {
         }
     }
     
-    private lazy var leftView: UIImageView = {
-        let imageView = UIImageView.init()
+    private lazy var leftView: ImageViewScrollView = {
+        let imageView = ImageViewScrollView.init()
         self.addSubview(imageView)
-        imageView.contentMode = .scaleAspectFit
         imageView.frame = CGRect(x: 0, y: 0, width: screenW, height: screenH)
         return imageView
     }()
     
-    private lazy var middleView: UIImageView = {
-        let imageView = UIImageView.init()
+    private lazy var middleView: ImageViewScrollView = {
+        let imageView = ImageViewScrollView.init()
         self.addSubview(imageView)
-        imageView.contentMode = .scaleAspectFit
         imageView.frame = CGRect(x: screenW, y: 0, width: screenW, height: screenH)
         return imageView
     }()
     
-    private lazy var rightView: UIImageView = {
-        let imageView = UIImageView.init()
+    private lazy var rightView: ImageViewScrollView = {
+        let imageView = ImageViewScrollView.init()
         self.addSubview(imageView)
-        imageView.contentMode = .scaleAspectFit
         imageView.frame = CGRect(x: screenW*2, y: 0, width: screenW, height: screenH)
         return imageView
     }()
@@ -85,12 +82,12 @@ class CartoonViewScrollView: UIScrollView,UIScrollViewDelegate {
                 return r
             }
             if !leftModel.imgUrl.isEmpty{
-                leftView.kf.setImage(with: URL.init(string: leftModel.imgUrl), placeholder: UIImage.init(named: "placeholder.jpg"), options: [.requestModifier(modifier)], completionHandler: nil)
+                leftView.imageView.kf.setImage(with: URL.init(string: leftModel.imgUrl), placeholder: UIImage.init(named: "placeholder.jpg"), options: [.requestModifier(modifier)], completionHandler: nil)
             }
             if !rightModel.imgUrl.isEmpty{
-                rightView.kf.setImage(with: URL.init(string: rightModel.imgUrl), placeholder: UIImage.init(named: "placeholder.jpg"), options: [.requestModifier(modifier)], completionHandler: nil)
+                rightView.imageView.kf.setImage(with: URL.init(string: rightModel.imgUrl), placeholder: UIImage.init(named: "placeholder.jpg"), options: [.requestModifier(modifier)], completionHandler: nil)
             }
-            middleView.kf.setImage(with: URL.init(string: middleModel.imgUrl), placeholder: UIImage.init(named: "placeholder.jpg"), options: [.requestModifier(modifier)], completionHandler: nil)
+            middleView.imageView.kf.setImage(with: URL.init(string: middleModel.imgUrl), placeholder: UIImage.init(named: "placeholder.jpg"), options: [.requestModifier(modifier)], completionHandler: nil)
             self.contentOffset = CGPoint(x: itemWidth, y: 0)
         }
     }
@@ -115,10 +112,6 @@ class CartoonViewScrollView: UIScrollView,UIScrollViewDelegate {
             reloadData()
         }
         
-    }
-    
-    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        middleView
     }
     
     required init?(coder: NSCoder) {

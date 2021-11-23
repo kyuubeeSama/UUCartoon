@@ -15,7 +15,7 @@
 		144DFD2D91D37148174C78FA /* sql in Resources */ = {isa = PBXBuildFile; fileRef = 144DF2F5CF03809F86997FAF /* sql */; };
 		144DFD3746DC88E0C675542D /* placeholder.gif in Resources */ = {isa = PBXBuildFile; fileRef = 144DFE0A4C4BC132C0DBB958 /* placeholder.gif */; };
 		144DFE53D99CE5ADF635DCFB /* UIImageView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144DF5E9CD713E7B7484D1F9 /* UIImageView+extension.swift */; };
-		A9006819274B88D60097C238 /* ImageViewScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9006818274B88D50097C238 /* ImageViewScrollView.swift */; };
+		A9006819274B88D60097C238 /* CartoonViewScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9006818274B88D50097C238 /* CartoonViewScrollView.swift */; };
 		A907CC6326440FDE00B9393C /* LabelTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A907CC6226440FDE00B9393C /* LabelTableView.swift */; };
 		A907CC6526441C6A00B9393C /* CartoonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A907CC6426441C6A00B9393C /* CartoonViewController.swift */; };
 		A907CC6726441C7B00B9393C /* CartoonListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A907CC6626441C7B00B9393C /* CartoonListViewController.swift */; };
@@ -82,6 +82,7 @@
 		A9FC199D2679E74800665986 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FC199C2679E74800665986 /* SearchViewController.swift */; };
 		A9FC199F2679E76000665986 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FC199E2679E76000665986 /* SearchView.swift */; };
 		A9FC19A12679EA5F00665986 /* SearchCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FC19A02679EA5F00665986 /* SearchCollectionView.swift */; };
+		A9FFB1D6274CC1DA0040E1FF /* ImageViewScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FFB1D5274CC1DA0040E1FF /* ImageViewScrollView.swift */; };
 		D809989F9805E6889C1A027D /* Pods_UUCartoon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 839A0DF0414B27A3CC996FFB /* Pods_UUCartoon.framework */; };
 /* End PBXBuildFile section */
 
@@ -95,7 +96,7 @@
 		144DFE0A4C4BC132C0DBB958 /* placeholder.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = placeholder.gif; sourceTree = "<group>"; };
 		144DFF8BE7E815690FDE0A14 /* CartoonCategoryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartoonCategoryCollectionViewCell.xib; sourceTree = "<group>"; };
 		839A0DF0414B27A3CC996FFB /* Pods_UUCartoon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UUCartoon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A9006818274B88D50097C238 /* ImageViewScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewScrollView.swift; sourceTree = "<group>"; };
+		A9006818274B88D50097C238 /* CartoonViewScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoonViewScrollView.swift; sourceTree = "<group>"; };
 		A907CC6226440FDE00B9393C /* LabelTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableView.swift; sourceTree = "<group>"; };
 		A907CC6426441C6A00B9393C /* CartoonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoonViewController.swift; sourceTree = "<group>"; };
 		A907CC6626441C7B00B9393C /* CartoonListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoonListViewController.swift; sourceTree = "<group>"; };
@@ -167,6 +168,7 @@
 		A9FC199C2679E74800665986 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		A9FC199E2679E76000665986 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		A9FC19A02679EA5F00665986 /* SearchCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionView.swift; sourceTree = "<group>"; };
+		A9FFB1D5274CC1DA0040E1FF /* ImageViewScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewScrollView.swift; sourceTree = "<group>"; };
 		B67310F4365BD6F8F98FBEEA /* Pods-UUCartoon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UUCartoon.release.xcconfig"; path = "Target Support Files/Pods-UUCartoon/Pods-UUCartoon.release.xcconfig"; sourceTree = "<group>"; };
 		CE5D49EAD0E59961112CC347 /* Pods-UUCartoon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UUCartoon.debug.xcconfig"; path = "Target Support Files/Pods-UUCartoon/Pods-UUCartoon.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -339,7 +341,8 @@
 				A97FE41B26BA88DB00BCC954 /* CartoonImgTableView.swift */,
 				A97FE41D26BA88F400BCC954 /* CartoonImgTableViewCell.swift */,
 				144DF976FA02CBC53D84839C /* ImgLoadingPlaceHolderView.swift */,
-				A9006818274B88D50097C238 /* ImageViewScrollView.swift */,
+				A9006818274B88D50097C238 /* CartoonViewScrollView.swift */,
+				A9FFB1D5274CC1DA0040E1FF /* ImageViewScrollView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -529,6 +532,7 @@
 				A9653EE424BDA0720098AB1E /* BaseViewController.swift in Sources */,
 				A915A027266F8A1F00182FB1 /* ChapterCollectionViewCell.swift in Sources */,
 				A9F005692689F76C00CCC791 /* SearchResultViewController.swift in Sources */,
+				A9FFB1D6274CC1DA0040E1FF /* ImageViewScrollView.swift in Sources */,
 				A9653EE024BDA0340098AB1E /* UIView+extension.swift in Sources */,
 				A9653EE224BDA0340098AB1E /* Date+extension.swift in Sources */,
 				A9653EE824BDB2160098AB1E /* Tool.swift in Sources */,
@@ -550,7 +554,7 @@
 				A9742350264682830012B82E /* RankChooseView.swift in Sources */,
 				A98B8BFB2648DA2400792C54 /* SiftView.swift in Sources */,
 				A9653EB224BD9BA00098AB1E /* SceneDelegate.swift in Sources */,
-				A9006819274B88D60097C238 /* ImageViewScrollView.swift in Sources */,
+				A9006819274B88D60097C238 /* CartoonViewScrollView.swift in Sources */,
 				A9653EEA24BEA2230098AB1E /* IndexViewController.swift in Sources */,
 				A9CEF7002645267800FD43C2 /* CartoonListCollectionView.swift in Sources */,
 				A915A01A266F7A9E00182FB1 /* CartoonDetailCollectionView.swift in Sources */,

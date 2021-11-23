@@ -19,22 +19,32 @@ class CartoonDetailViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-//        setNavColor(navColor: .systemBackground, titleColor: UIColor.init(.dm, light: .black, dark: .white), barStyle: .default)
         self.navigationController?.isNavigationBarHidden = true
+        backBtn.isHidden = false
         getData()
     }
+    
+    lazy var backBtn: UIButton = {
+        let btn = UIButton.init(type: .custom)
+        view.addSubview(btn)
+        btn.isHidden = true
+        btn.snp.makeConstraints { make in
+            make.left.equalToSuperview()
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.size.equalTo(CGSize(width: 44, height: 44))
+        }
+        btn.setImage(UIImage.init(systemName: "chevron.backward"), for: .normal)
+        return btn
+    }()
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // TODO:退出页面时，更新页码
-//        saveHistory()
         ImageCache.default.clearMemoryCache()
     }
     
     func saveHistory(){
-        let visible = mainTable.indexPathsForVisibleRows
-        let indexPath = visible![0]
-        self.cartoonModel?.page_index = indexPath.row
+        self.cartoonModel?.page_index = mainScroll.currentPageIndex
         self.cartoonModel?.chapter_name = self.model!.name
         self.cartoonModel?.type = self.type!
         SqlTool.init().saveHistory(model: self.cartoonModel!)
@@ -47,22 +57,17 @@ class CartoonDetailViewController: BaseViewController {
             detailUrl = "http://wap.ykmh.com/"+model!.detailUrl
         }
         DataTool.init().getCartoonDetailImgData(type: self.type!, detailUrl: detailUrl!, success: { imgArr in
-//            self.mainTable.listArr = imgArr
             self.mainScroll.listArr = imgArr
-//            self.mainTable.scrollToRow(at: IndexPath.init(row: self.cartoonModel!.page_index, section: 0), at: .top, animated: false)
-//            self.saveHistory()
         }, failure: { error in
             print(error)
         })
     }
     
-    lazy var mainScroll: ImageViewScrollView = {
-        let scrollView = ImageViewScrollView.init(frame: CGRect(x: 0, y: 0, width: screenW, height: screenH))
+    lazy var mainScroll: CartoonViewScrollView = {
+        let scrollView = CartoonViewScrollView.init(frame: CGRect(x: 0, y: 0, width: screenW, height: screenH))
         self.view.addSubview(scrollView)
-        scrollView.backgroundColor = .red
         scrollView.scrollLastPage = {
-            print("滑动到最后一页")
-            let alert = UIAlertController.init(title: "提醒", message: "前面没有了", preferredStyle: .alert)
+            let alert = UIAlertController.init(title: "提醒", message: "后面没有了", preferredStyle: .alert)
             let sureAction = UIAlertAction.init(title: "确定", style: .default) { action in
                 self.mainScroll.contentOffset = CGPoint(x: screenW, y: 0)
             }
@@ -70,8 +75,7 @@ class CartoonDetailViewController: BaseViewController {
             self.present(alert, animated: true, completion: nil)
         }
         scrollView.scrollFirstPage = {
-            print("滑到到第一页")
-            let alert = UIAlertController.init(title: "提醒", message: "后面没有了", preferredStyle: .alert)
+            let alert = UIAlertController.init(title: "提醒", message: "前面没有了", preferredStyle: .alert)
             let sureAction = UIAlertAction.init(title: "确定", style: .default) { action in
                 self.mainScroll.contentOffset = CGPoint(x: screenW, y: 0)
             }
@@ -80,16 +84,7 @@ class CartoonDetailViewController: BaseViewController {
         }
         return scrollView
     }()
-    
-    lazy var mainTable: CartoonImgTableView = {
-        let mainTable = CartoonImgTableView.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: .plain)
-        self.view.addSubview(mainTable)
-        mainTable.snp.makeConstraints { make in
-            make.left.right.top.bottom.equalToSuperview()
-        }
-        return mainTable
-    }()
-    
+        
     override func didReceiveMemoryWarning() {
         ImageCache.default.clearMemoryCache()
     }
