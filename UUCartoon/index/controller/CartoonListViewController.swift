@@ -213,7 +213,10 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
                         self.mainCollect.listArr = self.listArr
                     }
                 } failure: { error in
-                    print(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        self.endProgress()
+                        self.view.makeToast("获取数据失败")
+                    }
                 }
             } else if self.index == 1 {
                 DataTool.init().getRankCartoonData(type: self.type!, pageNum: self.pageNum, rankType: self.rankType, timeType: self.timeType, category: self.categoryType) { resultArr in
@@ -223,7 +226,10 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
                         self.mainCollect.listArr = self.rankListArr[self.rankType]
                     }
                 } failure: { error in
-                    print(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        self.endProgress()
+                        self.view.makeToast("获取数据失败")
+                    }
                 }
             }else if self.index == 2{
                 var detailUrl = self.categoryValue.joined(separator: "")+self.orderType

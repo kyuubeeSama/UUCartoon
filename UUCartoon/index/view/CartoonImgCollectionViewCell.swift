@@ -7,14 +7,19 @@
 //
 
 import UIKit
-
+import SnapKit
 class CartoonImgCollectionViewCell: UICollectionViewCell {
     
     lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView.init()
         self.contentView.addSubview(scrollView)
+        /*
         scrollView.frame = CGRect(x: 0, y: 0, width: screenW, height: screenH)
         scrollView.contentSize = CGSize(width: screenW, height: screenH)
+         */
+        scrollView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
         return scrollView
     }()
     
@@ -22,7 +27,10 @@ class CartoonImgCollectionViewCell: UICollectionViewCell {
         let imageView = UIImageView.init()
         self.scrollView.addSubview(imageView)
         imageView.contentMode = .scaleAspectFit
-        imageView.frame = CGRect(x: 0, y: 0, width: screenW, height: screenH)
+//        imageView.frame = CGRect(x: 0, y: 0, width: screenW, height: screenH)
+        imageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
         return imageView
     }()
     

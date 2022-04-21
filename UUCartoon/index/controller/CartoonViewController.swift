@@ -32,7 +32,7 @@ class CartoonViewController: BaseViewController,JXSegmentedViewDelegate,JXSegmen
     
     @objc func searchView(){
         let VC = SearchViewController.init()
-        VC.type = self.type
+        VC.type = type
         self.navigationController?.pushViewController(VC, animated: true)
     }
     
@@ -77,7 +77,7 @@ class CartoonViewController: BaseViewController,JXSegmentedViewDelegate,JXSegmen
     func listContainerView(_ listContainerView: JXSegmentedListContainerView, initListAt index: Int) -> JXSegmentedListContainerViewListDelegate {
         let VC = CartoonListViewController.init()
         VC.index = index
-        VC.type = self.type
+        VC.type = type
         return VC
     }
     

@@ -29,7 +29,6 @@ class CartoonDetailViewController: BaseViewController {
     lazy var backBtn: UIButton = {
         let btn = UIButton.init(type: .custom)
         view.addSubview(btn)
-//        btn.isHidden = true
         btn.snp.makeConstraints { make in
             make.left.equalToSuperview()
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
@@ -49,10 +48,12 @@ class CartoonDetailViewController: BaseViewController {
     }
     
     func saveHistory(){
-        self.cartoonModel?.page_index = mainScroll.currentPageIndex
-        self.cartoonModel?.chapter_name = self.model!.name
-        self.cartoonModel?.type = self.type!
-        SqlTool.init().saveHistory(model: self.cartoonModel!)
+        /*
+        cartoonModel?.page_index = mainScroll.currentPageIndex
+        cartoonModel?.chapter_name = model!.name
+        cartoonModel?.type = type!
+        SqlTool.init().saveHistory(model: cartoonModel!)
+         */
     }
     
     // TODO:进入页面时，保存历史记录
@@ -61,11 +62,20 @@ class CartoonDetailViewController: BaseViewController {
         if type == .ykmh {
             detailUrl = "http://wap.ykmh.com/"+model!.detailUrl
         }
-        DataTool.init().getCartoonDetailImgData(type: self.type!, detailUrl: detailUrl!, success: { imgArr in
-            self.mainScroll.listArr = imgArr
-        }, failure: { error in
-            print(error)
-        })
+        beginProgress()
+        DispatchQueue.global().async {
+            DataTool.init().getCartoonDetailImgData(type: self.type!, detailUrl: detailUrl!, success: { imgArr in
+                DispatchQueue.main.async {
+                    self.endProgress()
+                    self.mainScroll.listArr = imgArr
+                }
+            }, failure: { error in
+                DispatchQueue.main.async {
+                    self.endProgress()
+                    self.view.makeToast("数据获取失败")
+                }
+            })
+        }
     }
     
     lazy var mainScroll: CartoonViewScrollView = {
@@ -89,7 +99,7 @@ class CartoonDetailViewController: BaseViewController {
         }
         return scrollView
     }()
-        
+
     override func didReceiveMemoryWarning() {
         ImageCache.default.clearMemoryCache()
     }
