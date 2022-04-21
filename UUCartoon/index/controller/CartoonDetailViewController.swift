@@ -9,6 +9,8 @@
 import UIKit
 import ESPullToRefresh
 import Kingfisher
+import ReactiveCocoa
+import SnapKit
 
 class CartoonDetailViewController: BaseViewController {
     
@@ -27,13 +29,16 @@ class CartoonDetailViewController: BaseViewController {
     lazy var backBtn: UIButton = {
         let btn = UIButton.init(type: .custom)
         view.addSubview(btn)
-        btn.isHidden = true
+//        btn.isHidden = true
         btn.snp.makeConstraints { make in
             make.left.equalToSuperview()
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.size.equalTo(CGSize(width: 44, height: 44))
         }
         btn.setImage(UIImage.init(systemName: "chevron.backward"), for: .normal)
+        btn.reactive.controlEvents(.touchUpInside).observeValues { button in
+            self.navigationController?.popViewController(animated: true)
+        }
         return btn
     }()
     

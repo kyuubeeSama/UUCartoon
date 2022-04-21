@@ -9,7 +9,9 @@
 import UIKit
 import Kingfisher
 class CartoonViewScrollView: UIScrollView,UIScrollViewDelegate {
+    // 当前位置
     var currentPageIndex:Int = 0
+    // 单页面宽
     var itemWidth:Double = screenW
     // TODO:添加方法，当漫画滚动到最后一页和滚动到第一页时，提示
     var scrollLastPage:(()->())?
@@ -61,43 +63,60 @@ class CartoonViewScrollView: UIScrollView,UIScrollViewDelegate {
             var middleModel = CartoonImgModel.init()
             var rightModel = CartoonImgModel.init()
             if currentPageIndex == 0{
-                // 第一位
+                // 最左边
                 //TODO:如果是第一页，左边不能读取最后一页，应该禁止左滑，或者提示到页尾
 //                leftModel = listArr.last!
-                middleModel = listArr.first!
-                rightModel = listArr[1]
+//                middleModel = listArr.first!
+//                rightModel = listArr[1]
+                leftModel = listArr.first!
+                middleModel = listArr[1]
+                rightModel = listArr[2]
             }else if currentPageIndex == listArr.count-1 {
-                // 最后一位
-                leftModel = listArr[currentPageIndex-1]
-                middleModel = listArr[currentPageIndex]
+                // 最右边
+//                leftModel = listArr[currentPageIndex-1]
+//                middleModel = listArr[currentPageIndex]
 //                rightModel = listArr.first!
+                leftModel = listArr[currentPageIndex-2]
+                middleModel = listArr[currentPageIndex-1]
+                rightModel = listArr[currentPageIndex]
             }else{
                 leftModel = listArr[currentPageIndex-1]
                 middleModel = listArr[currentPageIndex]
                 rightModel = listArr[currentPageIndex+1]
             }
+            // 设置图片Referer
             let modifier = AnyModifier { request in
                 var r = request
                 r.setValue(urlArr[leftModel.type.rawValue], forHTTPHeaderField: "Referer")
                 return r
             }
-            if !leftModel.imgUrl.isEmpty{
+//            if !leftModel.imgUrl.isEmpty{
                 leftView.imageView.kf.setImage(with: URL.init(string: leftModel.imgUrl), placeholder: UIImage.init(named: "placeholder.jpg"), options: [.requestModifier(modifier)], completionHandler: nil)
-            }
-            if !rightModel.imgUrl.isEmpty{
+//            }
+//            if !rightModel.imgUrl.isEmpty{
                 rightView.imageView.kf.setImage(with: URL.init(string: rightModel.imgUrl), placeholder: UIImage.init(named: "placeholder.jpg"), options: [.requestModifier(modifier)], completionHandler: nil)
-            }
+//            }
             middleView.imageView.kf.setImage(with: URL.init(string: middleModel.imgUrl), placeholder: UIImage.init(named: "placeholder.jpg"), options: [.requestModifier(modifier)], completionHandler: nil)
-            self.contentOffset = CGPoint(x: itemWidth, y: 0)
+            if currentPageIndex == 0 {
+                self.contentOffset = CGPoint(x: 0, y: 0)
+            }else if currentPageIndex == self.listArr.count-1 {
+                self.contentOffset = CGPoint(x: itemWidth*2, y: 0)
+            }else{
+                self.contentOffset = CGPoint(x: itemWidth, y: 0)
+            }
         }
     }
     //TODO:判断此处不对
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView){
 //        判断是左移还是右移，如果是左移-1，右移+1,当currentindex小于0或者大于数组长度时，重置数据
         let offsetX = scrollView.contentOffset.x
-        if offsetX<screenW/2{
+        if currentPageIndex == self.listArr.count-1 && offsetX<screenW/2*3{
+            currentPageIndex -= 1
+        }else if offsetX<screenW/2{
             // 左移
             currentPageIndex -= 1
+        }else if currentPageIndex == 0 && offsetX > screenW/2 {
+            currentPageIndex += 1
         }else if offsetX > screenW/2*3{
 //            右移
             currentPageIndex += 1
