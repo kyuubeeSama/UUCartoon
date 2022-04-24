@@ -57,6 +57,7 @@
 		A9653EE624BDA90E0098AB1E /* QYRequestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9653EE524BDA90E0098AB1E /* QYRequestData.swift */; };
 		A9653EE824BDB2160098AB1E /* Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9653EE724BDB2160098AB1E /* Tool.swift */; };
 		A9653EEA24BEA2230098AB1E /* IndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9653EE924BEA2230098AB1E /* IndexViewController.swift */; };
+		A96EA0ED2814EAB800E4961F /* BottomPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96EA0EC2814EAB800E4961F /* BottomPageView.swift */; };
 		A974234E264665E70012B82E /* placeholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A974234D264665E60012B82E /* placeholder.jpg */; };
 		A9742350264682830012B82E /* RankChooseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A974234F264682830012B82E /* RankChooseView.swift */; };
 		A97FE41C26BA88DB00BCC954 /* CartoonImgTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97FE41B26BA88DB00BCC954 /* CartoonImgTableView.swift */; };
@@ -143,6 +144,7 @@
 		A9664DDF24DD28ED00EB1FD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A9664DE024DD293700EB1FD5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		A9664DE124DD293700EB1FD5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		A96EA0EC2814EAB800E4961F /* BottomPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomPageView.swift; sourceTree = "<group>"; };
 		A974234D264665E60012B82E /* placeholder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = placeholder.jpg; sourceTree = "<group>"; };
 		A974234F264682830012B82E /* RankChooseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankChooseView.swift; sourceTree = "<group>"; };
 		A97FE41B26BA88DB00BCC954 /* CartoonImgTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoonImgTableView.swift; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 				144DF976FA02CBC53D84839C /* ImgLoadingPlaceHolderView.swift */,
 				A9006818274B88D50097C238 /* CartoonViewScrollView.swift */,
 				A9FFB1D5274CC1DA0040E1FF /* ImageViewScrollView.swift */,
+				A96EA0EC2814EAB800E4961F /* BottomPageView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -559,6 +562,7 @@
 				A9CEF7002645267800FD43C2 /* CartoonListCollectionView.swift in Sources */,
 				A915A01A266F7A9E00182FB1 /* CartoonDetailCollectionView.swift in Sources */,
 				A9CEF70626452C8D00FD43C2 /* CartoonModel.swift in Sources */,
+				A96EA0ED2814EAB800E4961F /* BottomPageView.swift in Sources */,
 				A99B7C8D24C1880900DB3EBB /* config.swift in Sources */,
 				A9653EDD24BDA0340098AB1E /* UIImage+extension.swift in Sources */,
 				A9FC199F2679E76000665986 /* SearchView.swift in Sources */,

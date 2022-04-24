@@ -23,7 +23,7 @@ class CategoryBtnView:UIView {
                 categoryBtn.setTitle(titleArr[type.rawValue][item], for: .normal)
                 if item == 0 {
                     categoryBtn.setTitleColor(.white, for: .normal)
-                    categoryBtn.backgroundColor = UIColor.colorWithHexString(hexString: "0090ff")
+                    categoryBtn.backgroundColor = UIColor.color(hexString: "0090ff")
                 }else{
                     categoryBtn.setTitleColor(UIColor.init(.dm, light: .black, dark: .white), for: .normal)
                     categoryBtn.backgroundColor = UIColor.init(.dm, light: .white, dark: .black)
@@ -41,7 +41,7 @@ class CategoryBtnView:UIView {
                     }
                     
                     button.setTitleColor(.white, for: .normal)
-                    button.backgroundColor = UIColor.colorWithHexString(hexString: "0090ff")
+                    button.backgroundColor = UIColor.color(hexString: "0090ff")
                     
                     if (self.categoryBtnBlock != nil) {
                         self.categoryBtnBlock!(item)
@@ -79,7 +79,7 @@ class SiftBtn:UIButton {
         super.init(frame: frame)
         setTitle("筛选", for: .normal)
         setTitleColor(.white, for: .normal)
-        backgroundColor = UIColor.colorWithHexString(hexString: "0090ff")
+        backgroundColor = UIColor.color(hexString: "0090ff")
         layer.masksToBounds = true
         layer.cornerRadius = 4
         titleLabel?.font = UIFont.systemFont(ofSize: 15)

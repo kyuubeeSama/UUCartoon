@@ -19,9 +19,21 @@ class CartoonViewScrollView: UIScrollView,UIScrollViewDelegate {
     var listArr:[CartoonImgModel] = []{
         didSet{
             self.contentSize = CGSize(width: itemWidth*3, height: frame.size.height)
-            print("screenH= \(screenH) ,contentsize height = \(self.contentSize.height)")
+            // 预加载图片
+//            var urlArr:[URL] = []
+//            for item in listArr {
+//                urlArr.append(URL.init(string: item.imgUrl)!)
+//            }
+//            let prefetcher = ImagePrefetcher.init(urls: urlArr)
+//            prefetcher.start()
             reloadData()
         }
+    }
+    
+    // 设置当前页面
+    public func setCurrentPage(index:Int){
+        self.currentPageIndex = index
+        self.reloadData()
     }
     
     private lazy var leftView: ImageViewScrollView = {
@@ -64,18 +76,12 @@ class CartoonViewScrollView: UIScrollView,UIScrollViewDelegate {
             var rightModel = CartoonImgModel.init()
             if currentPageIndex == 0{
                 // 最左边
-                //TODO:如果是第一页，左边不能读取最后一页，应该禁止左滑，或者提示到页尾
-//                leftModel = listArr.last!
-//                middleModel = listArr.first!
-//                rightModel = listArr[1]
+                //TODO:如果是第一页，左边不能读取最后一页，提示到页尾
                 leftModel = listArr.first!
                 middleModel = listArr[1]
                 rightModel = listArr[2]
             }else if currentPageIndex == listArr.count-1 {
                 // 最右边
-//                leftModel = listArr[currentPageIndex-1]
-//                middleModel = listArr[currentPageIndex]
-//                rightModel = listArr.first!
                 leftModel = listArr[currentPageIndex-2]
                 middleModel = listArr[currentPageIndex-1]
                 rightModel = listArr[currentPageIndex]
@@ -90,12 +96,8 @@ class CartoonViewScrollView: UIScrollView,UIScrollViewDelegate {
                 r.setValue(urlArr[leftModel.type.rawValue], forHTTPHeaderField: "Referer")
                 return r
             }
-//            if !leftModel.imgUrl.isEmpty{
-                leftView.imageView.kf.setImage(with: URL.init(string: leftModel.imgUrl), placeholder: UIImage.init(named: "placeholder.jpg"), options: [.requestModifier(modifier)], completionHandler: nil)
-//            }
-//            if !rightModel.imgUrl.isEmpty{
-                rightView.imageView.kf.setImage(with: URL.init(string: rightModel.imgUrl), placeholder: UIImage.init(named: "placeholder.jpg"), options: [.requestModifier(modifier)], completionHandler: nil)
-//            }
+            leftView.imageView.kf.setImage(with: URL.init(string: leftModel.imgUrl), placeholder: UIImage.init(named: "placeholder.jpg"), options: [.requestModifier(modifier)], completionHandler: nil)
+            rightView.imageView.kf.setImage(with: URL.init(string: rightModel.imgUrl), placeholder: UIImage.init(named: "placeholder.jpg"), options: [.requestModifier(modifier)], completionHandler: nil)
             middleView.imageView.kf.setImage(with: URL.init(string: middleModel.imgUrl), placeholder: UIImage.init(named: "placeholder.jpg"), options: [.requestModifier(modifier)], completionHandler: nil)
             if currentPageIndex == 0 {
                 self.contentOffset = CGPoint(x: 0, y: 0)
@@ -106,7 +108,6 @@ class CartoonViewScrollView: UIScrollView,UIScrollViewDelegate {
             }
         }
     }
-    //TODO:判断此处不对
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView){
 //        判断是左移还是右移，如果是左移-1，右移+1,当currentindex小于0或者大于数组长度时，重置数据
         let offsetX = scrollView.contentOffset.x

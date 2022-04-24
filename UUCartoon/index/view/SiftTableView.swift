@@ -44,7 +44,7 @@ class SiftTableView: UITableView,UITableViewDelegate,UITableViewDataSource {
             if model.is_choose {
                 cell.contentView.backgroundColor = .white
             }else{
-                cell.contentView.backgroundColor = UIColor.init(.dm, light: UIColor.colorWithHexString(hexString: "d9d9d9"), dark: .white)
+                cell.contentView.backgroundColor = UIColor.init(.dm, light: UIColor.color(hexString: "d9d9d9"), dark: .white)
             }
         }else{
             if model.is_choose {

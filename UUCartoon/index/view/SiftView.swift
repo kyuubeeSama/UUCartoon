@@ -15,7 +15,7 @@ class SiftView: UIView {
     // 点击底部，关闭当前页面
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.colorWithHexString(hexString: "333333", alpha: 0.3)
+        self.backgroundColor = UIColor.color(hexString: "333333", alpha: 0.3)
     }
     
     lazy private var contentView: UIView = {
@@ -30,7 +30,7 @@ class SiftView: UIView {
         self.contentView.addSubview(leftTableView)
         leftTableView.type = 1
         let view = UIView.init()
-        view.backgroundColor = UIColor.colorWithHexString(hexString: "d9d9d9")
+        view.backgroundColor = UIColor.color(hexString: "d9d9d9")
         leftTableView.backgroundView = view
         return leftTableView
     }()

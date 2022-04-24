@@ -129,7 +129,7 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
                             let backView = UIView.init()
                             backView.tag = 200
                             self.view.addSubview(backView)
-                            backView.backgroundColor = UIColor.colorWithHexString(hexString: "333333", alpha: 0.3)
+                            backView.backgroundColor = UIColor.color(hexString: "333333", alpha: 0.3)
                             backView.snp.makeConstraints { make in
                                 make.left.right.bottom.equalToSuperview()
                                 make.top.equalTo(chooseView.snp.bottom).offset(-50)

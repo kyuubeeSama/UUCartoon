@@ -42,8 +42,8 @@ class CartoonCategoryCollectionView: UICollectionView, UICollectionViewDelegate,
             cell.layer.borderColor = UIColor.red.cgColor
             cell.titleLab.textColor = UIColor.red
         } else {
-            cell.layer.borderColor = UIColor.init(.dm, light: UIColor.colorWithHexString(hexString: "333333"), dark: .white).cgColor
-            cell.titleLab.textColor = UIColor.init(.dm, light: UIColor.colorWithHexString(hexString: "333333"), dark: .white)
+            cell.layer.borderColor = UIColor.init(.dm, light: UIColor.color(hexString: "333333"), dark: .white).cgColor
+            cell.titleLab.textColor = UIColor.init(.dm, light: UIColor.color(hexString: "333333"), dark: .white)
         }
         return cell
     }

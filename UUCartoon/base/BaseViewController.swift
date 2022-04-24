@@ -16,6 +16,22 @@ class BaseViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         self.view.backgroundColor = .systemBackground
+        NotificationCenter.default.reactive.notifications(forName: UIApplication.willResignActiveNotification).observeValues { notification in
+           let effect = UIBlurEffect.init(style: .extraLight)
+            let effectView = UIVisualEffectView.init(effect: effect)
+            effectView.frame = CGRect(x: 0, y: 0, width: screenW, height: screenH)
+            effectView.tag = 1990
+            effectView.alpha = 0.8
+            let window = UIApplication.shared.windows[0]
+            window.addSubview(effectView)
+        }
+        NotificationCenter.default.reactive.notifications(forName: UIApplication.didBecomeActiveNotification).observeValues { notification in
+            let window = UIApplication.shared.windows[0]
+            if var effectView = window.viewWithTag(1990){
+                effectView = effectView as! UIVisualEffectView
+                effectView.removeFromSuperview()
+            }
+        }
     }
     
     func setNavColor(navColor:UIColor,titleColor:UIColor,barStyle:UIBarStyle) {

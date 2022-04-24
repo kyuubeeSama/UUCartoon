@@ -51,9 +51,9 @@ class CartoonListCollectionView: UICollectionView,UICollectionViewDelegate,UICol
                 cell.rankView.addRound(radio: 40, corners: UIRectCorner.bottomLeft)
                 let colorArr = ["ff4b4b","ff8004","ffc000","dfdfdf"]
                 if indexPath.row < 3{
-                    cell.rankView.backgroundColor = UIColor.colorWithHexString(hexString: colorArr[indexPath.row])
+                    cell.rankView.backgroundColor = UIColor.color(hexString: colorArr[indexPath.row])
                 }else{
-                    cell.rankView.backgroundColor = UIColor.colorWithHexString(hexString: colorArr[3])
+                    cell.rankView.backgroundColor = UIColor.color(hexString: colorArr[3])
                 }
             }
             return cell

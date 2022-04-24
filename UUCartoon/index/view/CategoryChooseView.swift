@@ -15,7 +15,7 @@ class CategoryChooseView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor.colorWithHexString(hexString: "e9e9e9")
+        backgroundColor = UIColor.color(hexString: "e9e9e9")
         let titleArr = ["题材","读者","进度","地域"];
         for item in 0...3 {
 //            四个按钮，按钮旁边加箭头图片，并根据选中与否修改图片
@@ -43,7 +43,7 @@ class CategoryChooseView: UIView {
                 button.isSelected = !button.isSelected
                 if button.isSelected {
                     button.setImage(UIImage.init(named: "category_row_open"), for: .normal)
-                    button.setTitleColor(UIColor.colorWithHexString(hexString: "1296db"), for: .normal)
+                    button.setTitleColor(UIColor.color(hexString: "1296db"), for: .normal)
                 }else{
                     button.setImage(UIImage.init(named: "category_row_close"), for: .normal)
                     button.setTitleColor(UIColor.init(named: "333333"), for: .normal)
@@ -74,7 +74,7 @@ class CategoryChooseView: UIView {
             button.setTitle(btnTitleArr[item-1], for: .normal)
             if item == 1 {
                 button.clickLevel = 1;
-                button.setTitleColor(UIColor.colorWithHexString(hexString: "1296db"), for: .normal)
+                button.setTitleColor(UIColor.color(hexString: "1296db"), for: .normal)
             }else{
                 button.clickLevel = 0;
                 button.setTitleColor(UIColor.init(named: "333333"), for: .normal)
@@ -94,7 +94,7 @@ class CategoryChooseView: UIView {
                         btn.setTitleColor(UIColor.init(named: "333333"), for: .normal)
                     }
                 }
-                button.setTitleColor(UIColor.colorWithHexString(hexString: "1296db"), for: .normal)
+                button.setTitleColor(UIColor.color(hexString: "1296db"), for: .normal)
                 if button.clickLevel == 0 || button.clickLevel == 2{
                     button.clickLevel = 1;
                     button.setImage(UIImage.init(named: "category_order_down"), for: .normal)
