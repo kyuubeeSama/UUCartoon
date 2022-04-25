@@ -16,16 +16,18 @@ class CartoonViewScrollView: UIScrollView,UIScrollViewDelegate {
     // TODO:添加方法，当漫画滚动到最后一页和滚动到第一页时，提示
     var scrollLastPage:(()->())?
     var scrollFirstPage:(()->())?
+    // 当有页面滚动时
+    var scrollDidScrollBlock:((_ currentIndex:Int)->())?
     var listArr:[CartoonImgModel] = []{
         didSet{
             self.contentSize = CGSize(width: itemWidth*3, height: frame.size.height)
             // 预加载图片
-//            var urlArr:[URL] = []
-//            for item in listArr {
-//                urlArr.append(URL.init(string: item.imgUrl)!)
-//            }
-//            let prefetcher = ImagePrefetcher.init(urls: urlArr)
-//            prefetcher.start()
+            var urlArr:[URL] = []
+            for item in listArr {
+                urlArr.append(URL.init(string: item.imgUrl)!)
+            }
+            let prefetcher = ImagePrefetcher.init(urls: urlArr)
+            prefetcher.start()
             reloadData()
         }
     }
@@ -105,6 +107,9 @@ class CartoonViewScrollView: UIScrollView,UIScrollViewDelegate {
                 self.contentOffset = CGPoint(x: itemWidth*2, y: 0)
             }else{
                 self.contentOffset = CGPoint(x: itemWidth, y: 0)
+            }
+            if self.scrollDidScrollBlock != nil {
+                self.scrollDidScrollBlock!(currentPageIndex)
             }
         }
     }

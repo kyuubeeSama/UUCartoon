@@ -14,6 +14,7 @@ class BottomPageView: UIView {
         let label = UILabel.init()
         addSubview(label)
         label.font = .systemFont(ofSize: 15)
+        label.textAlignment = .center
         label.textColor = UIColor.init(.dm, light: UIColor.color(hexString: "333333"), dark: UIColor.white)
         label.snp.makeConstraints { make in
             make.top.left.bottom.equalTo(self)
@@ -26,6 +27,7 @@ class BottomPageView: UIView {
         let label = UILabel.init()
         addSubview(label)
         label.font = .systemFont(ofSize: 15)
+        label.textAlignment = .center
         label.textColor = UIColor.init(.dm, light: UIColor.color(hexString: "333333"), dark: UIColor.white)
         label.snp.makeConstraints { make in
             make.top.right.bottom.equalTo(self)

@@ -67,9 +67,9 @@ class CartoonDetailViewController: BaseViewController {
                 DispatchQueue.main.async {
                     self.endProgress()
                     self.mainScroll.listArr = imgArr
-                    self.bottomView.currentPageLab.text = 1;
-                    self.bottomView.totalPageLab.text = imgArr.count
-                    self.bottomView.slider.maximumValue = imgArr.count
+                    self.bottomView.currentPageLab.text = "1";
+                    self.bottomView.totalPageLab.text = "\(imgArr.count)"
+                    self.bottomView.slider.maximumValue = Float(imgArr.count)
                     self.bottomView.slider.minimumValue = 1
                 }
             }, failure: { error in
@@ -100,6 +100,10 @@ class CartoonDetailViewController: BaseViewController {
             alert.addAction(sureAction)
             self.present(alert, animated: true, completion: nil)
         }
+        scrollView.scrollDidScrollBlock = { currentIndex in
+            self.bottomView.currentPageLab.text = "\(currentIndex+1)"
+            self.bottomView.slider.value = Float(currentIndex+1)
+        }
         self.view.bringSubviewToFront(self.backBtn)
         return scrollView
     }()
@@ -112,7 +116,7 @@ class CartoonDetailViewController: BaseViewController {
             make.height.equalTo(40)
         }
         bottomView.slider.reactive.controlEvents(.valueChanged).observeValues { slider in
-            self.mainScroll.currentPageIndex = slider.value
+            self.mainScroll.currentPageIndex = Int(slider.value)
         }
         return bottomView
     }()
