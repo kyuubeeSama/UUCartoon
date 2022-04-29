@@ -11,6 +11,7 @@ import ESPullToRefresh
 import Kingfisher
 import ReactiveCocoa
 import SnapKit
+import ProgressHUD
 
 class CartoonDetailViewController: BaseViewController {
     
@@ -21,13 +22,13 @@ class CartoonDetailViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.navigationController?.isNavigationBarHidden = true
+        navigationController?.isNavigationBarHidden = true
         getData()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.isNavigationBarHidden = false
+        navigationController?.isNavigationBarHidden = false
         // TODO:退出页面时，更新页码
         ImageCache.default.clearMemoryCache()
     }
@@ -47,7 +48,6 @@ class CartoonDetailViewController: BaseViewController {
         return btn
     }()
 
-    
     func saveHistory(){
 //        cartoonModel?.page_index = mainScroll.currentPageIndex
 //        cartoonModel?.chapter_name = model!.name
@@ -87,7 +87,6 @@ class CartoonDetailViewController: BaseViewController {
         scrollView.scrollLastPage = {
             let alert = UIAlertController.init(title: "提醒", message: "后面没有了", preferredStyle: .alert)
             let sureAction = UIAlertAction.init(title: "确定", style: .default) { action in
-//                self.mainScroll.contentOffset = CGPoint(x: screenW, y: 0)
             }
             alert.addAction(sureAction)
             self.present(alert, animated: true, completion: nil)
@@ -95,7 +94,6 @@ class CartoonDetailViewController: BaseViewController {
         scrollView.scrollFirstPage = {
             let alert = UIAlertController.init(title: "提醒", message: "前面没有了", preferredStyle: .alert)
             let sureAction = UIAlertAction.init(title: "确定", style: .default) { action in
-//                self.mainScroll.contentOffset = CGPoint(x: screenW, y: 0)
             }
             alert.addAction(sureAction)
             self.present(alert, animated: true, completion: nil)
@@ -116,7 +114,7 @@ class CartoonDetailViewController: BaseViewController {
             make.height.equalTo(40)
         }
         bottomView.slider.reactive.controlEvents(.valueChanged).observeValues { slider in
-            self.mainScroll.currentPageIndex = Int(slider.value)
+            self.mainScroll.setCurrentPage(index: Int(slider.value)-1)
         }
         return bottomView
     }()

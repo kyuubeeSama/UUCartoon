@@ -18,11 +18,12 @@ class ChapterViewController: BaseViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        self.getData()
+        setNavColor(navColor: UIColor.init(.dm,light: .white,dark: .black), titleColor: .white, barStyle: .default)
+        getData()
     }
     
     func getData(){
-        self.beginProgress()
+        beginProgress()
         DispatchQueue.global().async {
             DataTool.init().getCartoonDetailData(type: self.type!, detailUrl: self.detailUrl!, success: { detailModel in
                 DispatchQueue.main.async {
@@ -51,8 +52,8 @@ class ChapterViewController: BaseViewController {
                 for (j,var chapterModel) in item.data.enumerated() {
                     if chapterModel.name == historyModel.chapter_name {
                         chapterModel.is_choose = true
-                        self.model.chapterArr[index].data[j] = chapterModel
-                        self.model.page_index = historyModel.page_index
+                        model.chapterArr[index].data[j] = chapterModel
+                        model.page_index = historyModel.page_index
                     }
                 }
             }
@@ -75,16 +76,16 @@ class ChapterViewController: BaseViewController {
     }
     
     @objc func collectClick() {
-        if SqlTool.init().isCollect(model: self.model) {
+        if SqlTool.init().isCollect(model: model) {
             // 删除收藏
-            if SqlTool.init().deleteCollect(model: self.model) {
+            if SqlTool.init().deleteCollect(model: model) {
                 collectBtn.setImage(UIImage.init(systemName: "heart"), for: .normal)
             } else {
                 view.makeToast("操作失败")
             }
         } else {
             // 添加收藏
-            if SqlTool.init().saveCollect(model: self.model) {
+            if SqlTool.init().saveCollect(model: model) {
                 // 修改bar按钮
                 collectBtn.setImage(UIImage.init(systemName: "heart.fill"), for: .normal)
             } else {

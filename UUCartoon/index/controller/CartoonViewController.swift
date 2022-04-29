@@ -24,7 +24,7 @@ class CartoonViewController: BaseViewController,JXSegmentedViewDelegate,JXSegmen
         // Do any additional setup after loading the view.
         // 搜索按钮
         let rightItem = UIBarButtonItem.init(image: UIImage.init(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(searchView))
-        self.navigationItem.rightBarButtonItem = rightItem
+        navigationItem.rightBarButtonItem = rightItem
         title = ["优酷漫画","ssoonn"][type!.rawValue]
         segmentedView.dataSource = segmentedDataSource
         segmentedView.listContainer = listContainerView
@@ -33,7 +33,7 @@ class CartoonViewController: BaseViewController,JXSegmentedViewDelegate,JXSegmen
     @objc func searchView(){
         let VC = SearchViewController.init()
         VC.type = type
-        self.navigationController?.pushViewController(VC, animated: true)
+        navigationController?.pushViewController(VC, animated: true)
     }
     
     lazy var segmentedDataSource: JXSegmentedTitleDataSource = {

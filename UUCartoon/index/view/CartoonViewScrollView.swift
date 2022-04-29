@@ -20,7 +20,7 @@ class CartoonViewScrollView: UIScrollView,UIScrollViewDelegate {
     var scrollDidScrollBlock:((_ currentIndex:Int)->())?
     var listArr:[CartoonImgModel] = []{
         didSet{
-            self.contentSize = CGSize(width: itemWidth*3, height: frame.size.height)
+            contentSize = CGSize(width: itemWidth*3, height: frame.size.height)
             // 预加载图片
             var urlArr:[URL] = []
             for item in listArr {
@@ -34,8 +34,8 @@ class CartoonViewScrollView: UIScrollView,UIScrollViewDelegate {
     
     // 设置当前页面
     public func setCurrentPage(index:Int){
-        self.currentPageIndex = index
-        self.reloadData()
+        currentPageIndex = index
+        reloadData()
     }
     
     private lazy var leftView: ImageViewScrollView = {
@@ -61,14 +61,14 @@ class CartoonViewScrollView: UIScrollView,UIScrollViewDelegate {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.delegate = self
-        self.minimumZoomScale = 1
-        self.maximumZoomScale = 3
-        self.contentInsetAdjustmentBehavior = .never
+        delegate = self
+        minimumZoomScale = 1
+        maximumZoomScale = 3
+        contentInsetAdjustmentBehavior = .never
         itemWidth = frame.size.width
-        self.isPagingEnabled = true
-        self.showsHorizontalScrollIndicator = false
-        self.bounces = false
+        isPagingEnabled = true
+        showsHorizontalScrollIndicator = false
+        bounces = false
     }
 
     func reloadData(){
@@ -102,21 +102,21 @@ class CartoonViewScrollView: UIScrollView,UIScrollViewDelegate {
             rightView.imageView.kf.setImage(with: URL.init(string: rightModel.imgUrl), placeholder: UIImage.init(named: "placeholder.jpg"), options: [.requestModifier(modifier)], completionHandler: nil)
             middleView.imageView.kf.setImage(with: URL.init(string: middleModel.imgUrl), placeholder: UIImage.init(named: "placeholder.jpg"), options: [.requestModifier(modifier)], completionHandler: nil)
             if currentPageIndex == 0 {
-                self.contentOffset = CGPoint(x: 0, y: 0)
-            }else if currentPageIndex == self.listArr.count-1 {
-                self.contentOffset = CGPoint(x: itemWidth*2, y: 0)
+                contentOffset = CGPoint(x: 0, y: 0)
+            }else if currentPageIndex == listArr.count-1 {
+                contentOffset = CGPoint(x: itemWidth*2, y: 0)
             }else{
-                self.contentOffset = CGPoint(x: itemWidth, y: 0)
+                contentOffset = CGPoint(x: itemWidth, y: 0)
             }
-            if self.scrollDidScrollBlock != nil {
-                self.scrollDidScrollBlock!(currentPageIndex)
+            if scrollDidScrollBlock != nil {
+                scrollDidScrollBlock!(currentPageIndex)
             }
         }
     }
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView){
 //        判断是左移还是右移，如果是左移-1，右移+1,当currentindex小于0或者大于数组长度时，重置数据
         let offsetX = scrollView.contentOffset.x
-        if currentPageIndex == self.listArr.count-1 && offsetX<screenW/2*3{
+        if currentPageIndex == listArr.count-1 && offsetX<screenW/2*3{
             currentPageIndex -= 1
         }else if offsetX<screenW/2{
             // 左移
@@ -129,14 +129,13 @@ class CartoonViewScrollView: UIScrollView,UIScrollViewDelegate {
         }
         if currentPageIndex < 0{
             currentPageIndex = 0
-            self.scrollFirstPage!()
+            scrollFirstPage!()
         }else if currentPageIndex >= listArr.count{
             currentPageIndex = listArr.count-1
-            self.scrollLastPage!()
+            scrollLastPage!()
         }else{
             reloadData()
         }
-        
     }
     
     required init?(coder: NSCoder) {

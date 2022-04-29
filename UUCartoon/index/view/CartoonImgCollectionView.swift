@@ -32,7 +32,7 @@ class CartoonImgCollectionView: UICollectionView,UICollectionViewDelegate,UIColl
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CartoonImgCollectionViewCell
         var model = listArr[indexPath.row]
-        var imgUrl = model.imgUrl
+        let imgUrl = model.imgUrl
 //        if model.type == .ykmh {
 //            imgUrl = imgUrl.replacingOccurrences(of: "\\", with: "")
 //            imgUrl = "http://pic.w1fl.com/\(imgUrl)"

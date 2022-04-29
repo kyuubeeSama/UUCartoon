@@ -37,6 +37,8 @@ pod 'ESPullToRefresh'
 
 pod 'JXPhotoBrowser'
 
+pod 'ProgressHUD'
+
 end
 
 post_install do |installer_representation|
