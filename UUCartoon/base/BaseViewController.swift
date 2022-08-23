@@ -11,6 +11,11 @@ import Toast_Swift
 
 class BaseViewController: UIViewController {
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNav()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,20 +39,13 @@ class BaseViewController: UIViewController {
         }
     }
     
-    func setNavColor(navColor:UIColor,titleColor:UIColor,barStyle:UIBarStyle) {
-        navigationController?.isNavigationBarHidden = false
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.barStyle = barStyle
-        navigationController?.navigationBar.barTintColor = navColor
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:titleColor]
-        navigationController?.navigationBar.tintColor = titleColor
-            let statusBarView = UIView(frame: view.window?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero)
-            statusBarView.backgroundColor = navColor
-            view.addSubview(statusBarView)
+    func setNav(){
+        
     }
+    
     // 提示消息
     func showAlert(title:String){
-        view.makeToast(title)
+        view.makeToast(title,position: .center)
     }
     // 加载中
     func beginProgress(){

@@ -16,6 +16,7 @@ class CategoryChooseView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = UIColor.color(hexString: "e9e9e9")
+        backgroundColor = UIColor(.dm,light: UIColor.color(hexString: "e9e9e9"),dark: UIColor.color(hexString: "696969"))
         let titleArr = ["题材","读者","进度","地域"];
         for item in 0...3 {
 //            四个按钮，按钮旁边加箭头图片，并根据选中与否修改图片

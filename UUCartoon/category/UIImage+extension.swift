@@ -12,7 +12,7 @@ extension UIImage{
     
     func compressImage(maxLength:CGFloat)->Data{
         var compression:CGFloat = 1
-//        let data = UIImage.jpegData(compression)
+        //        let data = UIImage.jpegData(compression)
         var data = self.jpegData(compressionQuality: compression)
         var max:CGFloat = 1
         var min:CGFloat = 0
@@ -45,12 +45,24 @@ extension UIImage{
         }
         return data!
     }
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    
+    class func createImage(color:UIColor,size:CGSize)->UIImage{
+        let rect = CGRect.init(x: 0, y: 0, width: size.width, height: size.height)
+        UIGraphicsBeginImageContext(rect.size)
+        let context = UIGraphicsGetCurrentContext()
+        context?.setFillColor(color.cgColor)
+        context?.fill(rect)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image!
     }
-    */
-
+    
+    /*
+     // Only override draw() if you perform custom drawing.
+     // An empty implementation adversely affects performance during animation.
+     override func draw(_ rect: CGRect) {
+     // Drawing code
+     }
+     */
+    
 }

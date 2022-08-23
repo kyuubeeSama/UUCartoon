@@ -73,6 +73,7 @@
 		A99D679A26820B5500171D53 /* CartoonImgCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99D679826820B5500171D53 /* CartoonImgCollectionViewCell.swift */; };
 		A99F7A6E268B0FCD0093B765 /* CollectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99F7A6D268B0FCD0093B765 /* CollectViewController.swift */; };
 		A99F7A72268B15730093B765 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99F7A71268B15730093B765 /* HistoryViewController.swift */; };
+		A9CE79B928AF7B2B00BFCA68 /* ViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CE79B828AF7B2B00BFCA68 /* ViewController+extension.swift */; };
 		A9CEF7002645267800FD43C2 /* CartoonListCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CEF6FF2645267800FD43C2 /* CartoonListCollectionView.swift */; };
 		A9CEF7032645268900FD43C2 /* CartoonTableListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CEF7012645268900FD43C2 /* CartoonTableListCollectionViewCell.swift */; };
 		A9CEF7042645268900FD43C2 /* CartoonTableListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9CEF7022645268900FD43C2 /* CartoonTableListCollectionViewCell.xib */; };
@@ -160,6 +161,7 @@
 		A99D679826820B5500171D53 /* CartoonImgCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoonImgCollectionViewCell.swift; sourceTree = "<group>"; };
 		A99F7A6D268B0FCD0093B765 /* CollectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectViewController.swift; sourceTree = "<group>"; };
 		A99F7A71268B15730093B765 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		A9CE79B828AF7B2B00BFCA68 /* ViewController+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+extension.swift"; sourceTree = "<group>"; };
 		A9CEF6FF2645267800FD43C2 /* CartoonListCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoonListCollectionView.swift; sourceTree = "<group>"; };
 		A9CEF7012645268900FD43C2 /* CartoonTableListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoonTableListCollectionViewCell.swift; sourceTree = "<group>"; };
 		A9CEF7022645268900FD43C2 /* CartoonTableListCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartoonTableListCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -380,6 +382,7 @@
 				A9653ED724BDA0340098AB1E /* UIView+extension.swift */,
 				A95527D326536633009ED762 /* Array+extension.swift */,
 				144DF5E9CD713E7B7484D1F9 /* UIImageView+extension.swift */,
+				A9CE79B828AF7B2B00BFCA68 /* ViewController+extension.swift */,
 			);
 			path = category;
 			sourceTree = "<group>";
@@ -550,6 +553,7 @@
 				A9653EE124BDA0340098AB1E /* UIButton+extension.swift in Sources */,
 				A98B8BFD2649035400792C54 /* SiftTableView.swift in Sources */,
 				A9653EDB24BDA0340098AB1E /* UITextField+extension.swift in Sources */,
+				A9CE79B928AF7B2B00BFCA68 /* ViewController+extension.swift in Sources */,
 				A9653EB424BD9BA00098AB1E /* ViewController.swift in Sources */,
 				A9653EDF24BDA0340098AB1E /* UIColor+extension.swift in Sources */,
 				A907CC6326440FDE00B9393C /* LabelTableView.swift in Sources */,
@@ -767,9 +771,11 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.quanyihulian.UUCartoon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 			};
 			name = Debug;
 		};
@@ -791,9 +797,11 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.quanyihulian.UUCartoon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 			};
 			name = Release;
 		};

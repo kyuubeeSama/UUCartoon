@@ -7,7 +7,7 @@ target 'UUCartoon' do
 #  图片缓存
   pod 'Kingfisher'
 #  控件适配
-pod 'SnapKit'
+#pod 'SnapKit'
 #  加载样式
 pod 'Toast-Swift'
 #  键盘弹出
@@ -18,7 +18,7 @@ pod 'EmptyDataSet-Swift'
 pod 'SwiftyJSON'
 pod 'HandyJSON'
 #  应用内自定义通知
-#pod 'NotificationBanner'
+pod 'NotificationBannerSwift'
 # 侧滑菜单
 pod 'SideMenu'
 # 暗黑模式
@@ -34,8 +34,6 @@ pod 'ReactiveCocoa'
 
 #上拉下拉
 pod 'ESPullToRefresh'
-
-pod 'JXPhotoBrowser'
 
 pod 'ProgressHUD'
 

@@ -95,11 +95,11 @@ class ChapterViewController: BaseViewController {
     }
     
     lazy var mainCollect: CartoonDetailCollectionView = {
-        let layout = UICollectionViewFlowLayout.init()
+        let layout = UICollectionViewLeftAlignedLayout()
         let mainCollect = CartoonDetailCollectionView.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0), collectionViewLayout: layout)
         view.addSubview(mainCollect)
         mainCollect.snp.makeConstraints { make in
-            make.left.right.top.bottom.equalTo(self.view)
+            make.edges.equalToSuperview()
         }
         mainCollect.cellItemSelectedBlock = { indexPath in
             if(indexPath.section == 2+self.model.chapterArr.count){
