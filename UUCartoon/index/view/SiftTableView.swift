@@ -39,7 +39,7 @@ class SiftTableView: UITableView,UITableViewDelegate,UITableViewDataSource {
         let cell = UITableViewCell.init(style: .default, reuseIdentifier: "cell")
         let model = listArr[indexPath.row]
         cell.textLabel?.text = model.name
-        if self.type == 1 {
+        if type == 1 {
             //TODO:此处需要根据在暗黑模式下，调整颜色
             if model.is_choose {
                 cell.contentView.backgroundColor = .white
@@ -61,16 +61,16 @@ class SiftTableView: UITableView,UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.index = indexPath.row
-        for model in self.listArr {
+        index = indexPath.row
+        for model in listArr {
             model.is_choose = false
         }
-        let model = self.listArr[indexPath.row]
+        let model = listArr[indexPath.row]
         model.is_choose = true
-        if (self.cellItemSelectedBlock != nil) {
-            self.cellItemSelectedBlock!(indexPath)
+        if (cellItemSelectedBlock != nil) {
+            cellItemSelectedBlock!(indexPath)
         }
-        self.reloadData()
+        reloadData()
     }
     
     /*

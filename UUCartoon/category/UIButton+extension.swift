@@ -32,14 +32,14 @@ extension UIButton {
     }
     func layoutButton(style: QYButtonEdgeInsetsStyle, imageTitleSpace: CGFloat) {
         //得到imageView和titleLabel的宽高
-        let imageWidth = self.imageView?.frame.size.width
-        let imageHeight = self.imageView?.frame.size.height
+        let imageWidth = imageView?.frame.size.width
+        let imageHeight = imageView?.frame.size.height
         
         var labelWidth: CGFloat! = 0.0
         var labelHeight: CGFloat! = 0.0
         
-        labelWidth = self.titleLabel?.intrinsicContentSize.width
-        labelHeight = self.titleLabel?.intrinsicContentSize.height
+        labelWidth = titleLabel?.intrinsicContentSize.width
+        labelHeight = titleLabel?.intrinsicContentSize.height
         
         //初始化imageEdgeInsets和labelEdgeInsets
         var imageEdgeInsets = UIEdgeInsets.zero
@@ -70,7 +70,7 @@ extension UIButton {
             
         }
         
-        self.titleEdgeInsets = labelEdgeInsets
+        titleEdgeInsets = labelEdgeInsets
         self.imageEdgeInsets = imageEdgeInsets
         
     }

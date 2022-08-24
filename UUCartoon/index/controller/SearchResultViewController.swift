@@ -18,11 +18,11 @@ class SearchResultViewController: BaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.getListData()
+        getListData()
     }
 
     func getListData(){
-        self.beginProgress()
+        beginProgress()
         DispatchQueue.global().async {
             DataTool.init().getSearchResultData(type: self.type!, keyword:self.keyword, page: self.pageNum) { resultArr in
                 DispatchQueue.main.async {

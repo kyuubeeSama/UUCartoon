@@ -17,10 +17,10 @@ class ImageViewScrollView: UIScrollView,UIScrollViewDelegate {
     }()
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.delegate = self
-        self.minimumZoomScale = 1
-        self.maximumZoomScale = 3
-        self.contentSize = CGSize(width: screenW, height: screenH)
+        delegate = self
+        minimumZoomScale = 1
+        maximumZoomScale = 3
+        contentSize = CGSize(width: screenW, height: screenH)
     }
     
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {

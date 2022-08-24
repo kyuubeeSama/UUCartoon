@@ -199,86 +199,86 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
     func getListData() {
         beginProgress()
         DispatchQueue.global().async { [self] in
-            if self.index == 0 {
-                DataTool.init().getNewCartoonData(type: self.type!, pageNum: self.pageNum) { resultArr in
+            if index == 0 {
+                DataTool.init().getNewCartoonData(type: type!, pageNum: pageNum) { resultArr in
                     DispatchQueue.main.async {
-                        self.endProgress()
+                        endProgress()
                         if !resultArr.isEmpty {
-                            self.pageNum += 1
-                            self.mainCollect.es.stopLoadingMore()
+                            pageNum += 1
+                            mainCollect.es.stopLoadingMore()
                         } else {
-                            self.mainCollect.es.noticeNoMoreData()
+                            mainCollect.es.noticeNoMoreData()
                         }
-                        self.listArr.append(array: resultArr)
-                        self.mainCollect.listArr = self.listArr
+                        listArr.append(array: resultArr)
+                        mainCollect.listArr = listArr
                     }
                 } failure: { error in
                     DispatchQueue.main.async {
-                        self.endProgress()
-                        self.view.makeToast("获取数据失败")
+                        endProgress()
+                        view.makeToast("获取数据失败")
                     }
                 }
-            } else if self.index == 1 {
-                DataTool.init().getRankCartoonData(type: self.type!, pageNum: self.pageNum, rankType: self.rankType, timeType: self.timeType, category: self.categoryType) { resultArr in
+            } else if index == 1 {
+                DataTool.init().getRankCartoonData(type: type!, pageNum: pageNum, rankType: rankType, timeType: timeType, category: categoryType) { resultArr in
                     DispatchQueue.main.async {
-                        self.endProgress()
-                        self.rankListArr[self.rankType] = resultArr
-                        self.mainCollect.listArr = self.rankListArr[self.rankType]
+                        endProgress()
+                        rankListArr[rankType] = resultArr
+                        mainCollect.listArr = rankListArr[rankType]
                     }
                 } failure: { error in
                     DispatchQueue.main.async {
-                        self.endProgress()
-                        self.view.makeToast("获取数据失败")
+                        endProgress()
+                        view.makeToast("获取数据失败")
                     }
                 }
-            }else if self.index == 2{
-                var detailUrl = self.categoryValue.joined(separator: "")+self.orderType
-                if self.type == .ssoonn {
-                    detailUrl = self.categoryValue.joined(separator: "")
+            }else if index == 2{
+                var detailUrl = categoryValue.joined(separator: "")+ orderType
+                if type == .ssoonn {
+                    detailUrl = categoryValue.joined(separator: "")
                 }
                 if detailUrl.isEmpty {
                     DispatchQueue.main.async {
-                        self.endProgress()
-                        self.view.makeToast("请选择筛选条件", duration: 3, position: .center)
+                        endProgress()
+                        view.makeToast("请选择筛选条件", duration: 3, position: .center)
                     }
                 }else{
-                    DataTool.init().getCategorySiftResultListData(type: self.type!, detailUrl: detailUrl, page: self.pageNum, success: { resultArr in
+                    DataTool.init().getCategorySiftResultListData(type: type!, detailUrl: detailUrl, page: pageNum, success: { resultArr in
                         DispatchQueue.main.async {
-                            self.endProgress()
+                            endProgress()
                             if !resultArr.isEmpty {
-                                self.pageNum += 1
-                                self.mainCollect.es.stopLoadingMore()
+                                pageNum += 1
+                                mainCollect.es.stopLoadingMore()
                             } else {
-                                self.mainCollect.es.noticeNoMoreData()
+                                mainCollect.es.noticeNoMoreData()
                             }
-                            self.listArr.append(array: resultArr)
-                            self.mainCollect.listArr = self.listArr
+                            listArr.append(array: resultArr)
+                            mainCollect.listArr = listArr
                         }
                     }, failure: { errer in
                         DispatchQueue.main.async {
-                            self.endProgress()
-                            self.view.makeToast("获取数据失败")
+                            endProgress()
+                            view.makeToast("获取数据失败")
                         }
                     })
                 }
                 
-            }else if self.index == 3{
-                DataTool.init().getDoneCartoonData(type: self.type!, page: self.pageNum) { resultArr in
+            }else if index == 3{
+                DataTool.init().getDoneCartoonData(type: type!, page: pageNum) { resultArr in
                     DispatchQueue.main.async {
-                        self.endProgress()
+                        endProgress()
                         if !resultArr.isEmpty {
-                            self.pageNum += 1
-                            self.mainCollect.es.stopLoadingMore()
+                            pageNum += 1
+                            mainCollect.es.stopLoadingMore()
                         } else {
-                            self.mainCollect.es.noticeNoMoreData()
+                            mainCollect.es.noticeNoMoreData()
                         }
-                        self.listArr.append(array: resultArr)
-                        self.mainCollect.listArr = self.listArr
+                        listArr.append(array: resultArr)
+                        mainCollect.listArr = listArr
                     }
                 } failure: { Error in
                     DispatchQueue.main.async {
-                        self.endProgress()
-                        self.view.makeToast("获取数据失败")
+                        endProgress()
+                        view.makeToast("获取数据失败")
                     }
                 }
             }

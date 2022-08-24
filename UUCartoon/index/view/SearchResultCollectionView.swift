@@ -15,9 +15,9 @@ class SearchResultCollectionView: UICollectionView,UICollectionViewDelegate,UICo
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
-        self.delegate = self
-        self.dataSource = self
-        self.backgroundColor = .systemBackground
+        delegate = self
+        dataSource = self
+        backgroundColor = .systemBackground
         self.register(UINib.init(nibName: "CartoonTableListCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: "tableCell")
     }
 
@@ -28,7 +28,7 @@ class SearchResultCollectionView: UICollectionView,UICollectionViewDelegate,UICo
     }
         
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        self.listArr.count
+        listArr.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

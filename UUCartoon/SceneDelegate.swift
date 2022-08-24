@@ -20,12 +20,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         SqlTool.init().createTable()
         print(FileTool.init().getDocumentPath())
         let windowScene = scene as! UIWindowScene
-        self.window = UIWindow.init(windowScene: windowScene)
-        self.window?.backgroundColor = .white
+        window = UIWindow.init(windowScene: windowScene)
+        window?.backgroundColor = .white
         let index = IndexViewController.init()
         let nav = UINavigationController.init(rootViewController: index)
-        self.window?.rootViewController = nav
-        self.window?.makeKeyAndVisible()
+        window?.rootViewController = nav
+        window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

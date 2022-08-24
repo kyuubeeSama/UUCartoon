@@ -22,24 +22,24 @@ extension UIView{
         
         for item in position{
             if item == .All {
-                self.layer.borderWidth = borderWidth
-                self.layer.borderColor = borderColor.cgColor
+                layer.borderWidth = borderWidth
+                layer.borderColor = borderColor.cgColor
             }
-            print(self.frame.size.width,self.frame.size.height)
+            print(frame.size.width, frame.size.height)
             if item == .Left{
-                self.layer.addSublayer(self.addLine(originPoint: CGPoint(x: 0, y: 0), toPoint: CGPoint(x: 0, y: self.frame.size.height), color: borderColor, borderWidth: borderWidth))
+                layer.addSublayer(addLine(originPoint: CGPoint(x: 0, y: 0), toPoint: CGPoint(x: 0, y: frame.size.height), color: borderColor, borderWidth: borderWidth))
             }
             
             if item == .Right{
-                self.layer.addSublayer(self.addLine(originPoint: CGPoint(x: self.frame.size.width, y: 0), toPoint: CGPoint(x: self.frame.size.width, y: self.frame.size.height), color: borderColor, borderWidth: borderWidth))
+                layer.addSublayer(addLine(originPoint: CGPoint(x: frame.size.width, y: 0), toPoint: CGPoint(x: frame.size.width, y: frame.size.height), color: borderColor, borderWidth: borderWidth))
             }
             
             if item == .Top{
-                self.layer.addSublayer(self.addLine(originPoint: CGPoint(x: 0, y: 0), toPoint: CGPoint(x: self.frame.size.width, y: 0), color: borderColor, borderWidth: borderWidth))
+                layer.addSublayer(addLine(originPoint: CGPoint(x: 0, y: 0), toPoint: CGPoint(x: frame.size.width, y: 0), color: borderColor, borderWidth: borderWidth))
             }
             
             if item == .Bottom{
-                self.layer.addSublayer(self.addLine(originPoint: CGPoint(x: 0, y: self.frame.size.height), toPoint: CGPoint(x: self.frame.size.width, y: self.frame.size.height), color: borderColor, borderWidth: borderWidth))
+                layer.addSublayer(addLine(originPoint: CGPoint(x: 0, y: frame.size.height), toPoint: CGPoint(x: frame.size.width, y: frame.size.height), color: borderColor, borderWidth: borderWidth))
             }
         }
         
@@ -65,7 +65,7 @@ extension UIView{
         let maskLayer = CAShapeLayer.init()
         maskLayer.frame = bounds
         maskLayer.path = maskPath.cgPath
-        self.layer.mask = maskLayer
+        layer.mask = maskLayer
         
     }
     /*

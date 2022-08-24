@@ -12,7 +12,7 @@ import SnapKit
 class IndexViewController: BaseViewController {
     
     @objc func injected(){
-        self.viewDidLoad()
+        viewDidLoad()
     }
     
     override func viewDidLoad() {

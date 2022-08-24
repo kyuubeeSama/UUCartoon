@@ -14,15 +14,15 @@ class SearchCollectionView: UICollectionView,UICollectionViewDelegate,UICollecti
     
     var listArr:[CartoonModel]?{
         didSet{
-            self.reloadData()
+            reloadData()
         }
     }
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
-        self.delegate = self
-        self.dataSource = self
-        self.backgroundColor = .systemBackground
+        delegate = self
+        dataSource = self
+        backgroundColor = .systemBackground
         self.register(UINib.init(nibName: "ChapterCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: "cell")
     }
     
@@ -36,20 +36,20 @@ class SearchCollectionView: UICollectionView,UICollectionViewDelegate,UICollecti
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ChapterCollectionViewCell
-        let model = self.listArr![indexPath.row]
+        let model = listArr![indexPath.row]
         cell.titleLab.text = model.name
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let model = self.listArr![indexPath.row]
+        let model = listArr![indexPath.row]
         let size = model.name.getStringSize(font: UIFont.systemFont(ofSize: 15), size: CGSize(width: screenW, height: 40))
         return CGSize(width: size.width+30, height: 40)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if self.cellItemBlock != nil {
-            self.cellItemBlock!(indexPath)
+        if cellItemBlock != nil {
+            cellItemBlock!(indexPath)
         }
     }
     

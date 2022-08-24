@@ -14,7 +14,7 @@ class HistoryViewController: BaseViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "清空", style: .plain, target: self, action: #selector(cleanHistory))
+        navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "清空", style: .plain, target: self, action: #selector(cleanHistory))
         getHistoryData()
     }
     
@@ -28,7 +28,7 @@ class HistoryViewController: BaseViewController {
         alert.addAction(sureAction)
         let cancelAction = UIAlertAction.init(title: "取消", style: .cancel, handler: nil)
         alert.addAction(cancelAction)
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
     
     func getHistoryData(){

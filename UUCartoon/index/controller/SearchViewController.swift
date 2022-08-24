@@ -16,13 +16,13 @@ class SearchViewController: BaseViewController,UISearchBarDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.makeUI()
-        self.getData()
+        makeUI()
+        getData()
     }
     
     func makeUI(){
         let searchView = UISearchBar.init()
-        self.view.addSubview(searchView)
+        view.addSubview(searchView)
         searchView.delegate = self
         searchView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
@@ -34,9 +34,9 @@ class SearchViewController: BaseViewController,UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let VC = SearchResultViewController.init()
-        VC.type = self.type
+        VC.type = type
         VC.keyword = searchBar.text!
-        self.navigationController?.pushViewController(VC, animated: true)
+        navigationController?.pushViewController(VC, animated: true)
     }
     
     func getData(){

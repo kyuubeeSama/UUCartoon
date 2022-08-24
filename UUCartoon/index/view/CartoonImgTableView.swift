@@ -13,22 +13,22 @@ class CartoonImgTableView: UITableView,UITableViewDelegate,UITableViewDataSource
     
     var listArr:[CartoonImgModel] = []{
         didSet{
-            self.reloadData()
+            reloadData()
         }
     }
     
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
-        self.estimatedRowHeight = 0
-        self.estimatedSectionFooterHeight = 0
-        self.estimatedSectionHeaderHeight = 0
-        self.delegate = self
-        self.dataSource = self
+        estimatedRowHeight = 0
+        estimatedSectionFooterHeight = 0
+        estimatedSectionHeaderHeight = 0
+        delegate = self
+        dataSource = self
         self .register(CartoonImgTableViewCell.self, forCellReuseIdentifier: "cell")
     }
         
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return listArr.count
+        listArr.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -91,7 +91,7 @@ class CartoonImgTableView: UITableView,UITableViewDelegate,UITableViewDataSource
             model.height = 0
             listArr[indexPath.row] = model
         }
-        self.reloadRows(at: [indexPath], with: .none)
+        reloadRows(at: [indexPath], with: .none)
     }
     
     required init?(coder: NSCoder) {

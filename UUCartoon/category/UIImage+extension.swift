@@ -13,12 +13,12 @@ extension UIImage{
     func compressImage(maxLength:CGFloat)->Data{
         var compression:CGFloat = 1
         //        let data = UIImage.jpegData(compression)
-        var data = self.jpegData(compressionQuality: compression)
+        var data = jpegData(compressionQuality: compression)
         var max:CGFloat = 1
         var min:CGFloat = 0
         for _ in 0...5{
             compression = (max+min)/2
-            data = self.jpegData(compressionQuality: compression)
+            data = jpegData(compressionQuality: compression)
             if CGFloat(data!.count) < maxLength*0.9 {
                 min = compression
             }else if CGFloat(data!.count) > maxLength{
@@ -41,7 +41,7 @@ extension UIImage{
             UIGraphicsBeginImageContext(size)
             fineImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
-            data = self.jpegData(compressionQuality: compression)
+            data = jpegData(compressionQuality: compression)
         }
         return data!
     }

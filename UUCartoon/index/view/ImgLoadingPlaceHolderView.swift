@@ -15,7 +15,7 @@ class ImgLoadingPlaceHolderView: UIView {
         let image = UIImageView.init()
         addSubview(image)
         image.showGifImage(imagePath: Bundle.main.path(forResource: "placeholder", ofType: "gif")!)
-        image.center = self.center
+        image.center = center
         image.bounds = CGRect(x: 0, y: 0, width: 346, height: 367)
     }
     

@@ -13,15 +13,15 @@ class CartoonImgCollectionView: UICollectionView,UICollectionViewDelegate,UIColl
         
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
-        self.delegate = self
-        self.dataSource = self
+        delegate = self
+        dataSource = self
         self.register(CartoonImgCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-        self.isPagingEnabled = true
+        isPagingEnabled = true
     }
 
     public var listArr:[CartoonImgModel] = []{
         didSet{
-            self.reloadData()
+            reloadData()
         }
     }
         
@@ -33,10 +33,6 @@ class CartoonImgCollectionView: UICollectionView,UICollectionViewDelegate,UIColl
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CartoonImgCollectionViewCell
         var model = listArr[indexPath.row]
         let imgUrl = model.imgUrl
-//        if model.type == .ykmh {
-//            imgUrl = imgUrl.replacingOccurrences(of: "\\", with: "")
-//            imgUrl = "http://pic.w1fl.com/\(imgUrl)"
-//        }
         let modifier = AnyModifier { request in
             var r = request
             r.setValue(urlArr[model.type.rawValue], forHTTPHeaderField: "Referer")
@@ -49,9 +45,6 @@ class CartoonImgCollectionView: UICollectionView,UICollectionViewDelegate,UIColl
             case .success(let value):
                 if model.has_done == .prepare{
                     model.height = value.image.size.height*screenW/value.image.size.width
-//                    cell.scrollView.frame = CGRect(x: 0, y: 0, width: model.width, height: model.height)
-//                    cell.scrollView.contentSize = CGSize(width: model.width, height: model.height)
-//                    cell.cartoonImage.frame = CGRect(x: 0, y: 0, width: model.width, height: model.height)
                     model.has_done = .success
                     print("图片高度是\(model.height)")
                     self.listArr[indexPath.row] = model
@@ -67,12 +60,7 @@ class CartoonImgCollectionView: UICollectionView,UICollectionViewDelegate,UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let model = listArr[indexPath.row]
-//        if model.width == 0 {
-            return CGSize(width: screenW, height: screenH)
-//        }else{
-//            return CGSize(width: model.width, height: model.height)
-//        }
+        CGSize(width: screenW, height: screenH)
     }
     
     required init?(coder: NSCoder) {

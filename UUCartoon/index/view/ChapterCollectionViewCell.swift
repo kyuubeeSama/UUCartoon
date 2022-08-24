@@ -16,10 +16,10 @@ class ChapterCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.titleLab.layer.masksToBounds = true
-        self.titleLab.layer.cornerRadius = 3
-        self.titleLab.layer.borderWidth = 1
-        self.titleLab.layer.borderColor = UIColor.init(named: "border")?.cgColor
+        titleLab.layer.masksToBounds = true
+        titleLab.layer.cornerRadius = 3
+        titleLab.layer.borderWidth = 1
+        titleLab.layer.borderColor = UIColor.init(named: "border")?.cgColor
     }
 
 }

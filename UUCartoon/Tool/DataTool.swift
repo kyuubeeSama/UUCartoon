@@ -499,7 +499,7 @@ class DataTool: NSObject {
                 cartoonModel.name = recommendTitleNodeArr![index].content!
                 cartoonModel.author = recommendAuthorNodeArr![index].content!
                 cartoonModel.imgUrl = recommendImgNodeArr![index].content!
-                cartoonModel.detailUrl = self.checkUrl(urlStr: recommendUrlNodeArr![index].content!, domainUrlStr: urlArr[type.rawValue])
+                cartoonModel.detailUrl = checkUrl(urlStr: recommendUrlNodeArr![index].content!, domainUrlStr: urlArr[type.rawValue])
                 cartoonModel.type = type
                 detailModel.recommendArr.append(cartoonModel)
             }

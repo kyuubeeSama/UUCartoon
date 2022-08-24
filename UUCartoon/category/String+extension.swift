@@ -39,8 +39,8 @@ extension String {
     func isMobilePhone()->Bool{
         let mobileNoRegex = "^1((3\\d|5[0-9]|8[0-9])\\d|7\\d[0-9]|9\\d[0-9])\\d{7}$"
         let phsRegex = "^0(10|2[0-57-9]|\\d{3})\\d{7,8}$"
-        let ret:Bool = self.isValidateByRegex(regex: mobileNoRegex)
-        let ret1:Bool = self.isValidateByRegex(regex: phsRegex)
+        let ret:Bool = isValidateByRegex(regex: mobileNoRegex)
+        let ret1:Bool = isValidateByRegex(regex: phsRegex)
         return (ret||ret1)
     }
 

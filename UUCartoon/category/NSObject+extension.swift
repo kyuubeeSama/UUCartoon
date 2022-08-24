@@ -19,13 +19,13 @@ extension NSObject{
     static func topViewControllerWithRootViewController(rootViewController:UIViewController) -> UIViewController{
         if rootViewController.isKind(of: UITabBarController.self) {
             let tabBarController:UITabBarController = rootViewController as! UITabBarController
-            return self.topViewControllerWithRootViewController(rootViewController: tabBarController)
+            return topViewControllerWithRootViewController(rootViewController: tabBarController)
         }else if(rootViewController.isKind(of:UINavigationController.self)){
             let navigationController:UINavigationController = rootViewController as! UINavigationController
-            return self.topViewControllerWithRootViewController(rootViewController: navigationController.presentedViewController!)
+            return topViewControllerWithRootViewController(rootViewController: navigationController.presentedViewController!)
         }else if((rootViewController.presentedViewController) != nil){
             let presentedViewController:UIViewController = rootViewController.presentedViewController!
-            return self.topViewControllerWithRootViewController(rootViewController: presentedViewController)
+            return topViewControllerWithRootViewController(rootViewController: presentedViewController)
         }else{
             return rootViewController
         }

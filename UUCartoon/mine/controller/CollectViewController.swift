@@ -13,11 +13,11 @@ class CollectViewController: BaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self .getListData()
+        getListData()
     }
     
     func getListData(){
-        self.mainCollect.listArr = SqlTool.init().getCollect()
+        mainCollect.listArr = SqlTool.init().getCollect()
     }
     
     lazy var mainCollect: SearchResultCollectionView = {

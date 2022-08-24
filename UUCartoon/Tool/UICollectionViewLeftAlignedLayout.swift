@@ -10,7 +10,7 @@ import UIKit
 
 extension UICollectionViewLayoutAttributes {
     func leftAlignFrameWithSectionInset(_ sectionInset:UIEdgeInsets){
-        var frame = self.frame
+        var frame = frame
         frame.origin.x = sectionInset.left
         self.frame = frame
     }
@@ -38,9 +38,9 @@ public class UICollectionViewLeftAlignedLayout: UICollectionViewFlowLayout {
     public override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         
         if let currentItemAttributes = super.layoutAttributesForItem(at: indexPath as IndexPath)?.copy() as? UICollectionViewLayoutAttributes {
-            let sectionInset = self.evaluatedSectionInsetForItem(at: indexPath.section)
+            let sectionInset = evaluatedSectionInsetForItem(at: indexPath.section)
             let isFirstItemInSection = indexPath.item == 0
-            let layoutWidth = self.collectionView!.frame.width - sectionInset.left - sectionInset.right
+            let layoutWidth = collectionView!.frame.width - sectionInset.left - sectionInset.right
             
             if (isFirstItemInSection) {
                 currentItemAttributes.leftAlignFrameWithSectionInset(sectionInset)
@@ -76,23 +76,23 @@ public class UICollectionViewLeftAlignedLayout: UICollectionViewFlowLayout {
     }
     
     func evaluatedMinimumInteritemSpacing(at sectionIndex:Int) -> CGFloat {
-        if let delegate = self.collectionView?.delegate as? UICollectionViewDelegateFlowLayout {
-            let inteitemSpacing = delegate.collectionView?(self.collectionView!, layout: self, minimumInteritemSpacingForSectionAt: sectionIndex)
+        if let delegate = collectionView?.delegate as? UICollectionViewDelegateFlowLayout {
+            let inteitemSpacing = delegate.collectionView?(collectionView!, layout: self, minimumInteritemSpacingForSectionAt: sectionIndex)
             if let inteitemSpacing = inteitemSpacing {
                 return inteitemSpacing
             }
         }
-        return self.minimumInteritemSpacing
+        return minimumInteritemSpacing
         
     }
     
     func evaluatedSectionInsetForItem(at index: Int) ->UIEdgeInsets {
-        if let delegate = self.collectionView?.delegate as? UICollectionViewDelegateFlowLayout {
-            let insetForSection = delegate.collectionView?(self.collectionView!, layout: self, insetForSectionAt: index)
+        if let delegate = collectionView?.delegate as? UICollectionViewDelegateFlowLayout {
+            let insetForSection = delegate.collectionView?(collectionView!, layout: self, insetForSectionAt: index)
             if let insetForSectionAt = insetForSection {
                 return insetForSectionAt
             }
         }
-        return self.sectionInset
+        return sectionInset
     }
 }

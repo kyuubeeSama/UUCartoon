@@ -46,7 +46,7 @@ class ChapterViewController: BaseViewController {
     
     //TODO:查找历史记录
     func getHistoryData(){
-        let historyModel = SqlTool.init().getHistory(detailUrl: self.model.detailUrl)
+        let historyModel = SqlTool.init().getHistory(detailUrl: model.detailUrl)
         if !historyModel.name.isEmpty {
             for (index,item) in model.chapterArr.enumerated() {
                 for (j,var chapterModel) in item.data.enumerated() {

@@ -13,7 +13,7 @@ class FileTool:NSObject {
     }
     // 创建文件
     func createFile(document:String,fileData:Data) -> Bool {
-        let path = self.getDocumentPath().appending(document)
+        let path = getDocumentPath().appending(document)
         let fileManager = FileManager.default
         let isDirExist = fileManager.fileExists(atPath: path)
         if !isDirExist {

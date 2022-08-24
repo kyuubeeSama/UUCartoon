@@ -15,7 +15,7 @@ class SiftView: UIView {
     // 点击底部，关闭当前页面
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.color(hexString: "333333", alpha: 0.3)
+        backgroundColor = UIColor.color(hexString: "333333", alpha: 0.3)
     }
     
     lazy private var contentView: UIView = {
