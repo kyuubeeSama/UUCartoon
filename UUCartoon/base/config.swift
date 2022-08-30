@@ -18,7 +18,7 @@ let top_height = CGFloat(statusbar_height+44)
 let NavColor = "196EE5"
 let ButtonBackColor = "CD3C3E"
 let isIphoneX = UIScreen.main.bounds.size.height >= 812 ? true : false
-let urlArr = ["http://wap.ykmh.com/", "http://ssoonn.com/"]
+let urlArr = ["http://wap.ykmh.com/"]
 
 enum downloadStatus : Int {
     case prepare = 0

@@ -11,7 +11,6 @@ import Ji
 
 enum CartoonType: Int {
     case ykmh = 0
-    case ssoonn = 1
 }
 
 enum XPathError: Error {
@@ -36,16 +35,6 @@ class DataTool: NSObject {
         }
         let urlStr = urlArr[type.rawValue] + detailUrlStr
         var  jiDoc = Ji.init(htmlURL: URL.init(string: urlStr)!)
-        if type == .ssoonn {
-            var data = Data.init()
-            do{
-                data = try Data.init(contentsOf: URL.init(string: urlStr)!)
-            }catch{
-                failure(XPathError.getContentFail)
-            }
-            let contentStr = "<html><body>"+String.init(data: data, encoding: .utf8)!+"</body></html>"
-            jiDoc = Ji.init(htmlString: contentStr.replacingOccurrences(of: "\\", with: ""))
-        }
         if jiDoc == nil {
             failure(XPathError.getContentFail)
         } else {
@@ -72,14 +61,14 @@ class DataTool: NSObject {
                 timeXPath = "//*[@id=\"update_list\"]/div/div/div[2]/p[3]/span[2]"
                 imgXPath = "//*[@id=\"update_list\"]/div/div/div[1]/a/img/@src"
                 numXPath = "//*[@id=\"update_list\"]/div/div/a"
-            } else if type == .ssoonn {
-                titleXPath = "/html/body/li/a[1]//div[1]/h3"
-                urlXPath = "/html/body/li/a[1]/@href"
-                authorXPath = "/html/body/li/a[1]/div/p[1]"
-                categoryXPath = "/html/body/li/a[1]/div/p[2]"
-                timeXPath = "/html/body/li/a[1]/div/p[4]/span"
-                imgXPath = "/html/body/li/a[1]/img/@src"
-                numXPath = "/html/body/li/a[2]/span[2]"
+            } else {
+                titleXPath = ""
+                urlXPath = ""
+                authorXPath = ""
+                categoryXPath = ""
+                timeXPath = ""
+                imgXPath = ""
+                numXPath = ""
             }
             let titleNodeArr = jiDoc?.xPath(titleXPath)
             let urlNodeArr = jiDoc?.xPath(urlXPath)
@@ -100,10 +89,6 @@ class DataTool: NSObject {
                     cartoonModel.category = categoryNodeArr![index].content!
                     cartoonModel.time = timeNodeArr![index].content!
                     var num = numNodeArr![index].content!
-                    if type == .ssoonn {
-                        num.removeFirst()
-                        num.removeLast()
-                    }
                     cartoonModel.type = type
                     cartoonModel.num = num
                     cartoonModel.imgUrl = imgNodeArr![index].content!
@@ -138,18 +123,7 @@ class DataTool: NSObject {
             detailUrlStr = "/top/"+rankTypeArr[rankType]
         }
         let urlStr = urlArr[type.rawValue] + detailUrlStr
-//        print(urlStr)
         var jiDoc = Ji.init(htmlURL: URL.init(string: urlStr)!)
-        if type == .ssoonn {
-            var data = Data.init()
-            do{
-                data = try Data.init(contentsOf: URL.init(string: urlStr)!)
-            }catch{
-                failure(XPathError.getContentFail)
-            }
-            let contentStr = "<html><body>"+String.init(data: data, encoding: .utf8)!+"</body></html>"
-            jiDoc = Ji.init(htmlString: contentStr.replacingOccurrences(of: "\\", with: ""))
-        }
         if jiDoc == nil {
             failure(XPathError.getContentFail)
         } else {
@@ -173,13 +147,13 @@ class DataTool: NSObject {
                 categoryXPath = "//*[@id=\"topImgCon\"]/div/div/div[2]/p[2]/span[2]"
                 timeXPath = "//*[@id=\"topImgCon\"]/div/div/div[2]/p[3]/span[2]"
                 imgXPath = "//*[@id=\"topImgCon\"]/div/div/div[1]/a/img/@src"
-            } else if type == .ssoonn {
-                titleXPath = "/html/body/li/a[1]//div[1]/h3"
-                urlXPath = "/html/body/li/a[1]/@href"
-                authorXPath = "/html/body/li/a[1]/div/p[1]"
-                categoryXPath = "/html/body/li/a[1]/div/p[2]"
-                timeXPath = "/html/body/li/a[1]/div/p[4]/span"
-                imgXPath = "/html/body/li/a[1]/img/@src"
+            } else {
+                titleXPath = ""
+                urlXPath = ""
+                authorXPath = ""
+                categoryXPath = ""
+                timeXPath = ""
+                imgXPath = ""
             }
             let titleNodeArr = jiDoc?.xPath(titleXPath)
             let urlNodeArr = jiDoc?.xPath(urlXPath)
@@ -194,7 +168,7 @@ class DataTool: NSObject {
                     cartoonModel.is_rank = true
                     cartoonModel.name = titleNodeArr![index].content!
                     cartoonModel.detailUrl = urlNode.content!
-                    if type == .ykmh || (type == .ssoonn && rankType != 0){
+                    if type == .ykmh {
                         cartoonModel.author = authorNodeArr![index].content!
                         cartoonModel.category = categoryNodeArr![index].content!
                         cartoonModel.time = timeNodeArr![index].content!
@@ -245,9 +219,6 @@ class DataTool: NSObject {
             for (index, item) in titleXpathArr.enumerated() {
                 let titleNodeArr = jiDoc?.xPath(item)
                 var valueNodeArr:[JiNode] = []
-                if type == .ssoonn {
-                    valueNodeArr = (jiDoc?.xPath(valueXpathArr[index]))!
-                }
                 var array: [CategoryModel] = []
                 if !(titleNodeArr?.isEmpty)! {
                     for (i,node) in titleNodeArr!.enumerated() {
@@ -312,11 +283,11 @@ class DataTool: NSObject {
                 urlXPath = "//*[@id=\"comic-items\"]/li/a[2]/@href"
                 authorXPath = "//*[@id=\"comic-items\"]/li/span/a"
                 imgXPath = "//*[@id=\"comic-items\"]/li/a[1]/img/@src"
-            } else if type == .ssoonn {
-                titleXPath = "/html/body/div[3]/ul/li/a[1]/div/h3"
-                urlXPath = "/html/body/div[3]/ul/li/a[1]/@href"
-                authorXPath = "/html/body/div[3]/ul/li/a[1]/div/p[1]"
-                imgXPath = "/html/body/div[3]/ul/li/a[1]/img/@src"
+            } else {
+                titleXPath = ""
+                urlXPath = ""
+                authorXPath = ""
+                imgXPath = ""
             }
             let titleNodeArr = jiDoc?.xPath(titleXPath)
             let urlNodeArr = jiDoc?.xPath(urlXPath)
@@ -374,11 +345,11 @@ class DataTool: NSObject {
                 urlXPath = "//*[@id=\"comic-items\"]/li/a[2]/@href"
                 authorXPath = "//*[@id=\"comic-items\"]/li/span/a"
                 imgXPath = "//*[@id=\"comic-items\"]/li/a[1]/img/@src"
-            } else if type == .ssoonn {
-                titleXPath = "/html/body/div[3]/ul/li/a[1]/div/h3"
-                urlXPath = "/html/body/div[3]/ul/li/a[1]/@href"
-                authorXPath = "/html/body/div[3]/ul/li/a[1]/div/p[1]"
-                imgXPath = "/html/body/div[3]/ul/li/a[1]/img/@src"
+            } else {
+                titleXPath = ""
+                urlXPath = ""
+                authorXPath = ""
+                imgXPath = ""
             }
             let titleNodeArr = jiDoc?.xPath(titleXPath)
             let urlNodeArr = jiDoc?.xPath(urlXPath)
@@ -440,13 +411,13 @@ class DataTool: NSObject {
                 recommendUrlXpath = "//*[@id=\"w1\"]/li/a[2]/@href"
                 recommendImgXpath = "//*[@id=\"w1\"]/li/a[1]/mip-img/@src"
                 recommendAuthorXpath = "//*[@id=\"w1\"]/li/span/a"
-            }else if type == .ssoonn{
-                titleXpath = "/html/body/div[2]/div/div[1]/div/h3"
-                imgXpath = "/html/body/div[2]/div/div[1]/img/@src"
-                authorXpath = "/html/body/div[2]/div/div[1]/div/p[1]"
-                timeXpath = "/html/body/div[2]/div/div[1]/div/p[5]"
-                categoryXpath = "/html/body/div[2]/div/div[1]/div/p[2]/a"
-                descXpath = "//*[@id=\"detail_block\"]/div/p"
+            }else {
+                titleXpath = ""
+                imgXpath = ""
+                authorXpath = ""
+                timeXpath = ""
+                categoryXpath = ""
+                descXpath = ""
             }
             let titleNodeArr = jiDoc?.xPath(titleXpath)
             let imgNodeArr = jiDoc?.xPath(imgXpath)
@@ -523,9 +494,6 @@ class DataTool: NSObject {
     /// - Returns: nil
     func getSearchRecommendData(type:CartoonType,success:@escaping (_ resultArr:[CartoonModel])->(),failure:@escaping (_ error:Error)->()){
         var detailUrlStr = ""
-        if type == .ssoonn {
-            detailUrlStr = "comicsearch/"
-        }
         let urlStr = urlArr[type.rawValue] + detailUrlStr
         let jiDoc = Ji.init(htmlURL: URL.init(string: urlStr)!)
         if jiDoc == nil {
@@ -537,9 +505,9 @@ class DataTool: NSObject {
             if type == .ykmh {
                 titleXpath = "//*[@id=\"w7\"]/li/a"
                 urlXpath = "//*[@id=\"w7\"]/li/a/@href"
-            }else if type == .ssoonn{
-                titleXpath = "//*[@id=\"search_tags\"]/div[1]/p/a"
-                urlXpath = "//*[@id=\"search_tags\"]/div[1]/p/a/@href"
+            }else{
+                titleXpath = ""
+                urlXpath = ""
             }
             let titleNodeArr = jiDoc?.xPath(titleXpath)
             let urlNodeArr = jiDoc?.xPath(urlXpath)
@@ -562,22 +530,11 @@ class DataTool: NSObject {
 //            http://wap.ykmh.com/search/?keywords=%E6%88%91&page=2
             detailUrlStr = "search/?keywords=\(keyword)&page=\(page)"
         }else{
-//            http://ssoonn.com/comicsearch/s.aspx?s=%E6%B5%B7%E8%B4%BC%E7%8E%8B
-            detailUrlStr = "comicsearch/s.aspx?s=\(keyword)"
+            detailUrlStr = ""
         }
         var urlStr = urlArr[type.rawValue] + detailUrlStr
         urlStr = urlStr.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         var  jiDoc = Ji.init(htmlURL: URL.init(string: urlStr)!)
-        if type == .ssoonn {
-            var data = Data.init()
-            do{
-                data = try Data.init(contentsOf: URL.init(string: urlStr)!)
-            }catch{
-                failure(XPathError.getContentFail)
-            }
-            let contentStr = "<html><body>"+String.init(data: data, encoding: .utf8)!+"</body></html>"
-            jiDoc = Ji.init(htmlString: contentStr.replacingOccurrences(of: "\\", with: ""))
-        }
         if jiDoc == nil {
             failure(XPathError.getContentFail)
         } else {
@@ -604,14 +561,6 @@ class DataTool: NSObject {
                 timeXPath = "//*[@id=\"update_list\"]/div/div/div[2]/p[3]/span[2]"
                 imgXPath = "//*[@id=\"update_list\"]/div/div/div[1]/a/img/@src"
                 numXPath = "//*[@id=\"update_list\"]/div/div/a"
-            } else if type == .ssoonn {
-                titleXPath = "/html/body/div[2]/ul/li/a[1]/div/h3"
-                urlXPath = "/html/body/div[2]/ul/li/a[1]/@href"
-                authorXPath = "/html/body/div[2]/ul/li/a[1]/div/p[1]"
-                categoryXPath = "/html/body/div[2]/ul/li/a[1]/div/p[2]"
-                timeXPath = "/html/body/div[2]/ul/li/a[1]/div/p[4]/span"
-                imgXPath = "/html/body/div[2]/ul/li/a[1]/img/@src"
-                numXPath = "/html/body/div[2]/ul/li/a[2]/span[2]"
             }
             let titleNodeArr = jiDoc?.xPath(titleXPath)
             let urlNodeArr = jiDoc?.xPath(urlXPath)
@@ -632,10 +581,6 @@ class DataTool: NSObject {
                     cartoonModel.category = categoryNodeArr![index].content!
                     cartoonModel.time = timeNodeArr![index].content!
                     var num = numNodeArr![index].content!
-                    if type == .ssoonn {
-                        num.removeFirst()
-                        num.removeLast()
-                    }
                     cartoonModel.type = type
                     cartoonModel.num = num
                     cartoonModel.imgUrl = imgNodeArr![index].content!

@@ -19,7 +19,7 @@ class ChapterCollectionViewCell: UICollectionViewCell {
         titleLab.layer.masksToBounds = true
         titleLab.layer.cornerRadius = 3
         titleLab.layer.borderWidth = 1
-        titleLab.layer.borderColor = UIColor.init(named: "border")?.cgColor
+        titleLab.layer.borderColor = UIColor.init(named: "lineColor")?.cgColor
     }
 
 }

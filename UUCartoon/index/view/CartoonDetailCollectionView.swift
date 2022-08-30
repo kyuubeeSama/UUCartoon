@@ -37,7 +37,6 @@ class CartoonDetailCollectionView: UICollectionView,UICollectionViewDelegate,UIC
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         (model.recommendArr.count > 0 ? 3 : 2)+model.chapterArr.count
-
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -82,8 +81,8 @@ class CartoonDetailCollectionView: UICollectionView,UICollectionViewDelegate,UIC
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "chapterCell", for: indexPath) as! ChapterCollectionViewCell
             let chapterModel = self.model.chapterArr[indexPath.section-2].data[indexPath.row]
             cell.titleLab.text = chapterModel.name
-            cell.titleLab.textColor = chapterModel.is_choose ? UIColor.red : UIColor.init(named: "border")
-            cell.titleLab.layer.borderColor = chapterModel.is_choose ? UIColor.red.cgColor : UIColor.init(named: "border")?.cgColor
+            cell.titleLab.textColor = chapterModel.is_choose ? UIColor.red : UIColor.init(named: "lineColor")
+            cell.titleLab.layer.borderColor = chapterModel.is_choose ? UIColor.red.cgColor : UIColor.init(named: "lineColor")?.cgColor
             return cell
         }
     }
@@ -112,7 +111,7 @@ class CartoonDetailCollectionView: UICollectionView,UICollectionViewDelegate,UIC
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 2 {
             for chapter in model.chapterArr {
-                for var model in chapter.data {
+                for model in chapter.data {
                     model.is_choose = false
                 }
             }

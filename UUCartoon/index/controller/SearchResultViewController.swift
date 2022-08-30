@@ -56,7 +56,7 @@ class SearchResultViewController: BaseViewController {
         mainCollect.cellItemSelected = { indexPath in
             let model = mainCollect.listArr[indexPath.row]
             let VC = ChapterViewController.init()
-            VC.type = self.type
+            VC.type = self.type!
             VC.detailUrl = model.detailUrl
             self.navigationController?.pushViewController(VC, animated: true)
         }

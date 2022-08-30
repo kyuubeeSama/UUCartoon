@@ -12,7 +12,7 @@ import JXSegmentedView
 
 class CartoonViewController: BaseViewController,JXSegmentedViewDelegate,JXSegmentedListContainerViewDataSource {
     
-    public var type:CartoonType?
+    public var type:CartoonType = .ykmh
     
     @objc func injected(){
         viewDidLoad()
@@ -25,8 +25,7 @@ class CartoonViewController: BaseViewController,JXSegmentedViewDelegate,JXSegmen
         // 搜索按钮
         let rightItem = UIBarButtonItem.init(image: UIImage.init(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(searchView))
         navigationItem.rightBarButtonItem = rightItem
-//        title = ["优酷漫画","ssoonn"][type!.rawValue]
-        navigationItem.title = ["优酷漫画","ssoonn"][type!.rawValue]
+        navigationItem.title = ["优酷漫画"][type.rawValue]
         segmentedView.dataSource = segmentedDataSource
         segmentedView.listContainer = listContainerView
     }

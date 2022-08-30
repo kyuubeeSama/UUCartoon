@@ -49,7 +49,7 @@ class CartoonTableListCollectionViewCell: UICollectionViewCell {
         if cartoonModel.is_collect || cartoonModel.is_history {
             numLab.isHidden = true
             rightImg.isHidden = true
-            timeLab.text = ["优酷漫画","ssoonn"][cartoonModel.type.rawValue]
+            timeLab.text = ["优酷漫画"][cartoonModel.type.rawValue]
         }else{
             if cartoonModel.type == .ykmh {
                 let numArr = cartoonModel.num.split(separator: " ")

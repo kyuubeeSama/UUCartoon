@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ChapterModel {
+class ChapterModel {
     var name:String = ""
     var detailUrl:String = ""
     var is_choose:Bool = false

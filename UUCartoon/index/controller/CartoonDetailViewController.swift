@@ -15,7 +15,7 @@ import ProgressHUD
 
 class CartoonDetailViewController: BaseViewController {
     
-    public var cartoonModel:CartoonModel?
+    public var cartoonModel:CartoonModel = CartoonModel.init()
     public var model:ChapterModel?
     public var type:CartoonType?
     

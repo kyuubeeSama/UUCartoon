@@ -10,7 +10,7 @@ import UIKit
 
 class SearchViewController: BaseViewController,UISearchBarDelegate {
 
-    var type:CartoonType?
+    var type:CartoonType = .ykmh
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +41,7 @@ class SearchViewController: BaseViewController,UISearchBarDelegate {
     
     func getData(){
         DispatchQueue.global().async {
-            DataTool.init().getSearchRecommendData(type: self.type!) { resultArr in
+            DataTool.init().getSearchRecommendData(type: self.type) { resultArr in
                 DispatchQueue.main.async {
                     self.mainCollect.listArr = resultArr
                 }

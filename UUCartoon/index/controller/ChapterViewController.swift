@@ -10,7 +10,7 @@ import UIKit
 
 class ChapterViewController: BaseViewController {
     
-    public var type:CartoonType?
+    public var type:CartoonType = .ykmh
     public var detailUrl:String?
     private var model:CartoonModel = CartoonModel.init()
     private let collectBtn = UIButton.init(type: .custom)
@@ -25,7 +25,7 @@ class ChapterViewController: BaseViewController {
     func getData(){
         beginProgress()
         DispatchQueue.global().async {
-            DataTool.init().getCartoonDetailData(type: self.type!, detailUrl: self.detailUrl!, success: { detailModel in
+            DataTool.init().getCartoonDetailData(type: self.type, detailUrl: self.detailUrl!, success: { detailModel in
                 DispatchQueue.main.async {
                     self.endProgress()
                     self.model = detailModel
@@ -49,7 +49,7 @@ class ChapterViewController: BaseViewController {
         let historyModel = SqlTool.init().getHistory(detailUrl: model.detailUrl)
         if !historyModel.name.isEmpty {
             for (index,item) in model.chapterArr.enumerated() {
-                for (j,var chapterModel) in item.data.enumerated() {
+                for (j, chapterModel) in item.data.enumerated() {
                     if chapterModel.name == historyModel.chapter_name {
                         chapterModel.is_choose = true
                         model.chapterArr[index].data[j] = chapterModel
@@ -115,7 +115,7 @@ class ChapterViewController: BaseViewController {
                 let VC = CartoonDetailViewController.init()
                 VC.model = model
                 VC.cartoonModel = self.model
-                VC.cartoonModel?.chapter_area = indexPath.section-2
+                VC.cartoonModel.chapter_area = indexPath.section-2
                 VC.type = self.type
                 self.navigationController?.pushViewController(VC, animated: true)
             }
@@ -126,8 +126,8 @@ class ChapterViewController: BaseViewController {
             let VC = CartoonDetailViewController.init()
             VC.model = model!
             VC.cartoonModel = self.model
-            VC.cartoonModel?.chapter_area = 0
-            VC.type = self.type!
+            VC.cartoonModel.chapter_area = 0
+            VC.type = self.type
             self.navigationController?.pushViewController(VC, animated: true)
         }
         mainCollect.subscribeBlock = {

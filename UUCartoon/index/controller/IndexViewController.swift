@@ -18,7 +18,7 @@ class IndexViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        mainTable.listArr = ["优酷漫画",/*"ssoonn",*/"收藏列表","历史记录"]
+        mainTable.listArr = ["优酷漫画","收藏列表","历史记录"]
     }
     
     lazy var mainTable: LabelTableView = {
@@ -36,7 +36,7 @@ class IndexViewController: BaseViewController {
                 self.navigationController?.pushViewController(VC, animated: true)
             }else{
                 let VC = CartoonViewController.init()
-                VC.type = CartoonType(rawValue: indexPath.row)
+                VC.type = CartoonType(rawValue: indexPath.row)!
                 self.navigationController?.pushViewController(VC, animated: true)
             }
         }
