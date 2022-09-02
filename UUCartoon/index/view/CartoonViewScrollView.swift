@@ -98,9 +98,9 @@ class CartoonViewScrollView: UIScrollView,UIScrollViewDelegate {
                 r.setValue(urlArr[leftModel.type.rawValue], forHTTPHeaderField: "Referer")
                 return r
             }
-            leftView.imageView.kf.setImage(with: URL.init(string: leftModel.imgUrl), placeholder: UIImage.init(named: "placeholder.jpg"), options: [.requestModifier(modifier)], completionHandler: nil)
-            rightView.imageView.kf.setImage(with: URL.init(string: rightModel.imgUrl), placeholder: UIImage.init(named: "placeholder.jpg"), options: [.requestModifier(modifier)], completionHandler: nil)
-            middleView.imageView.kf.setImage(with: URL.init(string: middleModel.imgUrl), placeholder: UIImage.init(named: "placeholder.jpg"), options: [.requestModifier(modifier)], completionHandler: nil)
+            leftView.imageView.kf.setImage(with: URL.init(string: leftModel.imgUrl), placeholder: UIImage.init(named: "placeholder"), options: [.requestModifier(modifier)], completionHandler: nil)
+            rightView.imageView.kf.setImage(with: URL.init(string: rightModel.imgUrl), placeholder: UIImage.init(named: "placeholder"), options: [.requestModifier(modifier)], completionHandler: nil)
+            middleView.imageView.kf.setImage(with: URL.init(string: middleModel.imgUrl), placeholder: UIImage.init(named: "placeholder"), options: [.requestModifier(modifier)], completionHandler: nil)
             if currentPageIndex == 0 {
                 contentOffset = CGPoint(x: 0, y: 0)
             }else if currentPageIndex == listArr.count-1 {

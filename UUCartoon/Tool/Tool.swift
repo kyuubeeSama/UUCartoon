@@ -25,6 +25,18 @@ class Tool: NSObject {
         return array;
     }
     
+    // 弹窗
+    static func makeAlertController(title:String,message:String,success:@escaping ()->()){
+        let alert = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
+        let cancelBtn = UIAlertAction.init(title: "取消", style: .cancel)
+        alert.addAction(cancelBtn)
+        let sureBtn = UIAlertAction.init(title: "确定", style: .default){_ in
+            success()
+        }
+        alert.addAction(sureBtn)
+        Tool().currentViewController().present(alert, animated: true)
+    }
+    
     func isIpad()->Bool{
         if UIDevice.current.userInterfaceIdiom == .pad{
             return true

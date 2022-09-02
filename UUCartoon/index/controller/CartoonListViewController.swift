@@ -151,7 +151,6 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
                                 self.categoryValue = ["","","",""]
                             }
                             categoryModel.ischoose = true
-                            //                                self.categoryArr[index][indexPath.row] = categoryModel
                             self.categoryValue[index] = categoryModel.value
                             self.pageNum = 1
                             self.listArr = []
@@ -196,11 +195,8 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
                         listArr.append(array: resultArr)
                         mainCollect.listArr = listArr
                     }
-                } failure: { error in
-                    DispatchQueue.main.async {
-                        self.endProgress()
-                        self.view.makeToast("获取数据失败")
-                    }
+                } failure: { [self] error in
+                    getDataFail()
                 }
             } else if index == 1 {
                 DataTool.init().getRankCartoonData(type: type, pageNum: pageNum, rankType: rankType, timeType: timeType, category: categoryType) { resultArr in
@@ -209,18 +205,15 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
                         rankListArr[rankType] = resultArr
                         mainCollect.listArr = rankListArr[rankType]
                     }
-                } failure: { error in
-                    DispatchQueue.main.async {
-                        self.endProgress()
-                        self.view.makeToast("获取数据失败")
-                    }
+                } failure: { [self] error in
+                    getDataFail()
                 }
             }else if index == 2{
-                var detailUrl = categoryValue.joined(separator: "") + orderType
+                let detailUrl = categoryValue.joined(separator: "") + orderType
                 if detailUrl.isEmpty {
-                    DispatchQueue.main.async {
-                        self.endProgress()
-                        self.view.makeToast("请选择筛选条件", duration: 3, position: .center)
+                    DispatchQueue.main.async {[self] in
+                        endProgress()
+                        view.makeToast("请选择筛选条件", duration: 3, position: .center)
                     }
                 }else{
                     DataTool.init().getCategorySiftResultListData(type: type, detailUrl: detailUrl, page: pageNum, success: { resultArr in
@@ -235,14 +228,10 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
                             listArr.append(array: resultArr)
                             mainCollect.listArr = listArr
                         }
-                    }, failure: { errer in
-                        DispatchQueue.main.async {
-                            self.endProgress()
-                            self.view.makeToast("获取数据失败")
-                        }
+                    }, failure: { [self] errer in
+                        getDataFail()
                     })
                 }
-                
             }else if index == 3{
                 DataTool.init().getDoneCartoonData(type: type, page: pageNum) { resultArr in
                     DispatchQueue.main.async { [self] in
@@ -256,16 +245,22 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
                         listArr.append(array: resultArr)
                         mainCollect.listArr = listArr
                     }
-                } failure: { Error in
-                    DispatchQueue.main.async {
-                        self.endProgress()
-                        self.view.makeToast("获取数据失败")
-                    }
+                } failure: { [self] Error in
+                    getDataFail()
                 }
             }
         }
     }
-    
+
+    private func getDataFail() {
+        DispatchQueue.main.async {
+            self.endProgress()
+            Tool.makeAlertController(title: "提示", message: "获取网络失败，请返回重新进入") {
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+    }
+
     // 获取分类数据
     func getCategoryData() {
         DispatchQueue.global().async {

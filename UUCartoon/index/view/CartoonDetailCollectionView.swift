@@ -56,7 +56,7 @@ class CartoonDetailCollectionView: UICollectionView,UICollectionViewDelegate,UIC
             cell.timeLab.text = model.time
             cell.categoryLab.text = model.category
             cell.authorLab.text = model.author
-            cell.leftImg.kf.setImage(with: URL.init(string: model.imgUrl), placeholder: UIImage.init(named: "placeholder.jpg"))
+            cell.leftImg.kf.setImage(with: URL.init(string: model.imgUrl), placeholder: UIImage.init(named: "placeholder"))
             cell.subscribeBtn.isHidden = true
             cell.subscribeBtn.reactive.controlEvents(.touchUpInside).observeValues { button in
                 if self.subscribeBlock != nil{

@@ -33,7 +33,7 @@ class CartoonTableListCollectionViewCell: UICollectionViewCell {
             r.setValue(urlArr[cartoonModel.type.rawValue], forHTTPHeaderField: "Referer")
             return r
         }
-        leftImg.kf.setImage(with: URL.init(string: cartoonModel.imgUrl), placeholder: UIImage.init(named: "placeholder.jpg"), options: [.requestModifier(modifier)], completionHandler: nil)
+        leftImg.kf.setImage(with: URL.init(string: cartoonModel.imgUrl), placeholder: UIImage.init(named: "placeholder"), options: [.requestModifier(modifier)], completionHandler: nil)
         authorLab.text = cartoonModel.author
         categoryLab.text = cartoonModel.category
         timeLab.text = cartoonModel.time

@@ -38,7 +38,7 @@ class CartoonImgCollectionView: UICollectionView,UICollectionViewDelegate,UIColl
             r.setValue(urlArr[model.type.rawValue], forHTTPHeaderField: "Referer")
             return r
         }
-        cell.cartoonImage.kf.setImage(with: URL.init(string: imgUrl), placeholder: UIImage.init(named: "placeholder.jpg"), options: [.requestModifier(modifier)], progressBlock: { receivedSize, totalSize in
+        cell.cartoonImage.kf.setImage(with: URL.init(string: imgUrl), placeholder: UIImage.init(named: "placeholder"), options: [.requestModifier(modifier)], progressBlock: { receivedSize, totalSize in
             
         }, completionHandler: { result in
             switch result {

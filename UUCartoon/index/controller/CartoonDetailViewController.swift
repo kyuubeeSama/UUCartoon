@@ -16,8 +16,8 @@ import ProgressHUD
 class CartoonDetailViewController: BaseViewController {
     
     public var cartoonModel:CartoonModel = CartoonModel.init()
-    public var model:ChapterModel?
-    public var type:CartoonType?
+    public var model:ChapterModel = ChapterModel.init()
+    public var type:CartoonType = .ykmh
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,13 +57,13 @@ class CartoonDetailViewController: BaseViewController {
     
     // TODO:进入页面时，保存历史记录
     func getData() {
-        var detailUrl = model?.detailUrl
+        var detailUrl = model.detailUrl
         if type == .ykmh {
-            detailUrl = "http://wap.ykmh.com/"+model!.detailUrl
+            detailUrl = "http://wap.ykmh.com/"+model.detailUrl
         }
         beginProgress()
         DispatchQueue.global().async {
-            DataTool.init().getCartoonDetailImgData(type: self.type!, detailUrl: detailUrl!, success: { imgArr in
+            DataTool.init().getCartoonDetailImgData(type: self.type, detailUrl: detailUrl, success: { imgArr in
                 DispatchQueue.main.async {
                     self.endProgress()
                     self.mainScroll.listArr = imgArr
@@ -85,18 +85,14 @@ class CartoonDetailViewController: BaseViewController {
         let scrollView = CartoonViewScrollView.init(frame: CGRect(x: 0, y: 0, width: screenW, height: screenH))
         self.view.addSubview(scrollView)
         scrollView.scrollLastPage = {
-            let alert = UIAlertController.init(title: "提醒", message: "后面没有了", preferredStyle: .alert)
-            let sureAction = UIAlertAction.init(title: "确定", style: .default) { action in
+            Tool.makeAlertController(title: "提醒", message: "后面没有了") {
+                
             }
-            alert.addAction(sureAction)
-            self.present(alert, animated: true, completion: nil)
         }
         scrollView.scrollFirstPage = {
-            let alert = UIAlertController.init(title: "提醒", message: "前面没有了", preferredStyle: .alert)
-            let sureAction = UIAlertAction.init(title: "确定", style: .default) { action in
+            Tool.makeAlertController(title: "提醒", message: "前面没有了") {
+                
             }
-            alert.addAction(sureAction)
-            self.present(alert, animated: true, completion: nil)
         }
         scrollView.scrollDidScrollBlock = { currentIndex in
             self.bottomView.currentPageLab.text = "\(currentIndex+1)"

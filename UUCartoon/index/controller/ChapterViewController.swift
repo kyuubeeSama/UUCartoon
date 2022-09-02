@@ -14,6 +14,7 @@ class ChapterViewController: BaseViewController {
     public var detailUrl:String?
     private var model:CartoonModel = CartoonModel.init()
     private let collectBtn = UIButton.init(type: .custom)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

@@ -16,7 +16,7 @@ class CartoonListCollectionViewCell: UICollectionViewCell {
     
     func setData(cartoonModel:CartoonModel)->(){
         
-        topImg.kf.setImage(with: URL.init(string: cartoonModel.imgUrl), placeholder: UIImage.init(named: "placeholder.jpg"))
+        topImg.kf.setImage(with: URL.init(string: cartoonModel.imgUrl), placeholder: UIImage.init(named: "placeholder"))
         titleLab.text = cartoonModel.name
         authorLab.text = cartoonModel.author
     }

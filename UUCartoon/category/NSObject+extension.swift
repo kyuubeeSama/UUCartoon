@@ -10,24 +10,17 @@ import Foundation
 import UIKit
 
 extension NSObject{
-    static func currentViewController() -> UIViewController {
-        var VC:UIViewController = objc_getAssociatedObject(self, #function) as! UIViewController
-        VC = UIApplication.topViewControllerWithRootViewController(rootViewController: UIApplication.shared.windows[0].rootViewController!)
-        return VC
-    }
-    
-    static func topViewControllerWithRootViewController(rootViewController:UIViewController) -> UIViewController{
-        if rootViewController.isKind(of: UITabBarController.self) {
-            let tabBarController:UITabBarController = rootViewController as! UITabBarController
-            return topViewControllerWithRootViewController(rootViewController: tabBarController)
-        }else if(rootViewController.isKind(of:UINavigationController.self)){
-            let navigationController:UINavigationController = rootViewController as! UINavigationController
-            return topViewControllerWithRootViewController(rootViewController: navigationController.presentedViewController!)
-        }else if((rootViewController.presentedViewController) != nil){
-            let presentedViewController:UIViewController = rootViewController.presentedViewController!
-            return topViewControllerWithRootViewController(rootViewController: presentedViewController)
-        }else{
-            return rootViewController
+    func currentViewController(base: UIViewController? = UIApplication.shared.windows.first?.rootViewController) -> UIViewController {
+        if let nav = base as? UINavigationController {
+            return currentViewController(base: nav.visibleViewController)
         }
+        if let tab = base as? UITabBarController {
+            return currentViewController(base: tab.selectedViewController)
+        }
+        if let presented = base?.presentedViewController {
+            return currentViewController(base: presented)
+        }
+        return base!
     }
 }
+   

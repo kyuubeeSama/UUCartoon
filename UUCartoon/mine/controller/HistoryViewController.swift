@@ -19,16 +19,11 @@ class HistoryViewController: BaseViewController {
     }
     
     @objc func cleanHistory(){
-        let alert = UIAlertController.init(title: "警告", message: "是否删除所有历史记录", preferredStyle: .alert)
-        let sureAction = UIAlertAction.init(title: "删除", style: .default) { action in
+        Tool.makeAlertController(title: "警告", message: "是否删除所有历史记录") {
             if SqlTool.init().cleanHistory() {
                 self.mainCollect.listArr = []
             }
         }
-        alert.addAction(sureAction)
-        let cancelAction = UIAlertAction.init(title: "取消", style: .cancel, handler: nil)
-        alert.addAction(cancelAction)
-        present(alert, animated: true, completion: nil)
     }
     
     func getHistoryData(){

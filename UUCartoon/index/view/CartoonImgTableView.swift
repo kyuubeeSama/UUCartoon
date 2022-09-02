@@ -66,7 +66,7 @@ class CartoonImgTableView: UITableView,UITableViewDelegate,UITableViewDataSource
                 }
             })
         }else{
-            cell.imgView.image = UIImage.init(named: "placeholder.jpg")
+            cell.imgView.image = UIImage.init(named: "placeholder")
         }
         return cell
     }
