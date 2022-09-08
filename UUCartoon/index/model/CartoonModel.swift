@@ -8,7 +8,9 @@
 
 import Foundation
 
-struct CartoonModel {
+class CartoonModel {
+    // id
+    var cartoon_id = 0
     // 标题
     var name: String = ""
     // 详情
@@ -38,6 +40,7 @@ struct CartoonModel {
     var chapter_area:Int = 0
     // 第几章节
     var chapter_name:String = ""
+     var chapter_id:Int = 0
     // 第几页
     var page_index:Int = 0
     //是否是收藏列表

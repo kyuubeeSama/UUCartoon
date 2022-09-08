@@ -14,25 +14,26 @@ import SnapKit
 import ProgressHUD
 
 class CartoonDetailViewController: BaseViewController {
-    
-    public var cartoonModel:CartoonModel = CartoonModel.init()
-    public var model:ChapterModel = ChapterModel.init()
-    public var type:CartoonType = .ykmh
-    
+    public var cartoonModel: CartoonModel = CartoonModel.init()
+    public var model: ChapterModel = ChapterModel.init()
+    public var type: CartoonType = .ykmh
+    // 当前章节在数组中的位置
+    public var index: Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         navigationController?.isNavigationBarHidden = true
         getData()
     }
-
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.isNavigationBarHidden = false
-        // TODO:退出页面时，更新页码
+        // 退出页面时，更新页码
+        if !mainScroll.listArr.isEmpty {
+            saveHistory(pageIndex: mainScroll.currentPageIndex)
+        }
         ImageCache.default.clearMemoryCache()
     }
-
     lazy var backBtn: UIButton = {
         let btn = UIButton.init(type: .custom)
         view.addSubview(btn)
@@ -47,27 +48,35 @@ class CartoonDetailViewController: BaseViewController {
         }
         return btn
     }()
-
-    func saveHistory(){
-//        cartoonModel?.page_index = mainScroll.currentPageIndex
-//        cartoonModel?.chapter_name = model!.name
-//        cartoonModel?.type = type!
-//        SqlTool.init().saveHistory(model: cartoonModel!)
+    // 保存历史记录
+    func saveHistory(pageIndex: Int) {
+        cartoonModel.page_index = pageIndex
+        cartoonModel.chapter_name = model.name
+        cartoonModel.type = type
+        SqlTool.init().saveHistory(model: cartoonModel)
     }
-    
-    // TODO:进入页面时，保存历史记录
+    // 进入页面时，保存历史记录
     func getData() {
         var detailUrl = model.detailUrl
         if type == .ykmh {
-            detailUrl = "http://wap.ykmh.com/"+model.detailUrl
+            detailUrl = "http://wap.ykmh.com/" + model.detailUrl
         }
         beginProgress()
         DispatchQueue.global().async {
             DataTool.init().getCartoonDetailImgData(type: self.type, detailUrl: detailUrl, success: { imgArr in
                 DispatchQueue.main.async {
+                    // TODO: 通过历史记录进来的，按照历史记录的页码
                     self.endProgress()
                     self.mainScroll.listArr = imgArr
-                    self.bottomView.currentPageLab.text = "1";
+                    let page = SqlTool.init().getHistory(detailUrl: detailUrl, is_page: true)
+                    if page == 0 {
+                        self.saveHistory(pageIndex: 0)
+                        self.bottomView.currentPageLab.text = "1";
+                    }else{
+                        self.saveHistory(pageIndex: page)
+                        self.mainScroll.currentPageIndex = page
+                        self.bottomView.currentPageLab.text = "\(page+1)"
+                    }
                     self.bottomView.totalPageLab.text = "\(imgArr.count)"
                     self.bottomView.slider.maximumValue = Float(imgArr.count)
                     self.bottomView.slider.minimumValue = 1
@@ -80,28 +89,40 @@ class CartoonDetailViewController: BaseViewController {
             })
         }
     }
-    
     lazy var mainScroll: CartoonViewScrollView = {
         let scrollView = CartoonViewScrollView.init(frame: CGRect(x: 0, y: 0, width: screenW, height: screenH))
         self.view.addSubview(scrollView)
         scrollView.scrollLastPage = {
-            Tool.makeAlertController(title: "提醒", message: "后面没有了") {
-                
+            let listArr = self.cartoonModel.chapterArr[self.cartoonModel.chapter_area]
+            if self.index == listArr.data.count - 1 {
+                Tool.makeAlertController(title: "提醒", message: "后面没有了") {
+                }
+            } else {
+                self.index += 1
+                self.model = listArr.data[self.index]
+                self.getData()
             }
         }
         scrollView.scrollFirstPage = {
-            Tool.makeAlertController(title: "提醒", message: "前面没有了") {
-                
+            let listArr = self.cartoonModel.chapterArr[self.cartoonModel.chapter_area]
+            if self.index == 0 {
+                // 到头了
+                Tool.makeAlertController(title: "提醒", message: "前面没有了") {
+                }
+            } else {
+                // 加载下一章
+                self.index -= 1
+                self.model = listArr.data[self.index]
+                self.getData()
             }
         }
         scrollView.scrollDidScrollBlock = { currentIndex in
-            self.bottomView.currentPageLab.text = "\(currentIndex+1)"
-            self.bottomView.slider.value = Float(currentIndex+1)
+            self.bottomView.currentPageLab.text = "\(currentIndex + 1)"
+            self.bottomView.slider.value = Float(currentIndex + 1)
         }
         self.view.bringSubviewToFront(self.backBtn)
         return scrollView
     }()
-    
     lazy var bottomView: BottomPageView = {
         let bottomView = BottomPageView.init()
         view.addSubview(bottomView)
@@ -110,23 +131,11 @@ class CartoonDetailViewController: BaseViewController {
             make.height.equalTo(40)
         }
         bottomView.slider.reactive.controlEvents(.valueChanged).observeValues { slider in
-            self.mainScroll.setCurrentPage(index: Int(slider.value)-1)
+            self.mainScroll.setCurrentPage(index: Int(slider.value) - 1)
         }
         return bottomView
     }()
-    
     override func didReceiveMemoryWarning() {
         ImageCache.default.clearMemoryCache()
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

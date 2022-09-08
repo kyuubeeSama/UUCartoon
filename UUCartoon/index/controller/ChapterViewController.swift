@@ -11,7 +11,8 @@ import UIKit
 class ChapterViewController: BaseViewController {
     
     public var type:CartoonType = .ykmh
-    public var detailUrl:String?
+    public var detailUrl:String = ""
+    public var cartoon_id:Int = 0
     private var model:CartoonModel = CartoonModel.init()
     private let collectBtn = UIButton.init(type: .custom)
     
@@ -26,12 +27,20 @@ class ChapterViewController: BaseViewController {
     func getData(){
         beginProgress()
         DispatchQueue.global().async {
-            DataTool.init().getCartoonDetailData(type: self.type, detailUrl: self.detailUrl!, success: { detailModel in
+            DataTool.init().getCartoonDetailData(type: self.type, detailUrl: self.detailUrl, success: { detailModel in
                 DispatchQueue.main.async {
+                    //TODO: 保存数据到数据库中
                     self.endProgress()
                     self.model = detailModel
-                    self.model.detailUrl = self.detailUrl!
+                    self.model.cartoon_id = self.cartoon_id
+                    self.model.detailUrl = self.detailUrl
                     self.mainCollect.model = detailModel
+                    for item in  detailModel.chapterArr {
+                        for item1 in item.data {
+                            item1.cartoonId = self.cartoon_id
+                            item1.chapterId = SqlTool.init().insertChapter(model: item1)
+                        }
+                    }
                     self.getHistoryData()
                     self.addCollectItem(cartoonModel: self.model)
                 }
@@ -45,16 +54,16 @@ class ChapterViewController: BaseViewController {
         }
     }
     
-    //TODO:查找历史记录
+    //查找历史记录
     func getHistoryData(){
-        let historyModel = SqlTool.init().getHistory(detailUrl: model.detailUrl)
-        if !historyModel.name.isEmpty {
+        // TODO: 更新为新的数据类型
+        let chapter_id = SqlTool.init().getHistory(detailUrl: model.detailUrl)
+        if chapter_id != 0 {
             for (index,item) in model.chapterArr.enumerated() {
                 for (j, chapterModel) in item.data.enumerated() {
-                    if chapterModel.name == historyModel.chapter_name {
+                    if chapterModel.chapterId == chapter_id {
                         chapterModel.is_choose = true
                         model.chapterArr[index].data[j] = chapterModel
-                        model.page_index = historyModel.page_index
                     }
                 }
             }
@@ -117,6 +126,7 @@ class ChapterViewController: BaseViewController {
                 VC.model = model
                 VC.cartoonModel = self.model
                 VC.cartoonModel.chapter_area = indexPath.section-2
+                VC.index = indexPath.row
                 VC.type = self.type
                 self.navigationController?.pushViewController(VC, animated: true)
             }

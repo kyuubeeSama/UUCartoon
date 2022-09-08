@@ -58,12 +58,12 @@ class CartoonDetailCollectionView: UICollectionView,UICollectionViewDelegate,UIC
             cell.authorLab.text = model.author
             cell.leftImg.kf.setImage(with: URL.init(string: model.imgUrl), placeholder: UIImage.init(named: "placeholder"))
             cell.subscribeBtn.isHidden = true
-            cell.subscribeBtn.reactive.controlEvents(.touchUpInside).observeValues { button in
+            cell.subscribeBtn.reactive.controlEvents(.touchUpInside).take(until: cell.reactive.prepareForReuse).observeValues { button in
                 if self.subscribeBlock != nil{
                     self.subscribeBlock!()
                 }
             }
-            cell.readBtn.reactive.controlEvents(.touchUpInside).observeValues { button in
+            cell.readBtn.reactive.controlEvents(.touchUpInside).take(until: cell.reactive.prepareForReuse).observeValues { button in
                 if self.readBlock != nil{
                     self.readBlock!()
                 }
@@ -80,9 +80,7 @@ class CartoonDetailCollectionView: UICollectionView,UICollectionViewDelegate,UIC
         } else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "chapterCell", for: indexPath) as! ChapterCollectionViewCell
             let chapterModel = self.model.chapterArr[indexPath.section-2].data[indexPath.row]
-            cell.titleLab.text = chapterModel.name
-            cell.titleLab.textColor = chapterModel.is_choose ? UIColor.red : UIColor.init(named: "lineColor")
-            cell.titleLab.layer.borderColor = chapterModel.is_choose ? UIColor.red.cgColor : UIColor.init(named: "lineColor")?.cgColor
+            cell.model = chapterModel
             return cell
         }
     }

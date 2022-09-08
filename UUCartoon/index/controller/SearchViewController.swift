@@ -43,6 +43,9 @@ class SearchViewController: BaseViewController,UISearchBarDelegate {
         DispatchQueue.global().async {
             DataTool.init().getSearchRecommendData(type: self.type) { resultArr in
                 DispatchQueue.main.async {
+                    for item in resultArr {
+                        item.cartoon_id = SqlTool.init().insertCartoon(model: item)
+                    }
                     self.mainCollect.listArr = resultArr
                 }
             } failure: { error in
@@ -64,6 +67,7 @@ class SearchViewController: BaseViewController,UISearchBarDelegate {
             let VC = ChapterViewController.init()
             VC.type = self.type
             VC.detailUrl = model.detailUrl
+            VC.cartoon_id = model.cartoon_id
             self.navigationController?.pushViewController(VC, animated: true)
         }
         return mainCollect

@@ -11,7 +11,6 @@ import JXSegmentedView
 import ESPullToRefresh
 
 class CartoonListViewController: BaseViewController, JXSegmentedListContainerViewListDelegate {
-    
     // 区分当前是那一列
     public var index: Int = 0
     public var type: CartoonType = .ykmh
@@ -28,23 +27,20 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
     // 区分当前是选择类型还是时间
     private var chooseType: Int = 0
     // 保存排序方式
-    private var orderType:String = "/post"
+    private var orderType: String = "/post"
     // 保存获取分类类表
-    private var categoryArr:[[CategoryModel]] = [[],[],[],[]]
+    private var categoryArr: [[CategoryModel]] = [[], [], [], []]
     // 保存选中的分类信息
-    private var categoryValue:[String] = ["","","",""]
+    private var categoryValue: [String] = ["", "", "", ""]
     private var listArr: [CartoonModel] = []
-    
+    private var sqlTool = SqlTool.init()
     private var leftArr = SiftCategoryModel.init().getCategoryLeftArr()
     private var rightArr = SiftCategoryModel.init().getCategoryRightArr()
-    
     @objc func injected() {
         viewDidLoad()
     }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Do any additional setup after loading the view.
         if index == 1 {
             makeOrderView()
@@ -55,7 +51,6 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
         }
         getListData()
     }
-    
     func makeOrderView() {
         let header = RankChooseView.init(frame: CGRect(x: 0, y: 0, width: screenW, height: 50))
         view.addSubview(header)
@@ -104,14 +99,12 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
             }
         }
     }
-    
     func makeCategoryView() {
         let chooseView = CategoryChooseView.init(frame: CGRect(x: 0, y: 0, width: screenW, height: 90))
         view.addSubview(chooseView)
         chooseView.btnClickBlock = { index in
-            if index<10 {
-                let button:UIButton = chooseView.viewWithTag(150+index) as! UIButton
-                
+            if index < 10 {
+                let button: UIButton = chooseView.viewWithTag(150 + index) as! UIButton
                 let array = self.categoryArr[index]
                 if !array.isEmpty {
                     if button.isSelected {
@@ -142,13 +135,13 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
                                 for model in array {
                                     model.ischoose = false
                                 }
-                            }else {
+                            } else {
                                 for array1 in self.categoryArr {
                                     for model in array1 {
                                         model.ischoose = false
                                     }
                                 }
-                                self.categoryValue = ["","","",""]
+                                self.categoryValue = ["", "", "", ""]
                             }
                             categoryModel.ischoose = true
                             self.categoryValue[index] = categoryModel.value
@@ -156,29 +149,34 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
                             self.listArr = []
                             self.getListData()
                         }
-                    }else{
+                    } else {
                         for view in self.view.subviews {
                             if view.tag == 200 {
                                 view.removeFromSuperview()
                             }
                         }
                     }
-                }else{
+                } else {
                     self.view.makeToast("当前未获取分类信息")
                 }
-            }else{
-                let valueArr:[[String]] = [["/post","/update","/click"],["/-post","/-update","/-click"]]
+            } else {
+                let valueArr: [[String]] = [["/post", "/update", "/click"], ["/-post", "/-update", "/-click"]]
                 // 排序按钮
-                let button = chooseView.viewWithTag(150+index) as! UIButton
-                self.orderType = valueArr[button.clickLevel-1][index-11]
+                let button = chooseView.viewWithTag(150 + index) as! UIButton
+                self.orderType = valueArr[button.clickLevel - 1][index - 11]
                 self.listArr = []
                 self.pageNum = 1
                 self.getListData()
             }
         }
     }
-    
+    func saveCartoonList(list: [CartoonModel]) {
+        for var item in list {
+            item.cartoon_id = sqlTool.insertCartoon(model: item)
+        }
+    }
     // 获取漫画列表
+    //TODO: 保存漫画到数据库中
     func getListData() {
         beginProgress()
         DispatchQueue.global().async { [self] in
@@ -192,6 +190,7 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
                         } else {
                             mainCollect.es.noticeNoMoreData()
                         }
+                        saveCartoonList(list: resultArr)
                         listArr.append(array: resultArr)
                         mainCollect.listArr = listArr
                     }
@@ -202,20 +201,21 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
                 DataTool.init().getRankCartoonData(type: type, pageNum: pageNum, rankType: rankType, timeType: timeType, category: categoryType) { resultArr in
                     DispatchQueue.main.async { [self] in
                         endProgress()
+                        saveCartoonList(list: resultArr)
                         rankListArr[rankType] = resultArr
                         mainCollect.listArr = rankListArr[rankType]
                     }
                 } failure: { [self] error in
                     getDataFail()
                 }
-            }else if index == 2{
+            } else if index == 2 {
                 let detailUrl = categoryValue.joined(separator: "") + orderType
                 if detailUrl.isEmpty {
-                    DispatchQueue.main.async {[self] in
+                    DispatchQueue.main.async { [self] in
                         endProgress()
                         view.makeToast("请选择筛选条件", duration: 3, position: .center)
                     }
-                }else{
+                } else {
                     DataTool.init().getCategorySiftResultListData(type: type, detailUrl: detailUrl, page: pageNum, success: { resultArr in
                         DispatchQueue.main.async { [self] in
                             endProgress()
@@ -225,6 +225,7 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
                             } else {
                                 mainCollect.es.noticeNoMoreData()
                             }
+                            saveCartoonList(list: resultArr)
                             listArr.append(array: resultArr)
                             mainCollect.listArr = listArr
                         }
@@ -232,7 +233,7 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
                         getDataFail()
                     })
                 }
-            }else if index == 3{
+            } else if index == 3 {
                 DataTool.init().getDoneCartoonData(type: type, page: pageNum) { resultArr in
                     DispatchQueue.main.async { [self] in
                         endProgress()
@@ -242,6 +243,7 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
                         } else {
                             mainCollect.es.noticeNoMoreData()
                         }
+                        saveCartoonList(list: resultArr)
                         listArr.append(array: resultArr)
                         mainCollect.listArr = listArr
                     }
@@ -251,7 +253,6 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
             }
         }
     }
-
     private func getDataFail() {
         DispatchQueue.main.async {
             self.endProgress()
@@ -260,7 +261,6 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
             }
         }
     }
-
     // 获取分类数据
     func getCategoryData() {
         DispatchQueue.global().async {
@@ -273,14 +273,13 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
             })
         }
     }
-    
     lazy var mainCollect: CartoonListCollectionView = {
         let layout = UICollectionViewFlowLayout.init()
         let mainCollect = CartoonListCollectionView.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0), collectionViewLayout: layout)
         self.view.addSubview(mainCollect)
         if self.index == 0 || self.index == 1 {
             mainCollect.cellType = .Table
-        }else{
+        } else {
             mainCollect.cellType = .Collection
         }
         mainCollect.snp.makeConstraints { make in
@@ -297,31 +296,20 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
             let model = mainCollect.listArr![indexPath.row]
             let VC = ChapterViewController.init()
             VC.type = self.type
+            VC.cartoon_id = model.cartoon_id
             VC.detailUrl = model.detailUrl
             self.navigationController?.pushViewController(VC, animated: true)
         }
         mainCollect.es.addInfiniteScrolling {
             if self.index == 1 {
                 mainCollect.es.stopLoadingMore()
-            }else{
+            } else {
                 self.getListData()
             }
         }
         return mainCollect
     }()
-    
     func listView() -> UIView {
         view
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }

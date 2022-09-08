@@ -33,14 +33,6 @@ extension Date {
         let timeStamp = Int(timeInterval)
         return timeStamp
     }
-    
-//    static func getNowTimeInterval(){
-//        let newDate = Date.init()
-////        NSDate *newDate = [NSDate date];
-////        long int timeSp = (long)[newDate timeIntervalSince1970];
-////        NSString *tempTime = [NSString stringWithFormat:@"%ld",timeSp];
-////        return tempTime;
-//    }
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.

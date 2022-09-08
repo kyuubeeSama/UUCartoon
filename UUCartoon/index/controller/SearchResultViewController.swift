@@ -26,6 +26,7 @@ class SearchResultViewController: BaseViewController {
         DispatchQueue.global().async {
             DataTool.init().getSearchResultData(type: self.type, keyword:self.keyword, page: self.pageNum) { resultArr in
                 DispatchQueue.main.async {
+                    //TODO: 搜索结果也要存到数据库中
                     self.endProgress()
                     if resultArr.isEmpty {
                         self.mainCollect.es.noticeNoMoreData()

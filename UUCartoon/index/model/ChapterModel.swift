@@ -12,4 +12,6 @@ class ChapterModel {
     var name:String = ""
     var detailUrl:String = ""
     var is_choose:Bool = false
+    var cartoonId:Int = 0
+    var chapterId:Int = 0
 }
