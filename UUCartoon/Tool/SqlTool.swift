@@ -117,7 +117,6 @@ class SqlTool: NSObject {
         do {
             let dbQueue = try DatabaseQueue(path: databasePath)
             try dbQueue.write { db in
-                //TODO: 替换relace为查找插入
                 try db.execute(sql: """
                                         REPLACE INTO collect ('cartoon_id','create_time') VALUES(:cartoon_id,:create_time)
                                     """, arguments: [model.cartoon_id, Date.getCurrentTimeInterval()])
@@ -128,46 +127,58 @@ class SqlTool: NSObject {
             return false
         }
     }
-    //TODO: 存入漫画数据
+    //MARK: 存入漫画数据
     func insertCartoon(model: CartoonModel) -> Int {
         do {
             let dbQueue = try DatabaseQueue(path: databasePath)
-            try dbQueue.write { db in
-                // TODO: 替换replace
-                try db.execute(sql: """
-                                    replace into cartoon ('website_type','name','detail_url','img_url','autor','category','create_time') values(:website_type,:name,:detail_url,:img_url,:autor,:category,:category_time)
-                                    """, arguments: [model.type.rawValue, model.name, model.detailUrl, model.imgUrl, model.author, model.category, Date.getCurrentTimeInterval()])
-            }
             let row = try dbQueue.read { db in
                 try Row.fetchOne(db, sql: "select * from cartoon where detail_url = :detail_url", arguments: [model.detailUrl])
             }
-            if (row != nil) {
+            if row == nil {
+                try dbQueue.write { db in
+                    try db.execute(sql: """
+                                        insert into cartoon ('website_type','name','detail_url','img_url','autor','category','create_time') values(:website_type,:name,:detail_url,:img_url,:autor,:category,:category_time)
+                                        """, arguments: [model.type.rawValue, model.name, model.detailUrl, model.imgUrl, model.author, model.category, Date.getCurrentTimeInterval()])
+                }
+                let row1 = try dbQueue.read { db in
+                    try Row.fetchOne(db, sql: "select * from cartoon where detail_url = :detail_url", arguments: [model.detailUrl])
+                }
+                if (row1 != nil) {
+                    return row1![Column("cartoon_id")]
+                }else{
+                    return 0
+                }
+            }else {
                 return row![Column("cartoon_id")]
-            }else{
-                return 0
             }
         } catch {
             print(error.localizedDescription)
             return 0
         }
     }
-    //TODO: 存入章节数据
+    //MARK: 存入章节数据
     func insertChapter(model: ChapterModel) -> Int {
         do {
             let dbQueue = try DatabaseQueue(path: databasePath)
-            try dbQueue.write { db in
-                // TODO: 替换replace
-                try db.execute(sql: """
-                                    replace into chapter('cartoon_id','name','detail_url','create_time') values(:cartoon_id,:name,:detail_url,:create_time)
-                                    """, arguments: [model.cartoonId,model.name,model.detailUrl,Date.getCurrentTimeInterval()])
-            }
             let row = try dbQueue.read { db in
-                try Row.fetchOne(db, sql: "select * from cartoon where detail_url = :detail_url", arguments: [model.detailUrl])
+                try Row.fetchOne(db, sql: "select * from chapter where detail_url = :detail_url", arguments: [model.detailUrl])
             }
-            if (row != nil) {
-                return row![Column("chapter_id")]
+            if row == nil {
+                try dbQueue.write { db in
+                    try db.execute(sql: """
+                                        insert into chapter('cartoon_id','name','detail_url','create_time') values(:cartoon_id,:name,:detail_url,:create_time)
+                                        """, arguments: [model.cartoonId,model.name,model.detailUrl,Date.getCurrentTimeInterval()])
+                }
+                let row1 = try dbQueue.read { db in
+                    try Row.fetchOne(db, sql: "select * from chapter where detail_url = :detail_url", arguments: [model.detailUrl])
+                }
+                if (row1 != nil) {
+                    return row1![Column("chapter_id")]
+                }else{
+                    return 0
+                }
             }else{
-                return 0
+                return row![Column("chapter_id")]
             }
         } catch {
             print(error.localizedDescription)
@@ -235,7 +246,6 @@ class SqlTool: NSObject {
         do {
             let dbQueue = try DatabaseQueue(path: databasePath)
             try dbQueue.write { db in
-                // TODO: 替换replace
                 try db.execute(sql: """
                                         REPLACE INTO history ('cartoon_id','chapter_id',page_index,create_time) VALUES(:cartoon_id,:chapter_id,:page_index,:create_time)
                                     """, arguments: [model.cartoon_id, model.chapter_id,model.page_index, Date.getCurrentTimeInterval()])
