@@ -46,6 +46,12 @@ class HistoryViewController: BaseViewController {
             VC.cartoon_id = model.cartoon_id
             self.navigationController?.pushViewController(VC, animated: true)
         }
+        mainCollect.es.addInfiniteScrolling(animator: footer) {
+            self.getHistoryData()
+        }
+        mainCollect.es.addPullToRefresh(animator: header) {
+            self.getHistoryData()
+        }
         return mainCollect
     }()
 }

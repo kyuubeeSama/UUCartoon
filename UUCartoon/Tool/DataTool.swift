@@ -34,7 +34,7 @@ class DataTool: NSObject {
             detailUrlStr = "/dfcomiclist_\(pageNum).htm"
         }
         let urlStr = urlArr[type.rawValue] + detailUrlStr
-        var  jiDoc = Ji.init(htmlURL: URL.init(string: urlStr)!)
+        let  jiDoc = Ji.init(htmlURL: URL.init(string: urlStr)!)
         if jiDoc == nil {
             failure(XPathError.getContentFail)
         } else {
@@ -80,7 +80,7 @@ class DataTool: NSObject {
             // 数据不为空
             if !(urlNodeArr?.isEmpty)! {
                 for (index, urlNode) in urlNodeArr!.enumerated() {
-                    var cartoonModel = CartoonModel.init()
+                    let cartoonModel = CartoonModel.init()
                     cartoonModel.name = titleNodeArr![index].content!
 //                    let detailUrl = urlNode.content
 //                    print(detailUrl)
@@ -88,7 +88,7 @@ class DataTool: NSObject {
                     cartoonModel.author = authorNodeArr![index].content!
                     cartoonModel.category = categoryNodeArr![index].content!
                     cartoonModel.time = timeNodeArr![index].content!
-                    var num = numNodeArr![index].content!
+                    let num = numNodeArr![index].content!
                     cartoonModel.type = type
                     cartoonModel.num = num
                     cartoonModel.imgUrl = imgNodeArr![index].content!
@@ -123,7 +123,7 @@ class DataTool: NSObject {
             detailUrlStr = "/top/"+rankTypeArr[rankType]
         }
         let urlStr = urlArr[type.rawValue] + detailUrlStr
-        var jiDoc = Ji.init(htmlURL: URL.init(string: urlStr)!)
+        let jiDoc = Ji.init(htmlURL: URL.init(string: urlStr)!)
         if jiDoc == nil {
             failure(XPathError.getContentFail)
         } else {
@@ -164,7 +164,7 @@ class DataTool: NSObject {
             // 数据不为空
             if !(urlNodeArr?.isEmpty)! {
                 for (index, urlNode) in urlNodeArr!.enumerated() {
-                    var cartoonModel = CartoonModel.init()
+                    let cartoonModel = CartoonModel.init()
                     cartoonModel.is_rank = true
                     cartoonModel.name = titleNodeArr![index].content!
                     cartoonModel.detailUrl = urlNode.content!
@@ -218,7 +218,7 @@ class DataTool: NSObject {
             }
             for (index, item) in titleXpathArr.enumerated() {
                 let titleNodeArr = jiDoc?.xPath(item)
-                var valueNodeArr:[JiNode] = []
+                let valueNodeArr:[JiNode] = []
                 var array: [CategoryModel] = []
                 if !(titleNodeArr?.isEmpty)! {
                     for (i,node) in titleNodeArr!.enumerated() {
@@ -296,7 +296,7 @@ class DataTool: NSObject {
             // 数据不为空
             if !(urlNodeArr?.isEmpty)! {
                 for (index, urlNode) in urlNodeArr!.enumerated() {
-                    var cartoonModel = CartoonModel.init()
+                    let cartoonModel = CartoonModel.init()
                     cartoonModel.is_rank = true
                     cartoonModel.name = titleNodeArr![index].content!
                     cartoonModel.detailUrl = urlNode.content!
@@ -358,7 +358,7 @@ class DataTool: NSObject {
             // 数据不为空
             if !(urlNodeArr?.isEmpty)! {
                 for (index, urlNode) in urlNodeArr!.enumerated() {
-                    var cartoonModel = CartoonModel.init()
+                    let cartoonModel = CartoonModel.init()
                     cartoonModel.is_rank = true
                     cartoonModel.name = titleNodeArr![index].content!
                     cartoonModel.detailUrl = urlNode.content!
@@ -430,7 +430,7 @@ class DataTool: NSObject {
             let recommendUrlNodeArr = jiDoc?.xPath(recommendUrlXpath)
             let recommendImgNodeArr = jiDoc?.xPath(recommendImgXpath)
             let recommendAuthorNodeArr = jiDoc?.xPath(recommendAuthorXpath)
-            var detailModel = CartoonModel.init()
+            let detailModel = CartoonModel.init()
             // 剧集数据
             if !(chapterNameNodeArr!.isEmpty)  && type == .ykmh{
                 for (index,item) in chapterNameNodeArr!.enumerated() {
@@ -440,7 +440,7 @@ class DataTool: NSObject {
                     let chapterUrlListNodeArr = jiDoc?.xPath(chapterUrlListXpath)
                     var chapterArr:[ChapterModel] = []
                     for (k,chapterItem) in chapterTitleListNodeArr!.enumerated() {
-                        var chapterModel = ChapterModel.init()
+                        let chapterModel = ChapterModel.init()
                         chapterModel.name = chapterItem.content!
                         chapterModel.detailUrl = chapterUrlListNodeArr![k].content!
                         chapterArr.append(chapterModel)
@@ -456,7 +456,7 @@ class DataTool: NSObject {
                 let chapterUrlListNodeArr = jiDoc?.xPath(chapterUrlListXpath)
                 var chapterArr:[ChapterModel] = []
                 for (k,chapterItem) in chapterTitleListNodeArr!.enumerated() {
-                    var chapterModel = ChapterModel.init()
+                    let chapterModel = ChapterModel.init()
                     chapterModel.name = chapterItem.content!
                     chapterModel.detailUrl = chapterUrlListNodeArr![k].content!
                     chapterArr.append(chapterModel)
@@ -466,7 +466,7 @@ class DataTool: NSObject {
             }
             // 推荐漫画
             for (index,_) in recommendTitleNodeArr!.enumerated() {
-                var cartoonModel = CartoonModel.init()
+                let cartoonModel = CartoonModel.init()
                 cartoonModel.name = recommendTitleNodeArr![index].content!
                 cartoonModel.author = recommendAuthorNodeArr![index].content!
                 cartoonModel.imgUrl = recommendImgNodeArr![index].content!
@@ -493,7 +493,7 @@ class DataTool: NSObject {
     ///   - failure: 失败
     /// - Returns: nil
     func getSearchRecommendData(type:CartoonType,success:@escaping (_ resultArr:[CartoonModel])->(),failure:@escaping (_ error:Error)->()){
-        var detailUrlStr = ""
+        let detailUrlStr = ""
         let urlStr = urlArr[type.rawValue] + detailUrlStr
         let jiDoc = Ji.init(htmlURL: URL.init(string: urlStr)!)
         if jiDoc == nil {
@@ -513,7 +513,7 @@ class DataTool: NSObject {
             let urlNodeArr = jiDoc?.xPath(urlXpath)
             if !(titleNodeArr?.isEmpty)! {
                 for (index,item) in titleNodeArr!.enumerated() {
-                    var model = CartoonModel.init()
+                    let model = CartoonModel.init()
                     model.name = item.content!
                     model.detailUrl = urlNodeArr![index].content!
                     model.type = type
@@ -534,7 +534,7 @@ class DataTool: NSObject {
         }
         var urlStr = urlArr[type.rawValue] + detailUrlStr
         urlStr = urlStr.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-        var  jiDoc = Ji.init(htmlURL: URL.init(string: urlStr)!)
+        let  jiDoc = Ji.init(htmlURL: URL.init(string: urlStr)!)
         if jiDoc == nil {
             failure(XPathError.getContentFail)
         } else {
@@ -572,7 +572,7 @@ class DataTool: NSObject {
             // 数据不为空
             if !(urlNodeArr?.isEmpty)! {
                 for (index, urlNode) in urlNodeArr!.enumerated() {
-                    var cartoonModel = CartoonModel.init()
+                    let cartoonModel = CartoonModel.init()
                     cartoonModel.name = titleNodeArr![index].content!
 //                    let detailUrl = urlNode.content
 //                    print(detailUrl)
@@ -580,7 +580,7 @@ class DataTool: NSObject {
                     cartoonModel.author = authorNodeArr![index].content!
                     cartoonModel.category = categoryNodeArr![index].content!
                     cartoonModel.time = timeNodeArr![index].content!
-                    var num = numNodeArr![index].content!
+                    let num = numNodeArr![index].content!
                     cartoonModel.type = type
                     cartoonModel.num = num
                     cartoonModel.imgUrl = imgNodeArr![index].content!

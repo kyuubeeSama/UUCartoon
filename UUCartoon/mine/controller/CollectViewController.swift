@@ -36,7 +36,10 @@ class CollectViewController: BaseViewController {
             VC.cartoon_id = model.cartoon_id
             self.navigationController?.pushViewController(VC, animated: true)
         }
-        mainCollect.es.addInfiniteScrolling {
+        mainCollect.es.addInfiniteScrolling(animator: footer) {
+            self.getListData()
+        }
+        mainCollect.es.addPullToRefresh(animator: header) {
             self.getListData()
         }
         return mainCollect

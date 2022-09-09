@@ -108,6 +108,11 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
                 let array = self.categoryArr[index]
                 if !array.isEmpty {
                     if button.isSelected {
+                        for view in self.view.subviews {
+                            if view.tag == 200 {
+                                view.removeFromSuperview()
+                            }
+                        }
                         let backView = UIView.init()
                         backView.tag = 200
                         self.view.addSubview(backView)
@@ -171,7 +176,7 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
         }
     }
     func saveCartoonList(list: [CartoonModel]) {
-        for var item in list {
+        for item in list {
             item.cartoon_id = sqlTool.insertCartoon(model: item)
         }
     }
@@ -300,7 +305,7 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
             VC.detailUrl = model.detailUrl
             self.navigationController?.pushViewController(VC, animated: true)
         }
-        mainCollect.es.addInfiniteScrolling {
+        mainCollect.es.addInfiniteScrolling(animator: footer) {
             if self.index == 1 {
                 mainCollect.es.stopLoadingMore()
             } else {

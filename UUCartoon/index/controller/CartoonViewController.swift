@@ -58,7 +58,6 @@ class CartoonViewController: BaseViewController,JXSegmentedViewDelegate,JXSegmen
             make.height.equalTo(40)
         }
         
-        
         let indicator = JXSegmentedIndicatorLineView.init()
         segmentedView.indicators = [indicator]
         return segmentedView

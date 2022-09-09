@@ -226,7 +226,7 @@ class SqlTool: NSObject {
                 try Row.fetchAll(db, sql: "select cartoon.* from collect left join cartoon on cartoon.cartoon_id = collect.cartoon_id where 1=1 order by collect.create_time desc")
             })
             for item in rows {
-                var model = CartoonModel.init()
+                let model = CartoonModel.init()
                 model.cartoon_id = item[Column("cartoon_id")]
                 model.type = CartoonType.init(rawValue: item[Column("website_type")])!
                 model.name = item[Column("name")]

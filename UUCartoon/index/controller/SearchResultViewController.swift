@@ -61,7 +61,7 @@ class SearchResultViewController: BaseViewController {
             VC.detailUrl = model.detailUrl
             self.navigationController?.pushViewController(VC, animated: true)
         }
-        mainCollect.es.addInfiniteScrolling {
+        mainCollect.es.addInfiniteScrolling(animator: footer) {
             self.getListData()
         }
         return mainCollect
