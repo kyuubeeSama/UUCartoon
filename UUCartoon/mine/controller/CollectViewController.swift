@@ -33,6 +33,7 @@ class CollectViewController: BaseViewController {
             let VC = ChapterViewController.init()
             VC.type = model.type
             VC.detailUrl = model.detailUrl
+            VC.cartoon_id = model.cartoon_id
             self.navigationController?.pushViewController(VC, animated: true)
         }
         mainCollect.es.addInfiniteScrolling {

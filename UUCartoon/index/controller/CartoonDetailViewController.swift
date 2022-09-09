@@ -52,6 +52,7 @@ class CartoonDetailViewController: BaseViewController {
     func saveHistory(pageIndex: Int) {
         cartoonModel.page_index = pageIndex
         cartoonModel.chapter_name = model.name
+        cartoonModel.chapter_id = model.chapterId
         cartoonModel.type = type
         SqlTool.init().saveHistory(model: cartoonModel)
     }
@@ -68,22 +69,25 @@ class CartoonDetailViewController: BaseViewController {
                     // TODO: 通过历史记录进来的，按照历史记录的页码
                     self.endProgress()
                     self.mainScroll.listArr = imgArr
-                    let page = SqlTool.init().getHistory(detailUrl: detailUrl, is_page: true)
+                    self.bottomView.totalPageLab.text = "\(imgArr.count)"
+                    self.bottomView.slider.maximumValue = Float(imgArr.count)
+                    self.bottomView.slider.minimumValue = 1
+                    let page = SqlTool.init().getHistory(detailUrl: self.model.detailUrl, is_page: true)
                     if page == 0 {
                         self.saveHistory(pageIndex: 0)
                         self.bottomView.currentPageLab.text = "1";
                     }else{
                         self.saveHistory(pageIndex: page)
-                        self.mainScroll.currentPageIndex = page
+                        self.mainScroll.setCurrentPage(index: page)
                         self.bottomView.currentPageLab.text = "\(page+1)"
                     }
-                    self.bottomView.totalPageLab.text = "\(imgArr.count)"
-                    self.bottomView.slider.maximumValue = Float(imgArr.count)
-                    self.bottomView.slider.minimumValue = 1
                 }
             }, failure: { error in
                 DispatchQueue.main.async {
                     self.endProgress()
+                    Tool.makeAlertController(title: "提示", message: "数据加载失败") {
+                        self.navigationController?.popViewController(animated: true)
+                    }
                     self.view.makeToast("数据获取失败")
                 }
             })

@@ -29,7 +29,7 @@ class ChapterViewController: BaseViewController {
         DispatchQueue.global().async {
             DataTool.init().getCartoonDetailData(type: self.type, detailUrl: self.detailUrl, success: { detailModel in
                 DispatchQueue.main.async {
-                    //TODO: 保存数据到数据库中
+                    //保存数据到数据库中
                     self.endProgress()
                     self.model = detailModel
                     self.model.cartoon_id = self.cartoon_id
@@ -48,7 +48,9 @@ class ChapterViewController: BaseViewController {
                 print(error)
                 DispatchQueue.main.async {
                     self.endProgress()
-                    self.view.makeToast("加载失败")
+                    Tool.makeAlertController(title: "提示", message: "数据加载失败") {
+                        self.navigationController?.popViewController(animated: true)
+                    }
                 }
             })
         }
@@ -56,7 +58,7 @@ class ChapterViewController: BaseViewController {
     
     //查找历史记录
     func getHistoryData(){
-        // TODO: 更新为新的数据类型
+        //更新为新的数据类型
         let chapter_id = SqlTool.init().getHistory(detailUrl: model.detailUrl)
         if chapter_id != 0 {
             for (index,item) in model.chapterArr.enumerated() {
@@ -133,9 +135,17 @@ class ChapterViewController: BaseViewController {
         }
         mainCollect.readBlock = {
             // 阅读
-            let model = self.model.chapterArr[0].data.last
+            // 如果有记录，就继续记录，如果没有，就读最新的
+            var chapterModel = self.model.chapterArr[0].data.last
+            for item in self.model.chapterArr {
+                for item1 in item.data {
+                    if item1.is_choose == true {
+                        chapterModel = item1
+                    }
+                }
+            }
             let VC = CartoonDetailViewController.init()
-            VC.model = model!
+            VC.model = chapterModel!
             VC.cartoonModel = self.model
             VC.cartoonModel.chapter_area = 0
             VC.type = self.type

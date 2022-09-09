@@ -35,7 +35,7 @@ class SqlTool: NSObject {
                                     name varchar(300) not null,
                                     detail_url varchar(300) not null unique,
                                     img_url varchar(300) not null,
-                                    autor varchar(200),
+                                    author varchar(200),
                                     category varchar(200),
                                     create_time integer not null
                                     )
@@ -137,7 +137,7 @@ class SqlTool: NSObject {
             if row == nil {
                 try dbQueue.write { db in
                     try db.execute(sql: """
-                                        insert into cartoon ('website_type','name','detail_url','img_url','autor','category','create_time') values(:website_type,:name,:detail_url,:img_url,:autor,:category,:category_time)
+                                        insert into cartoon ('website_type','name','detail_url','img_url','author','category','create_time') values(:website_type,:name,:detail_url,:img_url,:author,:category,:category_time)
                                         """, arguments: [model.type.rawValue, model.name, model.detailUrl, model.imgUrl, model.author, model.category, Date.getCurrentTimeInterval()])
                 }
                 let row1 = try dbQueue.read { db in
@@ -227,6 +227,7 @@ class SqlTool: NSObject {
             })
             for item in rows {
                 var model = CartoonModel.init()
+                model.cartoon_id = item[Column("cartoon_id")]
                 model.type = CartoonType.init(rawValue: item[Column("website_type")])!
                 model.name = item[Column("name")]
                 model.detailUrl = item[Column("detail_url")]
@@ -276,6 +277,7 @@ class SqlTool: NSObject {
             })
             for items in rows {
                 let model = CartoonModel.init()
+                model.cartoon_id = items[Column("cartoon_id")]
                 model.name = items[Column("name")]
                 model.detailUrl = items[Column("detail_url")]
                 model.imgUrl = items[Column("img_url")]
@@ -296,9 +298,15 @@ class SqlTool: NSObject {
     func getHistory(detailUrl: String,is_page:Bool = false) -> Int {
         do {
             let dbQueue = try DatabaseQueue(path: databasePath)
+            var sql = ""
+            if is_page {
+                sql = "select cartoon.*,history.chapter_id,history.page_index from history left join cartoon on cartoon.cartoon_id = history.cartoon_id left join chapter on chapter.chapter_id = history.chapter_id where chapter.detail_url=:detail_url"
+            }else{
+                sql = "select cartoon.*,history.chapter_id,history.page_index from history left join cartoon on cartoon.cartoon_id = history.cartoon_id left join chapter on chapter.chapter_id = history.chapter_id where cartoon.detail_url=:detail_url"
+            }
             let row = try dbQueue.read({ db in
 //                try Row.fetchAll(db, sql: "select * from history where detail_url = :detailUrl order by add_time desc", arguments: [detailUrl])
-                try Row.fetchOne(db, sql: "select cartoon.*,history.chapter_id,history.page_index from history left join cartoon on cartoon.cartoon_id = history.cartoon_id where cartoon.detail_url=:detail_url",arguments: [detailUrl])
+                try Row.fetchOne(db, sql: sql,arguments: [detailUrl])
             })
             if row != nil {
                 if is_page {

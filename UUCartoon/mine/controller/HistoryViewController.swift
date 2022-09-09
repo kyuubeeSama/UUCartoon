@@ -43,19 +43,9 @@ class HistoryViewController: BaseViewController {
             let VC = ChapterViewController.init()
             VC.type = model.type
             VC.detailUrl = model.detailUrl
+            VC.cartoon_id = model.cartoon_id
             self.navigationController?.pushViewController(VC, animated: true)
         }
         return mainCollect
     }()
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }
