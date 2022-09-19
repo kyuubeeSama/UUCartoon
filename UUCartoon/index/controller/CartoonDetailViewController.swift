@@ -98,17 +98,6 @@ class CartoonDetailViewController: BaseViewController {
         self.view.addSubview(scrollView)
         scrollView.scrollLastPage = {
             let listArr = self.cartoonModel.chapterArr[self.cartoonModel.chapter_area]
-            if self.index == listArr.data.count - 1 {
-                Tool.makeAlertController(title: "提醒", message: "后面没有了") {
-                }
-            } else {
-                self.index += 1
-                self.model = listArr.data[self.index]
-                self.getData()
-            }
-        }
-        scrollView.scrollFirstPage = {
-            let listArr = self.cartoonModel.chapterArr[self.cartoonModel.chapter_area]
             if self.index == 0 {
                 // 到头了
                 Tool.makeAlertController(title: "提醒", message: "前面没有了") {
@@ -117,6 +106,19 @@ class CartoonDetailViewController: BaseViewController {
                 // 加载下一章
                 self.index -= 1
                 self.model = listArr.data[self.index]
+                self.saveHistory(pageIndex: 0)
+                self.getData()
+            }
+        }
+        scrollView.scrollFirstPage = {
+            let listArr = self.cartoonModel.chapterArr[self.cartoonModel.chapter_area]
+            if self.index == listArr.data.count - 1 {
+                Tool.makeAlertController(title: "提醒", message: "后面没有了") {
+                }
+            } else {
+                self.index += 1
+                self.model = listArr.data[self.index]
+                self.saveHistory(pageIndex: 0)
                 self.getData()
             }
         }

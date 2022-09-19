@@ -33,12 +33,5 @@ extension Date {
         let timeStamp = Int(timeInterval)
         return timeStamp
     }
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
 
 }
