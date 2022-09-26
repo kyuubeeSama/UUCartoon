@@ -12,7 +12,7 @@ class LabelTableView: UITableView,UITableViewDataSource,UITableViewDelegate {
     
     var cellItemBlock:((_ indexPath:IndexPath)->())?
     
-    public var listArr:[String]?{
+    public var listArr:[[String]] = []{
         didSet{
             reloadData()
         }
@@ -24,13 +24,17 @@ class LabelTableView: UITableView,UITableViewDataSource,UITableViewDelegate {
         dataSource = self
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        listArr.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        listArr!.count
+        listArr[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell.init(style: .default, reuseIdentifier: "cell")
-        cell.textLabel?.text = listArr?[indexPath.row]
+        cell.textLabel?.text = listArr[indexPath.section][indexPath.row]
         return cell
     }
     
@@ -42,6 +46,10 @@ class LabelTableView: UITableView,UITableViewDataSource,UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         40
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        ["漫画列表","个人中心"][section]
     }
     
     required init?(coder: NSCoder) {

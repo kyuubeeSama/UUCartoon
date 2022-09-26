@@ -27,6 +27,7 @@ class ChapterViewController: BaseViewController {
     func getData(){
         beginProgress()
         DispatchQueue.global().async {
+            self.detailUrl = "https://www.maofly.com/manga/5777.html"
             DataTool.init().getCartoonDetailData(type: self.type, detailUrl: self.detailUrl, success: { detailModel in
                 DispatchQueue.main.async {
                     //保存数据到数据库中

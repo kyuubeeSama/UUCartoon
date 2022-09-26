@@ -9,35 +9,36 @@
 
 import UIKit
 import SnapKit
+
 class IndexViewController: BaseViewController {
-    
-    @objc func injected(){
-        viewDidLoad()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        mainTable.listArr = ["优酷漫画","收藏列表","历史记录"]
+        mainTable.listArr = [["优酷漫画","漫画猫"],["收藏列表","历史记录"]]
+        title = "悠悠漫画"
     }
     
     lazy var mainTable: LabelTableView = {
-        let mainTable = LabelTableView.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: .plain)
+        let mainTable = LabelTableView.init(frame: .zero, style: .grouped)
         self.view.addSubview(mainTable)
         mainTable.snp.makeConstraints { make in
-            make.left.right.top.bottom.equalToSuperview()
+            make.edges.equalToSuperview()
         }
         mainTable.cellItemBlock = { indexPath in
-            if indexPath.row == 1{
-                let VC = CollectViewController.init()
-                self.navigationController?.pushViewController(VC, animated: true)
-            }else if indexPath.row == 2{
-                let VC = HistoryViewController.init()
-                self.navigationController?.pushViewController(VC, animated: true)
-            }else{
+            if indexPath.section == 0 {
                 let VC = CartoonViewController.init()
                 VC.type = CartoonType(rawValue: indexPath.row)!
                 self.navigationController?.pushViewController(VC, animated: true)
+
+            }else{
+                if indexPath.row == 0{
+                    let VC = CollectViewController.init()
+                    self.navigationController?.pushViewController(VC, animated: true)
+                }else if indexPath.row == 1{
+                    let VC = HistoryViewController.init()
+                    self.navigationController?.pushViewController(VC, animated: true)
+                }
             }
         }
         return mainTable

@@ -51,6 +51,7 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
         }
         getListData()
     }
+    // 漫画排行的排序界面
     func makeOrderView() {
         let header = RankChooseView.init(frame: CGRect(x: 0, y: 0, width: screenW, height: 50))
         view.addSubview(header)
@@ -99,6 +100,7 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
             }
         }
     }
+    // 筛选界面
     func makeCategoryView() {
         let chooseView = CategoryChooseView.init(frame: CGRect(x: 0, y: 0, width: screenW, height: 90))
         view.addSubview(chooseView)
@@ -119,10 +121,10 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
                         backView.backgroundColor = UIColor.color(hexString: "333333", alpha: 0.3)
                         backView.snp.makeConstraints { make in
                             make.left.right.bottom.equalToSuperview()
-                            make.top.equalTo(chooseView.snp.bottom).offset(-50)
+                            make.top.equalTo(50)
                         }
                         let layout = UICollectionViewLeftAlignedLayout.init()
-                        let categoryCollectionView = CartoonCategoryCollectionView.init(frame: CGRect.init(), collectionViewLayout: layout)
+                        let categoryCollectionView = CartoonCategoryCollectionView.init(frame: .zero, collectionViewLayout: layout)
                         backView.addSubview(categoryCollectionView)
                         categoryCollectionView.snp.makeConstraints { make in
                             make.left.right.top.equalToSuperview()
@@ -174,18 +176,23 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
                 self.getListData()
             }
         }
+        if type == .mao {
+            chooseView.orderView.isHidden = true
+            chooseView.frame = CGRect(x: 0, y: 0, width: screenW, height: 50)
+        }
     }
+    // 保存漫画记录
     func saveCartoonList(list: [CartoonModel]) {
         for item in list {
             item.cartoon_id = sqlTool.insertCartoon(model: item)
         }
     }
-    // 获取漫画列表
-    //TODO: 保存漫画到数据库中
+    //MARK: 获取漫画列表
     func getListData() {
         beginProgress()
         DispatchQueue.global().async { [self] in
             if index == 0 {
+                // 最新发布
                 DataTool.init().getNewCartoonData(type: type, pageNum: pageNum) { resultArr in
                     DispatchQueue.main.async { [self] in
                         endProgress()
@@ -203,6 +210,7 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
                     getDataFail()
                 }
             } else if index == 1 {
+                // 漫画排行
                 DataTool.init().getRankCartoonData(type: type, pageNum: pageNum, rankType: rankType, timeType: timeType, category: categoryType) { resultArr in
                     DispatchQueue.main.async { [self] in
                         endProgress()
@@ -214,7 +222,16 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
                     getDataFail()
                 }
             } else if index == 2 {
-                let detailUrl = categoryValue.joined(separator: "") + orderType
+                // 分类筛选
+                var detailUrl = ""
+                if type == .ykmh {
+                    detailUrl = categoryValue.joined(separator: "") + orderType
+                }else{
+                    let valueArr = categoryValue.map { value in
+                        return value.isEmpty ? "0" : value
+                    }
+                    detailUrl = "list/a-\(valueArr[2])-c-\(valueArr[0])-t-\(valueArr[1])-y-0-i-0-m-\(valueArr[2])"
+                }
                 if detailUrl.isEmpty {
                     DispatchQueue.main.async { [self] in
                         endProgress()
@@ -239,6 +256,7 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
                     })
                 }
             } else if index == 3 {
+                // 已完结
                 DataTool.init().getDoneCartoonData(type: type, page: pageNum) { resultArr in
                     DispatchQueue.main.async { [self] in
                         endProgress()
@@ -278,6 +296,7 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
             })
         }
     }
+    // 漫画列表
     lazy var mainCollect: CartoonListCollectionView = {
         let layout = UICollectionViewFlowLayout.init()
         let mainCollect = CartoonListCollectionView.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0), collectionViewLayout: layout)
@@ -292,13 +311,17 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
             if index == 1 {
                 make.top.equalToSuperview().offset(60)
             } else if index == 2 {
-                make.top.equalToSuperview().offset(90)
+                if type == .mao {
+                    make.top.equalToSuperview().offset(50)
+                }else{
+                    make.top.equalToSuperview().offset(90)
+                }
             } else {
                 make.top.equalToSuperview()
             }
         }
         mainCollect.cellItemSelected = { indexPath in
-            let model = mainCollect.listArr![indexPath.row]
+            let model = mainCollect.listArr[indexPath.row]
             let VC = ChapterViewController.init()
             VC.type = self.type
             VC.cartoon_id = model.cartoon_id

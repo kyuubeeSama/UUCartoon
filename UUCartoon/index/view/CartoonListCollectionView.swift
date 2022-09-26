@@ -17,7 +17,7 @@ class CartoonListCollectionView: UICollectionView,UICollectionViewDelegate,UICol
     
     public var cellType:CollectionViewCellType = .Table
     
-    var listArr:[CartoonModel]?{
+    var listArr:[CartoonModel] = []{
         didSet{
             reloadData()
         }
@@ -38,13 +38,13 @@ class CartoonListCollectionView: UICollectionView,UICollectionViewDelegate,UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        listArr!.count
+        listArr.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if cellType == .Table {
             let cell:CartoonTableListCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "tableCell", for: indexPath) as! CartoonTableListCollectionViewCell
-            let model = listArr![indexPath.row]
+            let model = listArr[indexPath.row]
             cell.setData(cartoonModel: model)
             if model.is_rank {
                 cell.rankLab.text = "\(indexPath.row+1)"
@@ -59,7 +59,7 @@ class CartoonListCollectionView: UICollectionView,UICollectionViewDelegate,UICol
             return cell
         }else{
             let cell:CartoonListCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! CartoonListCollectionViewCell
-            cell.setData(cartoonModel: listArr![indexPath.row])
+            cell.cartoonModel = listArr[indexPath.row]
             return cell
         }
     }

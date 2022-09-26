@@ -75,7 +75,7 @@ class CartoonDetailCollectionView: UICollectionView,UICollectionViewDelegate,UIC
             return cell
         }else if indexPath.section == 2+model.chapterArr.count{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cartoonCell", for: indexPath) as! CartoonListCollectionViewCell
-            cell.setData(cartoonModel: model.recommendArr[indexPath.row])
+            cell.cartoonModel = model.recommendArr[indexPath.row]
             return cell
         } else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "chapterCell", for: indexPath) as! ChapterCollectionViewCell
@@ -107,7 +107,7 @@ class CartoonDetailCollectionView: UICollectionView,UICollectionViewDelegate,UIC
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.section == 2 {
+        if indexPath.section > 1 && indexPath.section < 2+model.chapterArr.count {
             for chapter in model.chapterArr {
                 for model in chapter.data {
                     model.is_choose = false
@@ -115,9 +115,9 @@ class CartoonDetailCollectionView: UICollectionView,UICollectionViewDelegate,UIC
             }
             self.model.chapterArr[indexPath.section-2].data[indexPath.row].is_choose = true
             reloadData()
-            if cellItemSelectedBlock != nil {
-                cellItemSelectedBlock!(indexPath)
-            }
+        }
+        if cellItemSelectedBlock != nil {
+            cellItemSelectedBlock!(indexPath)
         }
     }
     

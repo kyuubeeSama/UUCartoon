@@ -13,6 +13,7 @@ class CollectViewController: BaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        title = "收藏列表"
         getListData()
     }
     

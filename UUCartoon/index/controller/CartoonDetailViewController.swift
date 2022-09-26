@@ -14,8 +14,11 @@ import SnapKit
 import ProgressHUD
 
 class CartoonDetailViewController: BaseViewController {
+    // 漫画model
     public var cartoonModel: CartoonModel = CartoonModel.init()
+    // 当前章节model
     public var model: ChapterModel = ChapterModel.init()
+    // 当前章节
     public var type: CartoonType = .ykmh
     // 当前章节在数组中的位置
     public var index: Int = 0
@@ -28,12 +31,13 @@ class CartoonDetailViewController: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.isNavigationBarHidden = false
-        // 退出页面时，更新页码
+        // 退出页面时，更新数据库历史记录的页码
         if !mainScroll.listArr.isEmpty {
             saveHistory(pageIndex: mainScroll.currentPageIndex)
         }
         ImageCache.default.clearMemoryCache()
     }
+    // 返回按钮
     lazy var backBtn: UIButton = {
         let btn = UIButton.init(type: .custom)
         view.addSubview(btn)
@@ -56,7 +60,7 @@ class CartoonDetailViewController: BaseViewController {
         cartoonModel.type = type
         SqlTool.init().saveHistory(model: cartoonModel)
     }
-    // 进入页面时，保存历史记录
+    // 获取数据时，保存历史记录
     func getData() {
         var detailUrl = model.detailUrl
         if type == .ykmh {
@@ -72,11 +76,14 @@ class CartoonDetailViewController: BaseViewController {
                     self.bottomView.totalPageLab.text = "\(imgArr.count)"
                     self.bottomView.slider.maximumValue = Float(imgArr.count)
                     self.bottomView.slider.minimumValue = 1
+                    // 读取当前章节是否存在历史记录
                     let page = SqlTool.init().getHistory(detailUrl: self.model.detailUrl, is_page: true)
                     if page == 0 {
+                        // 不存在历史记录，从头开始
                         self.saveHistory(pageIndex: 0)
                         self.bottomView.currentPageLab.text = "1";
                     }else{
+                        // 存在记录，从记录点开始
                         self.saveHistory(pageIndex: page)
                         self.mainScroll.setCurrentPage(index: page)
                         self.bottomView.currentPageLab.text = "\(page+1)"
@@ -106,7 +113,6 @@ class CartoonDetailViewController: BaseViewController {
                 // 加载下一章
                 self.index -= 1
                 self.model = listArr.data[self.index]
-                self.saveHistory(pageIndex: 0)
                 self.getData()
             }
         }
@@ -118,7 +124,6 @@ class CartoonDetailViewController: BaseViewController {
             } else {
                 self.index += 1
                 self.model = listArr.data[self.index]
-                self.saveHistory(pageIndex: 0)
                 self.getData()
             }
         }
@@ -129,6 +134,7 @@ class CartoonDetailViewController: BaseViewController {
         self.view.bringSubviewToFront(self.backBtn)
         return scrollView
     }()
+    // 底部进度指示器
     lazy var bottomView: BottomPageView = {
         let bottomView = BottomPageView.init()
         view.addSubview(bottomView)

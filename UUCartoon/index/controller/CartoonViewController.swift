@@ -25,7 +25,7 @@ class CartoonViewController: BaseViewController,JXSegmentedViewDelegate,JXSegmen
         // 搜索按钮
         let rightItem = UIBarButtonItem.init(image: UIImage.init(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(searchView))
         navigationItem.rightBarButtonItem = rightItem
-        navigationItem.title = ["优酷漫画"][type.rawValue]
+        navigationItem.title = ["优酷漫画","漫画猫"][type.rawValue]
         segmentedView.dataSource = segmentedDataSource
         segmentedView.listContainer = listContainerView
     }
@@ -42,7 +42,8 @@ class CartoonViewController: BaseViewController,JXSegmentedViewDelegate,JXSegmen
     
     lazy var segmentedDataSource: JXSegmentedTitleDataSource = {
         let segmentedDataSource = JXSegmentedTitleDataSource.init()
-        segmentedDataSource.titles = ["最新发布","漫画排行","分类筛选","已完结"]
+        let titleArr = [["最新发布","漫画排行","分类筛选","已完结"],["最新发布","分类筛选","已完结"]]
+        segmentedDataSource.titles = titleArr[type.rawValue]
         segmentedDataSource.isTitleColorGradientEnabled = true
         segmentedDataSource.titleNormalColor = UIColor.init(.dm, light: .black, dark: .white)
         return segmentedDataSource
@@ -74,12 +75,14 @@ class CartoonViewController: BaseViewController,JXSegmentedViewDelegate,JXSegmen
     }()
     
     func numberOfLists(in listContainerView: JXSegmentedListContainerView) -> Int {
-        4
+        let numArr = [4,3]
+        return numArr[type.rawValue]
     }
     
     func listContainerView(_ listContainerView: JXSegmentedListContainerView, initListAt index: Int) -> JXSegmentedListContainerViewListDelegate {
         let VC = CartoonListViewController.init()
-        VC.index = index
+        let numArr = [[0,1,2,3],[0,2,3]]
+        VC.index = numArr[type.rawValue][index]
         VC.type = type
         return VC
     }

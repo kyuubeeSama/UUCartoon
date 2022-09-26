@@ -15,7 +15,6 @@ class CategoryChooseView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor.color(hexString: "e9e9e9")
         backgroundColor = UIColor(.dm,light: UIColor.color(hexString: "e9e9e9"),dark: UIColor.color(hexString: "696969"))
         let titleArr = ["题材","读者","进度","地域"];
         for item in 0...3 {
@@ -54,9 +53,11 @@ class CategoryChooseView: UIView {
                 }
             }
         }
-
+        addSubview(orderView)
+    }
+    
+    lazy var orderView: UIView = {
         let titleView = UIView.init()
-        addSubview(titleView)
         titleView.backgroundColor = .systemBackground
         titleView.frame = CGRect(x: 0, y: 50, width: screenW, height: 40)
 
@@ -108,7 +109,9 @@ class CategoryChooseView: UIView {
                 }
             }
         }
-    }
+        return titleView
+    }()
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

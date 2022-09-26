@@ -35,6 +35,7 @@
 		A915A02B266F8A6C00182FB1 /* CartoonInfoHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A915A029266F8A6C00182FB1 /* CartoonInfoHeaderCollectionReusableView.swift */; };
 		A915A02C266F8A6C00182FB1 /* CartoonInfoHeaderCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A915A02A266F8A6C00182FB1 /* CartoonInfoHeaderCollectionReusableView.xib */; };
 		A925C66F267888E20070E14D /* ChapterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A925C66E267888E20070E14D /* ChapterModel.swift */; };
+		A9375DEE28E030E500CCDA8D /* EnumFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9375DED28E030E500CCDA8D /* EnumFile.swift */; };
 		A95527D426536633009ED762 /* Array+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95527D326536633009ED762 /* Array+extension.swift */; };
 		A95527E22653E7D0009ED762 /* SiftCategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95527E12653E7D0009ED762 /* SiftCategoryModel.swift */; };
 		A9653EB024BD9BA00098AB1E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9653EAF24BD9BA00098AB1E /* AppDelegate.swift */; };
@@ -79,6 +80,7 @@
 		A9DFC10D26831894001CB09A /* CartoonImgModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DFC10C26831894001CB09A /* CartoonImgModel.swift */; };
 		A9F005692689F76C00CCC791 /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F005682689F76C00CCC791 /* SearchResultViewController.swift */; };
 		A9F0056B2689F77E00CCC791 /* SearchResultCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F0056A2689F77E00CCC791 /* SearchResultCollectionView.swift */; };
+		A9F43DEA28E182F00045E7F4 /* LZString.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F43DE928E182F00045E7F4 /* LZString.swift */; };
 		A9FC199D2679E74800665986 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FC199C2679E74800665986 /* SearchViewController.swift */; };
 		A9FC199F2679E76000665986 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FC199E2679E76000665986 /* SearchView.swift */; };
 		A9FC19A12679EA5F00665986 /* SearchCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FC19A02679EA5F00665986 /* SearchCollectionView.swift */; };
@@ -116,6 +118,7 @@
 		A915A029266F8A6C00182FB1 /* CartoonInfoHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoonInfoHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		A915A02A266F8A6C00182FB1 /* CartoonInfoHeaderCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartoonInfoHeaderCollectionReusableView.xib; sourceTree = "<group>"; };
 		A925C66E267888E20070E14D /* ChapterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterModel.swift; sourceTree = "<group>"; };
+		A9375DED28E030E500CCDA8D /* EnumFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumFile.swift; sourceTree = "<group>"; };
 		A95527D326536633009ED762 /* Array+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+extension.swift"; sourceTree = "<group>"; };
 		A95527E12653E7D0009ED762 /* SiftCategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiftCategoryModel.swift; sourceTree = "<group>"; };
 		A9653EAC24BD9BA00098AB1E /* UUCartoon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UUCartoon.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -165,6 +168,7 @@
 		A9DFC10C26831894001CB09A /* CartoonImgModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoonImgModel.swift; sourceTree = "<group>"; };
 		A9F005682689F76C00CCC791 /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
 		A9F0056A2689F77E00CCC791 /* SearchResultCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCollectionView.swift; sourceTree = "<group>"; };
+		A9F43DE928E182F00045E7F4 /* LZString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LZString.swift; sourceTree = "<group>"; };
 		A9FC199C2679E74800665986 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		A9FC199E2679E76000665986 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		A9FC19A02679EA5F00665986 /* SearchCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionView.swift; sourceTree = "<group>"; };
@@ -258,6 +262,7 @@
 				144DFB00E6E5D7B0E0DDFD7C /* FileTool.swift */,
 				A993C92F263ADCBA004EE50E /* DataTool.swift */,
 				A993C931263ADCC4004EE50E /* SqlTool.swift */,
+				A9375DED28E030E500CCDA8D /* EnumFile.swift */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -365,6 +370,7 @@
 		A9653ECF24BD9F6D0098AB1E /* category */ = {
 			isa = PBXGroup;
 			children = (
+				A9F43DE928E182F00045E7F4 /* LZString.swift */,
 				A9653ED924BDA0340098AB1E /* Date+extension.swift */,
 				A9653ED324BDA0330098AB1E /* Dictionary+extension.swift */,
 				A9653ED124BDA0330098AB1E /* NSObject+extension.swift */,
@@ -544,6 +550,7 @@
 				A9653EDE24BDA0340098AB1E /* String+extension.swift in Sources */,
 				A9653EE124BDA0340098AB1E /* UIButton+extension.swift in Sources */,
 				A98B8BFD2649035400792C54 /* SiftTableView.swift in Sources */,
+				A9F43DEA28E182F00045E7F4 /* LZString.swift in Sources */,
 				A9653EDB24BDA0340098AB1E /* UITextField+extension.swift in Sources */,
 				A9CE79B928AF7B2B00BFCA68 /* ViewController+extension.swift in Sources */,
 				A9653EB424BD9BA00098AB1E /* ViewController.swift in Sources */,
@@ -559,6 +566,7 @@
 				A915A01A266F7A9E00182FB1 /* CartoonDetailCollectionView.swift in Sources */,
 				A9CEF70626452C8D00FD43C2 /* CartoonModel.swift in Sources */,
 				A96EA0ED2814EAB800E4961F /* BottomPageView.swift in Sources */,
+				A9375DEE28E030E500CCDA8D /* EnumFile.swift in Sources */,
 				A99B7C8D24C1880900DB3EBB /* config.swift in Sources */,
 				A9653EDD24BDA0340098AB1E /* UIImage+extension.swift in Sources */,
 				A9FC199F2679E76000665986 /* SearchView.swift in Sources */,
