@@ -528,6 +528,10 @@ class DataTool: NSObject {
             var resultArr:[CartoonModel] = []
             var titleXpath = ""
             var urlXpath = ""
+            if type == .mao {
+                success([])
+                return
+            }
             if type == .ykmh {
                 titleXpath = "//*[@id=\"w7\"]/li/a"
                 urlXpath = "//*[@id=\"w7\"]/li/a/@href"
@@ -557,7 +561,8 @@ class DataTool: NSObject {
 //            http://wap.ykmh.com/search/?keywords=%E6%88%91&page=2
             detailUrlStr = "search/?keywords=\(keyword)&page=\(page)"
         }else{
-            detailUrlStr = ""
+//        https://www.maofly.com/search.html?q=%E9%AB%98%E4%B8%AD&page=2
+            detailUrlStr = "search.html?q=\(keyword)&page=\(page)"
         }
         var urlStr = urlArr[type.rawValue] + detailUrlStr
         urlStr = urlStr.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
@@ -580,10 +585,6 @@ class DataTool: NSObject {
             var imgXPath = ""
             // 最新
             var numXPath = ""
-            if type == .mao {
-                success([])
-                return
-            }
             if type == .ykmh {
                 titleXPath = "//*[@id=\"update_list\"]/div/div/div[2]/a"
                 urlXPath = "//*[@id=\"update_list\"]/div/div/div[2]/a/@href"
@@ -592,6 +593,14 @@ class DataTool: NSObject {
                 timeXPath = "//*[@id=\"update_list\"]/div/div/div[2]/p[3]/span[2]"
                 imgXPath = "//*[@id=\"update_list\"]/div/div/div[1]/a/img/@src"
                 numXPath = "//*[@id=\"update_list\"]/div/div/a"
+            }else{
+                titleXPath = "/html/body/div/div[2]/div/div[1]/div[2]/div/div/h2/a"
+                urlXPath = "/html/body/div/div[2]/div/div[1]/div[2]/div/div/h2/a/@href"
+                authorXPath = "/html/body/div/div[2]/div/div[1]/div[2]/div/div/div/a"
+                categoryXPath = ""
+                timeXPath = ""
+                imgXPath = "/html/body/div/div[2]/div/div[1]/div[2]/div/div/a/img/@src"
+                numXPath = ""
             }
             let titleNodeArr = jiDoc?.xPath(titleXPath)
             let urlNodeArr = jiDoc?.xPath(urlXPath)
@@ -609,11 +618,13 @@ class DataTool: NSObject {
 //                    print(detailUrl)
                     cartoonModel.detailUrl = urlNode.content!
                     cartoonModel.author = authorNodeArr![index].content!
-                    cartoonModel.category = categoryNodeArr![index].content!
-                    cartoonModel.time = timeNodeArr![index].content!
-                    let num = numNodeArr![index].content!
                     cartoonModel.type = type
-                    cartoonModel.num = num
+                    if type == .ykmh {
+                        cartoonModel.category = categoryNodeArr![index].content!
+                        cartoonModel.time = timeNodeArr![index].content!
+                        let num = numNodeArr![index].content!
+                        cartoonModel.num = num
+                    }
                     cartoonModel.imgUrl = imgNodeArr![index].content!
                     resultArr.append(cartoonModel)
                 }
@@ -667,6 +678,7 @@ class DataTool: NSObject {
                     var imgUrl = String(item)
                     imgUrl = imgUrl.replacingOccurrences(of: "\\", with: "")
 //                https://mao.mhtupian.com/uploads/img/34697/647507/0001.jpg
+                    imgUrl = imgUrl.addingPercentEncoding(withAllowedCharacters: CharacterSet.afURLQueryAllowed)!
                     imgUrl = "https://mao.mhtupian.com/uploads/\(imgUrl)"
                     imgModel.imgUrl = imgUrl
                     imgModel.type = type

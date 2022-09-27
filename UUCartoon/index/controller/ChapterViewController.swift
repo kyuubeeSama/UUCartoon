@@ -27,7 +27,6 @@ class ChapterViewController: BaseViewController {
     func getData(){
         beginProgress()
         DispatchQueue.global().async {
-            self.detailUrl = "https://www.maofly.com/manga/5777.html"
             DataTool.init().getCartoonDetailData(type: self.type, detailUrl: self.detailUrl, success: { detailModel in
                 DispatchQueue.main.async {
                     //保存数据到数据库中
@@ -131,25 +130,46 @@ class ChapterViewController: BaseViewController {
                 VC.cartoonModel.chapter_area = indexPath.section-2
                 VC.index = indexPath.row
                 VC.type = self.type
+                VC.changeChapterBlock = { index in
+                    for (index1,item) in self.model.chapterArr.enumerated() {
+                        for (index2,item1) in item.data.enumerated() {
+                            item1.is_choose = (index1 == indexPath.section-2 && index2 == index)
+                        }
+                    }
+                    self.mainCollect.reloadData()
+                }
                 self.navigationController?.pushViewController(VC, animated: true)
             }
         }
         mainCollect.readBlock = {
             // 阅读
             // 如果有记录，就继续记录，如果没有，就读最新的
-            var chapterModel = self.model.chapterArr[0].data.last
-            for item in self.model.chapterArr {
-                for item1 in item.data {
+            let chapterArr = self.model.chapterArr[0].data
+            var chapterModel = chapterArr.last
+            var chapter_area = 0
+            var index = chapterArr.count-1
+            for (index1,item) in self.model.chapterArr.enumerated() {
+                for (index2,item1) in item.data.enumerated() {
                     if item1.is_choose == true {
+                        chapter_area = index1
+                        index = index2
                         chapterModel = item1
                     }
                 }
             }
             let VC = CartoonDetailViewController.init()
+            VC.changeChapterBlock = { index in
+                for (index1,item) in self.model.chapterArr.enumerated() {
+                    for (index2,item1) in item.data.enumerated() {
+                        item1.is_choose = (index1 == chapter_area && index2 == index)
+                    }
+                }
+            }
             VC.model = chapterModel!
             VC.cartoonModel = self.model
-            VC.cartoonModel.chapter_area = 0
+            VC.cartoonModel.chapter_area = chapter_area
             VC.type = self.type
+            VC.index = index
             self.navigationController?.pushViewController(VC, animated: true)
         }
         mainCollect.subscribeBlock = {

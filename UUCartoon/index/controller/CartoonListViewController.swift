@@ -196,6 +196,7 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
                 DataTool.init().getNewCartoonData(type: type, pageNum: pageNum) { resultArr in
                     DispatchQueue.main.async { [self] in
                         endProgress()
+                        mainCollect.es.stopPullToRefresh()
                         if !resultArr.isEmpty {
                             pageNum += 1
                             mainCollect.es.stopLoadingMore()
@@ -214,6 +215,7 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
                 DataTool.init().getRankCartoonData(type: type, pageNum: pageNum, rankType: rankType, timeType: timeType, category: categoryType) { resultArr in
                     DispatchQueue.main.async { [self] in
                         endProgress()
+                        mainCollect.es.stopPullToRefresh()
                         saveCartoonList(list: resultArr)
                         rankListArr[rankType] = resultArr
                         mainCollect.listArr = rankListArr[rankType]
@@ -241,6 +243,7 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
                     DataTool.init().getCategorySiftResultListData(type: type, detailUrl: detailUrl, page: pageNum, success: { resultArr in
                         DispatchQueue.main.async { [self] in
                             endProgress()
+                            mainCollect.es.stopPullToRefresh()
                             if !resultArr.isEmpty {
                                 pageNum += 1
                                 mainCollect.es.stopLoadingMore()
@@ -260,6 +263,7 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
                 DataTool.init().getDoneCartoonData(type: type, page: pageNum) { resultArr in
                     DispatchQueue.main.async { [self] in
                         endProgress()
+                        mainCollect.es.stopPullToRefresh()
                         if !resultArr.isEmpty {
                             pageNum += 1
                             mainCollect.es.stopLoadingMore()
@@ -334,6 +338,12 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
             } else {
                 self.getListData()
             }
+        }
+        mainCollect.es.addPullToRefresh(animator: header) {
+            self.mainCollect.es.resetNoMoreData()
+            self.pageNum = 1
+            self.listArr = []
+            self.getListData()
         }
         return mainCollect
     }()

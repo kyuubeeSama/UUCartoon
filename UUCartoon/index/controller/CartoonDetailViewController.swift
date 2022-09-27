@@ -15,13 +15,25 @@ import ProgressHUD
 
 class CartoonDetailViewController: BaseViewController {
     // 漫画model
-    public var cartoonModel: CartoonModel = CartoonModel.init()
+    public var cartoonModel: CartoonModel = CartoonModel.init() {
+        didSet{
+            for _ in cartoonModel.chapterArr[cartoonModel.chapter_area].data {
+                imageListArr.append([])
+            }
+        }
+    }
+    // 切换了章节
+    public var changeChapterBlock:((_ index:Int)->())?
     // 当前章节model
     public var model: ChapterModel = ChapterModel.init()
     // 当前章节
     public var type: CartoonType = .ykmh
+    // 章节图片数组
+    private var imageListArr:[[CartoonImgModel]] = []
     // 当前章节在数组中的位置
     public var index: Int = 0
+    // 是否是查看前一章，如果是需要先翻到最后一页
+    private var is_former = false
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -72,6 +84,7 @@ class CartoonDetailViewController: BaseViewController {
                 DispatchQueue.main.async {
                     // TODO: 通过历史记录进来的，按照历史记录的页码
                     self.endProgress()
+                    self.imageListArr[self.index] = imgArr
                     self.mainScroll.listArr = imgArr
                     self.bottomView.totalPageLab.text = "\(imgArr.count)"
                     self.bottomView.slider.maximumValue = Float(imgArr.count)
@@ -80,8 +93,16 @@ class CartoonDetailViewController: BaseViewController {
                     let page = SqlTool.init().getHistory(detailUrl: self.model.detailUrl, is_page: true)
                     if page == 0 {
                         // 不存在历史记录，从头开始
-                        self.saveHistory(pageIndex: 0)
-                        self.bottomView.currentPageLab.text = "1";
+                        if self.is_former {
+                            self.saveHistory(pageIndex: imgArr.count-1)
+                            self.mainScroll.setCurrentPage(index: imgArr.count-1)
+                            self.bottomView.totalPageLab.text = "\(imgArr.count)"
+                            self.bottomView.currentPageLab.text = "\(imgArr.count)"
+                        }else{
+                            self.saveHistory(pageIndex: 0)
+                            self.bottomView.currentPageLab.text = "1";
+                            self.mainScroll.setCurrentPage(index: 0)
+                        }
                     }else{
                         // 存在记录，从记录点开始
                         self.saveHistory(pageIndex: page)
@@ -103,28 +124,50 @@ class CartoonDetailViewController: BaseViewController {
     lazy var mainScroll: CartoonViewScrollView = {
         let scrollView = CartoonViewScrollView.init(frame: CGRect(x: 0, y: 0, width: screenW, height: screenH))
         self.view.addSubview(scrollView)
+        // 因为外面章节是从新到旧，所以最新的一章要小于旧章
         scrollView.scrollLastPage = {
             let listArr = self.cartoonModel.chapterArr[self.cartoonModel.chapter_area]
             if self.index == 0 {
                 // 到头了
-                Tool.makeAlertController(title: "提醒", message: "前面没有了") {
+                Tool.makeAlertController(title: "提醒", message: "已经是最新一章，后面没有了") {
                 }
             } else {
                 // 加载下一章
+                self.is_former = false
                 self.index -= 1
+                if self.changeChapterBlock != nil {
+                    self.changeChapterBlock!(self.index)
+                }
                 self.model = listArr.data[self.index]
-                self.getData()
+                let imageArr = self.imageListArr[self.index]
+                if imageArr.isEmpty {
+                    self.getData()
+                }else{
+                    self.mainScroll.listArr = imageArr
+                }
             }
         }
         scrollView.scrollFirstPage = {
             let listArr = self.cartoonModel.chapterArr[self.cartoonModel.chapter_area]
             if self.index == listArr.data.count - 1 {
-                Tool.makeAlertController(title: "提醒", message: "后面没有了") {
+                Tool.makeAlertController(title: "提醒", message: "已经是第一章，前面没有了") {
                 }
             } else {
+                self.is_former = true
                 self.index += 1
+                if self.changeChapterBlock != nil {
+                    self.changeChapterBlock!(self.index)
+                }
                 self.model = listArr.data[self.index]
-                self.getData()
+                let imageArr = self.imageListArr[self.index]
+                if imageArr.isEmpty {
+                    self.getData()
+                }else{
+                    self.mainScroll.listArr = imageArr
+                    self.mainScroll.setCurrentPage(index: imageArr.count-1)
+                    self.bottomView.totalPageLab.text = "\(imageArr.count)"
+                    self.bottomView.currentPageLab.text = "\(imageArr.count)"
+                }
             }
         }
         scrollView.scrollDidScrollBlock = { currentIndex in
