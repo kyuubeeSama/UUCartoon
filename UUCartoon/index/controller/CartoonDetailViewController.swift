@@ -85,6 +85,7 @@ class CartoonDetailViewController: BaseViewController {
                     // TODO: 通过历史记录进来的，按照历史记录的页码
                     self.endProgress()
                     self.imageListArr[self.index] = imgArr
+                    self.mainScroll.currentPageIndex = 0
                     self.mainScroll.listArr = imgArr
                     self.bottomView.totalPageLab.text = "\(imgArr.count)"
                     self.bottomView.slider.maximumValue = Float(imgArr.count)
@@ -143,7 +144,11 @@ class CartoonDetailViewController: BaseViewController {
                 if imageArr.isEmpty {
                     self.getData()
                 }else{
+                    self.mainScroll.currentPageIndex = 0
                     self.mainScroll.listArr = imageArr
+                    self.mainScroll.setCurrentPage(index: 0)
+                    self.bottomView.totalPageLab.text = "\(imageArr.count)"
+                    self.bottomView.currentPageLab.text = "0"
                 }
             }
         }
@@ -163,6 +168,7 @@ class CartoonDetailViewController: BaseViewController {
                 if imageArr.isEmpty {
                     self.getData()
                 }else{
+                    self.mainScroll.currentPageIndex = 0
                     self.mainScroll.listArr = imageArr
                     self.mainScroll.setCurrentPage(index: imageArr.count-1)
                     self.bottomView.totalPageLab.text = "\(imageArr.count)"

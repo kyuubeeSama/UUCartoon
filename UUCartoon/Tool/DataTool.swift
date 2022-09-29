@@ -28,7 +28,11 @@ class DataTool: NSObject {
         if type == .ykmh {
             detailUrlStr = "update/?page=\(pageNum)"
         } else {
-            detailUrlStr = "update-page-\(pageNum).html"
+            if pageNum == 1 {
+                detailUrlStr = "update.html"
+            }else{
+                detailUrlStr = "update-page-\(pageNum).html"
+            }
         }
         let urlStr = urlArr[type.rawValue] + detailUrlStr
         let  jiDoc = Ji.init(htmlURL: URL.init(string: urlStr)!)

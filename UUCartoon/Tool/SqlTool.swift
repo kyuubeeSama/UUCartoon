@@ -78,6 +78,7 @@ class SqlTool: NSObject {
             try dbQueue.write { db in
                 try db.execute(sql: """
                                     replace into website ('name','url','type') values('优酷漫画','wap.ykmh.com',0)
+                                    replace into website ('name','url','type') values('漫画猫','www.maofly.com',1)
                                     """)
             }
         } catch {
