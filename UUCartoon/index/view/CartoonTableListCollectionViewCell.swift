@@ -38,11 +38,11 @@ class CartoonTableListCollectionViewCell: UICollectionViewCell {
         categoryLab.text = cartoonModel.category
         timeLab.text = cartoonModel.time
         if cartoonModel.is_rank == true {
-            rankLab.isHidden = false
+            rankView.isHidden = false
             numLab.isHidden = true
             rightImg.isHidden = true
         }else{
-            rankLab.isHidden = true
+            rankView.isHidden = true
             numLab.isHidden = false
             rightImg.isHidden = false
         }

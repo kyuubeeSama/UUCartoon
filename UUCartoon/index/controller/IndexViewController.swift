@@ -20,7 +20,7 @@ class IndexViewController: BaseViewController {
     }
     
     lazy var mainTable: LabelTableView = {
-        let mainTable = LabelTableView.init(frame: .zero, style: .grouped)
+        let mainTable = LabelTableView.init(frame: .zero, style: .insetGrouped)
         self.view.addSubview(mainTable)
         mainTable.snp.makeConstraints { make in
             make.edges.equalToSuperview()

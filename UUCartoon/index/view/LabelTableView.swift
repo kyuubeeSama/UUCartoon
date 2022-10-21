@@ -22,6 +22,9 @@ class LabelTableView: UITableView,UITableViewDataSource,UITableViewDelegate {
         super.init(frame: frame, style: style)
         delegate = self
         dataSource = self
+        estimatedRowHeight = 0
+        estimatedSectionFooterHeight = 0
+        estimatedSectionHeaderHeight = 0
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -52,6 +55,13 @@ class LabelTableView: UITableView,UITableViewDataSource,UITableViewDelegate {
         ["漫画列表","个人中心"][section]
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        40
+    }
+
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        0.01
+    }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

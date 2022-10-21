@@ -37,15 +37,22 @@ class BaseViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         view.backgroundColor = .systemBackground
+        // 退出app的通知
         NotificationCenter.default.reactive.notifications(forName: UIApplication.willResignActiveNotification).observeValues { notification in
-            let effect = UIBlurEffect.init(style: .extraLight)
+            var style:UIBlurEffect.Style = .dark
+            if self.traitCollection.userInterfaceStyle == .light {
+                style = .light
+            }
+            let effect = UIBlurEffect.init(style: style)
             let effectView = UIVisualEffectView.init(effect: effect)
             effectView.frame = CGRect(x: 0, y: 0, width: screenW, height: screenH)
             effectView.tag = 1990
             effectView.alpha = 0.8
+            effectView.backgroundColor = .systemBackground
             let window = UIApplication.shared.windows[0]
             window.addSubview(effectView)
         }
+        // 进入app的通知
         NotificationCenter.default.reactive.notifications(forName: UIApplication.didBecomeActiveNotification).observeValues { notification in
             let window = UIApplication.shared.windows[0]
             if var effectView = window.viewWithTag(1990) {
