@@ -16,11 +16,27 @@ let top_height = CGFloat(statusbar_height+44)
 let NavColor = "196EE5"
 let ButtonBackColor = "CD3C3E"
 let isIphoneX = UIScreen.main.bounds.size.height >= 812 ? true : false
-let urlArr = ["http://wap.ykmh.com/","https://www.maofly.com/"]
-
+let urlArr = [YouKuModel.init().webUrlStr]
 enum downloadStatus : Int {
     case prepare = 0
     case fail = 1
     case success = 2
 }
 
+// 首页标题
+var indexArr:[(title:String,list:[IndexModel])] {
+    [
+     (title:"漫画站",list:[
+        IndexModel.init(title: YouKuModel.init().websiteName, type: 1, webType: .ykmh,webModel: YouKuModel.init())
+     ]),
+     (title:"个人中心",list:[
+        IndexModel.init(title: "历史记录"),
+        IndexModel.init(title: "我的收藏")
+     ])]
+}
+
+// 站点枚举
+enum CartoonType: Int {
+    case ykmh = 0
+    case mao = 1
+}

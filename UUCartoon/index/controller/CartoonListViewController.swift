@@ -207,8 +207,6 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
                         listArr.append(array: resultArr)
                         mainCollect.listArr = listArr
                     }
-                } failure: { [self] error in
-                    getDataFail()
                 }
             } else if index == 1 {
                 // 漫画排行
@@ -220,8 +218,6 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
                         rankListArr[rankType] = resultArr
                         mainCollect.listArr = rankListArr[rankType]
                     }
-                } failure: { [self] error in
-                    getDataFail()
                 }
             } else if index == 2 {
                 // 分类筛选
@@ -254,8 +250,6 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
                             listArr.append(array: resultArr)
                             mainCollect.listArr = listArr
                         }
-                    }, failure: { [self] errer in
-                        getDataFail()
                     })
                 }
             } else if index == 3 {
@@ -274,17 +268,7 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
                         listArr.append(array: resultArr)
                         mainCollect.listArr = listArr
                     }
-                } failure: { [self] Error in
-                    getDataFail()
                 }
-            }
-        }
-    }
-    private func getDataFail() {
-        DispatchQueue.main.async {
-            self.endProgress()
-            Tool.makeAlertController(title: "提示", message: "获取网络失败，请返回重新进入") {
-                self.navigationController?.popViewController(animated: true)
             }
         }
     }
@@ -293,10 +277,6 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
         DispatchQueue.global().async {
             DataTool.init().getCategoryData(type: self.type, success: { resultArr in
                 self.categoryArr = resultArr
-            }, failure: { error in
-                DispatchQueue.main.async {
-                    self.view.makeToast("获取漫画分类失败")
-                }
             })
         }
     }

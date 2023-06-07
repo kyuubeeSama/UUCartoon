@@ -37,11 +37,6 @@ class SearchResultViewController: BaseViewController {
                     self.listArr.append(array: resultArr)
                     self.mainCollect.listArr = self.listArr
                 }
-            } failure: { error in
-                DispatchQueue.main.async {
-                    self.endProgress()
-                    self.view.makeToast("数据获取失败")
-                }
             }
         }
     }

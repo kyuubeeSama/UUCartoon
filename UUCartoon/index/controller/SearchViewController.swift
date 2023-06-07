@@ -48,8 +48,6 @@ class SearchViewController: BaseViewController,UISearchBarDelegate {
                     }
                     self.mainCollect.listArr = resultArr
                 }
-            } failure: { error in
-                print(error)
             }
         }
     }

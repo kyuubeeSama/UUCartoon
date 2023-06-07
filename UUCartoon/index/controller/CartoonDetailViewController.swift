@@ -84,40 +84,38 @@ class CartoonDetailViewController: BaseViewController {
                 DispatchQueue.main.async {
                     // TODO: 通过历史记录进来的，按照历史记录的页码
                     self.endProgress()
-                    self.imageListArr[self.index] = imgArr
-                    self.mainScroll.currentPageIndex = 0
-                    self.mainScroll.listArr = imgArr
-                    self.bottomView.totalPageLab.text = "\(imgArr.count)"
-                    self.bottomView.slider.maximumValue = Float(imgArr.count)
-                    self.bottomView.slider.minimumValue = 1
-                    // 读取当前章节是否存在历史记录
-                    let page = SqlTool.init().getHistory(detailUrl: self.model.detailUrl, is_page: true)
-                    if page == 0 {
-                        // 不存在历史记录，从头开始
-                        if self.is_former {
-                            self.saveHistory(pageIndex: imgArr.count-1)
-                            self.mainScroll.setCurrentPage(index: imgArr.count-1)
-                            self.bottomView.totalPageLab.text = "\(imgArr.count)"
-                            self.bottomView.currentPageLab.text = "\(imgArr.count)"
-                        }else{
-                            self.saveHistory(pageIndex: 0)
-                            self.bottomView.currentPageLab.text = "1";
-                            self.mainScroll.setCurrentPage(index: 0)
+                    if imgArr.isEmpty{
+                        Tool.makeAlertController(title: "提示", message: "详情获取失败") {
+                            self.navigationController?.popViewController(animated: true)
                         }
                     }else{
-                        // 存在记录，从记录点开始
-                        self.saveHistory(pageIndex: page)
-                        self.mainScroll.setCurrentPage(index: page)
-                        self.bottomView.currentPageLab.text = "\(page+1)"
+                        self.imageListArr[self.index] = imgArr
+                        self.mainScroll.currentPageIndex = 0
+                        self.mainScroll.listArr = imgArr
+                        self.bottomView.totalPageLab.text = "\(imgArr.count)"
+                        self.bottomView.slider.maximumValue = Float(imgArr.count)
+                        self.bottomView.slider.minimumValue = 1
+                        // 读取当前章节是否存在历史记录
+                        let page = SqlTool.init().getHistory(detailUrl: self.model.detailUrl, is_page: true)
+                        if page == 0 {
+                            // 不存在历史记录，从头开始
+                            if self.is_former {
+                                self.saveHistory(pageIndex: imgArr.count-1)
+                                self.mainScroll.setCurrentPage(index: imgArr.count-1)
+                                self.bottomView.totalPageLab.text = "\(imgArr.count)"
+                                self.bottomView.currentPageLab.text = "\(imgArr.count)"
+                            }else{
+                                self.saveHistory(pageIndex: 0)
+                                self.bottomView.currentPageLab.text = "1";
+                                self.mainScroll.setCurrentPage(index: 0)
+                            }
+                        }else{
+                            // 存在记录，从记录点开始
+                            self.saveHistory(pageIndex: page)
+                            self.mainScroll.setCurrentPage(index: page)
+                            self.bottomView.currentPageLab.text = "\(page+1)"
+                        }
                     }
-                }
-            }, failure: { error in
-                DispatchQueue.main.async {
-                    self.endProgress()
-                    Tool.makeAlertController(title: "提示", message: "数据加载失败") {
-                        self.navigationController?.popViewController(animated: true)
-                    }
-                    self.view.makeToast("数据获取失败")
                 }
             })
         }

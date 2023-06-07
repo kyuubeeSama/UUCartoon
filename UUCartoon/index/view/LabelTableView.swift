@@ -12,7 +12,7 @@ class LabelTableView: UITableView,UITableViewDataSource,UITableViewDelegate {
     
     var cellItemBlock:((_ indexPath:IndexPath)->())?
     
-    public var listArr:[[String]] = []{
+    public var listArr:[(title:String,list:[IndexModel])] = []{
         didSet{
             reloadData()
         }
@@ -32,12 +32,12 @@ class LabelTableView: UITableView,UITableViewDataSource,UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        listArr[section].count
+        listArr[section].list.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell.init(style: .default, reuseIdentifier: "cell")
-        cell.textLabel?.text = listArr[indexPath.section][indexPath.row]
+        cell.textLabel?.text = listArr[indexPath.section].list[indexPath.row].title
         return cell
     }
     
@@ -52,7 +52,7 @@ class LabelTableView: UITableView,UITableViewDataSource,UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        ["漫画列表","个人中心"][section]
+        listArr[section].title
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

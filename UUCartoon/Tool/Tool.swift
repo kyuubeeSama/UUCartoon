@@ -65,4 +65,31 @@ class Tool: NSObject {
             return false
         }
     }
+    
+    static func asciiBytesToString(bytes: [UInt8]) -> String{
+        var str: String = ""
+        for num in bytes {
+            str.append(Character(UnicodeScalar(num)))
+        }
+        return str
+    }
+    
+    // 判断是否有http，并拼接地址
+    static func checkUrl(urlStr: String, domainUrlStr: String) -> String {
+        if urlStr.contains("http") || urlStr.contains("https") {
+            return urlStr
+        } else {
+            return domainUrlStr + urlStr
+        }
+    }
+    
+    // 去除特殊字符
+    static func cleanChater(string:String) -> String{
+        var str = string
+        str = str.replacingOccurrences(of: "\r", with: "")
+        str = str.replacingOccurrences(of: "\n", with: "")
+        str = str.replacingOccurrences(of: " ", with: "")
+        return str
+    }
 }
+

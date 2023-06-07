@@ -44,14 +44,6 @@ class ChapterViewController: BaseViewController {
                     self.getHistoryData()
                     self.addCollectItem(cartoonModel: self.model)
                 }
-            }, failure: { error in
-                print(error)
-                DispatchQueue.main.async {
-                    self.endProgress()
-                    Tool.makeAlertController(title: "提示", message: "数据加载失败") {
-                        self.navigationController?.popViewController(animated: true)
-                    }
-                }
             })
         }
     }

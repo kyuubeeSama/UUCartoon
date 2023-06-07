@@ -44,6 +44,7 @@ post_install do |installer_representation|
         target.build_configurations.each do |config|
             config.build_settings['ONLY_ACTIVE_ARCH'] = 'NO'
             config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION'] = 'YES'
+            config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
         end
     end
 end

@@ -15,7 +15,7 @@ class IndexViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        mainTable.listArr = [["优酷漫画","漫画猫"],["收藏列表","历史记录"]]
+        mainTable.listArr = indexArr
         title = "悠悠漫画"
     }
     
@@ -28,9 +28,8 @@ class IndexViewController: BaseViewController {
         mainTable.cellItemBlock = { indexPath in
             if indexPath.section == 0 {
                 let VC = CartoonViewController.init()
-                VC.type = CartoonType(rawValue: indexPath.row)!
+                VC.indexModel = indexArr[indexPath.section].list[indexPath.row]
                 self.navigationController?.pushViewController(VC, animated: true)
-
             }else{
                 if indexPath.row == 0{
                     let VC = CollectViewController.init()
