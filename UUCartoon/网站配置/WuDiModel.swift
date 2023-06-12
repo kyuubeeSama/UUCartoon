@@ -1,18 +1,14 @@
 //
-//  YouKuModel.swift
-//  UUCartoon
+// Created by Galaxy on 2023/6/12.
+// Copyright (c) 2023 qykj. All rights reserved.
 //
-//  Created by Galaxy on 2023/6/7.
-//  Copyright © 2023 qykj. All rights reserved.
-//
-
-import UIKit
+import Foundation
 import Ji
-class YouKuModel: WebsiteBaseModel,WebsiteProtocol {
+class WuDiModel: WebsiteBaseModel,WebsiteProtocol {
     override init() {
         super.init()
-        websiteName = "优酷漫画"
-        webUrlStr = "http://wap.ykmh.com/"
+        websiteName = "无敌漫画"
+        webUrlStr = "https://m.55dmh.com/"
         websiteTitleArr = ["最新发布","漫画排行","分类筛选","已完结"]
         websiteIdArr = [0,1,2,3]
     }
@@ -30,7 +26,7 @@ class YouKuModel: WebsiteBaseModel,WebsiteProtocol {
             //            详情
             let urlXPath = "//*[@id=\"comic-items\"]/li/a[2]/@href"
             // 作者
-            let authorXPath = "//*[@id=\"comic-items\"]/li/span/a"
+            let authorXPath = "//*[@id=\"comic-items\"]/li/span"
             // 图片
             let imgXPath = "//*[@id=\"comic-items\"]/li/a[1]/img/@src"
             let titleNodeArr = jiDoc?.xPath(titleXPath)
@@ -47,39 +43,44 @@ class YouKuModel: WebsiteBaseModel,WebsiteProtocol {
                     cartoonModel.author = authorNodeArr![index].content!
                     cartoonModel.num = "0"
                     cartoonModel.imgUrl = imgNodeArr![index].content!
-                    cartoonModel.type = .ykmh
+                    cartoonModel.type = .wudi
                     resultArr.append(cartoonModel)
                 }
             }
             return resultArr
         }
     }
-    
+
     func getImageList(detailUrl: String) -> [CartoonImgModel] {
         let jiDoc = Ji.init(htmlURL: URL.init(string: detailUrl.replacingOccurrences(of: "//", with: "/"))!)
         if jiDoc == nil {
             return []
         }else{
-            let jsXpath = "/html/body/script[1]/text()"
-            let jsNodeArr = jiDoc?.xPath(jsXpath)
-            let htmlContent = jsNodeArr![0].content
-            var oneStr:String = String(htmlContent!.split(separator: ";")[0])
-            oneStr = oneStr.replacingOccurrences(of: "]", with: "")
-            oneStr = oneStr.replacingOccurrences(of: "var chapterImages = [", with: "")
-            var array:[CartoonImgModel] = []
-            for item in oneStr.split(separator: ",") {
-                var imgModel = CartoonImgModel.init()
-                var imgUrl = String(item.replacingOccurrences(of: "\"", with: ""))
-                imgUrl = imgUrl.replacingOccurrences(of: "\\", with: "")
-                imgUrl = "http://js.tingliu.cc\(imgUrl)"
-                imgModel.imgUrl = imgUrl
-                imgModel.type = .ykmh
-                array.append(imgModel)
-            }
-            return array
+            return getDetailImageList(urlStr: detailUrl, page: 1, array: [])
         }
     }
-    
+    private func getDetailImageList(urlStr:String,page:Int,array:[CartoonImgModel])->[CartoonImgModel]{
+        let detailUrl = urlStr.replacingOccurrences(of: ".html", with: "-\(page).html")
+        let jiDoc = Ji.init(htmlURL: URL.init(string: detailUrl.replacingOccurrences(of: "//", with: "/"))!)
+        if jiDoc == nil {
+            return []
+        }else{
+            var imageArr:[CartoonImgModel] = array
+            let imageXpath = "//*[@id=\"images\"]/div/img/@src"
+            let imageNodeArr = jiDoc?.xPath(imageXpath)
+            if imageNodeArr!.isEmpty {
+                return imageArr
+            }
+            for item in imageNodeArr! {
+                var imgModel = CartoonImgModel.init()
+                imgModel.imgUrl = item.content!
+                imgModel.type = .wudi
+                imageArr.append(imgModel)
+            }
+            return getDetailImageList(urlStr: urlStr, page: page+1, array: imageArr)
+        }
+    }
+
     func getSearchList(keyword: String, pageNum: Int) -> [CartoonModel] {
         var urlStr = webUrlStr + "search/?keywords=\(keyword)&page=\(pageNum)"
         urlStr = urlStr.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
@@ -116,7 +117,7 @@ class YouKuModel: WebsiteBaseModel,WebsiteProtocol {
                     cartoonModel.name = titleNodeArr![index].content!
                     cartoonModel.detailUrl = urlNode.content!
                     cartoonModel.author = authorNodeArr![index].content!
-                    cartoonModel.type = .ykmh
+                    cartoonModel.type = .wudi
                     cartoonModel.category = categoryNodeArr![index].content!
                     cartoonModel.time = timeNodeArr![index].content!
                     let num = numNodeArr![index].content!
@@ -128,7 +129,7 @@ class YouKuModel: WebsiteBaseModel,WebsiteProtocol {
             return resultArr
         }
     }
-    
+
     func getSearchRecommendList() -> [CartoonModel] {
         let urlStr = webUrlStr
         let jiDoc = Ji.init(htmlURL: URL.init(string: urlStr)!)
@@ -145,30 +146,30 @@ class YouKuModel: WebsiteBaseModel,WebsiteProtocol {
                     let model = CartoonModel.init()
                     model.name = item.content!
                     model.detailUrl = urlNodeArr![index].content!
-                    model.type = .ykmh
+                    model.type = .wudi
                     resultArr.append(model)
                 }
             }
             return resultArr
         }
     }
-    
+
     func getDetailData(urlStr: String) -> CartoonModel {
         let jiDoc = Ji.init(htmlURL: URL.init(string: urlStr)!)
         if jiDoc == nil {
             return CartoonModel.init()
         } else {
             let titleXpath = "//*[@id=\"comicName\"]"
-            let imgXpath = "//*[@id=\"Cover\"]/mip-img/@src"
-            let authorXpath = "//*[@id=\"header\"]/div/div[3]/div[2]/p[1]/a"
-            let timeXpath = "//*[@id=\"header\"]/div/div[3]/div[2]/p[4]/span[2]"
-            let categoryXpath = "//*[@id=\"header\"]/div/div[3]/div[2]/p[2]/a"
+            let imgXpath = "//*[@id=\"Cover\"]/img/@src"
+            let authorXpath = "/html/body/div[1]/div/div[2]/div[2]/p[1]/a"
+            let timeXpath = "/html/body/div[1]/div/div[2]/div[2]/p[4]/span[2]"
+            let categoryXpath = "/html/body/div[1]/div/div[2]/div[2]/p[2]/a"
             let chapterNameXpath = "//*[@id=\"list_block\"]/div/div[1]/div[1]/span[2]"
-            let descXpath = "//*[@id=\"showmore-des\"]"
-            let recommendTitleXpath = "//*[@id=\"w1\"]/li/a[2]"
-            let recommendUrlXpath = "//*[@id=\"w1\"]/li/a[2]/@href"
-            let recommendImgXpath = "//*[@id=\"w1\"]/li/a[1]/mip-img/@src"
-            let recommendAuthorXpath = "//*[@id=\"w1\"]/li/span/a"
+            let descXpath = "//*[@id=\"full-des\"]"
+            let recommendTitleXpath = "//*[@id=\"w0\"]/li/a[2]"
+            let recommendUrlXpath = "//*[@id=\"w0\"]/li/a[2]/@href"
+            let recommendImgXpath = "//*[@id=\"w0\"]/li/a[1]/img/@src"
+            let recommendAuthorXpath = "//*[@id=\"w0\"]/li/span"
             let titleNodeArr = jiDoc?.xPath(titleXpath)
             let imgNodeArr = jiDoc?.xPath(imgXpath)
             let authorNodeArr = jiDoc?.xPath(authorXpath)
@@ -184,8 +185,8 @@ class YouKuModel: WebsiteBaseModel,WebsiteProtocol {
             // 剧集数据
             if !(chapterNameNodeArr!.isEmpty){
                 for (index,item) in chapterNameNodeArr!.enumerated() {
-                    let chapterTitleListXpath = "/html/body/div[1]/div/div[4]/div[\(index+1)]/div[2]/div/mip-showmore/ul/li/a/span"
-                    let chapterUrlListXpath = "/html/body/div[1]/div/div[4]/div[\(index+1)]/div[2]/div/mip-showmore/ul/li/a/@href"
+                    let chapterTitleListXpath = "/html/body/div[1]/div/div[4]/div[\(index+1)]/div[2]/div/ul/li/a/span"
+                    let chapterUrlListXpath = "/html/body/div[1]/div/div[4]/div[\(index+1)]/div[2]/div/ul/li/a/@href"
                     let chapterTitleListNodeArr = jiDoc?.xPath(chapterTitleListXpath)
                     let chapterUrlListNodeArr = jiDoc?.xPath(chapterUrlListXpath)
                     var chapterArr:[ChapterModel] = []
@@ -195,6 +196,7 @@ class YouKuModel: WebsiteBaseModel,WebsiteProtocol {
                         chapterModel.detailUrl = chapterUrlListNodeArr![k].content!
                         chapterArr.append(chapterModel)
                     }
+                    chapterArr = chapterArr.reversed()
                     let chapterData = (name:item.content!,data:chapterArr)
                     detailModel.chapterArr.append(chapterData)
                 }
@@ -206,7 +208,7 @@ class YouKuModel: WebsiteBaseModel,WebsiteProtocol {
                 cartoonModel.author = recommendAuthorNodeArr![index].content!
                 cartoonModel.imgUrl = recommendImgNodeArr![index].content!
                 cartoonModel.detailUrl = Tool.checkUrl(urlStr: recommendUrlNodeArr![index].content!, domainUrlStr: webUrlStr)
-                cartoonModel.type = .ykmh
+                cartoonModel.type = .wudi
                 detailModel.recommendArr.append(cartoonModel)
             }
             detailModel.name = titleNodeArr![0].content!
@@ -221,7 +223,7 @@ class YouKuModel: WebsiteBaseModel,WebsiteProtocol {
             return detailModel
         }
     }
-    
+
     func getDoneList(pageNum: Int) -> [CartoonModel] {
         let urlStr = webUrlStr + "list/wanjie/post/?page=\(pageNum)"
         let jiDoc = Ji.init(htmlURL: URL.init(string: urlStr)!)
@@ -234,7 +236,7 @@ class YouKuModel: WebsiteBaseModel,WebsiteProtocol {
             //            详情
             let urlXPath = "//*[@id=\"comic-items\"]/li/a[2]/@href"
             // 作者
-            let authorXPath = "//*[@id=\"comic-items\"]/li/span/a"
+            let authorXPath = "//*[@id=\"comic-items\"]/li/span"
             // 图片
             let imgXPath = "//*[@id=\"comic-items\"]/li/a[1]/img/@src"
             let titleNodeArr = jiDoc?.xPath(titleXPath)
@@ -251,14 +253,14 @@ class YouKuModel: WebsiteBaseModel,WebsiteProtocol {
                     cartoonModel.author = authorNodeArr![index].content!
                     cartoonModel.num = "0"
                     cartoonModel.imgUrl = imgNodeArr![index].content!
-                    cartoonModel.type = .ykmh
+                    cartoonModel.type = .wudi
                     resultArr.append(cartoonModel)
                 }
             }
             return resultArr
         }
     }
-    
+
     func getCategoryList() -> [[CategoryModel]] {
         let urlStr = webUrlStr + "list/"
         let jiDoc = Ji.init(htmlURL: URL.init(string: urlStr)!)
@@ -295,25 +297,21 @@ class YouKuModel: WebsiteBaseModel,WebsiteProtocol {
             return resultArr
         }
     }
-    
+
     func getRankList(pageNum: Int, rankType: Int, timeType: Int, category: Int) -> [CartoonModel] {
         // 域名后面的地址
-        let rankTypeArr = ["popularity", "click", "subscribe"]
-        let timeTypeArr = ["", "-daily", "-weekly", "-monthly"]
-        let categoryTypeArr = ["", "mofa_", "shaonian_", "shaonv_", "qingnian_", "gaoxiao_", "kehuan_", "rexue_", "maoxian_", "wanjie_"]
-        let detailUrlStr = "rank/" + categoryTypeArr[category] + rankTypeArr[rankType] + timeTypeArr[timeType] + "/"
-        let urlStr = webUrlStr + detailUrlStr
+        let urlStr = webUrlStr + "rank/"
         let jiDoc = Ji.init(htmlURL: URL.init(string: urlStr)!)
         if jiDoc == nil {
             return []
         } else {
             var resultArr: [CartoonModel] = []
             //            标题
-            let titleXPath = "/html/body/div[3]/div/div[2]/div/div/div[2]/a"
+            let titleXPath = "//*[@id=\"topImgCon\"]/div/div/div[2]/a"
             //            详情
-            let urlXPath = "/html/body/div[3]/div/div[2]/div/div/div[2]/a/@href"
+            let urlXPath = "//*[@id=\"topImgCon\"]/div/div/div[2]/a/@href"
             // 作者
-            let authorXPath = "//*[@id=\"topImgCon\"]/div/div/div[2]/p[1]/a"
+            let authorXPath = "//*[@id=\"topImgCon\"]/div/div/div[2]/p[1]"
             // 类型
             let categoryXPath = "//*[@id=\"topImgCon\"]/div/div/div[2]/p[2]/span[2]"
             // 时间
@@ -337,7 +335,7 @@ class YouKuModel: WebsiteBaseModel,WebsiteProtocol {
                     cartoonModel.category = categoryNodeArr![index].content!
                     cartoonModel.time = timeNodeArr![index].content!
                     cartoonModel.imgUrl = imgNodeArr![index].content!
-                    cartoonModel.type = .ykmh
+                    cartoonModel.type = .wudi
                     resultArr.append(cartoonModel)
                 }
             }
@@ -357,7 +355,7 @@ class YouKuModel: WebsiteBaseModel,WebsiteProtocol {
             //            详情
             let urlXPath = "//*[@id=\"update_list\"]/div/div/div[2]/a/@href"
             // 作者
-            let authorXPath = "//*[@id=\"update_list\"]/div/div/div[2]/p[1]/a"
+            let authorXPath = "//*[@id=\"update_list\"]/div/div/div[2]/p[1]"
             // 类型
             let categoryXPath = "//*[@id=\"update_list\"]/div/div/div[2]/p[2]/span[2]"
             // 时间
@@ -385,7 +383,7 @@ class YouKuModel: WebsiteBaseModel,WebsiteProtocol {
                     }
                     cartoonModel.time = timeNodeArr![index].content!
                     let num = numNodeArr![index].content!
-                    cartoonModel.type = .ykmh
+                    cartoonModel.type = .wudi
                     cartoonModel.num = Tool.cleanChater(string: num)
                     cartoonModel.imgUrl = imgNodeArr![index].content!
                     resultArr.append(cartoonModel)

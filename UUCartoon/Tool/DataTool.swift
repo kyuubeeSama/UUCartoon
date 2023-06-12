@@ -25,6 +25,8 @@ class DataTool: NSObject {
         switch type {
         case .ykmh:
             array=YouKuModel.init().getLatestList(pageNum: pageNum)
+        case .wudi:
+            array = WuDiModel.init().getLatestList(pageNum: pageNum)
         default:
             array = []
         }
@@ -43,6 +45,8 @@ class DataTool: NSObject {
         switch type {
         case .ykmh:
             array = YouKuModel.init().getRankList(pageNum: pageNum, rankType: rankType, timeType: timeType, category: category)
+        case .wudi:
+            array = WuDiModel.init().getRankList(pageNum: pageNum, rankType: rankType, timeType: timeType, category: category)
         default:
             array = []
         }
@@ -58,6 +62,8 @@ class DataTool: NSObject {
         switch type {
         case .ykmh:
             array = YouKuModel.init().getCategoryList()
+        case .wudi:
+            array = WuDiModel.init().getCategoryList()
         default:
             array = []
         }
@@ -75,6 +81,8 @@ class DataTool: NSObject {
         switch type {
         case .ykmh:
             array = YouKuModel.init().getCategorySiftList(detailUrl: detailUrl, pageNum: page)
+        case .wudi:
+            array = WuDiModel.init().getCategorySiftList(detailUrl: detailUrl, pageNum: page)
         default:
             array = []
         }
@@ -91,6 +99,8 @@ class DataTool: NSObject {
         switch type {
         case .ykmh:
             array = YouKuModel.init().getDoneList(pageNum: page)
+        case .wudi:
+            array = WuDiModel.init().getDoneList(pageNum: page)
         default:
             array = []
         }
@@ -107,6 +117,8 @@ class DataTool: NSObject {
         switch type {
         case .ykmh:
             model = YouKuModel.init().getDetailData(urlStr: detailUrl)
+        case .wudi:
+            model = WuDiModel.init().getDetailData(urlStr: detailUrl)
         default:
             model = CartoonModel.init()
         }
@@ -155,6 +167,8 @@ class DataTool: NSObject {
         switch type {
         case .ykmh:
             array = YouKuModel.init().getImageList(detailUrl: detailUrl)
+        case .wudi:
+            array = WuDiModel.init().getImageList(detailUrl: detailUrl)
         default:
             array = []
         }

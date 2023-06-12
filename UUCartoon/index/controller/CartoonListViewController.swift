@@ -5,7 +5,6 @@
 //  Created by Galaxy on 2021/5/6.
 //  Copyright © 2021 qykj. All rights reserved.
 //  漫画列表页面
-
 import UIKit
 import JXSegmentedView
 import ESPullToRefresh
@@ -36,6 +35,7 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
     private var sqlTool = SqlTool.init()
     private var leftArr = SiftCategoryModel.init().getCategoryLeftArr()
     private var rightArr = SiftCategoryModel.init().getCategoryRightArr()
+    private var orderHeight = 0
     @objc func injected() {
         viewDidLoad()
     }
@@ -43,7 +43,9 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         if index == 1 {
-            makeOrderView()
+            if type == .ykmh {
+                makeOrderView()
+            }
         } else if index == 2 {
             // 创建分类筛选界面
             makeCategoryView()
@@ -55,6 +57,7 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
     func makeOrderView() {
         let header = RankChooseView.init(frame: CGRect(x: 0, y: 0, width: screenW, height: 50))
         view.addSubview(header)
+        orderHeight = 50
         header.categoryBtnView.type = type
         header.categoryBtnView.categoryBtnBlock = { index in
             self.rankType = index
@@ -138,17 +141,10 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
                             backView.removeFromSuperview()
                             //                    赋值，并刷新列表
                             let categoryModel = array[indexPath.row]
-                            if self.type == .ykmh {
+                            if self.type == .ykmh || self.type == .wudi {
                                 for model in array {
                                     model.ischoose = false
                                 }
-                            } else {
-                                for array1 in self.categoryArr {
-                                    for model in array1 {
-                                        model.ischoose = false
-                                    }
-                                }
-                                self.categoryValue = ["", "", "", ""]
                             }
                             categoryModel.ischoose = true
                             self.categoryValue[index] = categoryModel.value
@@ -175,10 +171,6 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
                 self.pageNum = 1
                 self.getListData()
             }
-        }
-        if type == .mao {
-            chooseView.orderView.isHidden = true
-            chooseView.frame = CGRect(x: 0, y: 0, width: screenW, height: 50)
         }
     }
     // 保存漫画记录
@@ -222,13 +214,8 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
             } else if index == 2 {
                 // 分类筛选
                 var detailUrl = ""
-                if type == .ykmh {
+                if type == .ykmh || type == .wudi {
                     detailUrl = categoryValue.joined(separator: "") + orderType
-                }else{
-                    let valueArr = categoryValue.map { value in
-                        return value.isEmpty ? "0" : value
-                    }
-                    detailUrl = "list/a-\(valueArr[2])-c-\(valueArr[0])-t-\(valueArr[1])-y-0-i-0-m-\(valueArr[2])"
                 }
                 if detailUrl.isEmpty {
                     DispatchQueue.main.async { [self] in
@@ -293,13 +280,9 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
         mainCollect.snp.makeConstraints { make in
             make.left.right.bottom.equalToSuperview()
             if index == 1 {
-                make.top.equalToSuperview().offset(60)
+                make.top.equalToSuperview().offset(orderHeight + 10)
             } else if index == 2 {
-                if type == .mao {
-                    make.top.equalToSuperview().offset(50)
-                }else{
-                    make.top.equalToSuperview().offset(90)
-                }
+                make.top.equalToSuperview().offset(90)
             } else {
                 make.top.equalToSuperview()
             }

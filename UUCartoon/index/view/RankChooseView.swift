@@ -15,12 +15,12 @@ class CategoryBtnView:UIView {
 
     var type:CartoonType = .ykmh {
         didSet{
-            let titleArr = [["人气排行","点击排行","订阅排行"],["今日最热","最多人看","最受好评"]]
+            let titleArr = ["人气排行","点击排行","订阅排行"]
             for item in 0...2 {
                 // 创建三个按钮，根据不同的type，显示不同的文字
                 let categoryBtn = UIButton.init(type: .custom)
                 addSubview(categoryBtn)
-                categoryBtn.setTitle(titleArr[type.rawValue][item], for: .normal)
+                categoryBtn.setTitle(titleArr[item], for: .normal)
                 if item == 0 {
                     categoryBtn.setTitleColor(.white, for: .normal)
                     categoryBtn.backgroundColor = UIColor.color(hexString: "0090ff")

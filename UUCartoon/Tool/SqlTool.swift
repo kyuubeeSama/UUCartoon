@@ -82,6 +82,9 @@ class SqlTool: NSObject {
                 try db.execute(sql: """
                                     replace into website ('name','url','type') values('漫画猫','www.maofly.com',1)
                                     """)
+                try db.execute(sql: """
+                                    replace into website ('name','url','type') values('无敌漫画','m.55dmh.com',2)
+                                    """)
             }
         } catch {
             print(error.localizedDescription)
@@ -276,7 +279,7 @@ class SqlTool: NSObject {
         do {
             let dbQueue = try DatabaseQueue(path: databasePath)
             let rows = try dbQueue.read({ db in
-                try Row.fetchAll(db, sql: "select cartoon.*,history.chapter_id,history.page_index from history left join cartoon on cartoon.cartoon_id = history.cartoon_id where 1=1 order by history.create_time desc")
+                try Row.fetchAll(db, sql: "select cartoon.*,history.chapter_id,history.cartoon_id as h_c_id,history.page_index from history left join cartoon on cartoon.cartoon_id = history.cartoon_id where history.cartoon_id > 0 order by history.create_time desc")
             })
             for items in rows {
                 let model = CartoonModel.init()
