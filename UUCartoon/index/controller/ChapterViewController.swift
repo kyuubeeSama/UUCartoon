@@ -7,7 +7,7 @@
 //  章节页面
 
 import UIKit
-
+import UICollectionViewLeftAlignedLayout
 class ChapterViewController: BaseViewController {
     
     public var type:CartoonType = .ykmh

@@ -8,7 +8,7 @@
 import UIKit
 import JXSegmentedView
 import ESPullToRefresh
-
+import UICollectionViewLeftAlignedLayout
 class CartoonListViewController: BaseViewController, JXSegmentedListContainerViewListDelegate {
     // 区分当前是那一列
     public var index: Int = 0

@@ -7,7 +7,7 @@
 //  搜索界面
 
 import UIKit
-
+import UICollectionViewLeftAlignedLayout
 class SearchViewController: BaseViewController,UISearchBarDelegate {
 
     var type:CartoonType = .ykmh

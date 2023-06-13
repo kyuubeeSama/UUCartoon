@@ -36,6 +36,7 @@ pod 'ReactiveCocoa'
 pod 'ESPullToRefresh'
 
 pod 'ProgressHUD'
+pod 'UICollectionViewLeftAlignedLayout'
 
 end
 

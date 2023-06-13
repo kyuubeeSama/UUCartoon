@@ -22,7 +22,6 @@
 		A907CC6726441C7B00B9393C /* CartoonListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A907CC6626441C7B00B9393C /* CartoonListViewController.swift */; };
 		A907CC6926441CCA00B9393C /* CartoonDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A907CC6826441CCA00B9393C /* CartoonDetailViewController.swift */; };
 		A907CC6B26441CF300B9393C /* ChapterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A907CC6A26441CF300B9393C /* ChapterViewController.swift */; };
-		A915A014266F0E6600182FB1 /* UICollectionViewLeftAlignedLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A915A013266F0E6600182FB1 /* UICollectionViewLeftAlignedLayout.swift */; };
 		A915A017266F619900182FB1 /* CartoonListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A915A015266F619900182FB1 /* CartoonListCollectionViewCell.swift */; };
 		A915A018266F619900182FB1 /* CartoonListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A915A016266F619900182FB1 /* CartoonListCollectionViewCell.xib */; };
 		A915A01A266F7A9E00182FB1 /* CartoonDetailCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A915A019266F7A9E00182FB1 /* CartoonDetailCollectionView.swift */; };
@@ -108,7 +107,6 @@
 		A907CC6626441C7B00B9393C /* CartoonListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoonListViewController.swift; sourceTree = "<group>"; };
 		A907CC6826441CCA00B9393C /* CartoonDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoonDetailViewController.swift; sourceTree = "<group>"; };
 		A907CC6A26441CF300B9393C /* ChapterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterViewController.swift; sourceTree = "<group>"; };
-		A915A013266F0E6600182FB1 /* UICollectionViewLeftAlignedLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionViewLeftAlignedLayout.swift; sourceTree = "<group>"; };
 		A915A015266F619900182FB1 /* CartoonListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoonListCollectionViewCell.swift; sourceTree = "<group>"; };
 		A915A016266F619900182FB1 /* CartoonListCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartoonListCollectionViewCell.xib; sourceTree = "<group>"; };
 		A915A019266F7A9E00182FB1 /* CartoonDetailCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoonDetailCollectionView.swift; sourceTree = "<group>"; };
@@ -263,7 +261,6 @@
 		A9653EC624BD9F210098AB1E /* Tool */ = {
 			isa = PBXGroup;
 			children = (
-				A915A013266F0E6600182FB1 /* UICollectionViewLeftAlignedLayout.swift */,
 				A9653EE524BDA90E0098AB1E /* QYRequestData.swift */,
 				A9653EE724BDB2160098AB1E /* Tool.swift */,
 				144DFB00E6E5D7B0E0DDFD7C /* FileTool.swift */,
@@ -604,7 +601,6 @@
 				A9F925992A302D0D00AB4F39 /* WebsiteBaseModel.swift in Sources */,
 				A99F7A6E268B0FCD0093B765 /* CollectViewController.swift in Sources */,
 				A915A02B266F8A6C00182FB1 /* CartoonInfoHeaderCollectionReusableView.swift in Sources */,
-				A915A014266F0E6600182FB1 /* UICollectionViewLeftAlignedLayout.swift in Sources */,
 				A9653EE624BDA90E0098AB1E /* QYRequestData.swift in Sources */,
 				A915A023266F89EA00182FB1 /* CartoonIntroCollectionViewCell.swift in Sources */,
 				A9F0056B2689F77E00CCC791 /* SearchResultCollectionView.swift in Sources */,

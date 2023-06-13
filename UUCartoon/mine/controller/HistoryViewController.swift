@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import UICollectionViewLeftAlignedLayout
 class HistoryViewController: BaseViewController {
     
     override func viewDidLoad() {

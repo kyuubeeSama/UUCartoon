@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import UICollectionViewLeftAlignedLayout
 class SearchResultViewController: BaseViewController {
 
     var type:CartoonType = .ykmh

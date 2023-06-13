@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import UICollectionViewLeftAlignedLayout
 class CollectViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
