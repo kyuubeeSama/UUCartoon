@@ -11,6 +11,7 @@ class WuDiModel: WebsiteBaseModel,WebsiteProtocol {
         webUrlStr = "https://m.55dmh.com/"
         websiteTitleArr = ["最新发布","漫画排行","分类筛选","已完结"]
         websiteIdArr = [0,1,2,3]
+        type = .wudi
     }
     func getCategorySiftList(detailUrl: String, pageNum: Int) -> [CartoonModel] {
         var urlStr = webUrlStr + "list/" + detailUrl + "/?page=\(pageNum)"

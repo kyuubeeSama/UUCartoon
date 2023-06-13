@@ -15,6 +15,7 @@ class YouKuModel: WebsiteBaseModel,WebsiteProtocol {
         webUrlStr = "http://wap.ykmh.com/"
         websiteTitleArr = ["最新发布","漫画排行","分类筛选","已完结"]
         websiteIdArr = [0,1,2,3]
+        type = .ykmh
     }
     func getCategorySiftList(detailUrl: String, pageNum: Int) -> [CartoonModel] {
         var urlStr = webUrlStr + "list/" + detailUrl + "/?page=\(pageNum)"

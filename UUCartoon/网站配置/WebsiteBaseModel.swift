@@ -17,6 +17,8 @@ class WebsiteBaseModel: NSObject {
     public var websiteTitleArr:[String] = []
     // 站点对应的类型
     public var websiteIdArr:[Int] = []
+    // 站点类型
+    public var type:CartoonType = .ykmh
 }
 
 // 站点需要实现的方法

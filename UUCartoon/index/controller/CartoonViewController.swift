@@ -81,7 +81,7 @@ class CartoonViewController: BaseViewController,JXSegmentedViewDelegate,JXSegmen
     func listContainerView(_ listContainerView: JXSegmentedListContainerView, initListAt index: Int) -> JXSegmentedListContainerViewListDelegate {
         let VC = CartoonListViewController.init()
         VC.index = indexModel.webModel.websiteIdArr[index]
-        VC.type = indexModel.webType
+        VC.websiteModel = indexModel.webModel
         return VC
     }
 }

@@ -12,7 +12,7 @@ import ESPullToRefresh
 class CartoonListViewController: BaseViewController, JXSegmentedListContainerViewListDelegate {
     // 区分当前是那一列
     public var index: Int = 0
-    public var type: CartoonType = .ykmh
+    public var websiteModel:WebsiteBaseModel = WebsiteBaseModel.init()
     public var pageNum: Int = 1
     // 当前选中是哪个排序
     private var rankType: Int = 0
@@ -43,7 +43,7 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         if index == 1 {
-            if type == .ykmh {
+            if websiteModel.type == .ykmh {
                 makeOrderView()
             }
         } else if index == 2 {
@@ -58,7 +58,7 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
         let header = RankChooseView.init(frame: CGRect(x: 0, y: 0, width: screenW, height: 50))
         view.addSubview(header)
         orderHeight = 50
-        header.categoryBtnView.type = type
+        header.categoryBtnView.type = websiteModel.type
         header.categoryBtnView.categoryBtnBlock = { index in
             self.rankType = index
             let array = self.rankListArr[self.rankType]
@@ -141,7 +141,7 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
                             backView.removeFromSuperview()
                             //                    赋值，并刷新列表
                             let categoryModel = array[indexPath.row]
-                            if self.type == .ykmh || self.type == .wudi {
+                            if self.websiteModel.type == .ykmh || self.websiteModel.type == .wudi {
                                 for model in array {
                                     model.ischoose = false
                                 }
@@ -185,7 +185,7 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
         DispatchQueue.global().async { [self] in
             if index == 0 {
                 // 最新发布
-                DataTool.init().getNewCartoonData(type: type, pageNum: pageNum) { resultArr in
+                DataTool.init().getNewCartoonData(type: websiteModel.type, pageNum: pageNum) { resultArr in
                     DispatchQueue.main.async { [self] in
                         endProgress()
                         mainCollect.es.stopPullToRefresh()
@@ -202,7 +202,7 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
                 }
             } else if index == 1 {
                 // 漫画排行
-                DataTool.init().getRankCartoonData(type: type, pageNum: pageNum, rankType: rankType, timeType: timeType, category: categoryType) { resultArr in
+                DataTool.init().getRankCartoonData(type: websiteModel.type, pageNum: pageNum, rankType: rankType, timeType: timeType, category: categoryType) { resultArr in
                     DispatchQueue.main.async { [self] in
                         endProgress()
                         mainCollect.es.stopPullToRefresh()
@@ -214,7 +214,7 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
             } else if index == 2 {
                 // 分类筛选
                 var detailUrl = ""
-                if type == .ykmh || type == .wudi {
+                if websiteModel.type == .ykmh || websiteModel.type == .wudi {
                     detailUrl = categoryValue.joined(separator: "") + orderType
                 }
                 if detailUrl.isEmpty {
@@ -223,7 +223,7 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
                         view.makeToast("请选择筛选条件", duration: 3, position: .center)
                     }
                 } else {
-                    DataTool.init().getCategorySiftResultListData(type: type, detailUrl: detailUrl, page: pageNum, success: { resultArr in
+                    DataTool.init().getCategorySiftResultListData(type: websiteModel.type, detailUrl: detailUrl, page: pageNum, success: { resultArr in
                         DispatchQueue.main.async { [self] in
                             endProgress()
                             mainCollect.es.stopPullToRefresh()
@@ -241,7 +241,7 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
                 }
             } else if index == 3 {
                 // 已完结
-                DataTool.init().getDoneCartoonData(type: type, page: pageNum) { resultArr in
+                DataTool.init().getDoneCartoonData(type: websiteModel.type, page: pageNum) { resultArr in
                     DispatchQueue.main.async { [self] in
                         endProgress()
                         mainCollect.es.stopPullToRefresh()
@@ -262,7 +262,7 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
     // 获取分类数据
     func getCategoryData() {
         DispatchQueue.global().async {
-            DataTool.init().getCategoryData(type: self.type, success: { resultArr in
+            DataTool.init().getCategoryData(type: self.websiteModel.type, success: { resultArr in
                 self.categoryArr = resultArr
             })
         }
@@ -290,7 +290,7 @@ class CartoonListViewController: BaseViewController, JXSegmentedListContainerVie
         mainCollect.cellItemSelected = { indexPath in
             let model = mainCollect.listArr[indexPath.row]
             let VC = ChapterViewController.init()
-            VC.type = self.type
+            VC.type = self.websiteModel.type
             VC.cartoon_id = model.cartoon_id
             VC.detailUrl = model.detailUrl
             self.navigationController?.pushViewController(VC, animated: true)
