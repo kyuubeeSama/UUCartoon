@@ -81,10 +81,18 @@ class CartoonViewScrollView: UIScrollView,UIScrollViewDelegate {
                 //TODO:如果是第一页，左边不能读取最后一页，提示到页尾
                 leftModel = listArr.first!
                 middleModel = listArr[1]
-                rightModel = listArr[2]
+                if (self.listArr.count >= 3){
+                    rightModel = listArr[2]
+                }else{
+                    rightModel = listArr.last!
+                }
             }else if currentPageIndex == listArr.count-1 {
                 // 最右边
-                leftModel = listArr[currentPageIndex-2]
+                if (self.listArr.count >= 3){
+                    leftModel = listArr[currentPageIndex-2]
+                }else{
+                    leftModel = listArr.first!
+                }
                 middleModel = listArr[currentPageIndex-1]
                 rightModel = listArr[currentPageIndex]
             }else{

@@ -7,7 +7,7 @@ target 'UUCartoon' do
 #  图片缓存
   pod 'Kingfisher'
 #  控件适配
-#pod 'SnapKit'
+pod 'SnapKit'
 #  加载样式
 pod 'Toast-Swift'
 #  键盘弹出
