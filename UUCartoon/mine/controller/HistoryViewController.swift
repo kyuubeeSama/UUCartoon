@@ -53,6 +53,9 @@ class HistoryViewController: BaseViewController {
         mainCollect.es.addPullToRefresh(animator: header) {
             self.getHistoryData()
         }
+        mainCollect.emptyDataSetView { emptyView in
+            emptyView.detailLabelString(NSAttributedString.init(string: "暂时没有历史记录")).image(UIImage.init(named: "empty_img"))
+        }
         return mainCollect
     }()
 }

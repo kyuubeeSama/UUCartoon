@@ -152,7 +152,7 @@ class DataTool: NSObject {
         case .ykmh:
             array = YouKuModel.init().getSearchList(keyword: keyword, pageNum: page)
         default:
-            array = []
+            array = WuDiModel.init().getSearchList(keyword: keyword, pageNum: page)
         }
         success(array)
     }

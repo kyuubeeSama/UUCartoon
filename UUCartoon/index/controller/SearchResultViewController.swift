@@ -28,11 +28,15 @@ class SearchResultViewController: BaseViewController {
                 DispatchQueue.main.async {
                     //TODO: 搜索结果也要存到数据库中
                     self.endProgress()
+                    self.mainCollect.es.stopPullToRefresh()
                     if resultArr.isEmpty {
                         self.mainCollect.es.noticeNoMoreData()
                     }else{
                         self.pageNum += 1
                         self.mainCollect.es.stopLoadingMore()
+                    }
+                    for item in resultArr {
+                        item.cartoon_id = SqlTool.init().insertCartoon(model: item)
                     }
                     self.listArr.append(array: resultArr)
                     self.mainCollect.listArr = self.listArr
@@ -54,9 +58,15 @@ class SearchResultViewController: BaseViewController {
             let VC = ChapterViewController.init()
             VC.type = self.type
             VC.detailUrl = model.detailUrl
+            VC.cartoon_id = model.cartoon_id
             self.navigationController?.pushViewController(VC, animated: true)
         }
         mainCollect.es.addInfiniteScrolling(animator: footer) {
+            self.getListData()
+        }
+        mainCollect.es.addPullToRefresh(animator: footer) {
+            self.listArr = []
+            self.pageNum = 1
             self.getListData()
         }
         return mainCollect

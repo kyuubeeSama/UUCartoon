@@ -95,11 +95,11 @@ class WuDiModel: WebsiteBaseModel,WebsiteProtocol {
             //            详情
             let urlXPath = "//*[@id=\"update_list\"]/div/div/div[2]/a/@href"
             // 作者
-            let authorXPath = "//*[@id=\"update_list\"]/div/div/div[2]/p[1]/a"
+            let authorXPath = "//*[@id=\"update_list\"]/div/div/div[2]/p[1]"
             // 类型
-            let categoryXPath = "//*[@id=\"update_list\"]/div/div/div[2]/p[2]/span[2]"
+            let categoryXPath = "//*[@id=\"update_list\"]/div/div/div[2]/p[2]"
             // 时间
-            let timeXPath = "//*[@id=\"update_list\"]/div/div/div[2]/p[3]/span[2]"
+            let timeXPath = "//*[@id=\"update_list\"]/div/div/div[2]/p[3]"
             // 图片
             let imgXPath = "//*[@id=\"update_list\"]/div/div/div[1]/a/img/@src"
             // 最新
@@ -132,27 +132,7 @@ class WuDiModel: WebsiteBaseModel,WebsiteProtocol {
     }
 
     func getSearchRecommendList() -> [CartoonModel] {
-        let urlStr = webUrlStr
-        let jiDoc = Ji.init(htmlURL: URL.init(string: urlStr)!)
-        if jiDoc == nil {
-            return []
-        }else{
-            var resultArr:[CartoonModel] = []
-            let titleXpath = "//*[@id=\"w7\"]/li/a"
-            let urlXpath = "//*[@id=\"w7\"]/li/a/@href"
-            let titleNodeArr = jiDoc?.xPath(titleXpath)
-            let urlNodeArr = jiDoc?.xPath(urlXpath)
-            if !(titleNodeArr?.isEmpty)! {
-                for (index,item) in titleNodeArr!.enumerated() {
-                    let model = CartoonModel.init()
-                    model.name = item.content!
-                    model.detailUrl = urlNodeArr![index].content!
-                    model.type = .wudi
-                    resultArr.append(model)
-                }
-            }
-            return resultArr
-        }
+        return []
     }
 
     func getDetailData(urlStr: String) -> CartoonModel {

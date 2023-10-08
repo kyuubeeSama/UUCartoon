@@ -8,6 +8,7 @@
 
 import UIKit
 import UICollectionViewLeftAlignedLayout
+import EmptyDataSet_Swift
 class CollectViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +36,9 @@ class CollectViewController: BaseViewController {
             VC.type = model.type
             VC.detailUrl = model.detailUrl
             VC.cartoon_id = model.cartoon_id
+            VC.deleteCollectBlock = {
+                self.getListData()
+            }
             self.navigationController?.pushViewController(VC, animated: true)
         }
         mainCollect.es.addInfiniteScrolling(animator: footer) {
@@ -42,6 +46,9 @@ class CollectViewController: BaseViewController {
         }
         mainCollect.es.addPullToRefresh(animator: header) {
             self.getListData()
+        }
+        mainCollect.emptyDataSetView { emptyView in
+            emptyView.detailLabelString(NSAttributedString.init(string: "快去收藏喜欢的内容吧")).image(UIImage.init(named: "empty_img"))
         }
         return mainCollect
     }()

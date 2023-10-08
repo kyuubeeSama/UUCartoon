@@ -12,7 +12,6 @@ import JXSegmentedView
 
 class CartoonViewController: BaseViewController,JXSegmentedViewDelegate,JXSegmentedListContainerViewDataSource {
     
-    public var type:CartoonType = .ykmh
     public var indexModel:IndexModel = IndexModel.init()
     
     @objc func injected(){
@@ -37,7 +36,7 @@ class CartoonViewController: BaseViewController,JXSegmentedViewDelegate,JXSegmen
         
     @objc func searchView(){
         let VC = SearchViewController.init()
-        VC.type = type
+        VC.type = indexModel.webType
         navigationController?.pushViewController(VC, animated: true)
     }
     

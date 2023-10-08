@@ -13,6 +13,7 @@ class ChapterViewController: BaseViewController {
     public var type:CartoonType = .ykmh
     public var detailUrl:String = ""
     public var cartoon_id:Int = 0
+    public var deleteCollectBlock:(()->())?
     private var model:CartoonModel = CartoonModel.init()
     private let collectBtn = UIButton.init(type: .custom)
     
@@ -84,6 +85,9 @@ class ChapterViewController: BaseViewController {
             // 删除收藏
             if SqlTool.init().deleteCollect(model: model) {
                 collectBtn.setImage(UIImage.init(systemName: "heart"), for: .normal)
+                if self.deleteCollectBlock != nil {
+                    self.deleteCollectBlock!()
+                }
             } else {
                 view.makeToast("操作失败")
             }
